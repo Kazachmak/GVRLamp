@@ -7,15 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C15F2D124EDA6F600F63C92 /* lampDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C15F2D024EDA6F600F63C92 /* lampDevice.swift */; };
 		3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */; };
 		3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */; };
 		3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45878124EC2C5A00DBE5C4 /* ViewController.swift */; };
 		3C45878524EC2C5A00DBE5C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45878324EC2C5A00DBE5C4 /* Main.storyboard */; };
 		3C45878724EC2C5C00DBE5C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */; };
 		3C45878A24EC2C5C00DBE5C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45878824EC2C5C00DBE5C4 /* LaunchScreen.storyboard */; };
+		3C45879224EC330400DBE5C4 /* effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879124EC330400DBE5C4 /* effects.swift */; };
+		3C45879424EC351700DBE5C4 /* EffectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */; };
+		3C45879624EC426100DBE5C4 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879524EC426100DBE5C4 /* extensions.swift */; };
+		3C45879A24EC45A500DBE5C4 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C45879924EC45A500DBE5C4 /* settings.png */; };
+		3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */; };
+		3C9EAEC924EC5E3D00600578 /* SFUIDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */; };
+		3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C15F2D024EDA6F600F63C92 /* lampDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lampDevice.swift; sourceTree = "<group>"; };
 		3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyverLamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +33,13 @@
 		3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C45878924EC2C5C00DBE5C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C45878B24EC2C5C00DBE5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C45879124EC330400DBE5C4 /* effects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = effects.swift; sourceTree = "<group>"; };
+		3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCollectionViewCell.swift; sourceTree = "<group>"; };
+		3C45879524EC426100DBE5C4 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		3C45879924EC45A500DBE5C4 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +74,37 @@
 			children = (
 				3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */,
 				3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */,
+				3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */,
+				3C15F2D024EDA6F600F63C92 /* lampDevice.swift */,
+				3C45879124EC330400DBE5C4 /* effects.swift */,
+				3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */,
+				3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */,
+				3C9EAECA24EC5E4D00600578 /* images */,
+				3C9EAECB24EC5E5500600578 /* fonts */,
 				3C45878124EC2C5A00DBE5C4 /* ViewController.swift */,
 				3C45878324EC2C5A00DBE5C4 /* Main.storyboard */,
+				3C45879524EC426100DBE5C4 /* extensions.swift */,
 				3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */,
 				3C45878824EC2C5C00DBE5C4 /* LaunchScreen.storyboard */,
 				3C45878B24EC2C5C00DBE5C4 /* Info.plist */,
 			);
 			path = GyverLamp;
+			sourceTree = "<group>";
+		};
+		3C9EAECA24EC5E4D00600578 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				3C45879924EC45A500DBE5C4 /* settings.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		3C9EAECB24EC5E5500600578 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +165,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C45879A24EC45A500DBE5C4 /* settings.png in Resources */,
 				3C45878A24EC2C5C00DBE5C4 /* LaunchScreen.storyboard in Resources */,
+				3C9EAEC924EC5E3D00600578 /* SFUIDisplay-Medium.ttf in Resources */,
 				3C45878724EC2C5C00DBE5C4 /* Assets.xcassets in Resources */,
 				3C45878524EC2C5A00DBE5C4 /* Main.storyboard in Resources */,
 			);
@@ -138,9 +180,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C45879224EC330400DBE5C4 /* effects.swift in Sources */,
 				3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */,
+				3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */,
+				3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */,
 				3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */,
+				3C45879424EC351700DBE5C4 /* EffectCollectionViewCell.swift in Sources */,
 				3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */,
+				3C15F2D124EDA6F600F63C92 /* lampDevice.swift in Sources */,
+				3C45879624EC426100DBE5C4 /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +335,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T3S6WD926G;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -294,7 +343,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -305,6 +354,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T3S6WD926G;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,7 +362,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

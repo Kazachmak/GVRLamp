@@ -1,24 +1,346 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFUIDisplay-Medium.ttf">
+            <string>SFUIDisplay-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="L0k-eL-S8k">
+                                <rect key="frame" x="0.0" y="20" width="320" height="528"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4r-Jd-5g8">
+                                        <rect key="frame" x="20" y="0.0" width="280" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Лампа недоступна" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-8w-6on">
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKJ-tO-Xbi">
+                                                <rect key="frame" x="140" y="0.0" width="140" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="qrY-p5-qHX"/>
+                                                    <constraint firstAttribute="height" constant="40" id="xfr-9l-aya"/>
+                                                </constraints>
+                                                <state key="normal" image="settings.png">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="settingsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UgK-Ww-LNY"/>
+                                                    <segue destination="4L0-4m-4Zc" kind="presentation" id="4vY-QN-GPf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-ng-Dss">
+                                        <rect key="frame" x="0.0" y="40.5" width="320" height="110.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="30" minimumInteritemSpacing="30" id="ZPN-UE-oK0">
+                                            <size key="itemSize" width="120" height="121"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="effectCell" id="nAz-mL-XwD" customClass="EffectCollectionViewCell" customModule="GyverLamp" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="0.0" width="120" height="110.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nv3-yc-wRr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="110.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYq-s2-dM2">
+                                                            <rect key="frame" x="42.5" y="47" width="35.5" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="UYq-s2-dM2" firstAttribute="centerY" secondItem="nv3-yc-wRr" secondAttribute="centerY" id="VNf-t4-tEK"/>
+                                                        <constraint firstItem="UYq-s2-dM2" firstAttribute="centerX" secondItem="nv3-yc-wRr" secondAttribute="centerX" id="ua5-as-QEC"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="120" height="110.5"/>
+                                                <connections>
+                                                    <outlet property="nameOfEffect" destination="UYq-s2-dM2" id="lTx-pp-MJA"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="R7R-96-Sva"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="CUz-rA-iLg"/>
+                                        </connections>
+                                    </collectionView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Iu8-dH-EnV">
+                                        <rect key="frame" x="20" y="171" width="280" height="150"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Яркость" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jne-bj-Htd">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="20"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="M0O-he-0Zn">
+                                                <rect key="frame" x="-2" y="20" width="284" height="31"/>
+                                            </slider>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Скорость" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UzK-49-rCR">
+                                                <rect key="frame" x="0.0" y="50" width="280" height="20"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tlI-Bb-WEX">
+                                                <rect key="frame" x="-2" y="70" width="284" height="31"/>
+                                            </slider>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Масштаб" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7c-NS-ObZ">
+                                                <rect key="frame" x="0.0" y="100" width="280" height="20"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="P2r-Me-F3i">
+                                                <rect key="frame" x="-2" y="120" width="284" height="31"/>
+                                            </slider>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xMw-AT-uSR">
+                                        <rect key="frame" x="20" y="341" width="280" height="136"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gz-pY-LsG">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Poh-aZ-CiV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <state key="normal" title="Автопереключение эффектов">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="autoswitchingButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gd5-9F-6Xh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpV-f4-ZBA">
+                                                <rect key="frame" x="0.0" y="48" width="280" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="f7O-rR-ES1"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <state key="normal" title="Будильник &quot;Рассвет&quot;">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="alarmClock:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8aG-IC-5dd"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ei6-6C-D9G">
+                                                <rect key="frame" x="0.0" y="96" width="280" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="yWS-JK-HJ9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <state key="normal" title="Таймер выключения">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="timer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k8G-Ty-QO7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VNP-YZ-KMU">
+                                        <rect key="frame" x="135.5" y="497" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OFN-ng-Dss" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" id="Cdf-k0-L4p"/>
+                                    <constraint firstItem="Iu8-dH-EnV" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" constant="20" id="CqG-2j-1g5"/>
+                                    <constraint firstAttribute="trailing" secondItem="s4r-Jd-5g8" secondAttribute="trailing" constant="20" id="JaO-hH-inS"/>
+                                    <constraint firstAttribute="trailing" secondItem="xMw-AT-uSR" secondAttribute="trailing" constant="20" id="Jwo-LP-Wsb"/>
+                                    <constraint firstAttribute="trailing" secondItem="OFN-ng-Dss" secondAttribute="trailing" id="P0e-T4-L7a"/>
+                                    <constraint firstAttribute="trailing" secondItem="Iu8-dH-EnV" secondAttribute="trailing" constant="20" id="a0C-wq-Vnj"/>
+                                    <constraint firstItem="s4r-Jd-5g8" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" constant="20" id="aBw-Tx-A6c"/>
+                                    <constraint firstItem="xMw-AT-uSR" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" constant="20" id="toD-TM-n3d"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="L0k-eL-S8k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="F4v-Kp-eA4"/>
+                            <constraint firstItem="L0k-eL-S8k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="IWM-D5-jvK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L0k-eL-S8k" secondAttribute="trailing" id="KEX-h1-0q4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="L0k-eL-S8k" secondAttribute="bottom" constant="20" id="yFL-4L-Cr0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="alarmClockOut" destination="wpV-f4-ZBA" id="F71-od-YQG"/>
+                        <outlet property="autoswitchingButtonOut" destination="2gz-pY-LsG" id="1eu-j5-YOV"/>
+                        <outlet property="brightnessSlider" destination="M0O-he-0Zn" id="1vf-7T-n0I"/>
+                        <outlet property="collectionOfEffects" destination="OFN-ng-Dss" id="2MF-fX-eSQ"/>
+                        <outlet property="scaleSlider" destination="P2r-Me-F3i" id="uz7-3W-Uqf"/>
+                        <outlet property="settingsButtonOut" destination="tKJ-tO-Xbi" id="J5d-M1-tFe"/>
+                        <outlet property="speedSlider" destination="tlI-Bb-WEX" id="4Wc-5V-eqB"/>
+                        <outlet property="statusLabel" destination="ORs-8w-6on" id="Cxm-cl-euD"/>
+                        <outlet property="timerOut" destination="ei6-6C-D9G" id="O1R-B9-h4H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="131.25" y="138.38028169014083"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="OmW-Fw-NVo">
+            <objects>
+                <viewController id="4L0-4m-4Zc" customClass="SettingsViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aXI-yb-F3L">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите лампу из списка" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgi-4g-Qsb">
+                                <rect key="frame" x="20" y="20" width="280" height="20.5"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mI0-D6-BNe">
+                                <rect key="frame" x="20" y="60.5" width="280" height="287.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="lampCell" textLabel="BWc-yk-Qlz" style="IBUITableViewCellStyleDefault" id="EPC-Zj-lMp" customClass="LampsTableViewCell" customModule="GyverLamp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EPC-Zj-lMp" id="eXA-zj-g0n">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BWc-yk-Qlz">
+                                                    <rect key="frame" x="15" y="0.0" width="250" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lampLabel" destination="BWc-yk-Qlz" id="3yW-WW-yhv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4L0-4m-4Zc" id="VkW-EJ-cdV"/>
+                                    <outlet property="delegate" destination="4L0-4m-4Zc" id="fIQ-HV-bhH"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gu-iv-zHW">
+                                <rect key="frame" x="20" y="488" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="n6j-X2-HH4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                <state key="normal" title="Закрыть">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButton:" destination="4L0-4m-4Zc" eventType="touchUpInside" id="Odb-4Q-se3"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="jcq-My-iII">
+                                <rect key="frame" x="20" y="368" width="280" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PeE-Fm-M04">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                        <state key="normal" title="Добавить">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addButton:" destination="4L0-4m-4Zc" eventType="touchUpInside" id="Amo-af-RxL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMS-Hv-y8G">
+                                        <rect key="frame" x="160" y="0.0" width="120" height="40"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                        <state key="normal" title="Удалить">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="removeButton:" destination="4L0-4m-4Zc" eventType="touchUpInside" id="hKY-DV-2WH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xAl-Wz-Qfc"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEK-3T-I8N">
+                                <rect key="frame" x="20" y="428" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="rKW-7T-eMV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                <state key="normal" title="Найти и добавить">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="scan:" destination="4L0-4m-4Zc" eventType="touchUpInside" id="cet-HC-e9c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jcq-My-iII" firstAttribute="top" secondItem="mI0-D6-BNe" secondAttribute="bottom" constant="20" id="0L9-ib-ub7"/>
+                            <constraint firstItem="mI0-D6-BNe" firstAttribute="top" secondItem="Kgi-4g-Qsb" secondAttribute="bottom" constant="20" id="59o-a8-3h7"/>
+                            <constraint firstItem="mI0-D6-BNe" firstAttribute="leading" secondItem="a2T-KU-rNw" secondAttribute="leading" constant="20" id="5gc-Up-BNh"/>
+                            <constraint firstItem="jcq-My-iII" firstAttribute="centerX" secondItem="a2T-KU-rNw" secondAttribute="centerX" id="5ln-Vw-l2L"/>
+                            <constraint firstItem="0gu-iv-zHW" firstAttribute="centerX" secondItem="a2T-KU-rNw" secondAttribute="centerX" id="7Ix-IW-hlb"/>
+                            <constraint firstItem="mI0-D6-BNe" firstAttribute="centerX" secondItem="a2T-KU-rNw" secondAttribute="centerX" id="B5W-V7-qZ3"/>
+                            <constraint firstItem="wEK-3T-I8N" firstAttribute="top" secondItem="jcq-My-iII" secondAttribute="bottom" constant="20" id="CYI-mZ-XhS"/>
+                            <constraint firstItem="Kgi-4g-Qsb" firstAttribute="centerX" secondItem="a2T-KU-rNw" secondAttribute="centerX" id="Gn4-aK-Y6J"/>
+                            <constraint firstItem="Kgi-4g-Qsb" firstAttribute="top" secondItem="a2T-KU-rNw" secondAttribute="top" constant="20" id="Gug-17-xE6"/>
+                            <constraint firstItem="0gu-iv-zHW" firstAttribute="leading" secondItem="a2T-KU-rNw" secondAttribute="leading" constant="20" id="H8w-4p-cwp"/>
+                            <constraint firstItem="wEK-3T-I8N" firstAttribute="centerX" secondItem="a2T-KU-rNw" secondAttribute="centerX" id="X8E-bu-9hH"/>
+                            <constraint firstItem="a2T-KU-rNw" firstAttribute="bottom" secondItem="0gu-iv-zHW" secondAttribute="bottom" constant="20" id="fHT-Ul-uu4"/>
+                            <constraint firstItem="Kgi-4g-Qsb" firstAttribute="leading" secondItem="a2T-KU-rNw" secondAttribute="leading" constant="20" id="g9q-dh-iTw"/>
+                            <constraint firstItem="jcq-My-iII" firstAttribute="leading" secondItem="a2T-KU-rNw" secondAttribute="leading" constant="20" id="ntM-e1-w2o"/>
+                            <constraint firstItem="0gu-iv-zHW" firstAttribute="top" secondItem="wEK-3T-I8N" secondAttribute="bottom" constant="20" id="r6H-uo-BA9"/>
+                            <constraint firstItem="wEK-3T-I8N" firstAttribute="leading" secondItem="a2T-KU-rNw" secondAttribute="leading" constant="20" id="w0R-XC-0wb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a2T-KU-rNw"/>
+                    </view>
+                    <connections>
+                        <outlet property="addButtonOut" destination="PeE-Fm-M04" id="O2n-jz-lmI"/>
+                        <outlet property="closeButtonOut" destination="0gu-iv-zHW" id="ndc-1m-b3t"/>
+                        <outlet property="removeButtonOut" destination="xMS-Hv-y8G" id="i8c-6B-5NO"/>
+                        <outlet property="scanOut" destination="wEK-3T-I8N" id="WI6-Fs-Ori"/>
+                        <outlet property="tableView" destination="mI0-D6-BNe" id="lBm-QZ-LGI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNg-8l-8Hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1008.75" y="143.66197183098592"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settings.png" width="384" height="384"/>
+    </resources>
 </document>
