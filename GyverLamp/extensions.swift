@@ -54,3 +54,23 @@ extension UIDevice {
         return address
     }
 }
+
+extension String{
+    func parseDataFromLamp()->[String]{
+        return self.components(separatedBy: " ")
+    }
+    
+    func isValidIP()->Bool{
+        let allowedCharacters = CharacterSet(charactersIn:"0123456789.")//Here change this characters based on your requirement
+        let characterSet = CharacterSet(charactersIn: self)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+    func isValidPort()->Bool{
+        let allowedCharacters = CharacterSet(charactersIn:"0123456789")//Here change this characters based on your requirement
+        let characterSet = CharacterSet(charactersIn: self)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+}
+

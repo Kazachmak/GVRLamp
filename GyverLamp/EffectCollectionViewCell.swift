@@ -14,3 +14,4 @@ class EffectCollectionViewCell: UICollectionViewCell {
     
     
 }
+
