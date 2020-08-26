@@ -55,22 +55,20 @@ extension UIDevice {
     }
 }
 
-extension String{
-    func parseDataFromLamp()->[String]{
-        return self.components(separatedBy: " ")
+extension String {
+    func parseDataFromLamp() -> [String] {
+        return components(separatedBy: " ")
     }
-    
-    func isValidIP()->Bool{
-        let allowedCharacters = CharacterSet(charactersIn:"0123456789.")//Here change this characters based on your requirement
-        let characterSet = CharacterSet(charactersIn: self)
-        return allowedCharacters.isSuperset(of: characterSet)
-    }
-    
-    func isValidPort()->Bool{
-        let allowedCharacters = CharacterSet(charactersIn:"0123456789")//Here change this characters based on your requirement
-        let characterSet = CharacterSet(charactersIn: self)
-        return allowedCharacters.isSuperset(of: characterSet)
-    }
-    
-}
 
+    func isValidIP() -> Bool {
+        let allowedCharacters = CharacterSet(charactersIn: "0123456789.") // Here change this characters based on your requirement
+        let characterSet = CharacterSet(charactersIn: self)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+
+    func isValidPort() -> Bool {
+        let allowedCharacters = CharacterSet(charactersIn: "0123456789") // Here change this characters based on your requirement
+        let characterSet = CharacterSet(charactersIn: self)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+}

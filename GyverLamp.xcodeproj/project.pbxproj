@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C15F2D124EDA6F600F63C92 /* lampDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C15F2D024EDA6F600F63C92 /* lampDevice.swift */; };
+		3C3761B924F644AE00E60309 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3761B824F644AE00E60309 /* blank.png */; };
 		3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */; };
 		3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */; };
 		3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45878124EC2C5A00DBE5C4 /* ViewController.swift */; };
@@ -18,6 +19,8 @@
 		3C45879424EC351700DBE5C4 /* EffectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */; };
 		3C45879624EC426100DBE5C4 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879524EC426100DBE5C4 /* extensions.swift */; };
 		3C45879A24EC45A500DBE5C4 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C45879924EC45A500DBE5C4 /* settings.png */; };
+		3C84E96324F3A732004B411A /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84E96224F3A732004B411A /* TimerViewController.swift */; };
+		3C85FDE224F46BEA002F938E /* stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C85FDE124F46BEA002F938E /* stopwatch.png */; };
 		3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */; };
 		3C9EAEC924EC5E3D00600578 /* SFUIDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */; };
 		3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */; };
@@ -25,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		3C15F2D024EDA6F600F63C92 /* lampDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lampDevice.swift; sourceTree = "<group>"; };
+		3C3761B824F644AE00E60309 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 		3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyverLamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,8 @@
 		3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C45879524EC426100DBE5C4 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		3C45879924EC45A500DBE5C4 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		3C84E96224F3A732004B411A /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		3C85FDE124F46BEA002F938E /* stopwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopwatch.png; sourceTree = "<group>"; };
 		3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampsTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,16 +80,13 @@
 			children = (
 				3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */,
 				3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */,
-				3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */,
+				3C7CF12B24F0FAB10094D602 /* cells */,
 				3C15F2D024EDA6F600F63C92 /* lampDevice.swift */,
-				3C45879124EC330400DBE5C4 /* effects.swift */,
-				3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */,
-				3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */,
+				3C7CF12924F0FA810094D602 /* others */,
+				3C7CF12A24F0FAA20094D602 /* viewcontrollers */,
 				3C9EAECA24EC5E4D00600578 /* images */,
 				3C9EAECB24EC5E5500600578 /* fonts */,
-				3C45878124EC2C5A00DBE5C4 /* ViewController.swift */,
 				3C45878324EC2C5A00DBE5C4 /* Main.storyboard */,
-				3C45879524EC426100DBE5C4 /* extensions.swift */,
 				3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */,
 				3C45878824EC2C5C00DBE5C4 /* LaunchScreen.storyboard */,
 				3C45878B24EC2C5C00DBE5C4 /* Info.plist */,
@@ -91,9 +94,39 @@
 			path = GyverLamp;
 			sourceTree = "<group>";
 		};
+		3C7CF12924F0FA810094D602 /* others */ = {
+			isa = PBXGroup;
+			children = (
+				3C45879124EC330400DBE5C4 /* effects.swift */,
+				3C45879524EC426100DBE5C4 /* extensions.swift */,
+			);
+			path = others;
+			sourceTree = "<group>";
+		};
+		3C7CF12A24F0FAA20094D602 /* viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */,
+				3C84E96224F3A732004B411A /* TimerViewController.swift */,
+				3C45878124EC2C5A00DBE5C4 /* ViewController.swift */,
+			);
+			path = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		3C7CF12B24F0FAB10094D602 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */,
+				3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		3C9EAECA24EC5E4D00600578 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3C3761B824F644AE00E60309 /* blank.png */,
+				3C85FDE124F46BEA002F938E /* stopwatch.png */,
 				3C45879924EC45A500DBE5C4 /* settings.png */,
 			);
 			path = images;
@@ -168,7 +201,9 @@
 				3C45879A24EC45A500DBE5C4 /* settings.png in Resources */,
 				3C45878A24EC2C5C00DBE5C4 /* LaunchScreen.storyboard in Resources */,
 				3C9EAEC924EC5E3D00600578 /* SFUIDisplay-Medium.ttf in Resources */,
+				3C85FDE224F46BEA002F938E /* stopwatch.png in Resources */,
 				3C45878724EC2C5C00DBE5C4 /* Assets.xcassets in Resources */,
+				3C3761B924F644AE00E60309 /* blank.png in Resources */,
 				3C45878524EC2C5A00DBE5C4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C84E96324F3A732004B411A /* TimerViewController.swift in Sources */,
 				3C45879224EC330400DBE5C4 /* effects.swift in Sources */,
 				3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */,
 				3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */,
