@@ -23,8 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="L0k-eL-S8k">
-                                <rect key="frame" x="0.0" y="20" width="320" height="528"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="L0k-eL-S8k">
+                                <rect key="frame" x="-8" y="12" width="320" height="528"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="s4r-Jd-5g8">
                                         <rect key="frame" x="20" y="0.0" width="280" height="20.5"/>
@@ -35,31 +35,23 @@
                                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="I28-F1-peO">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="blank.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZH-Z4-Plm">
-                                                        <rect key="frame" x="20" y="20" width="115" height="29"/>
-                                                    </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKJ-tO-Xbi">
-                                                        <rect key="frame" x="160" y="20" width="140" height="20.5"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="qrY-p5-qHX"/>
-                                                            <constraint firstAttribute="height" constant="40" id="xfr-9l-aya"/>
-                                                        </constraints>
-                                                        <state key="normal" image="settings.png">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="settingsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UgK-Ww-LNY"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKJ-tO-Xbi">
+                                                <rect key="frame" x="70" y="0.0" width="140" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="qrY-p5-qHX"/>
+                                                    <constraint firstAttribute="height" constant="40" id="xfr-9l-aya"/>
+                                                </constraints>
+                                                <state key="normal" image="settings.png">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="settingsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UgK-Ww-LNY"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-ng-Dss">
-                                        <rect key="frame" x="0.0" y="40.5" width="320" height="110.5"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-ng-Dss">
+                                        <rect key="frame" x="7" y="41" width="313" height="111"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="30" minimumInteritemSpacing="30" id="ZPN-UE-oK0">
                                             <size key="itemSize" width="120" height="121"/>
@@ -69,7 +61,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="effectCell" id="nAz-mL-XwD" customClass="EffectCollectionViewCell" customModule="GyverLamp" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="0.0" width="120" height="110.5"/>
+                                                <rect key="frame" x="20" y="0.5" width="120" height="110.5"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nv3-yc-wRr">
                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="110.5"/>
@@ -77,7 +69,7 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYq-s2-dM2">
                                                             <rect key="frame" x="42.5" y="47" width="35.5" height="17"/>
-                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -139,7 +131,7 @@
                                             </slider>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xMw-AT-uSR">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xMw-AT-uSR">
                                         <rect key="frame" x="20" y="341" width="280" height="136"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gz-pY-LsG">
@@ -147,7 +139,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Poh-aZ-CiV"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="19"/>
                                                 <state key="normal" title="Автопереключение эффектов">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -160,7 +152,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="f7O-rR-ES1"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                                 <state key="normal" title="Будильник &quot;Рассвет&quot;">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -173,7 +165,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="yWS-JK-HJ9"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                                 <state key="normal" title="Таймер выключения">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -183,14 +175,44 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VNP-YZ-KMU">
-                                        <rect key="frame" x="135.5" y="497" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="powerSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="u9H-nM-RfJ"/>
-                                        </connections>
-                                    </switch>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8T-ve-VXr">
+                                        <rect key="frame" x="114" y="106" width="91" height="315"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кнопка на лампе" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agC-y8-XNe">
+                                                <rect key="frame" x="23.5" y="20" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aZV-z6-Cqs">
+                                                <rect key="frame" x="20" y="264" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="buttonSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="KWf-dy-smJ"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MLs-EJ-GtH">
+                                        <rect key="frame" x="139" y="253" width="91" height="315"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Питание" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmR-xv-liP">
+                                                <rect key="frame" x="23.5" y="20" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VNP-YZ-KMU">
+                                                <rect key="frame" x="20" y="264" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="powerSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="u9H-nM-RfJ"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="OFN-ng-Dss" firstAttribute="height" secondItem="L0k-eL-S8k" secondAttribute="height" multiplier="0.13" id="1gB-Al-EaN"/>
+                                    <constraint firstAttribute="trailing" secondItem="g8T-ve-VXr" secondAttribute="trailing" constant="20" id="2sz-cD-0ng"/>
                                     <constraint firstItem="OFN-ng-Dss" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" id="Cdf-k0-L4p"/>
                                     <constraint firstItem="Iu8-dH-EnV" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" constant="20" id="CqG-2j-1g5"/>
                                     <constraint firstAttribute="trailing" secondItem="s4r-Jd-5g8" secondAttribute="trailing" constant="20" id="JaO-hH-inS"/>
@@ -198,6 +220,7 @@
                                     <constraint firstAttribute="trailing" secondItem="OFN-ng-Dss" secondAttribute="trailing" id="P0e-T4-L7a"/>
                                     <constraint firstAttribute="trailing" secondItem="Iu8-dH-EnV" secondAttribute="trailing" constant="20" id="a0C-wq-Vnj"/>
                                     <constraint firstItem="s4r-Jd-5g8" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" constant="20" id="aBw-Tx-A6c"/>
+                                    <constraint firstItem="g8T-ve-VXr" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" constant="20" id="g7y-Yu-R7o"/>
                                     <constraint firstItem="xMw-AT-uSR" firstAttribute="leading" secondItem="L0k-eL-S8k" secondAttribute="leading" constant="20" id="toD-TM-n3d"/>
                                 </constraints>
                             </stackView>
@@ -205,7 +228,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="L0k-eL-S8k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="F4v-Kp-eA4"/>
-                            <constraint firstItem="L0k-eL-S8k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="IWM-D5-jvK"/>
+                            <constraint firstItem="L0k-eL-S8k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IWM-D5-jvK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L0k-eL-S8k" secondAttribute="trailing" id="KEX-h1-0q4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="L0k-eL-S8k" secondAttribute="bottom" constant="20" id="yFL-4L-Cr0"/>
                         </constraints>
@@ -215,13 +238,13 @@
                         <outlet property="alarmClockOut" destination="wpV-f4-ZBA" id="F71-od-YQG"/>
                         <outlet property="autoswitchingButtonOut" destination="2gz-pY-LsG" id="1eu-j5-YOV"/>
                         <outlet property="brightnessSlider" destination="M0O-he-0Zn" id="1vf-7T-n0I"/>
+                        <outlet property="buttonSwitchOut" destination="aZV-z6-Cqs" id="OZ3-N4-ucd"/>
                         <outlet property="collectionOfEffects" destination="OFN-ng-Dss" id="2MF-fX-eSQ"/>
                         <outlet property="powerSwitchOut" destination="VNP-YZ-KMU" id="8xA-5j-zbG"/>
                         <outlet property="scaleSlider" destination="P2r-Me-F3i" id="uz7-3W-Uqf"/>
                         <outlet property="settingsButtonOut" destination="tKJ-tO-Xbi" id="J5d-M1-tFe"/>
                         <outlet property="speedSlider" destination="tlI-Bb-WEX" id="4Wc-5V-eqB"/>
                         <outlet property="statusLabel" destination="ORs-8w-6on" id="Cxm-cl-euD"/>
-                        <outlet property="timerImage" destination="dZH-Z4-Plm" id="ysB-Xb-Cfs"/>
                         <outlet property="timerOut" destination="ei6-6C-D9G" id="O1R-B9-h4H"/>
                         <segue destination="4L0-4m-4Zc" kind="presentation" identifier="settings" id="P7v-i4-Cgy"/>
                     </connections>
@@ -229,6 +252,174 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.25" y="138.38028169014083"/>
+        </scene>
+        <!--Alarm View Controller-->
+        <scene sceneID="Ks7-wR-i9x">
+            <objects>
+                <viewController storyboardIdentifier="alarm" id="VxG-0H-mKO" customClass="AlarmViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zd8-8h-nJy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Установить будильник на: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-d7-MjP">
+                                <rect key="frame" x="20" y="10" width="280" height="24"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2Be-BZ-7bR">
+                                <rect key="frame" x="0.0" y="34" width="320" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="RWd-X8-iTn"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dGt-Ro-SNw">
+                                    <size key="itemSize" width="80" height="70"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="day" id="XIV-wY-hL7" customClass="DaysCollectionViewCell" customModule="GyverLamp" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="15" width="80" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8um-AJ-SWg">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="70"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64u-xJ-NXT">
+                                                    <rect key="frame" x="15.5" y="23" width="49" height="24"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="64u-xJ-NXT" firstAttribute="centerX" secondItem="8um-AJ-SWg" secondAttribute="centerX" id="cyT-La-vKz"/>
+                                                <constraint firstItem="64u-xJ-NXT" firstAttribute="centerY" secondItem="8um-AJ-SWg" secondAttribute="centerY" id="eED-xb-95d"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="80" height="70"/>
+                                        <connections>
+                                            <outlet property="dayLabel" destination="64u-xJ-NXT" id="oUe-w0-yeV"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="VxG-0H-mKO" id="WFD-gv-xJD"/>
+                                    <outlet property="delegate" destination="VxG-0H-mKO" id="kA3-4L-0Kc"/>
+                                </connections>
+                            </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fPe-1s-NjQ">
+                                <rect key="frame" x="0.0" y="350" width="320" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="hlu-DB-mtL"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R1z-dn-CYk">
+                                    <size key="itemSize" width="80" height="70"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dawn" id="m94-dr-vXr" customClass="DawnCollectionViewCell" customModule="GyverLamp" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="15" width="80" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZVe-Vh-WdR">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="70"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOT-5I-KCU">
+                                                    <rect key="frame" x="16" y="23" width="48.5" height="24"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WOT-5I-KCU" firstAttribute="centerY" secondItem="ZVe-Vh-WdR" secondAttribute="centerY" id="3EE-pi-VxL"/>
+                                                <constraint firstItem="WOT-5I-KCU" firstAttribute="centerX" secondItem="ZVe-Vh-WdR" secondAttribute="centerX" id="ugF-ue-e9m"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="80" height="70"/>
+                                        <connections>
+                                            <outlet property="dawnLabel" destination="WOT-5I-KCU" id="Ssw-vf-avD"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="VxG-0H-mKO" id="hmM-Ih-thx"/>
+                                    <outlet property="delegate" destination="VxG-0H-mKO" id="N2O-I4-mDf"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ID-gg-puK">
+                                <rect key="frame" x="20" y="506" width="280" height="36"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                <state key="normal" title="Закрыть">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="VxG-0H-mKO" eventType="touchUpInside" id="b9f-iU-RXp"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xza-Rv-G2c">
+                                <rect key="frame" x="0.0" y="134" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="620210570.72646594">
+                                    <!--2020-08-27 08:42:50 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="ru"/>
+                                <connections>
+                                    <action selector="datePicker:" destination="VxG-0H-mKO" eventType="valueChanged" id="AXo-dX-fnD"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3A-lR-mdr">
+                                <rect key="frame" x="20" y="460" width="280" height="36"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                <state key="normal" title="Будильник выключен">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="alarmOnButton:" destination="VxG-0H-mKO" eventType="touchUpInside" id="jFJ-Ib-iSH"/>
+                                    <action selector="setAlarm:" destination="VxG-0H-mKO" eventType="touchUpInside" id="VmT-sB-CuN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fPe-1s-NjQ" firstAttribute="trailing" secondItem="dFe-XO-7Rx" secondAttribute="trailing" id="2s4-kB-knj"/>
+                            <constraint firstItem="Xza-Rv-G2c" firstAttribute="trailing" secondItem="dFe-XO-7Rx" secondAttribute="trailing" id="5CZ-3v-XsR"/>
+                            <constraint firstItem="Xza-Rv-G2c" firstAttribute="leading" secondItem="dFe-XO-7Rx" secondAttribute="leading" id="86S-N7-wQl"/>
+                            <constraint firstItem="dFe-XO-7Rx" firstAttribute="trailing" secondItem="VY7-d7-MjP" secondAttribute="trailing" constant="20" id="BbF-AJ-PWT"/>
+                            <constraint firstItem="8ID-gg-puK" firstAttribute="centerX" secondItem="dFe-XO-7Rx" secondAttribute="centerX" id="Eth-hf-9Qu"/>
+                            <constraint firstItem="2Be-BZ-7bR" firstAttribute="leading" secondItem="dFe-XO-7Rx" secondAttribute="leading" id="IWR-84-x4L"/>
+                            <constraint firstItem="X3A-lR-mdr" firstAttribute="top" secondItem="fPe-1s-NjQ" secondAttribute="bottom" constant="10" id="K7M-Sk-NWk"/>
+                            <constraint firstItem="X3A-lR-mdr" firstAttribute="leading" secondItem="dFe-XO-7Rx" secondAttribute="leading" constant="20" id="Mlx-wi-jcc"/>
+                            <constraint firstItem="2Be-BZ-7bR" firstAttribute="top" secondItem="VY7-d7-MjP" secondAttribute="bottom" id="POz-z2-6M1"/>
+                            <constraint firstItem="VY7-d7-MjP" firstAttribute="leading" secondItem="dFe-XO-7Rx" secondAttribute="leading" constant="20" id="QIx-lu-app"/>
+                            <constraint firstItem="fPe-1s-NjQ" firstAttribute="leading" secondItem="dFe-XO-7Rx" secondAttribute="leading" id="R2c-Dv-TYc"/>
+                            <constraint firstItem="8ID-gg-puK" firstAttribute="leading" secondItem="dFe-XO-7Rx" secondAttribute="leading" constant="20" id="aH5-Od-tKw"/>
+                            <constraint firstItem="fPe-1s-NjQ" firstAttribute="top" secondItem="Xza-Rv-G2c" secondAttribute="bottom" id="aje-PZ-Fif"/>
+                            <constraint firstItem="VY7-d7-MjP" firstAttribute="top" secondItem="dFe-XO-7Rx" secondAttribute="top" constant="10" id="jZj-lh-Bjm"/>
+                            <constraint firstItem="8ID-gg-puK" firstAttribute="top" secondItem="X3A-lR-mdr" secondAttribute="bottom" constant="10" id="pgZ-Xu-LDI"/>
+                            <constraint firstItem="X3A-lR-mdr" firstAttribute="centerX" secondItem="dFe-XO-7Rx" secondAttribute="centerX" id="pyy-1h-hcB"/>
+                            <constraint firstItem="2Be-BZ-7bR" firstAttribute="trailing" secondItem="dFe-XO-7Rx" secondAttribute="trailing" id="tmv-cF-Arb"/>
+                            <constraint firstItem="Xza-Rv-G2c" firstAttribute="top" secondItem="2Be-BZ-7bR" secondAttribute="bottom" id="vNJ-rB-4yZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dFe-XO-7Rx"/>
+                    </view>
+                    <connections>
+                        <outlet property="alarmOnButtonOut" destination="X3A-lR-mdr" id="HeS-xo-gLI"/>
+                        <outlet property="closeOut" destination="8ID-gg-puK" id="7TE-Tt-VAj"/>
+                        <outlet property="datePickerOut" destination="Xza-Rv-G2c" id="SpZ-rf-EIU"/>
+                        <outlet property="dawnCollectionView" destination="fPe-1s-NjQ" id="vrt-yc-uRQ"/>
+                        <outlet property="daysCollctionView" destination="2Be-BZ-7bR" id="S4g-Tt-TPm"/>
+                        <outlet property="setAlarmOut" destination="X3A-lR-mdr" id="xXU-jF-M4y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g31-eB-g7o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="999.375" y="-1295.0704225352113"/>
         </scene>
         <!--Timer View Controller-->
         <scene sceneID="uDT-Xy-0Rc">
@@ -251,11 +442,11 @@
                                     <outlet property="delegate" destination="4nl-VP-tTN" id="0i4-7P-xof"/>
                                 </connections>
                             </pickerView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tZi-ts-BIU">
-                                <rect key="frame" x="20" y="305" width="280" height="36"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tZi-ts-BIU">
+                                <rect key="frame" x="20" y="305" width="280" height="92"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODy-RP-PiE">
-                                        <rect key="frame" x="0.0" y="0.0" width="180.5" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="36"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                         <state key="normal" title="Отключить таймер">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -265,7 +456,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wo6-JN-1wm">
-                                        <rect key="frame" x="200.5" y="0.0" width="79.5" height="36"/>
+                                        <rect key="frame" x="0.0" y="56" width="280" height="36"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                         <state key="normal" title="Закрыть">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -435,24 +626,163 @@
             </objects>
             <point key="canvasLocation" x="1008.75" y="143.66197183098592"/>
         </scene>
-        <!--View Controller-->
+        <!--Auto Switch Effect View Controller-->
         <scene sceneID="Vih-Qw-fSC">
             <objects>
-                <viewController id="KI7-NN-iUS" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="autoswitching" id="KI7-NN-iUS" customClass="AutoSwitchEffectViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OlY-kW-kJQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ICR-Sq-TlB">
+                                <rect key="frame" x="0.0" y="20" width="320" height="528"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OY6-cB-6Wq">
+                                        <rect key="frame" x="20" y="0.0" width="280" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Режим смены эффектов" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xod-BU-Npq">
+                                                <rect key="frame" x="0.0" y="0.0" width="222" height="48"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apa-Td-6As">
+                                                <rect key="frame" x="230" y="8.5" width="52" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="dfZ-xv-oED"/>
+                                                </constraints>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j5a-qb-o1P">
+                                        <rect key="frame" x="20" y="94" width="280" height="72"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Не отключать режим смены эффектов при выключении лампы" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iq9-L8-e1r">
+                                                <rect key="frame" x="0.0" y="0.0" width="222" height="72"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKl-8d-ZVq">
+                                                <rect key="frame" x="230" y="20.5" width="52" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="uxU-Af-koH"/>
+                                                </constraints>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odg-bO-6am">
+                                        <rect key="frame" x="20" y="218" width="280" height="36"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                        <state key="normal" title="Интервал смены эффектов">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="interval:" destination="KI7-NN-iUS" eventType="touchUpInside" id="6fk-VO-wvP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvk-S9-Ymb">
+                                        <rect key="frame" x="20" y="310" width="280" height="36"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                        <state key="normal" title="+ случайное время от 0 до">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="randomTime:" destination="KI7-NN-iUS" eventType="touchUpInside" id="vG9-cq-TrG"/>
+                                        </connections>
+                                    </button>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="q3O-V9-OKd">
+                                        <rect key="frame" x="0.0" y="354" width="320" height="130"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="130" id="hdn-YA-mSH"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zYP-VL-L6f">
+                                            <size key="itemSize" width="99" height="109"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="autoswitch" id="XPa-2Q-nEy" customClass="AutoSwitchEffectCollectionViewCell" customModule="GyverLamp" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="109"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rIo-cZ-UZk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="99" height="109"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rI1-To-bRd">
+                                                            <rect key="frame" x="28" y="44" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="rI1-To-bRd" firstAttribute="centerX" secondItem="rIo-cZ-UZk" secondAttribute="centerX" id="ctd-nt-uan"/>
+                                                        <constraint firstItem="rI1-To-bRd" firstAttribute="centerY" secondItem="rIo-cZ-UZk" secondAttribute="centerY" id="fR1-iR-AtN"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="99" height="109"/>
+                                                <connections>
+                                                    <outlet property="label" destination="rI1-To-bRd" id="AP2-Ga-0Te"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="KI7-NN-iUS" id="eYw-Cg-Tcj"/>
+                                            <outlet property="delegate" destination="KI7-NN-iUS" id="Z6N-fv-sym"/>
+                                        </connections>
+                                    </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXU-rR-aus">
+                                        <rect key="frame" x="20" y="492" width="280" height="36"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                        <state key="normal" title="Закрыть">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="close:" destination="KI7-NN-iUS" eventType="touchUpInside" id="Mh8-DV-5vJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="odg-bO-6am" secondAttribute="trailing" constant="20" id="1Ss-Xy-liE"/>
+                                    <constraint firstItem="odg-bO-6am" firstAttribute="leading" secondItem="ICR-Sq-TlB" secondAttribute="leading" constant="20" id="CbM-aj-6iq"/>
+                                    <constraint firstAttribute="trailing" secondItem="j5a-qb-o1P" secondAttribute="trailing" constant="20" id="Fri-Vc-YT3"/>
+                                    <constraint firstAttribute="trailing" secondItem="q3O-V9-OKd" secondAttribute="trailing" id="XYH-eu-BFJ"/>
+                                    <constraint firstItem="q3O-V9-OKd" firstAttribute="leading" secondItem="ICR-Sq-TlB" secondAttribute="leading" id="XuO-05-V9K"/>
+                                    <constraint firstItem="OY6-cB-6Wq" firstAttribute="leading" secondItem="ICR-Sq-TlB" secondAttribute="leading" constant="20" id="YIj-KJ-6Hb"/>
+                                    <constraint firstAttribute="trailing" secondItem="OY6-cB-6Wq" secondAttribute="trailing" constant="20" id="aXl-iT-9F0"/>
+                                    <constraint firstAttribute="trailing" secondItem="tvk-S9-Ymb" secondAttribute="trailing" constant="20" id="cYV-eq-viz"/>
+                                    <constraint firstItem="j5a-qb-o1P" firstAttribute="top" secondItem="OY6-cB-6Wq" secondAttribute="bottom" constant="46" id="fg1-Va-GkU"/>
+                                    <constraint firstItem="j5a-qb-o1P" firstAttribute="leading" secondItem="ICR-Sq-TlB" secondAttribute="leading" constant="20" id="opb-GX-eUz"/>
+                                    <constraint firstItem="RXU-rR-aus" firstAttribute="leading" secondItem="ICR-Sq-TlB" secondAttribute="leading" constant="20" id="osZ-pq-bKp"/>
+                                    <constraint firstAttribute="trailing" secondItem="RXU-rR-aus" secondAttribute="trailing" constant="20" id="rYr-nr-fSY"/>
+                                    <constraint firstItem="tvk-S9-Ymb" firstAttribute="leading" secondItem="ICR-Sq-TlB" secondAttribute="leading" constant="20" id="u3J-xQ-pRa"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ICR-Sq-TlB" firstAttribute="leading" secondItem="PdJ-BR-M7T" secondAttribute="leading" id="CRU-Rg-9Y8"/>
+                            <constraint firstItem="PdJ-BR-M7T" firstAttribute="bottom" secondItem="ICR-Sq-TlB" secondAttribute="bottom" constant="20" id="HQe-l7-01H"/>
+                            <constraint firstItem="ICR-Sq-TlB" firstAttribute="trailing" secondItem="PdJ-BR-M7T" secondAttribute="trailing" id="nva-bA-v0N"/>
+                            <constraint firstItem="ICR-Sq-TlB" firstAttribute="top" secondItem="PdJ-BR-M7T" secondAttribute="top" constant="20" id="vsd-sw-RTU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="PdJ-BR-M7T"/>
                     </view>
+                    <connections>
+                        <outlet property="closeOut" destination="RXU-rR-aus" id="7Oz-FH-V9x"/>
+                        <outlet property="intervalOut" destination="odg-bO-6am" id="gLW-Vq-LoX"/>
+                        <outlet property="randomTimeOut" destination="tvk-S9-Ymb" id="lom-JB-A3l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E39-PU-5jo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009" y="852"/>
+            <point key="canvasLocation" x="1008.75" y="851.4084507042254"/>
         </scene>
     </scenes>
     <resources>
-        <image name="blank.png" width="46.285713195800781" height="46.285713195800781"/>
         <image name="settings.png" width="384" height="384"/>
     </resources>
 </document>
