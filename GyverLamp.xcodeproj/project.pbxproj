@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,10 +27,13 @@
 		3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */; };
 		3CA069FA24F909130058AD2A /* AutoSwitchEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA069F924F909130058AD2A /* AutoSwitchEffectViewController.swift */; };
 		3CA069FC24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA069FB24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift */; };
+		41FE89CA722D6D15EDA7FD8C /* Pods_GyverLamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D58903E06228209968C630 /* Pods_GyverLamp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GyverLamp.release.xcconfig"; path = "Target Support Files/Pods-GyverLamp/Pods-GyverLamp.release.xcconfig"; sourceTree = "<group>"; };
 		3C15F2D024EDA6F600F63C92 /* LampDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampDevice.swift; sourceTree = "<group>"; };
+		3C31837A2511E66C00663FC8 /* GyverLamp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GyverLamp-Bridging-Header.h"; sourceTree = "<group>"; };
 		3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyverLamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +55,8 @@
 		3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampsTableViewCell.swift; sourceTree = "<group>"; };
 		3CA069F924F909130058AD2A /* AutoSwitchEffectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSwitchEffectViewController.swift; sourceTree = "<group>"; };
 		3CA069FB24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSwitchEffectCollectionViewCell.swift; sourceTree = "<group>"; };
+		88D58903E06228209968C630 /* Pods_GyverLamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GyverLamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GyverLamp.debug.xcconfig"; path = "Target Support Files/Pods-GyverLamp/Pods-GyverLamp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41FE89CA722D6D15EDA7FD8C /* Pods_GyverLamp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +76,8 @@
 			children = (
 				3C45877C24EC2C5A00DBE5C4 /* GyverLamp */,
 				3C45877B24EC2C5A00DBE5C4 /* Products */,
+				A6265E26CC15F07C3F239C0F /* Pods */,
+				928B800D3974FC4B8B34E049 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +94,7 @@
 			children = (
 				3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */,
 				3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */,
+				3C31837A2511E66C00663FC8 /* GyverLamp-Bridging-Header.h */,
 				3C7CF12B24F0FAB10094D602 /* cells */,
 				3C15F2D024EDA6F600F63C92 /* LampDevice.swift */,
 				3C7CF12924F0FA810094D602 /* others */,
@@ -149,6 +158,23 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		928B800D3974FC4B8B34E049 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				88D58903E06228209968C630 /* Pods_GyverLamp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6265E26CC15F07C3F239C0F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */,
+				250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,9 +182,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C45878E24EC2C5C00DBE5C4 /* Build configuration list for PBXNativeTarget "GyverLamp" */;
 			buildPhases = (
+				29F27E207E89B252E06EB392 /* [CP] Check Pods Manifest.lock */,
 				3C45877624EC2C5A00DBE5C4 /* Sources */,
 				3C45877724EC2C5A00DBE5C4 /* Frameworks */,
 				3C45877824EC2C5A00DBE5C4 /* Resources */,
+				DADD91EA4B7DB81A539841BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -216,6 +244,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		29F27E207E89B252E06EB392 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GyverLamp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DADD91EA4B7DB81A539841BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3C45877624EC2C5A00DBE5C4 /* Sources */ = {
@@ -318,6 +388,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "GyverLamp/GyverLamp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -371,6 +442,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "GyverLamp/GyverLamp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -378,6 +450,7 @@
 		};
 		3C45878F24EC2C5C00DBE5C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -397,6 +470,7 @@
 		};
 		3C45879024EC2C5C00DBE5C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

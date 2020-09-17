@@ -9,6 +9,7 @@
 import UIKit
 
 class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     var lamp: LampDevice?
     let pickerData = ["Не выключать", "1 минуту", "5 минут", "10 минут", "15 минут", "30 минут", "45 минут", "60 минут"]
 
@@ -28,10 +29,10 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let currentLamp = lamp {
-            currentLamp.sendCommand(lamp: currentLamp, command: .timer, value: row)
+            currentLamp.sendCommand(lamp: currentLamp, command: .timer, value: [row]) // устанавливаем таймер на выбранное время
         }
 
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil) // закрываем view
     }
 
     @IBOutlet var timerLabel: UILabel!
@@ -40,22 +41,14 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
     @IBAction func invalidateTimer(_ sender: UIButton) {
         if let currentLamp = lamp {
-            currentLamp.sendCommand(lamp: currentLamp, command: .timer, value: 0)
-            
+            currentLamp.sendCommand(lamp: currentLamp, command: .timer, value: [0])  //отключаем таймер
             dismiss(animated: true, completion: nil)
         }
-    }
-
-    @IBOutlet var closeTimerOut: UIButton!
-
-    @IBAction func closeTimer(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         timerLabel.adjustsFontSizeToFitWidth = true
         invalidateTimerOut.addBoxShadow()
-        closeTimerOut.addBoxShadow()
     }
 }

@@ -6,12 +6,14 @@
 //  Copyright © 2020 Maksim Kazachkov. All rights reserved.
 //
 
-import Foundation
+//import Foundation
 import Network
 import UIKit
 
+// команды, которые можно передать на лампу
 enum CommandsToLamp: String {
-    case power = "POWER"
+    case power_on = "P_ON"
+    case power_off = "P_OFF"
     case eff = "EFF"
     case get = "GET"
     case deb = "DEB"
@@ -27,32 +29,26 @@ enum CommandsToLamp: String {
     case button_on = "BTN ON"
     case button_off = "BTN OFF"
     case dawn = "DAWN"
+    case fav_get = "FAV_GET"
+    case fav_set = "FAV_SET"
 }
 
 class UDPClient {
+    
     var connection: NWConnection?
-
-    // MARK: - UDP
-
-    func connectToUDP(messageToUDP: CommandsToLamp, lamp: LampDevice, value: Int...) {
-        // Transmited message:
+    
+    // подготовка сообщения для отправки в лампу
+    func connectToUDP(messageToUDP: CommandsToLamp, lamp: LampDevice, value: [Int]) {
 
         connection = NWConnection(host: lamp.hostIP ?? "0.0.0.0", port: lamp.hostPort ?? 8888, using: .udp)
         connection?.stateUpdateHandler = { newState in
             // print("This is stateUpdateHandler:")
             switch newState {
             case .ready:
-                if value.count == 1 {
-                    print(self.makeCommandForLamp(command: messageToUDP, lamp: lamp, value: value[0]))
-                    self.sendUDP(self.makeCommandForLamp(command: messageToUDP, lamp: lamp, value: value[0]))
-                    self.receiveUDP(lamp: lamp)
-                }else{
-                    
-                    print(self.makeCommandForLamp(command: messageToUDP, lamp: lamp, value: value[0]) + " \(value[1])")
-                    self.sendUDP(self.makeCommandForLamp(command: messageToUDP, lamp: lamp, value: value[0]) + " \(value[1])")
-                    self.receiveUDP(lamp: lamp)
-                }
-               
+                //print(self.makeCommandForLamp(command: messageToUDP, lamp: lamp, value: value))
+                self.sendUDP(self.makeCommandForLamp(command: messageToUDP, value: value)) // отправляем сообщение
+                self.receiveUDP(lamp: lamp) // принимаем сообщение
+
             case .setup: break
             // print("State: Setup\n")
             case .cancelled: break
@@ -67,16 +63,7 @@ class UDPClient {
         connection?.start(queue: .global())
     }
 
-    private func sendUDP(_ content: Data) {
-        connection?.send(content: content, completion: NWConnection.SendCompletion.contentProcessed(({ NWError in
-            if NWError == nil {
-                print("Data was sent to UDP")
-            } else {
-                print("ERROR! Error when data (Type: Data) sending. NWError: \n \(NWError!)")
-            }
-        })))
-    }
-
+    //отправка сообщения
     private func sendUDP(_ content: String) {
         let contentToSendUDP = content.data(using: String.Encoding.utf8)
         connection?.send(content: contentToSendUDP, completion: NWConnection.SendCompletion.contentProcessed(({ NWError in
@@ -89,52 +76,49 @@ class UDPClient {
         })))
     }
 
-    private func makeCommandForLamp(command: CommandsToLamp, lamp: LampDevice, value: Int) -> String {
+    //формирователь команды
+    private func makeCommandForLamp(command: CommandsToLamp, value: [Int]) -> String {
         switch command {
-        case .get, .gbr, .list: return command.rawValue
-        case .power:
-
-            if lamp.powerStatus == false {
-                return "P_ON"
-            } else {
-                return "P_OFF"
-            }
+        case .list: return command.rawValue + String(value[0])
+        case .get, .gbr, .button_on, .button_off, .fav_get, .power_on, .power_off, .deb: return command.rawValue
         case .eff:
-            return "EFF" + String(value)
-        case .deb:
-            return "DEB"
+            return command.rawValue + String(value[0])
         case .bri:
-            return "BRI" + String(value)
+            return command.rawValue + String(value[0])
         case .spd:
-            return "SPD" + String(value)
+            return command.rawValue + String(value[0])
         case .sca:
-            return "SCA" + String(value)
-        case .alarm_on: return "ALM_SET" + String(value) + " ON"
-        case .alarm_off: return "ALM_SET" + String(value) + " OFF"
+            return command.rawValue + String(value[0])
+        case .alarm_on: return "ALM_SET" + String(value[0]) + " ON"
+        case .alarm_off: return "ALM_SET" + String(value[0]) + " OFF"
         case .timer:
-            switch value {
-            case 0: return "TMR_SET" + " 0 " + String(value) + " 0"
-            case 1: return "TMR_SET" + " 1 " + String(value) + " 60"
-            case 2: return "TMR_SET" + " 1 " + String(value) + " 300"
-            case 3: return "TMR_SET" + " 1 " + String(value) + " 600"
-            case 4: return "TMR_SET" + " 1 " + String(value) + " 900"
-            case 5: return "TMR_SET" + " 1 " + String(value) + " 1800"
-            case 6: return "TMR_SET" + " 1 " + String(value) + " 2700"
-            case 7: return "TMR_SET" + " 1 " + String(value) + " 3600"
+            switch value[0] {
+            case 0: return command.rawValue + " 0 " + String(value[0]) + " 0"
+            case 1: return command.rawValue + " 1 " + String(value[0]) + " 60"
+            case 2: return command.rawValue + " 1 " + String(value[0]) + " 300"
+            case 3: return command.rawValue + " 1 " + String(value[0]) + " 600"
+            case 4: return command.rawValue + " 1 " + String(value[0]) + " 900"
+            case 5: return command.rawValue + " 1 " + String(value[0]) + " 1800"
+            case 6: return command.rawValue + " 1 " + String(value[0]) + " 2700"
+            case 7: return command.rawValue + " 1 " + String(value[0]) + " 3600"
             default:
-                return "TMR_SET" + " 0 " + String(value) + " 0"
+                return command.rawValue + " 0 " + String(value[0]) + " 0"
             }
-        case .button_on:
-            return command.rawValue
-        case .button_off:
-            return command.rawValue
+
         case .dawn:
-            return command.rawValue + String(value)
+            return command.rawValue + String(value[0])
         case .alarm:
-            return command.rawValue + String(value)
+            return command.rawValue + String(value[0]) + " " + String(value[1])
+        case .fav_set:
+            var str = ""
+            for element in value {
+                str.append(String(element) + " ")
+            }
+            return command.rawValue + " " + str
         }
     }
 
+    // обработка полученных от лампы сообщений
     private func receiveUDP(lamp: LampDevice) {
         connection?.receiveMessage { data, _, isComplete, _ in
             if isComplete {
@@ -142,24 +126,35 @@ class UDPClient {
                     let backToString = String(decoding: data!, as: UTF8.self)
                     print("Received message: \(backToString)")
 
-                    switch backToString.parseDataFromLamp()[0] {
+                    /*
+                     if backToString.contains("LIST"){
+                         var arrayOfQuantity = backToString.components(separatedBy: ";")
+                         arrayOfQuantity.removeFirst()
+                         for element in arrayOfQuantity{
+                             lamp.listOfEffects.append(element.components(separatedBy: ",")[0])
+                         }
+
+                     }
+                     */
+
+                    switch backToString.components(separatedBy: " ")[0] {
                     case "CURR":
                         lamp.connectionStatus = true
-                        if backToString.parseDataFromLamp()[5] == "0" {
+                        if backToString.components(separatedBy: " ")[5] == "0" {
                             lamp.powerStatus = false
                         } else {
                             lamp.powerStatus = true
                         }
-                        if backToString.parseDataFromLamp()[8] == "1" {
+                        if backToString.components(separatedBy: " ")[8] == "1" {
                             lamp.timer = true
                         } else {
                             lamp.timer = false
                         }
-                        lamp.effect = Int(backToString.parseDataFromLamp()[1])
-                        lamp.bright = Int(backToString.parseDataFromLamp()[2])
-                        lamp.speed = Int(backToString.parseDataFromLamp()[3])
-                        lamp.scale = Int(backToString.parseDataFromLamp()[4])
-                        if backToString.parseDataFromLamp()[9] == "1" {
+                        lamp.effect = Int(backToString.components(separatedBy: " ")[1])
+                        lamp.bright = Int(backToString.components(separatedBy: " ")[2])
+                        lamp.speed = Int(backToString.components(separatedBy: " ")[3])
+                        lamp.scale = Int(backToString.components(separatedBy: " ")[4])
+                        if backToString.components(separatedBy: " ")[9] == "1" {
                             lamp.button = true
                         } else {
                             lamp.button = false
@@ -170,19 +165,23 @@ class UDPClient {
                             NotificationCenter.default.post(name: Notification.Name("updateLamp"), object: lamp)
                             NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
                         }
-                        self.connection?.cancel()
+
                     case "TMR":
-                        if backToString.parseDataFromLamp()[1] == "1" {
+                        if backToString.components(separatedBy: " ")[1] == "1" {
                             lamp.timer = true
                         } else {
                             lamp.timer = false
                         }
+
                     case "ALMS":
                         lamp.alarm = backToString
-                        lamp.dawn = Int(backToString.parseDataFromLamp()[15])
+                        lamp.dawn = Int(backToString.components(separatedBy: " ")[15])
+                    case "FAV":
+                        lamp.favorite = backToString
+
                     default: break
                     }
-
+                    self.connection?.cancel()
                 } else {
                     print("Data == nil")
                     self.connection?.cancel()
@@ -192,67 +191,56 @@ class UDPClient {
     }
 }
 
-class LampDevice {
-    let hostIP: NWEndpoint.Host?
-    let hostPort: NWEndpoint.Port?
-    var connectionStatus: Bool?
-    var powerStatus: Bool?
-    var timer: Bool?
-    var button: Bool?
-    var alarm: String?
-    var dawn: Int?
+class LampDevice { // объект лампа
+    let hostIP: NWEndpoint.Host? // адрес
+    let hostPort: NWEndpoint.Port? // порт
+    var connectionStatus: Bool? // наличие соединения с лампой
+    var powerStatus: Bool? // включено или выключено
+    var timer: Bool? // таймер
+    var button: Bool? // кнопка на лампе включена или выключена
+    var alarm: String? // будильники
+    var dawn: Int? //
+    var favorite: String? // автопереключение эффектов
+    // var listOfEffects: [String] = []
 
-    var effect: Int?
-    var bright: Int?
-    var speed: Int?
-    var scale: Int?
+    var effect: Int? // номер текущего эффекта
+    var bright: Int? // значение яркости
+    var speed: Int? // значение скорости
+    var scale: Int? // значение масштаба
 
     init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port) {
         self.hostIP = hostIP
         self.hostPort = hostPort
-        powerStatus = false
-        connectionStatus = false
-        timer = false
-        effect = 0
-        bright = 0
-        scale = 0
-        speed = 0
 
-        updateStatus(lamp: self)
+        updateStatus(lamp: self) // запросить состояние лампы
+        // updateListOfEffects(lamp: self)
     }
 
     public func updateStatus(lamp: LampDevice) {
         let client = UDPClient()
-        client.connectToUDP(messageToUDP: .get, lamp: lamp, value: 0)
-   
+        client.connectToUDP(messageToUDP: .get, lamp: lamp, value: [0]) // запрос состояние лампы
+        client.connectToUDP(messageToUDP: .fav_get, lamp: lamp, value: [0]) // запрос режима автопереключения
     }
 
-    public func sendCommand(lamp: LampDevice, command: CommandsToLamp, value: Int...) {
+    // запрос эффектов из лампы, сейчас не реализовано
+    public func updateListOfEffects(lamp: LampDevice) {
         let client = UDPClient()
-        if value.count == 1{
-           client.connectToUDP(messageToUDP: command, lamp: lamp, value: value[0])
-        }else{
-            
-           client.connectToUDP(messageToUDP: command, lamp: lamp, value: value[0], value[1])
-        }
+        client.connectToUDP(messageToUDP: .list, lamp: lamp, value: [1])
+        client.connectToUDP(messageToUDP: .list, lamp: lamp, value: [2])
+        client.connectToUDP(messageToUDP: .list, lamp: lamp, value: [3])
+    }
+
+    // отправка команды в лампу
+    public func sendCommand(lamp: LampDevice, command: CommandsToLamp, value: [Int]) {
+        let client = UDPClient()
+        client.connectToUDP(messageToUDP: command, lamp: lamp, value: value)
+    }
+
+    //поиск ламп в локальной сети
+    static func scan(deviceIp: String) {
+        let client = UDPClient()
+        print(deviceIp)
+        client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888), value: [0])
         
-    }
-
-    static func scan() {
-        guard let deviceIp = UIDevice.current.getWiFiAddress() else {
-            print("Can`t get local ip adress. Emmiting 'onError'")
-
-            return
-        }
-
-        let client = UDPClient()
-
-        let mask = deviceIp.split(separator: ".")
-
-        for i in 1 ... 255 {
-            let lampIp = "\(mask[0]).\(mask[1]).\(mask[2]).\(i)"
-
-            client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(lampIp), hostPort: 8888), value: 0)
-        }
     }
 }
