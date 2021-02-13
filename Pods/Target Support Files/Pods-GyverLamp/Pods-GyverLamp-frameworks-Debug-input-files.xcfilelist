@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks.sh
+${BUILT_PRODUCTS_DIR}/InputMask/InputMask.framework
+${BUILT_PRODUCTS_DIR}/MIBlurPopup/MIBlurPopup.framework
+${BUILT_PRODUCTS_DIR}/MMLanScan/MMLanScan.framework
+${BUILT_PRODUCTS_DIR}/SimpleAnimation/SimpleAnimation.framework
+${BUILT_PRODUCTS_DIR}/TactileSlider/TactileSlider.framework

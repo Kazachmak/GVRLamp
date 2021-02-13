@@ -197,10 +197,18 @@ if [ -r "${ARTIFACT_LIST_FILE}" ]; then
 fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/InputMask/InputMask.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MIBlurPopup/MIBlurPopup.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MMLanScan/MMLanScan.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SimpleAnimation/SimpleAnimation.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TactileSlider/TactileSlider.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/InputMask/InputMask.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MIBlurPopup/MIBlurPopup.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MMLanScan/MMLanScan.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SimpleAnimation/SimpleAnimation.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TactileSlider/TactileSlider.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

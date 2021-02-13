@@ -7,33 +7,90 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C039B322561AD2200119134 /* scale.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C039B2F2561AD2200119134 /* scale.png */; };
+		3C039B332561AD2200119134 /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C039B302561AD2200119134 /* brightness.png */; };
+		3C039B342561AD2200119134 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C039B312561AD2200119134 /* speed.png */; };
+		3C09B3F0257FC62700CA34D4 /* picker_button_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C09B3EF257FC62700CA34D4 /* picker_button_left.png */; };
+		3C09B3F4257FCD4900CA34D4 /* picker_button_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C09B3F3257FCD4800CA34D4 /* picker_button_right.png */; };
+		3C09B3FD257FDC8800CA34D4 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B3FC257FDC8800CA34D4 /* SplashViewController.swift */; };
+		3C12C120257256CB00EAE13D /* plus_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C12C11F257256CB00EAE13D /* plus_big.png */; };
+		3C12C12325725B6500EAE13D /* SliderFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C12C12225725B6500EAE13D /* SliderFullScreenViewController.swift */; };
 		3C15F2D124EDA6F600F63C92 /* LampDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C15F2D024EDA6F600F63C92 /* LampDevice.swift */; };
+		3C16E042257A866600D8EBFE /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C16E041257A866600D8EBFE /* right-arrow.png */; };
+		3C18568C25945F0300851A6B /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C18568B25945F0300851A6B /* main.png */; };
+		3C22E2AD2573F2B300BD93B2 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */; };
+		3C28CDE72575470E008B3D90 /* speed_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C28CDE52575470D008B3D90 /* speed_big.png */; };
+		3C28CDE82575470E008B3D90 /* scale_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C28CDE62575470D008B3D90 /* scale_big.png */; };
+		3C2C3AA42570CF8B00E345DD /* LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3AA32570CF8B00E345DD /* LaunchScreen.png */; };
+		3C2C3AA72570D04F00E345DD /* lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3AA62570D04F00E345DD /* lamp.png */; };
+		3C2C3AAE2570D72C00E345DD /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3AAC2570D72C00E345DD /* minus.png */; };
+		3C330EC42570DA6700CEA6DC /* brightness_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C330EC32570DA6700CEA6DC /* brightness_big.png */; };
 		3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */; };
 		3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */; };
 		3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45878124EC2C5A00DBE5C4 /* ViewController.swift */; };
 		3C45878524EC2C5A00DBE5C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45878324EC2C5A00DBE5C4 /* Main.storyboard */; };
 		3C45878724EC2C5C00DBE5C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */; };
 		3C45878A24EC2C5C00DBE5C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45878824EC2C5C00DBE5C4 /* LaunchScreen.storyboard */; };
-		3C45879224EC330400DBE5C4 /* Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879124EC330400DBE5C4 /* Effects.swift */; };
 		3C45879424EC351700DBE5C4 /* EffectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */; };
 		3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879524EC426100DBE5C4 /* Extensions.swift */; };
-		3C45879A24EC45A500DBE5C4 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C45879924EC45A500DBE5C4 /* settings.png */; };
+		3C461022257777F800F375ED /* oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C461021257777F800F375ED /* oval.png */; };
+		3C4610262577781F00F375ED /* onOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4610252577781F00F375ED /* onOff.png */; };
+		3C561FFD25681D2E00E14632 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFB25681D2E00E14632 /* search.png */; };
+		3C561FFE25681D2E00E14632 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFC25681D2E00E14632 /* plus.png */; };
+		3C6ECAD825617E8A00813C43 /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD425617E8A00813C43 /* timer.png */; };
+		3C6ECAD925617E8A00813C43 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD525617E8A00813C43 /* alarm.png */; };
+		3C6ECADA25617E8A00813C43 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD625617E8A00813C43 /* background.png */; };
+		3C735A8D25701395001093C3 /* AddLampViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C735A8C25701395001093C3 /* AddLampViewController.swift */; };
+		3C735A90257018FB001093C3 /* SearchAndAddLampViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C735A8F257018FB001093C3 /* SearchAndAddLampViewController.swift */; };
+		3C735A9525702591001093C3 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9225702591001093C3 /* edit.png */; };
+		3C735A9625702591001093C3 /* red_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9325702591001093C3 /* red_background.png */; };
+		3C735A9725702591001093C3 /* basket.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9425702591001093C3 /* basket.png */; };
+		3C735A9D2570302C001093C3 /* effect_switch_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A992570302B001093C3 /* effect_switch_button.png */; };
+		3C735A9E2570302C001093C3 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9A2570302B001093C3 /* clock.png */; };
+		3C735A9F2570302C001093C3 /* 2arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9B2570302B001093C3 /* 2arrow.png */; };
+		3C735AA02570302C001093C3 /* small_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9C2570302C001093C3 /* small_background.png */; };
+		3C803AE62576CE8100759462 /* onOff2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C803AE52576CE8100759462 /* onOff2.png */; };
+		3C803AEF2576D21700759462 /* onOff3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C803AEE2576D21700759462 /* onOff3.png */; };
 		3C84E96324F3A732004B411A /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84E96224F3A732004B411A /* TimerViewController.swift */; };
 		3C8DE0AE24F6D09900C61BBC /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DE0AD24F6D09900C61BBC /* AlarmViewController.swift */; };
-		3C8DE0B024F6E6D100C61BBC /* DaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DE0AF24F6E6D100C61BBC /* DaysCollectionViewCell.swift */; };
 		3C8DE0B224F6E7A000C61BBC /* DawnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DE0B124F6E7A000C61BBC /* DawnCollectionViewCell.swift */; };
 		3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */; };
-		3C9EAEC924EC5E3D00600578 /* SFUIDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */; };
 		3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */; };
-		3CA069FA24F909130058AD2A /* AutoSwitchEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA069F924F909130058AD2A /* AutoSwitchEffectViewController.swift */; };
-		3CA069FC24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA069FB24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift */; };
+		3CA069FA24F909130058AD2A /* LampSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA069F924F909130058AD2A /* LampSettingsViewController.swift */; };
+		3CA0C5E52576317F00858C95 /* selector.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA0C5E42576317F00858C95 /* selector.png */; };
+		3CA0C5E8257631B700858C95 /* SelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0C5E7257631B700858C95 /* SelectorViewController.swift */; };
+		3CA0C5EC2576352800858C95 /* SelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0C5EB2576352800858C95 /* SelectorTableViewCell.swift */; };
+		3CA714832578AF64008984EA /* lamp_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA714822578AF64008984EA /* lamp_big.png */; };
+		3CB419472561617E0025A34D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CB419462561617E0025A34D /* settings.png */; };
+		3CD37A462592496D0076A696 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD37A452592496C0076A696 /* home.png */; };
+		3CDB362A2567C4C1004E3E1C /* backArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB36292567C4C1004E3E1C /* backArrow.png */; };
+		3CDB362D2567C5CD004E3E1C /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB362C2567C5CD004E3E1C /* enter.png */; };
+		3CE0576125793606008EB7A2 /* RenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0576025793606008EB7A2 /* RenameViewController.swift */; };
+		3CE0576C25796726008EB7A2 /* lamp2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE0576B25796726008EB7A2 /* lamp2.png */; };
 		41FE89CA722D6D15EDA7FD8C /* Pods_GyverLamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D58903E06228209968C630 /* Pods_GyverLamp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GyverLamp.release.xcconfig"; path = "Target Support Files/Pods-GyverLamp/Pods-GyverLamp.release.xcconfig"; sourceTree = "<group>"; };
+		3C039B2F2561AD2200119134 /* scale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scale.png; sourceTree = "<group>"; };
+		3C039B302561AD2200119134 /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness.png; sourceTree = "<group>"; };
+		3C039B312561AD2200119134 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
+		3C09B3EF257FC62700CA34D4 /* picker_button_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picker_button_left.png; sourceTree = "<group>"; };
+		3C09B3F3257FCD4800CA34D4 /* picker_button_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picker_button_right.png; sourceTree = "<group>"; };
+		3C09B3FC257FDC8800CA34D4 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		3C12C11F257256CB00EAE13D /* plus_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_big.png; sourceTree = "<group>"; };
+		3C12C12225725B6500EAE13D /* SliderFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderFullScreenViewController.swift; sourceTree = "<group>"; };
 		3C15F2D024EDA6F600F63C92 /* LampDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampDevice.swift; sourceTree = "<group>"; };
+		3C16E041257A866600D8EBFE /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
+		3C18568B25945F0300851A6B /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
+		3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
+		3C28CDE52575470D008B3D90 /* speed_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed_big.png; sourceTree = "<group>"; };
+		3C28CDE62575470D008B3D90 /* scale_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scale_big.png; sourceTree = "<group>"; };
+		3C2C3AA32570CF8B00E345DD /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
+		3C2C3AA62570D04F00E345DD /* lamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lamp.png; sourceTree = "<group>"; };
+		3C2C3AAC2570D72C00E345DD /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		3C31837A2511E66C00663FC8 /* GyverLamp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GyverLamp-Bridging-Header.h"; sourceTree = "<group>"; };
+		3C330EC32570DA6700CEA6DC /* brightness_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness_big.png; sourceTree = "<group>"; };
 		3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyverLamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,19 +99,42 @@
 		3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C45878924EC2C5C00DBE5C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C45878B24EC2C5C00DBE5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C45879124EC330400DBE5C4 /* Effects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effects.swift; sourceTree = "<group>"; };
 		3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C45879524EC426100DBE5C4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		3C45879924EC45A500DBE5C4 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		3C461021257777F800F375ED /* oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oval.png; sourceTree = "<group>"; };
+		3C4610252577781F00F375ED /* onOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff.png; sourceTree = "<group>"; };
+		3C561FFB25681D2E00E14632 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		3C561FFC25681D2E00E14632 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		3C6ECAD425617E8A00813C43 /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
+		3C6ECAD525617E8A00813C43 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = "<group>"; };
+		3C6ECAD625617E8A00813C43 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		3C735A8C25701395001093C3 /* AddLampViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLampViewController.swift; sourceTree = "<group>"; };
+		3C735A8F257018FB001093C3 /* SearchAndAddLampViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAndAddLampViewController.swift; sourceTree = "<group>"; };
+		3C735A9225702591001093C3 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		3C735A9325702591001093C3 /* red_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_background.png; sourceTree = "<group>"; };
+		3C735A9425702591001093C3 /* basket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basket.png; sourceTree = "<group>"; };
+		3C735A992570302B001093C3 /* effect_switch_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = effect_switch_button.png; sourceTree = "<group>"; };
+		3C735A9A2570302B001093C3 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		3C735A9B2570302B001093C3 /* 2arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2arrow.png; sourceTree = "<group>"; };
+		3C735A9C2570302C001093C3 /* small_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_background.png; sourceTree = "<group>"; };
+		3C803AE52576CE8100759462 /* onOff2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff2.png; sourceTree = "<group>"; };
+		3C803AEE2576D21700759462 /* onOff3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff3.png; sourceTree = "<group>"; };
 		3C84E96224F3A732004B411A /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		3C8DE0AD24F6D09900C61BBC /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
-		3C8DE0AF24F6E6D100C61BBC /* DaysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C8DE0B124F6E7A000C61BBC /* DawnCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DawnCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampsTableViewCell.swift; sourceTree = "<group>"; };
-		3CA069F924F909130058AD2A /* AutoSwitchEffectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSwitchEffectViewController.swift; sourceTree = "<group>"; };
-		3CA069FB24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSwitchEffectCollectionViewCell.swift; sourceTree = "<group>"; };
+		3CA069F924F909130058AD2A /* LampSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampSettingsViewController.swift; sourceTree = "<group>"; };
+		3CA0C5E42576317F00858C95 /* selector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selector.png; sourceTree = "<group>"; };
+		3CA0C5E7257631B700858C95 /* SelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorViewController.swift; sourceTree = "<group>"; };
+		3CA0C5EB2576352800858C95 /* SelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorTableViewCell.swift; sourceTree = "<group>"; };
+		3CA714822578AF64008984EA /* lamp_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lamp_big.png; sourceTree = "<group>"; };
+		3CB419462561617E0025A34D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		3CD37A452592496C0076A696 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		3CDB36292567C4C1004E3E1C /* backArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backArrow.png; sourceTree = "<group>"; };
+		3CDB362C2567C5CD004E3E1C /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
+		3CE0576025793606008EB7A2 /* RenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameViewController.swift; sourceTree = "<group>"; };
+		3CE0576B25796726008EB7A2 /* lamp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lamp2.png; sourceTree = "<group>"; };
 		88D58903E06228209968C630 /* Pods_GyverLamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GyverLamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GyverLamp.debug.xcconfig"; path = "Target Support Files/Pods-GyverLamp/Pods-GyverLamp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,7 +180,6 @@
 				3C7CF12924F0FA810094D602 /* others */,
 				3C7CF12A24F0FAA20094D602 /* viewcontrollers */,
 				3C9EAECA24EC5E4D00600578 /* images */,
-				3C9EAECB24EC5E5500600578 /* fonts */,
 				3C45878324EC2C5A00DBE5C4 /* Main.storyboard */,
 				3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */,
 				3C45878824EC2C5C00DBE5C4 /* LaunchScreen.storyboard */,
@@ -112,7 +191,6 @@
 		3C7CF12924F0FA810094D602 /* others */ = {
 			isa = PBXGroup;
 			children = (
-				3C45879124EC330400DBE5C4 /* Effects.swift */,
 				3C45879524EC426100DBE5C4 /* Extensions.swift */,
 			);
 			path = others;
@@ -122,8 +200,15 @@
 			isa = PBXGroup;
 			children = (
 				3C9EAEC624EC5CBF00600578 /* SettingsViewController.swift */,
+				3CA0C5E7257631B700858C95 /* SelectorViewController.swift */,
+				3C12C12225725B6500EAE13D /* SliderFullScreenViewController.swift */,
+				3C09B3FC257FDC8800CA34D4 /* SplashViewController.swift */,
+				3C735A8F257018FB001093C3 /* SearchAndAddLampViewController.swift */,
+				3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */,
+				3C735A8C25701395001093C3 /* AddLampViewController.swift */,
 				3C8DE0AD24F6D09900C61BBC /* AlarmViewController.swift */,
-				3CA069F924F909130058AD2A /* AutoSwitchEffectViewController.swift */,
+				3CA069F924F909130058AD2A /* LampSettingsViewController.swift */,
+				3CE0576025793606008EB7A2 /* RenameViewController.swift */,
 				3C84E96224F3A732004B411A /* TimerViewController.swift */,
 				3C45878124EC2C5A00DBE5C4 /* ViewController.swift */,
 			);
@@ -135,8 +220,7 @@
 			children = (
 				3C9EAECC24EC61AA00600578 /* LampsTableViewCell.swift */,
 				3C45879324EC351700DBE5C4 /* EffectCollectionViewCell.swift */,
-				3CA069FB24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift */,
-				3C8DE0AF24F6E6D100C61BBC /* DaysCollectionViewCell.swift */,
+				3CA0C5EB2576352800858C95 /* SelectorTableViewCell.swift */,
 				3C8DE0B124F6E7A000C61BBC /* DawnCollectionViewCell.swift */,
 			);
 			path = cells;
@@ -145,17 +229,45 @@
 		3C9EAECA24EC5E4D00600578 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				3C45879924EC45A500DBE5C4 /* settings.png */,
+				3C6ECAD525617E8A00813C43 /* alarm.png */,
+				3C6ECAD625617E8A00813C43 /* background.png */,
+				3C2C3AAC2570D72C00E345DD /* minus.png */,
+				3CE0576B25796726008EB7A2 /* lamp2.png */,
+				3C09B3F3257FCD4800CA34D4 /* picker_button_right.png */,
+				3C16E041257A866600D8EBFE /* right-arrow.png */,
+				3C2C3AA32570CF8B00E345DD /* LaunchScreen.png */,
+				3C18568B25945F0300851A6B /* main.png */,
+				3C09B3EF257FC62700CA34D4 /* picker_button_left.png */,
+				3C2C3AA62570D04F00E345DD /* lamp.png */,
+				3C561FFC25681D2E00E14632 /* plus.png */,
+				3C735A9425702591001093C3 /* basket.png */,
+				3C803AE52576CE8100759462 /* onOff2.png */,
+				3C330EC32570DA6700CEA6DC /* brightness_big.png */,
+				3C735A9225702591001093C3 /* edit.png */,
+				3C461021257777F800F375ED /* oval.png */,
+				3CA0C5E42576317F00858C95 /* selector.png */,
+				3CD37A452592496C0076A696 /* home.png */,
+				3C12C11F257256CB00EAE13D /* plus_big.png */,
+				3CA714822578AF64008984EA /* lamp_big.png */,
+				3C735A9325702591001093C3 /* red_background.png */,
+				3C561FFB25681D2E00E14632 /* search.png */,
+				3C4610252577781F00F375ED /* onOff.png */,
+				3C039B302561AD2200119134 /* brightness.png */,
+				3C803AEE2576D21700759462 /* onOff3.png */,
+				3CDB362C2567C5CD004E3E1C /* enter.png */,
+				3C735A9B2570302B001093C3 /* 2arrow.png */,
+				3C735A9A2570302B001093C3 /* clock.png */,
+				3C735A992570302B001093C3 /* effect_switch_button.png */,
+				3C735A9C2570302C001093C3 /* small_background.png */,
+				3C28CDE62575470D008B3D90 /* scale_big.png */,
+				3C28CDE52575470D008B3D90 /* speed_big.png */,
+				3C039B2F2561AD2200119134 /* scale.png */,
+				3CDB36292567C4C1004E3E1C /* backArrow.png */,
+				3C039B312561AD2200119134 /* speed.png */,
+				3C6ECAD425617E8A00813C43 /* timer.png */,
+				3CB419462561617E0025A34D /* settings.png */,
 			);
 			path = images;
-			sourceTree = "<group>";
-		};
-		3C9EAECB24EC5E5500600578 /* fonts */ = {
-			isa = PBXGroup;
-			children = (
-				3C9EAEC824EC5E3700600578 /* SFUIDisplay-Medium.ttf */,
-			);
-			path = fonts;
 			sourceTree = "<group>";
 		};
 		928B800D3974FC4B8B34E049 /* Frameworks */ = {
@@ -204,7 +316,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Maksim Kazachkov";
 				TargetAttributes = {
 					3C45877924EC2C5A00DBE5C4 = {
@@ -235,11 +347,46 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C45879A24EC45A500DBE5C4 /* settings.png in Resources */,
+				3C735A9725702591001093C3 /* basket.png in Resources */,
+				3C2C3AA72570D04F00E345DD /* lamp.png in Resources */,
+				3CA714832578AF64008984EA /* lamp_big.png in Resources */,
+				3C2C3AAE2570D72C00E345DD /* minus.png in Resources */,
+				3C735A9F2570302C001093C3 /* 2arrow.png in Resources */,
+				3C803AEF2576D21700759462 /* onOff3.png in Resources */,
+				3C330EC42570DA6700CEA6DC /* brightness_big.png in Resources */,
+				3C561FFE25681D2E00E14632 /* plus.png in Resources */,
 				3C45878A24EC2C5C00DBE5C4 /* LaunchScreen.storyboard in Resources */,
-				3C9EAEC924EC5E3D00600578 /* SFUIDisplay-Medium.ttf in Resources */,
+				3C16E042257A866600D8EBFE /* right-arrow.png in Resources */,
+				3C09B3F0257FC62700CA34D4 /* picker_button_left.png in Resources */,
+				3C28CDE72575470E008B3D90 /* speed_big.png in Resources */,
+				3C2C3AA42570CF8B00E345DD /* LaunchScreen.png in Resources */,
+				3C039B342561AD2200119134 /* speed.png in Resources */,
+				3C735A9E2570302C001093C3 /* clock.png in Resources */,
+				3C561FFD25681D2E00E14632 /* search.png in Resources */,
+				3C18568C25945F0300851A6B /* main.png in Resources */,
+				3CDB362A2567C4C1004E3E1C /* backArrow.png in Resources */,
+				3C4610262577781F00F375ED /* onOff.png in Resources */,
+				3C735AA02570302C001093C3 /* small_background.png in Resources */,
+				3C039B332561AD2200119134 /* brightness.png in Resources */,
+				3C6ECADA25617E8A00813C43 /* background.png in Resources */,
+				3C039B322561AD2200119134 /* scale.png in Resources */,
+				3CE0576C25796726008EB7A2 /* lamp2.png in Resources */,
+				3CD37A462592496D0076A696 /* home.png in Resources */,
+				3CDB362D2567C5CD004E3E1C /* enter.png in Resources */,
+				3C803AE62576CE8100759462 /* onOff2.png in Resources */,
+				3C6ECAD925617E8A00813C43 /* alarm.png in Resources */,
+				3C09B3F4257FCD4900CA34D4 /* picker_button_right.png in Resources */,
+				3CA0C5E52576317F00858C95 /* selector.png in Resources */,
+				3C735A9525702591001093C3 /* edit.png in Resources */,
+				3CB419472561617E0025A34D /* settings.png in Resources */,
 				3C45878724EC2C5C00DBE5C4 /* Assets.xcassets in Resources */,
+				3C735A9625702591001093C3 /* red_background.png in Resources */,
+				3C28CDE82575470E008B3D90 /* scale_big.png in Resources */,
+				3C461022257777F800F375ED /* oval.png in Resources */,
+				3C735A9D2570302C001093C3 /* effect_switch_button.png in Resources */,
 				3C45878524EC2C5A00DBE5C4 /* Main.storyboard in Resources */,
+				3C12C120257256CB00EAE13D /* plus_big.png in Resources */,
+				3C6ECAD825617E8A00813C43 /* timer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,19 +441,24 @@
 			files = (
 				3C8DE0AE24F6D09900C61BBC /* AlarmViewController.swift in Sources */,
 				3C84E96324F3A732004B411A /* TimerViewController.swift in Sources */,
-				3C45879224EC330400DBE5C4 /* Effects.swift in Sources */,
-				3CA069FC24F90F140058AD2A /* AutoSwitchEffectCollectionViewCell.swift in Sources */,
+				3CA0C5EC2576352800858C95 /* SelectorTableViewCell.swift in Sources */,
+				3C12C12325725B6500EAE13D /* SliderFullScreenViewController.swift in Sources */,
+				3C22E2AD2573F2B300BD93B2 /* EmptyViewController.swift in Sources */,
 				3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */,
 				3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */,
 				3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */,
 				3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */,
-				3C8DE0B024F6E6D100C61BBC /* DaysCollectionViewCell.swift in Sources */,
+				3C735A8D25701395001093C3 /* AddLampViewController.swift in Sources */,
 				3C45879424EC351700DBE5C4 /* EffectCollectionViewCell.swift in Sources */,
+				3C09B3FD257FDC8800CA34D4 /* SplashViewController.swift in Sources */,
 				3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */,
 				3C15F2D124EDA6F600F63C92 /* LampDevice.swift in Sources */,
 				3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */,
-				3CA069FA24F909130058AD2A /* AutoSwitchEffectViewController.swift in Sources */,
+				3CA069FA24F909130058AD2A /* LampSettingsViewController.swift in Sources */,
+				3C735A90257018FB001093C3 /* SearchAndAddLampViewController.swift in Sources */,
 				3C8DE0B224F6E7A000C61BBC /* DawnCollectionViewCell.swift in Sources */,
+				3CA0C5E8257631B700858C95 /* SelectorViewController.swift in Sources */,
+				3CE0576125793606008EB7A2 /* RenameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +510,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -382,7 +535,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -419,6 +572,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -437,7 +591,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -454,7 +608,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T3S6WD926G;
+				DEVELOPMENT_TEAM = S76LJWD5GQ;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -474,7 +628,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T3S6WD926G;
+				DEVELOPMENT_TEAM = S76LJWD5GQ;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

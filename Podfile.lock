@@ -1,16 +1,32 @@
 PODS:
+  - InputMask (6.0.0)
+  - MIBlurPopup (1.0.0)
   - MMLanScan (3.0.0)
+  - SimpleAnimation (0.4.2)
+  - TactileSlider (2.0.1)
 
 DEPENDENCIES:
+  - InputMask
+  - MIBlurPopup
   - MMLanScan
+  - SimpleAnimation
+  - TactileSlider
 
 SPEC REPOS:
   trunk:
+    - InputMask
+    - MIBlurPopup
     - MMLanScan
+    - SimpleAnimation
+    - TactileSlider
 
 SPEC CHECKSUMS:
+  InputMask: f340bdc905a4c4f377e44d865f129f752ac2383d
+  MIBlurPopup: 7e855df6a79d13bc0840519c2ec9bac50b1ac01a
   MMLanScan: 86a0f77edbf163be30c1f58321469c7c8ce4c50e
+  SimpleAnimation: 5430010b9548f392e7459290acce01c9ceba7171
+  TactileSlider: ca211be78178202c89412ed312f73020548f28ca
 
-PODFILE CHECKSUM: 099fbf52b1a416577f9b9c215520395684c375f1
+PODFILE CHECKSUM: dd351080caf224ece2f49af6fd015a0181b208a0
 
 COCOAPODS: 1.9.1
