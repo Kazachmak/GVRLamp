@@ -14,6 +14,8 @@ class SliderFullScreenViewController: UIViewController {
 
     var command: CommandsToLamp?
 
+    var timer: Timer?
+    
     @IBOutlet var icon: UIImageView!
 
     @IBOutlet var valueLabel: UILabel!
@@ -21,41 +23,79 @@ class SliderFullScreenViewController: UIViewController {
     @IBOutlet var percentageLabel: UILabel!
 
     @IBOutlet var slider: TactileSlider!
-
+    
+    
+    // однократное нажатие на кнопку минус
     @IBAction func minusButton(_ sender: UIButton) {
         if let currentLamp = lamp, let commandToSend = command {
             if slider.value > 0 {
-            switch commandToSend {
-            case .bri: currentLamp.sendCommand(lamp: currentLamp, command: commandToSend, value: [Int(slider.value) - 1])
-            case .spd: currentLamp.sendCommand(lamp: currentLamp, command: commandToSend, value: [Int(slider.value) - 1])
-            case .sca: currentLamp.sendCommand(lamp: currentLamp, command: commandToSend, value: [Int(slider.value) - 1])
-            default: break
-            }
-            slider.setValue(slider.value - 1, animated: true)
+                self.sendNewValueWhenButtonPressed(-1, lamp: currentLamp, command: commandToSend)
             }
         }
     }
 
+    // долгое нажатие на кнопку минус
+    @IBAction func minusButtonLongPress(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [self]_ in
+                        if let currentLamp = lamp, let commandToSend = command {
+                            if slider.value > 0 {
+                                self.sendNewValueWhenButtonPressed(-1, lamp: currentLamp, command: commandToSend)
+                            }
+                        }
+                    })
+                } else if sender.state == .ended || sender.state == .cancelled {
+                    print("FINISHED UP LONG PRESS")
+                    timer?.invalidate()
+                    timer = nil
+                }
+    }
+    
+    // однократное нажатие на кнопку плюс
     @IBAction func plusButton(_ sender: UIButton) {
         if let currentLamp = lamp, let commandToSend = command {
             if slider.value < 255{
-                switch commandToSend {
-                case .bri: currentLamp.sendCommand(lamp: currentLamp, command: commandToSend, value: [Int(slider.value) + 1])
-                case .spd: currentLamp.sendCommand(lamp: currentLamp, command: commandToSend, value: [Int(slider.value) + 1])
-                case .sca: currentLamp.sendCommand(lamp: currentLamp, command: commandToSend, value: [Int(slider.value) + 1])
-                default: break
-                }
-                slider.setValue(slider.value + 1, animated: true)
+                self.sendNewValueWhenButtonPressed(+1, lamp: currentLamp, command: commandToSend)
             }
         }
     }
 
+    // долгое нажатие на кнопку плюс
+    @IBAction func plusButtonLongPress(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [self]_ in
+                if let currentLamp = lamp, let commandToSend = command {
+                    if slider.value < 255{
+                        self.sendNewValueWhenButtonPressed(+1, lamp: currentLamp, command: commandToSend)
+                                }
+                            }
+                        
+                    })
+                } else if sender.state == .ended || sender.state == .cancelled {
+                    print("FINISHED UP LONG PRESS")
+                    timer?.invalidate()
+                    timer = nil
+                }
+    }
+    
+    // отправка нового значения в лампу
+    private func sendNewValueWhenButtonPressed(_ value: Int, lamp: LampDevice, command: CommandsToLamp){
+        switch command {
+        case .bri: lamp.sendCommand(lamp: lamp, command: command, value: [Int(slider.value) + value])
+        case .spd: lamp.sendCommand(lamp: lamp, command: command, value: [Int(slider.value) + value])
+        case .sca: lamp.sendCommand(lamp: lamp, command: command, value: [Int(slider.value) + value])
+        default: break
+        }
+        slider.setValue(slider.value + Float(value), animated: true)
+    }
+    
+    // закрыть экран
     @IBAction func dismissTap(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
 
     
-    
+    // передача значений при движении ползунком
     @IBAction func valueChange(_ sender: TactileSlider) {
         if let currentLamp = lamp, let commandToSend = command {
             currentLamp.sendCommand(lamp: currentLamp, command: commandToSend, value: [Int(sender.value)])
@@ -63,6 +103,7 @@ class SliderFullScreenViewController: UIViewController {
         }
     }
 
+    // извлекаем информацию из объекта "лампа"
     private func selectDataFromLamp(command: CommandsToLamp) -> Int? {
         var returnValue: Int?
         if let currentLamp = lamp {
@@ -85,6 +126,7 @@ class SliderFullScreenViewController: UIViewController {
         return returnValue
     }
 
+    // обновление интерфейса
     @objc func updateInterface() {
         if let value = selectDataFromLamp(command: command!) {
             valueLabel.text = String(value)
@@ -100,7 +142,7 @@ class SliderFullScreenViewController: UIViewController {
             }
         }
     }
-
+    // устанавливаем ползунок в начальное значение
     func setLamp(lamp: LampDevice, command: CommandsToLamp) {
         self.lamp = lamp
         self.command = command

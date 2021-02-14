@@ -628,6 +628,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRY-Gm-BVb">
                                 <rect key="frame" x="28" y="156.66666666666666" width="124" height="123.99999999999997"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="124" id="qvj-q4-EHh"/>
                                     <constraint firstAttribute="width" constant="124" id="yZG-cg-wEo"/>
@@ -635,10 +636,12 @@
                                 <state key="normal" title="Button" image="minus.png"/>
                                 <connections>
                                     <action selector="minusButton:" destination="ZYD-OJ-30A" eventType="touchUpInside" id="K4I-e0-Yor"/>
+                                    <outletCollection property="gestureRecognizers" destination="x32-JM-MV8" appends="YES" id="cLU-zi-7dk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="529-lo-yaG">
                                 <rect key="frame" x="262" y="156.66666666666666" width="124" height="123.99999999999997"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="124" id="nWS-TJ-43t"/>
                                     <constraint firstAttribute="height" constant="124" id="zu4-gl-JYo"/>
@@ -646,6 +649,7 @@
                                 <state key="normal" title="Button" image="plus_big.png"/>
                                 <connections>
                                     <action selector="plusButton:" destination="ZYD-OJ-30A" eventType="touchUpInside" id="nFm-F4-Pub"/>
+                                    <outletCollection property="gestureRecognizers" destination="suR-di-h2W" appends="YES" id="fyu-ec-OtH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -686,6 +690,16 @@
                         <outlet property="delegate" destination="c51-hF-ymT" id="sO1-83-wH8"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="x32-JM-MV8">
+                    <connections>
+                        <action selector="minusButtonLongPress:" destination="ZYD-OJ-30A" id="kgS-mL-19E"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="suR-di-h2W">
+                    <connections>
+                        <action selector="plusButtonLongPress:" destination="ZYD-OJ-30A" id="obi-On-Lcp"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3083" y="137"/>
         </scene>
