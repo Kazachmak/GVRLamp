@@ -55,10 +55,6 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
 
     @IBOutlet var headerViewHeight: NSLayoutConstraint!
 
-    @IBOutlet var buttonHeight: NSLayoutConstraint!
-
-    @IBOutlet var spaceBetweenButtons: NSLayoutConstraint!
-
     func openPickerView(_ tag: Int) {
         picker.removeFromSuperview()
         picker = UIPickerView()
@@ -163,6 +159,22 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             }
         }
     }
+    
+    
+    @IBAction func sendTextToLamp(_ sender: UIButton) {
+        showInputDialog(title: "Введите текст",
+                        subtitle: "Введите текст для отправки",
+                        actionTitle: "Отправить",
+                        cancelTitle: "Отмена",
+                        inputPlaceholder: "Сообщение",
+                        inputKeyboardType: .default, actionHandler:
+                            { (input:String?) in
+                                if let currentLamp = self.lamp{
+                                    currentLamp.sendCommand(lamp: currentLamp, command: .txt, value: [0], valueTXT: input ?? "")
+                                }
+                            })
+    }
+    
 
     @IBAction func renameLamp(_ sender: UIButton) {
         if let currentLamp = lamp {
@@ -208,12 +220,6 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         }
         autoSwitchLabel.adjustsFontSizeToFitWidth = true
         alwaysAutoSwitchLabel.adjustsFontSizeToFitWidth = true
-        if UIScreen.main.bounds.height < 569 {
-            buttonHeight.constant = 40
-            spaceBetweenButtons.constant = 10
-            renameLampOut.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 15)
-            removeLampOut.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 15)
-        }
     }
 
     private func showMessage(_ show: Bool, text: String) {
@@ -259,7 +265,6 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                 buttonOnLampOut.setOn(false, animated: false)
             }
             let range = (currentLamp.favorite?.components(separatedBy: " ").count ?? 0) - 1
-            print(range)
             if let arrayOfSelectedEffect = currentLamp.favorite?.components(separatedBy: " ")[5 ... range] {
                 selectedEffects = [Bool](repeating: false, count: arrayOfSelectedEffect.count)
                 for (index, element) in arrayOfSelectedEffect.enumerated() {

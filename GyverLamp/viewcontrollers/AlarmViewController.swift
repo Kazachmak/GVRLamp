@@ -128,12 +128,6 @@ class AlarmViewController: UIViewController {
         super.viewDidLoad()
         backArrowHeight.constant += view.safeAreaTop - 20
         headerViewHeight.constant += view.safeAreaTop - 20
-
-        if UIScreen.main.bounds.height < 669 {
-            constraitFortButton.constant = 10
-            buttonHeight.constant = 50
-        }
-
         if let currentLamp = lamp {
             if let time = currentLamp.currentTime {
                 let formatter1 = DateFormatter()
