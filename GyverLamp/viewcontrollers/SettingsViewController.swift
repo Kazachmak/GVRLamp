@@ -10,6 +10,9 @@ import Network
 import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    //обновлять таблицу или нет
+    var updateTableFlag = true
+    
     @IBAction func close(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
@@ -26,6 +29,24 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet var tableView: UITableView!
 
+    
+    // свайп ячеек
+    func tableView(_ tableView: UITableView,
+                       trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+        {
+            updateTableFlag = false
+            // добавляем лампу в список
+        let AddAction = UIContextualAction(style: .destructive, title:  "Добавить лампу в список", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                print("Update action ...")
+                success(true)
+                self.updateTableFlag = true
+            })
+            AddAction.backgroundColor = .gray
+            
+
+            return UISwipeActionsConfiguration(actions: [AddAction])
+        }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UserDefaults.standard.set(indexPath.row, forKey: "lampNumber")
         
@@ -115,7 +136,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if let listOfLampTemp = UserDefaults.standard.array(forKey: "listOfLamps") {
             listOfLamps = listOfLampTemp as! [String]
         }
-        tableView.reloadData()
+        if updateTableFlag{
+            tableView.reloadData()
+        }
     }
 
     @IBOutlet var scanOut: UIButton!
