@@ -36,10 +36,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         {
             updateTableFlag = false
             // добавляем лампу в список
-        let AddAction = UIContextualAction(style: .destructive, title:  "Добавить лампу в список", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-                print("Update action ...")
+        let AddAction = UIContextualAction(style: .destructive, title:  "Добавить в управляемые", handler: { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+                LampDevice.lampsAddLamp(ip: (listOfLamps[indexPath.row].components(separatedBy: ":"))[0], port: (listOfLamps[indexPath.row].components(separatedBy: ":"))[1])
                 success(true)
-                self.updateTableFlag = true
+                updateTableFlag = true
             })
             AddAction.backgroundColor = .gray
             
@@ -133,9 +134,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     // обновляем таблицу
     @objc func updateTable() {
-        if let listOfLampTemp = UserDefaults.standard.array(forKey: "listOfLamps") {
-            listOfLamps = listOfLampTemp as! [String]
-        }
+        listOfLamps = CoreDataService.listOfLamps()
         if updateTableFlag{
             tableView.reloadData()
         }
@@ -149,10 +148,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewWillAppear(_ animated: Bool) {
         // читаем из памяти список сохранненых ламп
-        if let listOfLampTemp = UserDefaults.standard.array(forKey: "listOfLamps") {
-            listOfLamps = listOfLampTemp as! [String]
-        }
-        tableView.reloadData()
+        updateTable()
     }
 
     override func viewDidLoad() {

@@ -49,6 +49,8 @@
 		3C735A9E2570302C001093C3 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9A2570302B001093C3 /* clock.png */; };
 		3C735A9F2570302C001093C3 /* 2arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9B2570302B001093C3 /* 2arrow.png */; };
 		3C735AA02570302C001093C3 /* small_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C735A9C2570302C001093C3 /* small_background.png */; };
+		3C76396E25E9162C007D13C4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C76396C25E9162C007D13C4 /* Model.xcdatamodeld */; };
+		3C76399025E92AC5007D13C4 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C76398F25E92AC5007D13C4 /* CoreDataService.swift */; };
 		3C803AE62576CE8100759462 /* onOff2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C803AE52576CE8100759462 /* onOff2.png */; };
 		3C803AEF2576D21700759462 /* onOff3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C803AEE2576D21700759462 /* onOff3.png */; };
 		3C84E96324F3A732004B411A /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84E96224F3A732004B411A /* TimerViewController.swift */; };
@@ -117,6 +119,8 @@
 		3C735A9A2570302B001093C3 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		3C735A9B2570302B001093C3 /* 2arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2arrow.png; sourceTree = "<group>"; };
 		3C735A9C2570302C001093C3 /* small_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_background.png; sourceTree = "<group>"; };
+		3C76396D25E9162C007D13C4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		3C76398F25E92AC5007D13C4 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3C803AE52576CE8100759462 /* onOff2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff2.png; sourceTree = "<group>"; };
 		3C803AEE2576D21700759462 /* onOff3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff3.png; sourceTree = "<group>"; };
 		3C84E96224F3A732004B411A /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 				3C45878624EC2C5C00DBE5C4 /* Assets.xcassets */,
 				3C45878824EC2C5C00DBE5C4 /* LaunchScreen.storyboard */,
 				3C45878B24EC2C5C00DBE5C4 /* Info.plist */,
+				3C76396C25E9162C007D13C4 /* Model.xcdatamodeld */,
 			);
 			path = GyverLamp;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 		3C7CF12924F0FA810094D602 /* others */ = {
 			isa = PBXGroup;
 			children = (
+				3C76398F25E92AC5007D13C4 /* CoreDataService.swift */,
 				3C45879524EC426100DBE5C4 /* Extensions.swift */,
 			);
 			path = others;
@@ -447,6 +453,7 @@
 				3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */,
 				3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */,
 				3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */,
+				3C76399025E92AC5007D13C4 /* CoreDataService.swift in Sources */,
 				3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */,
 				3C735A8D25701395001093C3 /* AddLampViewController.swift in Sources */,
 				3C45879424EC351700DBE5C4 /* EffectCollectionViewCell.swift in Sources */,
@@ -456,6 +463,7 @@
 				3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */,
 				3CA069FA24F909130058AD2A /* LampSettingsViewController.swift in Sources */,
 				3C735A90257018FB001093C3 /* SearchAndAddLampViewController.swift in Sources */,
+				3C76396E25E9162C007D13C4 /* Model.xcdatamodeld in Sources */,
 				3C8DE0B224F6E7A000C61BBC /* DawnCollectionViewCell.swift in Sources */,
 				3CA0C5E8257631B700858C95 /* SelectorViewController.swift in Sources */,
 				3CE0576125793606008EB7A2 /* RenameViewController.swift in Sources */,
@@ -664,6 +672,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3C76396C25E9162C007D13C4 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3C76396D25E9162C007D13C4 /* Model.xcdatamodel */,
+			);
+			currentVersion = 3C76396D25E9162C007D13C4 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3C45877224EC2C5A00DBE5C4 /* Project object */;
 }

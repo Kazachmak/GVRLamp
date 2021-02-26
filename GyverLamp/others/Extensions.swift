@@ -17,7 +17,7 @@ enum selectorFlag {
 
 let redColor = UIColor(red: 220.0 / 255.0, green: 78.0 / 255.0, blue: 65.0 / 255.0, alpha: 1)
 let blackColor = UIColor(red: 32.0 / 255.0, green: 34.0 / 255.0, blue: 55.0 / 255.0, alpha: 1)
-
+let violetColor = UIColor(red: 115.0 / 255.0, green: 112.0 / 255.0, blue: 249.0 / 255.0, alpha: 1)
 
 extension UIView {
     // добавление тени объекту
