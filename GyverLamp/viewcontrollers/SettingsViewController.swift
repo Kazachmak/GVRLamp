@@ -30,6 +30,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var tableView: UITableView!
 
     
+    private func setMainLamp(_ ip: String){
+        CoreDataService.setMainLamp(ip)
+        lamp = CoreDataService.fetchLampByIP(ip)
+    }
+    
+    
     // свайп ячеек
     func tableView(_ tableView: UITableView,
                        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
@@ -49,8 +55,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UserDefaults.standard.set(indexPath.row, forKey: "lampNumber")
         
+        setMainLamp((listOfLamps[indexPath.row].components(separatedBy: ":"))[0])
+        
+        /*
         if (listOfLamps[indexPath.row].components(separatedBy: ":").count > 3)&&(listOfLamps[indexPath.row].components(separatedBy: ":")[3] == "1"){
             lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3], listOfEffects: (listOfLamps[indexPath.row].components(separatedBy: ":")[4]).components(separatedBy: ","))
         }else{
@@ -58,6 +66,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3])
             }
         }
+        */
         
         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [self] _ in
             
@@ -93,8 +102,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                // cell.settingsButtonOut.isUserInteractionEnabled = false
             }
         }
-        
-
         return cell
     }
 
@@ -112,8 +119,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
 
-        UserDefaults.standard.set(indexPath.row, forKey: "lampNumber")
+        setMainLamp((listOfLamps[indexPath.row].components(separatedBy: ":"))[0])
         
+        /*
         if (listOfLamps[indexPath.row].components(separatedBy: ":")[3] == "1")&&(listOfLamps[indexPath.row].components(separatedBy: ":").count > 3){
             lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3], listOfEffects: (listOfLamps[indexPath.row].components(separatedBy: ":")[4]).components(separatedBy: ","))
         }else{
@@ -121,6 +129,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3])
             }
         }
+        */
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
