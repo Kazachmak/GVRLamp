@@ -154,7 +154,9 @@ class UDPClient {
                                 lamp.listOfEffects.append(element.components(separatedBy: ",")[0])
                             }
                             lamp.effectsFromLamp = true
-                            LampDevice.updateListOfLamps(lamp: lamp, true)
+                            DispatchQueue.main.async {
+                                LampDevice.updateListOfLamps(lamp: lamp)
+                            }
                         }
                     }
 
@@ -270,16 +272,13 @@ class LampDevice { // объект лампа
     }
 
     init?() {
-    
         if CoreDataService.fetchLamps().count > 0 {
-            
             var tempName = CoreDataService.fetchLamps()[0].value(forKey: "name") as! String
             var tempIP = CoreDataService.fetchLamps()[0].value(forKey: "ip") as! String
             var tempPort = CoreDataService.fetchLamps()[0].value(forKey: "port") as! String
             var tempEffectsFromLamp = CoreDataService.fetchLamps()[0].value(forKey: "flagEffects") as! Bool
             var templistOfEffects = (CoreDataService.fetchLamps()[0].value(forKey: "listOfEffects") as! String).components(separatedBy: ",")
-            
-            
+
             for element in CoreDataService.fetchLamps() {
                 let mainLamp = element.value(forKey: "mainLamp") as! Bool
                 if mainLamp {
@@ -309,7 +308,7 @@ class LampDevice { // объект лампа
     }
 
     func deleteLamp() { // удаление лампы
-        CoreDataService.delete(ip: "\(self.hostIP)")
+        CoreDataService.delete(ip: "\(hostIP)")
     }
 
     func renameLamp(name: String) { // переименование лампы
@@ -317,7 +316,7 @@ class LampDevice { // объект лампа
         _ = LampDevice(hostIP: hostIP, hostPort: hostPort, name: name, effectsFromLamp: effectsFromLamp.convertToString(), listOfEffects: listOfEffects)
     }
 
-    static func updateListOfLamps(lamp: LampDevice, _ beSureToUpdate: Bool = false) { // сохранияем новую лампу
+    static func updateListOfLamps(lamp: LampDevice) { // сохранияем новую лампу
         var flagLampIsNew = true
 
         for element in CoreDataService.fetchLamps() {
@@ -327,7 +326,6 @@ class LampDevice { // объект лампа
                 flagLampIsNew = false
             }
         }
-        
         if flagLampIsNew {
             lamp.mainLamp = true
             if CoreDataService.save(lamp: lamp) {
@@ -336,40 +334,9 @@ class LampDevice { // объект лампа
                     NotificationCenter.default.post(name: Notification.Name("newLampHasAdded"), object: lamp)
                 }
             }
+        } else {
+            CoreDataService.updateEffects(lamp: lamp)
         }
-
-        /*
-         var listOfLamps: [String] = []
-
-         if let listOfLampsTemp = UserDefaults.standard.array(forKey: "listOfLamps") as? [String] {
-             listOfLamps = listOfLampsTemp
-         }
-         var flag = true
-
-         listOfLamps.forEach {
-             if $0.hasPrefix("\(lamp.hostIP)") {
-                 if $0.components(separatedBy: ":")[3] == lamp.effectsFromLamp.convertToString() {
-                     flag = false
-                 }
-             }
-         }
-
-         if flag || beSureToUpdate {
-             listOfLamps = listOfLamps.filter { !$0.hasPrefix("\(lamp.hostIP)") } // удаляем лампу, если она в массиве
-             if lamp.effectsFromLamp {
-                 listOfLamps.append("\(lamp.hostIP)" + ":" + "\(lamp.hostPort)" + ":" + "\(lamp.name)" + ":" + "1" + ":" + lamp.listOfEffects.joined(separator: ","))
-             } else {
-                 listOfLamps.append("\(lamp.hostIP)" + ":" + "\(lamp.hostPort)" + ":" + "\(lamp.name)" + ":" + "0")
-             }
-             UserDefaults.standard.set(listOfLamps, forKey: "listOfLamps")
-             if !beSureToUpdate{
-                 lamp.getEffectsFromLamp(true)
-             }
-             DispatchQueue.main.async {
-                 NotificationCenter.default.post(name: Notification.Name("newLampHasAdded"), object: lamp)
-             }
-         }
-         */
     }
 
     public func updateStatus(lamp: LampDevice) {

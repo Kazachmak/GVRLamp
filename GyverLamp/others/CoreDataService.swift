@@ -30,6 +30,7 @@ class CoreDataService {
 
     class func fetchLamps() -> [NSManagedObject] {
         var tasks: [NSManagedObject] = []
+       
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
             return tasks
@@ -122,6 +123,37 @@ class CoreDataService {
             for object in resultData {
                 if object.ip == ip {
                     object.setValue("\(newName)", forKey: "name")
+                }
+            }
+            do {
+                try managedContext.save()
+                print("saved!")
+                return true
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+                return false
+            }
+    }
+    
+    class func updateEffects(lamp: LampDevice) -> Bool{
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lamp")
+        
+        let ip = "\(lamp.hostIP)"
+            fetchRequest.predicate = NSPredicate(format: "ip = %@", "\(ip)")
+            let result = try? managedContext.fetch(fetchRequest)
+            let resultData = result as! [Lamp]
+            for object in resultData {
+                if object.ip == ip {
+                    object.setValue(lamp.effectsFromLamp, forKey: "flagEffects")
+                    object.setValue(lamp.listOfEffects.joined(separator: ","), forKey: "listOfEffects")
                 }
             }
             do {
