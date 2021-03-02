@@ -70,7 +70,7 @@ class UDPClient {
         connection?.send(content: contentToSendUDP, completion: NWConnection.SendCompletion.contentProcessed(({ NWError in
             if NWError == nil {
                 print("Data was sent to UDP")
-                if content.contains("GET") && (!content.contains("TMR_GET")) && (!content.contains("FAV_GET")) {
+                if content.contains("GET") && (!content.contains("TMR_GET")) && (!content.contains("FAV_GET")) && (lamp.hostIP == lamps.mainLamp?.hostIP) {
                     DispatchQueue.main.async {
                         // таймер срабатывает, если не пришло никакого ответа от лампы
                         self.timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in
@@ -155,7 +155,7 @@ class UDPClient {
                             }
                             lamp.effectsFromLamp = true
                             DispatchQueue.main.async {
-                                LampDevice.updateListOfLamps(lamp: lamp)
+                                // LampDevice.updateListOfLamps(lamp: lamp)
                             }
                         }
                     }
@@ -184,10 +184,16 @@ class UDPClient {
                                 lamp.button = false
                             }
                             lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
-                            DispatchQueue.main.async {
-                                self.timer.invalidate()
-                                LampDevice.updateListOfLamps(lamp: lamp)
-                                NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: lamp)
+
+                            lamps.updateArrayOfLamps(lamp: lamp)
+
+                            if lamp.hostIP == lamps.mainLamp?.hostIP {
+                                DispatchQueue.main.async {
+                                    self.timer.invalidate()
+                                    NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
+                                    CoreDataService.deleteAllData()
+                                    CoreDataService.save()
+                                }
                             }
                         }
 
@@ -226,14 +232,6 @@ class UDPClient {
 }
 
 class LampDevice { // объект лампа
-    static func lampsAddLamp(ip: String, port: String) {
-        if lamps != nil {
-            lamps?.append((ip, port))
-        } else {
-            lamps = [(ip, port)]
-        }
-    }
-
     static let listOfEffectsDefault = ["Конфетти", "Огонь", "Белый огонь", "Радуга вертикальная", "Радуга горизонтальная", "Радуга диагональная", "Смена цвета", "Безумие", "Облака", "Лава", "Плазма", "Радуга 3D", "Павлин", "Зебра", "Лес", "Океан", "Моноцвет", "Снегопад", "Метель", "Звездопад", "Матрица", "Светлячки", "Светлячки со шлейфом", "Пейнтбол", "Блуждающий кубик", "Белый свет"] // список эффектов по умолчанию
     var name: String // имя лампы
     let hostIP: NWEndpoint.Host // адрес
@@ -255,9 +253,8 @@ class LampDevice { // объект лампа
     var effectsFromLamp = false
     var currentTime: Date? // время лампы
     var flagLampIsControlled = false // лампа входит в список управляемых
-    var mainLamp = false // основная лампа
 
-    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: String, listOfEffects: [String] = LampDevice.listOfEffectsDefault) {
+    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: String, listOfEffects: [String] = LampDevice.listOfEffectsDefault, flagLampIsControlled: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort
         self.name = name
@@ -265,86 +262,19 @@ class LampDevice { // объект лампа
         if self.effectsFromLamp {
             self.listOfEffects = listOfEffects
         }
-        sendCommand(lamp: self, command: .get, value: [0]) // запросить состояние лампы
+        sendCommand(command: .get, value: [0]) // запросить состояние лампы
         updateFavoriteStatus(lamp: self) // запросить состояние автопереключения
-        sendCommand(lamp: self, command: .alarm_on, value: [0]) // запросить состоние будильника
-        sendCommand(lamp: self, command: .timer_get, value: [0]) // запросить состояние таймера
+        sendCommand(command: .alarm_on, value: [0]) // запросить состоние будильника
+        sendCommand(command: .timer_get, value: [0]) // запросить состояние таймера
+        getEffectsFromLamp(true)
     }
 
-    init?() {
-        if CoreDataService.fetchLamps().count > 0 {
-            var tempName = CoreDataService.fetchLamps()[0].value(forKey: "name") as! String
-            var tempIP = CoreDataService.fetchLamps()[0].value(forKey: "ip") as! String
-            var tempPort = CoreDataService.fetchLamps()[0].value(forKey: "port") as! String
-            var tempEffectsFromLamp = CoreDataService.fetchLamps()[0].value(forKey: "flagEffects") as! Bool
-            var templistOfEffects = (CoreDataService.fetchLamps()[0].value(forKey: "listOfEffects") as! String).components(separatedBy: ",")
-
-            for element in CoreDataService.fetchLamps() {
-                let mainLamp = element.value(forKey: "mainLamp") as! Bool
-                if mainLamp {
-                    tempName = element.value(forKey: "name") as! String
-                    tempIP = element.value(forKey: "ip") as! String
-                    tempPort = element.value(forKey: "port") as! String
-                    tempEffectsFromLamp = element.value(forKey: "flagEffects") as! Bool
-                    if tempEffectsFromLamp {
-                        templistOfEffects = (element.value(forKey: "listOfEffects") as! String).components(separatedBy: ",")
-                    }
-                }
-            }
-
-            name = tempName
-            hostIP = NWEndpoint.Host(tempIP)
-            hostPort = NWEndpoint.Port(tempPort) ?? 8888
-            effectsFromLamp = tempEffectsFromLamp
-            listOfEffects = templistOfEffects
-            mainLamp = true
-            sendCommand(lamp: self, command: .get, value: [0]) // запросить состояние лампы
-            updateFavoriteStatus(lamp: self) // запросить состояние автопереключения
-            sendCommand(lamp: self, command: .alarm_on, value: [0]) // запросить состоние будильника
-            sendCommand(lamp: self, command: .timer_get, value: [0]) // запросить состоние будильника
-        } else {
-            return nil
-        }
-    }
-
-    func deleteLamp() { // удаление лампы
-        CoreDataService.delete(ip: "\(hostIP)")
-    }
-
-    func renameLamp(name: String) { // переименование лампы
-        CoreDataService.rename(lamp: self, newName: name)
-        _ = LampDevice(hostIP: hostIP, hostPort: hostPort, name: name, effectsFromLamp: effectsFromLamp.convertToString(), listOfEffects: listOfEffects)
-    }
-
-    static func updateListOfLamps(lamp: LampDevice) { // сохранияем новую лампу
-        var flagLampIsNew = true
-
-        for element in CoreDataService.fetchLamps() {
-            let lampIP = element.value(forKeyPath: "ip") as? String
-
-            if "\(lamp.hostIP)" == lampIP {
-                flagLampIsNew = false
-            }
-        }
-        if flagLampIsNew {
-            lamp.mainLamp = true
-            if CoreDataService.save(lamp: lamp) {
-                print("Lamp saved in SQL!")
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: Notification.Name("newLampHasAdded"), object: lamp)
-                }
-            }
-        } else {
-            CoreDataService.updateEffects(lamp: lamp)
-        }
-    }
-
-    public func updateStatus(lamp: LampDevice) {
+    func updateStatus() {
         let client = UDPClient()
-        client.connectToUDP(messageToUDP: .get, lamp: lamp, value: [0]) // запрос состояние лампы
+        client.connectToUDP(messageToUDP: .get, lamp: self, value: [0]) // запрос состояние лампы
     }
 
-    public func updateFavoriteStatus(lamp: LampDevice) {
+    func updateFavoriteStatus(lamp: LampDevice) {
         let client = UDPClient()
         client.connectToUDP(messageToUDP: .fav_get, lamp: lamp, value: [0]) // запрос режима автопереключения
     }
@@ -367,14 +297,10 @@ class LampDevice { // объект лампа
     }
 
     // отправка команды в лампу
-    public func sendCommand(lamp: LampDevice, command: CommandsToLamp, value: [Int], valueTXT: String = "") {
+    func sendCommand(command: CommandsToLamp, value: [Int], valueTXT: String = "") {
         let client = UDPClient()
-        client.connectToUDP(messageToUDP: command, lamp: lamp, value: value, valueTXT: valueTXT)
-        if let additionalLamps = lamps {
-            for element in additionalLamps {
-                client.connectToUDP(messageToUDP: command, lamp: LampDevice(hostIP: NWEndpoint.Host(element.0), hostPort: NWEndpoint.Port(element.1) ?? 8888, name: "", effectsFromLamp: ""), value: value, valueTXT: valueTXT)
-            }
-        }
+        client.connectToUDP(messageToUDP: command, lamp: self, value: value, valueTXT: valueTXT)
+
     }
 
     // поиск ламп в локальной сети
@@ -383,5 +309,3 @@ class LampDevice { // объект лампа
         client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, effectsFromLamp: "0"), value: [0])
     }
 }
-
-var lamps: [(String, String)]? // список ламп получающих команды, кроме основной

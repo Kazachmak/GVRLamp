@@ -20,7 +20,7 @@ class RenameViewController: UIViewController {
     @IBAction func renameLamp(_ sender: UIButton) {
         if let name = textField.text {
             if let currentLamp = lamp {
-                currentLamp.renameLamp(name: name)
+                lamps.renameLamp(name: name, lamp: currentLamp)
             }
             dismiss(animated: true)
         }

@@ -97,7 +97,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                 var array = [favOnOut.isOn.convertToInt(), interval, random, favAlwaysOnOut.isOn.convertToInt()]
                 if let effects = selectedEffects {
                     array.append(contentsOf: effects.convertToIntArray())
-                    currentLamp.sendCommand(lamp: currentLamp, command: .fav_set, value: array)
+                    currentLamp.sendCommand(command: .fav_set, value: array)
                 }
             }
         }
@@ -153,9 +153,9 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     @IBAction func buttonOnLamp(_ sender: UISwitch) {
         if let currentLamp = lamp {
             if currentLamp.button ?? true {
-                currentLamp.sendCommand(lamp: currentLamp, command: .button_off, value: [0])
+                currentLamp.sendCommand(command: .button_off, value: [0])
             } else {
-                currentLamp.sendCommand(lamp: currentLamp, command: .button_on, value: [0])
+                currentLamp.sendCommand(command: .button_on, value: [0])
             }
         }
     }
@@ -170,7 +170,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                         inputKeyboardType: .default, actionHandler:
                             { (input:String?) in
                                 if let currentLamp = self.lamp{
-                                    currentLamp.sendCommand(lamp: currentLamp, command: .txt, value: [0], valueTXT: input ?? "")
+                                    currentLamp.sendCommand(command: .txt, value: [0], valueTXT: input ?? "")
                                 }
                             })
     }
@@ -200,9 +200,11 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     @IBOutlet var removeLampOut: UIButton!
 
     @IBAction func removeButton(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name("deleteLamp"), object: lamp)
-        lamp?.deleteLamp()
-        dismiss(animated: true)
+        if let currentLamp = lamp {
+            lamps.removeLamp(currentLamp)
+            dismiss(animated: true)
+        }
+        
     }
 
     override func viewDidLoad() {

@@ -63,10 +63,9 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                 port = "8888"
             }
             if ip.isValidIP() && port.isValidPort() {
-               if CoreDataService.fetchLamps().count > 0{
+                if lamps.arrayOfLamps.count > 0 {
                     
-                    
-                if !CoreDataService.checkIP(ip){
+                if !lamps.checkIP(ip){
                         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                             self.addingLampLabel.text = "Идет поиск лампы..."
                             self.addingLampLabel.isHidden = false

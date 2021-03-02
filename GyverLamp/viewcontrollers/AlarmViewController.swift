@@ -51,7 +51,7 @@ class AlarmViewController: UIViewController {
         if let currentLamp = lamp, selectedDays.contains(true) {
             if sender.titleLabel?.text == "Отключить будильник" {
                 for element in [Int](1 ... 7) {
-                    currentLamp.sendCommand(lamp: currentLamp, command: .alarm_off, value: [element])
+                    currentLamp.sendCommand(command: .alarm_off, value: [element])
                 }
                 alarmOnButtonOut.setTitle("Включить будильник", for: .normal)
             } else {
@@ -62,11 +62,11 @@ class AlarmViewController: UIViewController {
                 let minute = comp.minute
                 for (index, element) in selectedDays.enumerated() {
                     if element {
-                        currentLamp.sendCommand(lamp: currentLamp, command: .alarm, value: [index + 1, 60 * hour! + minute!])
-                        currentLamp.sendCommand(lamp: currentLamp, command: .alarm_on, value: [index + 1])
+                        currentLamp.sendCommand(command: .alarm, value: [index + 1, 60 * hour! + minute!])
+                        currentLamp.sendCommand(command: .alarm_on, value: [index + 1])
                     }
                 }
-                currentLamp.sendCommand(lamp: currentLamp, command: .dawn, value: [(selectedDawn ?? 0) + 1])
+                currentLamp.sendCommand(command: .dawn, value: [(selectedDawn ?? 0) + 1])
                 alarmOnButtonOut.setTitle("Отключить будильник", for: .normal)
             }
         }

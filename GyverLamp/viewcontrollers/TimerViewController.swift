@@ -58,7 +58,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let currentLamp = lamp {
-            currentLamp.sendCommand(lamp: currentLamp, command: .timer, value: [row]) // устанавливаем таймер на выбранное время
+            currentLamp.sendCommand(command: .timer, value: [row]) // устанавливаем таймер на выбранное время
             switch row {
             
             case 1:
@@ -78,7 +78,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             default:
                 break
             }
-            currentLamp.sendCommand(lamp: currentLamp, command: .timer_get, value: [0])
+            currentLamp.sendCommand(command: .timer_get, value: [0])
         }
         
         dismiss(animated: true) // закрываем view
@@ -88,7 +88,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
     @IBAction func invalidateTimer(_ sender: UIButton) {
         if let currentLamp = lamp {
-            currentLamp.sendCommand(lamp: currentLamp, command: .timer, value: [0])  //отключаем таймер
+            currentLamp.sendCommand(command: .timer, value: [0])  //отключаем таймер
         }
         dismiss(animated: true) // закрываем view
     }

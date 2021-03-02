@@ -19,6 +19,8 @@ var window: UIWindow?
         return true
     }
 
+    
+    
     // MARK: UISceneSession Lifecycle
 
     @available(iOS 13.0, *)

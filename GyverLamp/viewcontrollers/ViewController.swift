@@ -36,10 +36,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func openSettings(_ sender: UIButton) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
-        vc.lamp = lamp
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        if lamps.arrayOfLamps.count > 0 {
+            vc.lamp = lamps.mainLamp
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
     }
 
     var heightOfPickerViewConstraint: NSLayoutConstraint?
@@ -51,11 +53,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return lamp?.listOfEffects.count ?? LampDevice.listOfEffectsDefault.count
+        if let currentLamp = lamps.mainLamp{
+            return currentLamp.listOfEffects.count
+        }else{
+            return LampDevice.listOfEffectsDefault.count
+        }
+        
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if let currentLamp = lamp {
+        if let currentLamp = lamps.mainLamp {
             if currentLamp.listOfEffects.count >= row {
                 return "\(currentLamp.listOfEffects[row])"
             } else {
@@ -67,18 +74,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if let currentLamp = lamp {
+        if let currentLamp = lamps.mainLamp {
             currentLamp.effect = row
             currentLamp.updateSliderFlag = true
-            currentLamp.sendCommand(lamp: currentLamp, command: .eff, value: [row])
+            lamps.sendCommandToArrayOfLamps(command: .eff, value: [row])
+            //currentLamp.sendCommand(command: .eff, value: [row])
         }
     }
 
     private func changeEffectByButton(_ step: Int) {
         let selectedValue = picker.selectedRow(inComponent: 0)
-        if let currentLamp = lamp {
+        if let currentLamp = lamps.mainLamp {
             currentLamp.updateSliderFlag = true
-            currentLamp.sendCommand(lamp: currentLamp, command: .eff, value: [selectedValue + step])
+            //currentLamp.sendCommand(command: .eff, value: [selectedValue + step])
+            lamps.sendCommandToArrayOfLamps(command: .eff, value: [selectedValue + step])
             currentLamp.effect = selectedValue + step
         }
     }
@@ -99,7 +108,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBOutlet var rightPickerButtonInteractionOut: UIButton!
 
-    var lamp: LampDevice? // объект лампа
+    
 
     // открываем страницу настроек
     @IBAction func settingsButton(_ sender: UIButton) {
@@ -110,16 +119,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         switch segue.identifier {
         case "settings":
             let vc = segue.destination as? SettingsViewController
-            vc?.lamp = lamp
         case "alarm":
             let vc = segue.destination as? AlarmViewController
-            vc?.lamp = lamp
+            vc?.lamp = lamps.mainLamp
         case "timer":
             let vc = segue.destination as? TimerViewController
-            vc?.lamp = lamp
+            vc?.lamp = lamps.mainLamp
         case "autoswitch":
             let vc = segue.destination as? LampSettingsViewController
-            vc?.lamp = lamp
+            vc?.lamp = lamps.mainLamp
         case "bright", "speed", "scale":
             guard let popupViewController = segue.destination as? EmptyViewController else { return }
             popupViewController.customBlurEffectStyle = .light
@@ -132,9 +140,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             default: break
             }
 
-            if let currentLamp = lamp {
-                popupViewController.lamp = currentLamp
-            }
+            popupViewController.lamp = lamps.mainLamp
+            
 
         default:
             break
@@ -153,10 +160,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var brightnessSlider: TactileSlider!
 
     @IBAction func brightSetValue(_ sender: TactileSlider) {
-        if let currentLamp = lamp {
-            currentLamp.updateSliderFlag = false
-            currentLamp.sendCommand(lamp: currentLamp, command: .bri, value: [Int(sender.value)])
-        }
+        
+        lamps.mainLamp?.updateSliderFlag = false
+        //lamps.mainLamp?.sendCommand(command: .bri, value: [Int(sender.value)])
+        lamps.sendCommandToArrayOfLamps(command: .bri, value: [Int(sender.value)])
     }
 
     @IBAction func longPressSlider(_ sender: UILongPressGestureRecognizer) {
@@ -167,10 +174,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var speedSlider: TactileSlider!
 
     @IBAction func speedSetValue(_ sender: TactileSlider) {
-        if let currentLamp = lamp {
-            currentLamp.updateSliderFlag = false
-            currentLamp.sendCommand(lamp: currentLamp, command: .spd, value: [Int(sender.value)])
-        }
+        lamps.mainLamp?.updateSliderFlag = false
+        //lamps.mainLamp?.sendCommand(command: .spd, value: [Int(sender.value)])
+        lamps.sendCommandToArrayOfLamps(command: .spd, value: [Int(sender.value)])
     }
 
     @IBAction func longPressSpeedSlider(_ sender: UILongPressGestureRecognizer) {
@@ -182,10 +188,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var scaleSlider: TactileSlider!
 
     @IBAction func scaleSetValue(_ sender: TactileSlider) {
-        if let currentLamp = lamp {
-            currentLamp.updateSliderFlag = false
-            currentLamp.sendCommand(lamp: currentLamp, command: .sca, value: [Int(sender.value)])
-        }
+        lamps.mainLamp?.updateSliderFlag = false
+       // lamps.mainLamp?.sendCommand(command: .sca, value: [Int(sender.value)])
+        lamps.sendCommandToArrayOfLamps(command: .sca, value: [Int(sender.value)])
     }
 
     @IBAction func longPressScaleSlider(_ sender: UILongPressGestureRecognizer) {
@@ -209,7 +214,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var timerLabel: UILabel!
 
     private func displayTimer(_ status: Bool) {
-        if let currentlamp = lamp {
+        if let currentlamp = lamps.mainLamp {
             if status && (currentlamp.timerTime > 0) {
                 timerOut.alpha = 1
                 timerLabel.alpha = 1
@@ -244,11 +249,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     // выключатель
     @IBAction func onOffButton(_ sender: UIButton) {
-        if let currentLamp = lamp {
+        if let currentLamp = lamps.mainLamp {
             if currentLamp.powerStatus ?? true {
-                currentLamp.sendCommand(lamp: currentLamp, command: .power_off, value: [0])
+                currentLamp.sendCommand(command: .power_off, value: [0])
             } else {
-                currentLamp.sendCommand(lamp: currentLamp, command: .power_on, value: [0])
+                currentLamp.sendCommand(command: .power_on, value: [0])
             }
         }
     }
@@ -256,28 +261,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var onOffButttonOut: UIButton!
     
 
-    // фукнция удаляет текущую лампу
-    @objc func deleteLamp() {
-        lamp = nil
-        UserDefaults.standard.removeObject(forKey: "lampNumber")
-        UserDefaults.standard.synchronize()
-        errorMessage.isUserInteractionEnabled = false
-        statusLabel.text = "Цветолампа"
-        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [self] in
-            errorMessageHeight.constant = 24
-            self.errorMessage.setTitle("Нет подключения к лампе", for: .normal)
-            addOffView()
-        })
-    }
-
     // фукнция обновляет инерфейс
     @objc func updateInterface(notification: Notification? = nil) {
         
+        /*
         if let newLamp = notification?.object as? LampDevice{
             lamp = newLamp
         }
+        */
        
-        if let currentLamp = lamp {
+        if let currentLamp = lamps.mainLamp {
             if currentLamp.updateSliderFlag {
                 updateSlider()
             }
@@ -319,7 +312,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
 
             } else {
-                
+                statusLabel.text = "Цветолампа"
                 UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.errorMessage.isUserInteractionEnabled = false
                     self.errorMessageHeight.constant = 24
@@ -351,6 +344,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         } else {
           
             errorMessage.isUserInteractionEnabled = false
+            statusLabel.text = "Цветолампа"
             UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [self] in
                 errorMessageHeight.constant = 24
                 self.errorMessage.setTitle("Нет подключения к лампе", for: .normal)
@@ -377,21 +371,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     private func updateSlider() {
-        if let bright = lamp?.bright {
+        if let bright = lamps.mainLamp?.bright {
             brightnessSlider.setValue(Float(bright), animated: false)
             
         }
-        if let speed = lamp?.speed {
+        if let speed = lamps.mainLamp?.speed {
             speedSlider.setValue(Float(speed), animated: false)
         }
-        if let scale = lamp?.scale {
+        if let scale = lamps.mainLamp?.scale {
             scaleSlider.setValue(Float(scale), animated: false)
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if lamp?.connectionStatus ?? false { // проверка соединения с лампой
-            if lamp?.powerStatus == true { // проверка включена лампа или нет
+        if lamps.mainLamp?.connectionStatus ?? false { // проверка соединения с лампой
+            if lamps.mainLamp?.powerStatus == true { // проверка включена лампа или нет
                     leftPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
                     rightPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
                 }
@@ -400,19 +394,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addOffView()
         errorMessage.layer.zPosition = 2
         leftPickerButtonInteractionOut.layer.zPosition = 2
         rightPickerButtonInteractionOut.layer.zPosition = 2
         statusLabel.adjustsFontSizeToFitWidth = true
-        lamp = LampDevice()
-        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
-            if let currentLamp = self.lamp {
-                currentLamp.updateStatus(lamp: currentLamp) // запрос состояние лампы
-            }
-        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateInterface), name: Notification.Name("updateInterface"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteLamp), name: Notification.Name("deleteLamp"), object: nil)
 
         timerOut.imageView?.contentMode = .scaleAspectFit
         alarmClockOut.imageView?.contentMode = .scaleAspectFit
@@ -429,10 +418,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         brightnessSlider.tintColor = UIColor(patternImage: imageGradient)
         speedSlider.tintColor = UIColor(patternImage: imageGradient)
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
+        
+       
+            
     }
 
+   
+    
     @objc func updateTimerLabel() {
-        if let currentLamp = lamp {
+        if let currentLamp = lamps.mainLamp {
             timerLabel.text = currentLamp.timerTime.timeFormatted() // will show timer
 
             if currentLamp.timerTime != 0 {

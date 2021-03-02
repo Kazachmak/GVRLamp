@@ -10,9 +10,9 @@ import Network
 import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    //обновлять таблицу или нет
+    // обновлять таблицу или нет
     var updateTableFlag = true
-    
+
     @IBAction func close(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
@@ -21,56 +21,53 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 
-    var lamp: LampDevice?
-
-    var listOfLamps: [String] = []
-
     @IBOutlet var heightOfErrorLabel: NSLayoutConstraint!
 
     @IBOutlet var tableView: UITableView!
 
-    
-    private func setMainLamp(_ ip: String){
-        CoreDataService.setMainLamp(ip)
-        lamp = CoreDataService.fetchLampByIP(ip)
+    private func setMainLamp(_ index: Int) {
+        lamps.setMainLamp(index)
     }
-    
-    
+
     // свайп ячеек
-    func tableView(_ tableView: UITableView,
-                       trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-        {
-            updateTableFlag = false
-            // добавляем лампу в список
-        let AddAction = UIContextualAction(style: .destructive, title:  "Добавить в управляемые", handler: { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-                
-                LampDevice.lampsAddLamp(ip: (listOfLamps[indexPath.row].components(separatedBy: ":"))[0], port: (listOfLamps[indexPath.row].components(separatedBy: ":"))[1])
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?{
+        updateTableFlag = false
+        // добавляем лампу в список управляемых
+
+        if indexPath.row != lamps.mainLampIndex {
+        
+        if  lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
+            let AddAction = UIContextualAction(style: .destructive, title: "Убрать из управляемые", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
+                lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = false
                 success(true)
                 updateTableFlag = true
+                
+            })
+            AddAction.backgroundColor = .red
+            return UISwipeActionsConfiguration(actions: [AddAction])
+        } else {
+            let AddAction = UIContextualAction(style: .destructive, title: "Добавить в управляемые", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
+                lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = true
+                success(true)
+                updateTableFlag = true
+                
             })
             AddAction.backgroundColor = .gray
-            
-
+        
             return UISwipeActionsConfiguration(actions: [AddAction])
         }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        setMainLamp((listOfLamps[indexPath.row].components(separatedBy: ":"))[0])
-        
-        /*
-        if (listOfLamps[indexPath.row].components(separatedBy: ":").count > 3)&&(listOfLamps[indexPath.row].components(separatedBy: ":")[3] == "1"){
-            lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3], listOfEffects: (listOfLamps[indexPath.row].components(separatedBy: ":")[4]).components(separatedBy: ","))
         }else{
-            if listOfLamps[indexPath.row].components(separatedBy: ":").count > 2{
-            lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3])
-            }
+            return nil
         }
-        */
-        
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        lamps.setMainLamp(indexPath.row)
+
         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [self] _ in
-            
-            if lamp?.connectionStatus == true {
+
+            if lamps.mainLamp?.connectionStatus == true {
                 self.dismiss(animated: true)
             } else {
                 UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
@@ -81,25 +78,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listOfLamps.count
+        return lamps.arrayOfLamps.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "lampCell", for: indexPath) as! LampsTableViewCell
 
-        if listOfLamps[indexPath.row].components(separatedBy: ":").count > 2 {
-        cell.lampLabel.text = listOfLamps[indexPath.row].components(separatedBy: ":")[2]
-        }
+       
+        cell.lampLabel.text = lamps.arrayOfLamps[indexPath.row].name
         
-        if let currentLamp = lamp {
-            if cell.lampLabel.text == "\(currentLamp.name)" {
+        
+        if lamps.arrayOfLamps.count > 0 {
+            if cell.lampLabel.text == "\(lamps.mainLamp?.name ?? "")" {
                 cell.lampLabel.textColor = redColor // текущая лампа подсвечена красным
                 cell.settingsButtonOut.alpha = 1.0
-             //  cell.settingsButtonOut.isUserInteractionEnabled = true
-            } else {
+        }else{
+            if lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
+                cell.lampLabel.textColor = violetColor // управляемая лампа подсвечена фиолетовым
+            }else{
                 cell.lampLabel.textColor = blackColor
-                cell.settingsButtonOut.alpha = 0.3
-               // cell.settingsButtonOut.isUserInteractionEnabled = false
+            }
+            cell.settingsButtonOut.alpha = 0.3
             }
         }
         return cell
@@ -119,21 +118,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
 
-        setMainLamp((listOfLamps[indexPath.row].components(separatedBy: ":"))[0])
-        
-        /*
-        if (listOfLamps[indexPath.row].components(separatedBy: ":")[3] == "1")&&(listOfLamps[indexPath.row].components(separatedBy: ":").count > 3){
-            lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3], listOfEffects: (listOfLamps[indexPath.row].components(separatedBy: ":")[4]).components(separatedBy: ","))
-        }else{
-            if listOfLamps[indexPath.row].components(separatedBy: ":").count > 2{
-            lamp = LampDevice(hostIP: NWEndpoint.Host((listOfLamps[indexPath.row].components(separatedBy: ":"))[0]), hostPort: NWEndpoint.Port((listOfLamps[indexPath.row].components(separatedBy: ":"))[1]) ?? 8888, name: listOfLamps[indexPath.row].components(separatedBy: ":")[2], effectsFromLamp: listOfLamps[indexPath.row].components(separatedBy: ":")[3])
-            }
-        }
-        */
-        
+        lamps.setMainLamp(indexPath.row)
+
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
-        vc.lamp = lamp
+        vc.lamp = lamps.mainLamp
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
@@ -143,8 +132,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     // обновляем таблицу
     @objc func updateTable() {
-        listOfLamps = CoreDataService.listOfLamps()
-        if updateTableFlag{
+        if updateTableFlag {
             tableView.reloadData()
         }
     }
