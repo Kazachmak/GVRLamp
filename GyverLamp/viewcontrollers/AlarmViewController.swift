@@ -110,6 +110,9 @@ class AlarmViewController: UIViewController {
         if selectedDays[6] {
             daysArray.append("Вс.")
         }
+        if daysArray.isEmpty{
+            
+        }
         daysLabel.text = daysArray
     }
 
@@ -158,7 +161,18 @@ class AlarmViewController: UIViewController {
                         alarmOnButtonOut.setTitle("Отключить будильник", for: .normal)
                     }
                 }
-                selectedDays = array
+                
+                if array.allSatisfy({ $0 == false }){
+                    let calendar = Calendar.current
+                    let date = Date()
+                    let day = calendar.component(.day, from: date)
+                    array[day] = true
+                    selectedDays = array
+                }else{
+                    selectedDays = array
+                }
+                
+               
                 setDays(days: selectedDays)
             }
         }

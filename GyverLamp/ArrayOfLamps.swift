@@ -54,7 +54,8 @@ class ArrayOfLamps {
                 if mainLamp {
                     mainLampIndex = index
                 }
-                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp.convertToString(), listOfEffects: listOfEffects, flagLampIsControlled: flagLampIsControlled))
+                
+                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects, flagLampIsControlled: flagLampIsControlled))
                 
             }
             if mainLampIndex == nil{
@@ -76,7 +77,8 @@ class ArrayOfLamps {
         switch command {
         case .sca, .power_on, .power_off, .bri, .spd, .eff:
             for element in arrayOfLamps {
-                if (element.flagLampIsControlled)||(element.hostPort == mainLamp?.hostPort){
+                
+                if (element.flagLampIsControlled)||(element.hostIP == mainLamp?.hostIP){
                     element.sendCommand(command: command, value: value)
                 }
                 
@@ -118,6 +120,9 @@ class ArrayOfLamps {
             return devices.hostIP != lamp.hostIP
           }
         NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
+        CoreDataService.deleteAllData()
+        CoreDataService.save()
+        
     }
     
     func renameLamp(name: String, lamp: LampDevice) { // переименование лампы

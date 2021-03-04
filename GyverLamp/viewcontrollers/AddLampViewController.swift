@@ -63,14 +63,14 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                 port = "8888"
             }
             if ip.isValidIP() && port.isValidPort() {
-                if lamps.arrayOfLamps.count > 0 {
+              
                     
                 if !lamps.checkIP(ip){
                         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                             self.addingLampLabel.text = "Идет поиск лампы..."
                             self.addingLampLabel.isHidden = false
                             })
-                        _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: "0")
+                    _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, listOfEffects: nil)
                         self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
                             UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                                 self.addingLampLabel.text = "Лампа не найдена"
@@ -89,9 +89,7 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                                 })
                         }
                     }
-                }else{
-                    _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: "0")
-                }
+                
                 
             }else{
                 UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {

@@ -151,7 +151,7 @@ class UDPClient {
                             self.listCounter += 1
                             arrayOfQuantity = arrayOfQuantity.filter { !$0.contains("LIST") }
                             for element in arrayOfQuantity {
-                                lamp.listOfEffects.append(element.components(separatedBy: ",")[0])
+                                lamp.listOfEffects?.append(element.components(separatedBy: ",")[0])
                             }
                             lamp.effectsFromLamp = true
                             DispatchQueue.main.async {
@@ -244,29 +244,38 @@ class LampDevice { // объект лампа
     var alarm: String? // будильники
     var dawn: Int? // рассвет за сколько минут
     var favorite: String? // автопереключение эффектов
-    var listOfEffects = listOfEffectsDefault
+    var listOfEffects: [String]? // список эффектов
     var updateSliderFlag = true
     var effect: Int? // номер текущего эффекта
     var bright: Int? // значение яркости
     var speed: Int? // значение скорости
     var scale: Int? // значение масштаба
-    var effectsFromLamp = false
+    var effectsFromLamp: Bool // использовать эффекты из лампы или нет
     var currentTime: Date? // время лампы
-    var flagLampIsControlled = false // лампа входит в список управляемых
-
-    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: String, listOfEffects: [String] = LampDevice.listOfEffectsDefault, flagLampIsControlled: Bool = false) {
+    var flagLampIsControlled: Bool // лампа входит в список управляемых или нет
+    
+    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String]?, flagLampIsControlled: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort
         self.name = name
-        self.effectsFromLamp = effectsFromLamp.convertToBool()
-        if self.effectsFromLamp {
-            self.listOfEffects = listOfEffects
+        self.effectsFromLamp = effectsFromLamp
+        self.flagLampIsControlled = flagLampIsControlled
+        
+        if effectsFromLamp {
+            if let effects = listOfEffects{
+                self.listOfEffects = effects
+            }else{
+                getEffectsFromLamp(self.effectsFromLamp)
+            }
+        }else{
+            self.listOfEffects = LampDevice.listOfEffectsDefault
         }
+        
         sendCommand(command: .get, value: [0]) // запросить состояние лампы
         updateFavoriteStatus(lamp: self) // запросить состояние автопереключения
         sendCommand(command: .alarm_on, value: [0]) // запросить состоние будильника
         sendCommand(command: .timer_get, value: [0]) // запросить состояние таймера
-        getEffectsFromLamp(true)
+        
     }
 
     func updateStatus() {
@@ -306,6 +315,6 @@ class LampDevice { // объект лампа
     // поиск ламп в локальной сети
     static func scan(deviceIp: String) {
         let client = UDPClient()
-        client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, effectsFromLamp: "0"), value: [0])
+        client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, listOfEffects: nil), value: [0])
     }
 }

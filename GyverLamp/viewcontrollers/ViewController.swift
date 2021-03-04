@@ -54,7 +54,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let currentLamp = lamps.mainLamp{
-            return currentLamp.listOfEffects.count
+            return currentLamp.listOfEffects?.count ?? 0
         }else{
             return LampDevice.listOfEffectsDefault.count
         }
@@ -63,8 +63,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.listOfEffects.count >= row {
-                return "\(currentLamp.listOfEffects[row])"
+            if currentLamp.listOfEffects?.count ?? 0 >= row {
+                return "\(currentLamp.listOfEffects?[row] ?? "")"
             } else {
                 return ""
             }
@@ -118,7 +118,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "settings":
-            let vc = segue.destination as? SettingsViewController
+            _ = segue.destination as? SettingsViewController
         case "alarm":
             let vc = segue.destination as? AlarmViewController
             vc?.lamp = lamps.mainLamp
@@ -418,8 +418,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         brightnessSlider.tintColor = UIColor(patternImage: imageGradient)
         speedSlider.tintColor = UIColor(patternImage: imageGradient)
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
-        
-       
+        //RunLoop.current.add(timer, forMode: .common)
             
     }
 

@@ -182,7 +182,7 @@ class CoreDataService {
             newLamp.setValue("\(element.hostIP)", forKey: "ip")
             newLamp.setValue("\(element.hostPort)", forKey: "port")
             newLamp.setValue(element.effectsFromLamp, forKey: "flagEffects")
-            newLamp.setValue(element.listOfEffects.joined(separator: ","), forKey: "listOfEffects")
+            newLamp.setValue(element.listOfEffects?.joined(separator: ","), forKey: "listOfEffects")
             newLamp.setValue(element.flagLampIsControlled, forKey: "flagLampIsControlled")
             do {
                 try managedContext.save()
