@@ -49,7 +49,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         switch flag {
         case .dawn: return dawnList.count
         case .days: return days.count
-        case .effects: return lamp?.listOfEffects?.count ?? 0
+        case .effects: return lamp?.listOfEffects.count ?? 0
         }
     }
 
@@ -57,7 +57,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "selector", for: indexPath) as! SelectorTableViewCell
         switch flag {
         case .effects:
-            cell.day.text = lamp?.listOfEffects?[indexPath.row]
+            cell.day.text = lamp?.listOfEffects[indexPath.row]
             if selectedEffects[indexPath.row] {
                 cell.selector.image = UIImage(named: "selector.png")!
             } else {

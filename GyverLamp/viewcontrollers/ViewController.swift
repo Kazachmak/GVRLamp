@@ -53,18 +53,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if let currentLamp = lamps.mainLamp{
-            return currentLamp.listOfEffects?.count ?? 0
-        }else{
+        if let currentLamp = lamps.mainLamp {
+            return currentLamp.listOfEffects.count
+        } else {
             return LampDevice.listOfEffectsDefault.count
         }
-        
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.listOfEffects?.count ?? 0 >= row {
-                return "\(currentLamp.listOfEffects?[row] ?? "")"
+            if currentLamp.listOfEffects.count >= row {
+                return "\(currentLamp.listOfEffects[row])"
             } else {
                 return ""
             }
@@ -78,7 +77,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             currentLamp.effect = row
             currentLamp.updateSliderFlag = true
             lamps.sendCommandToArrayOfLamps(command: .eff, value: [row])
-            //currentLamp.sendCommand(command: .eff, value: [row])
+            // currentLamp.sendCommand(command: .eff, value: [row])
         }
     }
 
@@ -86,7 +85,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let selectedValue = picker.selectedRow(inComponent: 0)
         if let currentLamp = lamps.mainLamp {
             currentLamp.updateSliderFlag = true
-            //currentLamp.sendCommand(command: .eff, value: [selectedValue + step])
+            // currentLamp.sendCommand(command: .eff, value: [selectedValue + step])
             lamps.sendCommandToArrayOfLamps(command: .eff, value: [selectedValue + step])
             currentLamp.effect = selectedValue + step
         }
@@ -107,8 +106,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var leftPickerButtonInteractionOut: UIButton!
 
     @IBOutlet var rightPickerButtonInteractionOut: UIButton!
-
-    
 
     // открываем страницу настроек
     @IBAction func settingsButton(_ sender: UIButton) {
@@ -141,7 +138,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
 
             popupViewController.lamp = lamps.mainLamp
-            
 
         default:
             break
@@ -160,9 +156,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var brightnessSlider: TactileSlider!
 
     @IBAction func brightSetValue(_ sender: TactileSlider) {
-        
         lamps.mainLamp?.updateSliderFlag = false
-        //lamps.mainLamp?.sendCommand(command: .bri, value: [Int(sender.value)])
+        // lamps.mainLamp?.sendCommand(command: .bri, value: [Int(sender.value)])
         lamps.sendCommandToArrayOfLamps(command: .bri, value: [Int(sender.value)])
     }
 
@@ -175,7 +170,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBAction func speedSetValue(_ sender: TactileSlider) {
         lamps.mainLamp?.updateSliderFlag = false
-        //lamps.mainLamp?.sendCommand(command: .spd, value: [Int(sender.value)])
         lamps.sendCommandToArrayOfLamps(command: .spd, value: [Int(sender.value)])
     }
 
@@ -189,7 +183,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBAction func scaleSetValue(_ sender: TactileSlider) {
         lamps.mainLamp?.updateSliderFlag = false
-       // lamps.mainLamp?.sendCommand(command: .sca, value: [Int(sender.value)])
+        // lamps.mainLamp?.sendCommand(command: .sca, value: [Int(sender.value)])
         lamps.sendCommandToArrayOfLamps(command: .sca, value: [Int(sender.value)])
     }
 
@@ -250,27 +244,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // выключатель
     @IBAction func onOffButton(_ sender: UIButton) {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.powerStatus ?? true {
-                currentLamp.sendCommand(command: .power_off, value: [0])
+            if currentLamp.powerStatus ?? false {
+                lamps.sendCommandToArrayOfLamps(command: .power_off, value: [0])
             } else {
-                currentLamp.sendCommand(command: .power_on, value: [0])
+                lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0])
             }
         }
     }
 
     @IBOutlet var onOffButttonOut: UIButton!
-    
 
     // фукнция обновляет инерфейс
     @objc func updateInterface(notification: Notification? = nil) {
-        
-        /*
-        if let newLamp = notification?.object as? LampDevice{
-            lamp = newLamp
-        }
-        */
-       
         if let currentLamp = lamps.mainLamp {
+            picker.delegate = self
             if currentLamp.updateSliderFlag {
                 updateSlider()
             }
@@ -286,27 +273,28 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
 
             statusLabel.text = currentLamp.name
-            picker.selectRow(currentLamp.effect ?? 0, inComponent: 0, animated: true)
-            picker.delegate = self
-           
+            if let effectNumber = currentLamp.effect {
+                picker.selectRow(effectNumber, inComponent: 0, animated: false)
+            }
+
             if currentLamp.connectionStatus { // проверка доступа к лампе
                 removeOffView()
-                
+
                 if currentLamp.powerStatus == true { // проверка включена лампа или нет
                     onOffButttonOut.setImage(UIImage(named: "onOff2.png"), for: .normal)
                     if errorMessageHeight.constant != 0 {
-                                    leftPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
-                                    rightPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
+                        leftPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
+                        rightPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
                         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                             self.errorMessageHeight.constant = 0
                         })
                     }
                 } else {
                     onOffButttonOut.setImage(UIImage(named: "onOff3.png"), for: .normal)
-                    self.errorMessage.setTitle("Лампа выключена", for: .normal)
+                    errorMessage.setTitle("Лампа выключена", for: .normal)
                     if errorMessageHeight.constant != 24 {
-                    UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                        self.errorMessageHeight.constant = 24
+                        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                            self.errorMessageHeight.constant = 24
                         })
                     }
                 }
@@ -342,7 +330,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
 
         } else {
-          
             errorMessage.isUserInteractionEnabled = false
             statusLabel.text = "Цветолампа"
             UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [self] in
@@ -351,7 +338,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 addOffView()
             })
         }
-        
     }
 
     private func addOffView() {
@@ -373,7 +359,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     private func updateSlider() {
         if let bright = lamps.mainLamp?.bright {
             brightnessSlider.setValue(Float(bright), animated: false)
-            
         }
         if let speed = lamps.mainLamp?.speed {
             speedSlider.setValue(Float(speed), animated: false)
@@ -386,21 +371,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewWillAppear(_ animated: Bool) {
         if lamps.mainLamp?.connectionStatus ?? false { // проверка соединения с лампой
             if lamps.mainLamp?.powerStatus == true { // проверка включена лампа или нет
-                    leftPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
-                    rightPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
-                }
+                updateInterface()
+                leftPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
+                rightPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
+            }
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         addOffView()
         errorMessage.layer.zPosition = 2
         leftPickerButtonInteractionOut.layer.zPosition = 2
         rightPickerButtonInteractionOut.layer.zPosition = 2
         statusLabel.adjustsFontSizeToFitWidth = true
-        
+       
         NotificationCenter.default.addObserver(self, selector: #selector(updateInterface), name: Notification.Name("updateInterface"), object: nil)
 
         timerOut.imageView?.contentMode = .scaleAspectFit
@@ -418,12 +404,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         brightnessSlider.tintColor = UIColor(patternImage: imageGradient)
         speedSlider.tintColor = UIColor(patternImage: imageGradient)
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
-        //RunLoop.current.add(timer, forMode: .common)
-            
+        // RunLoop.current.add(timer, forMode: .common)
+        updateInterface()
     }
 
-   
-    
     @objc func updateTimerLabel() {
         if let currentLamp = lamps.mainLamp {
             timerLabel.text = currentLamp.timerTime.timeFormatted() // will show timer

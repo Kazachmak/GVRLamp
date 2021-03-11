@@ -47,7 +47,7 @@ class ArrayOfLamps {
                 let ip = element.value(forKey: "ip") as! String
                 let port = element.value(forKey: "port") as! String
                 let effectsFromLamp = element.value(forKey: "flagEffects") as! Bool
-                let listOfEffects = (element.value(forKey: "listOfEffects") as! String).components(separatedBy: ",")
+             
                 let mainLamp = element.value(forKey: "mainLamp") as! Bool
                 let flagLampIsControlled = element.value(forKey: "flagLampIsControlled") as! Bool
                 
@@ -55,7 +55,7 @@ class ArrayOfLamps {
                     mainLampIndex = index
                 }
                 
-                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects, flagLampIsControlled: flagLampIsControlled))
+                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: nil, flagLampIsControlled: flagLampIsControlled))
                 
             }
             if mainLampIndex == nil{
@@ -77,9 +77,19 @@ class ArrayOfLamps {
         switch command {
         case .sca, .power_on, .power_off, .bri, .spd, .eff:
             for element in arrayOfLamps {
-                
                 if (element.flagLampIsControlled)||(element.hostIP == mainLamp?.hostIP){
                     element.sendCommand(command: command, value: value)
+                    if (command == .eff)&&(element.hostIP != mainLamp?.hostIP ){
+                        if let bright = mainLamp?.bright{
+                            element.sendCommand(command: .bri, value: [bright])
+                        }
+                        if let speed = mainLamp?.speed{
+                            element.sendCommand(command: .spd, value: [speed])
+                        }
+                        if let scale = mainLamp?.scale{
+                            element.sendCommand(command: .sca, value: [scale])
+                        }
+                    }
                 }
                 
             }
@@ -89,6 +99,7 @@ class ArrayOfLamps {
 
     func setMainLamp(_ index: Int) {
         mainLampIndex = index
+        arrayOfLamps[index].flagLampIsControlled = true
     }
 
     func checkIP(_ ip: String) -> Bool {

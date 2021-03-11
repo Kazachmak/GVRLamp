@@ -165,8 +165,8 @@ class AlarmViewController: UIViewController {
                 if array.allSatisfy({ $0 == false }){
                     let calendar = Calendar.current
                     let date = Date()
-                    let day = calendar.component(.day, from: date)
-                    array[day] = true
+                    let day = calendar.component(.weekday , from: date)
+                    array[day-1] = true
                     selectedDays = array
                 }else{
                     selectedDays = array

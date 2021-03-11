@@ -37,23 +37,37 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.row != lamps.mainLampIndex {
         
         if  lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
-            let AddAction = UIContextualAction(style: .destructive, title: "Убрать из управляемые", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
+            let AddAction = UIContextualAction(style: .destructive, title: "Убрать из группы", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
                 lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = false
+                print("Лампа " + "\(lamps.arrayOfLamps[indexPath.row].name)" + " удалена")
+                print("В группе:")
+                for element in lamps.arrayOfLamps{
+                    if element.flagLampIsControlled {
+                        print(element.name)
+                    }
+                }
                 success(true)
                 updateTableFlag = true
-                
+                updateTable()
             })
             AddAction.backgroundColor = .red
             return UISwipeActionsConfiguration(actions: [AddAction])
         } else {
-            let AddAction = UIContextualAction(style: .destructive, title: "Добавить в управляемые", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
+            let AddAction = UIContextualAction(style: .destructive, title: "Добавить в группу", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
                 lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = true
                 success(true)
                 updateTableFlag = true
-                
+                print("Лампа " + "\(lamps.arrayOfLamps[indexPath.row].name)" + " добавлена")
+                print("В группе:")
+                for element in lamps.arrayOfLamps{
+                    if element.flagLampIsControlled {
+                        print(element.name)
+                    }
+                }
+                updateTable()
             })
             AddAction.backgroundColor = .gray
-        
+            
             return UISwipeActionsConfiguration(actions: [AddAction])
         }
         
