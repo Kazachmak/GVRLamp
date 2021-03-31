@@ -70,7 +70,7 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                             self.addingLampLabel.text = "Идет поиск лампы..."
                             self.addingLampLabel.isHidden = false
                             })
-                    _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, listOfEffects: nil)
+                    _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true)
                         self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
                             UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                                 self.addingLampLabel.text = "Лампа не найдена"

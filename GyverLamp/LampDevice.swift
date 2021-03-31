@@ -39,6 +39,7 @@ enum CommandsToLamp: String {
 class UDPClient {
     var connection: NWConnection?
     var listCounter = 0
+    
     var timer = Timer()
     // подготовка сообщения для отправки в лампу
     func connectToUDP(messageToUDP: CommandsToLamp, lamp: LampDevice, value: [Int], valueTXT: String = "") {
@@ -74,10 +75,16 @@ class UDPClient {
                 if content.contains("GET") && (!content.contains("TMR_GET")) && (!content.contains("FAV_GET")) && (lamp.hostIP == lamps.mainLamp?.hostIP) {
                     DispatchQueue.main.async {
                         // таймер срабатывает, если не пришло никакого ответа от лампы
-                        self.timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in
-                            lamp.connectionStatus = false
-                            NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
-
+                        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
+                            //print("Lost connections")
+                            if lamp.lostConnectionFirstTime{
+                                lamp.connectionStatus = false
+                                NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
+                            }else{
+                                lamp.lostConnectionFirstTime = true
+                                
+                            }
+                            
                         })
                     }
                 }
@@ -139,12 +146,13 @@ class UDPClient {
 
     // обработка полученных от лампы сообщений
     private func receiveUDP(lamp: LampDevice) {
-        connection?.receiveMessage { data, _, isComplete, _ in
+        connection?.receiveMessage { [self] data, _, isComplete, _ in
             if isComplete {
                 if data != nil {
+                    lamp.connectionStatus = true
                     let backToString = String(decoding: data!, as: UTF8.self)
                     print("Received message: \(backToString)")
-
+                    
                     if backToString.contains("LIST") {
                         var arrayOfQuantity = backToString.components(separatedBy: ";")
                         if arrayOfQuantity.count > 1 {
@@ -157,99 +165,85 @@ class UDPClient {
                                 lamp.listOfEffects.append(element.components(separatedBy: ",")[0])
                             }
                             lamp.effectsFromLamp = true
+                            DispatchQueue.main.async {
+                                CoreDataService.deleteAllData()
+                                CoreDataService.save()
+                            }
                         }
                     }
+                    
 
                     switch backToString.components(separatedBy: " ")[0] {
                     case "CURR":
                         if backToString.components(separatedBy: " ").count > 9 {
                             
-                            lamp.connectionStatus = true
                             if backToString.components(separatedBy: " ")[5] == "0" {
-                                if lamp.powerStatus ?? false{
+                                if lamp.powerStatus ?? false {
                                     lamp.powerStatus = false
-                                    if lamp.hostIP == lamps.mainLamp?.hostIP{
-                                        lamps.sendCommandToArrayOfLamps(command: .power_off, value: [0])
+                                    if lamp.hostIP == lamps.mainLamp?.hostIP {
+                                        lamps.sendCommandToArrayOfLamps(command: .power_off, value: [0], exceptFromTheMainLamp: true)
                                     }
                                 }
-                                
+
                             } else {
                                 if !(lamp.powerStatus ?? false) {
                                     lamp.powerStatus = true
-                                    if lamp.hostIP == lamps.mainLamp?.hostIP{
-                                        lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0])
+                                    if lamp.hostIP == lamps.mainLamp?.hostIP {
+                                        lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0], exceptFromTheMainLamp: true)
                                     }
                                 }
                             }
-                         
                         }
-                            if backToString.components(separatedBy: " ")[8] == "1" {
-                                lamp.timer = true
-                            } else {
-                                lamp.timer = false
-                            }
-                            if lamp.effect != Int(backToString.components(separatedBy: " ")[1]) {
-                                lamp.effect = Int(backToString.components(separatedBy: " ")[1])
-                                if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                    if let effect = lamp.effect {
-                                        lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect])
-                                    }
-                                }
-                            }
-
-                         //   if lamp.bright != Int(backToString.components(separatedBy: " ")[2]) {
-                                lamp.bright = Int(backToString.components(separatedBy: " ")[2])
-                             //   if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                  //  if let bright = lamp.bright {
-                                       // lamps.sendCommandToArrayOfLamps(command: .bri, value: [bright])
-                                  //  }
-                               // }
-                          //  }
-                            
-                          //  if lamp.speed != Int(backToString.components(separatedBy: " ")[3]) {
-                                lamp.speed = Int(backToString.components(separatedBy: " ")[3])
-                              //  if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                  //  if let speed = lamp.speed {
-                                       // lamps.sendCommandToArrayOfLamps(command: .spd, value: [speed])
-                                 //   }
-                               // }
-                        //    }
-                            
-                            //if lamp.scale != Int(backToString.components(separatedBy: " ")[4]) {
-                                lamp.scale = Int(backToString.components(separatedBy: " ")[4])
-                                //if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                 //   if let scale = lamp.scale {
-                                      //  lamps.sendCommandToArrayOfLamps(command: .sca, value: [scale])
-                                 //   }
-                               // }
-                         //   }
-                            
-                            
-
-                            if backToString.components(separatedBy: " ")[9] == "1" {
-                                lamp.button = true
-                            } else {
-                                lamp.button = false
-                            }
-                            lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
-
-                            lamps.updateArrayOfLamps(lamp: lamp)
-
+                        if backToString.components(separatedBy: " ")[8] == "1" {
+                            lamp.timer = true
+                        } else {
+                            lamp.timer = false
+                        }
+                        if lamp.effect != Int(backToString.components(separatedBy: " ")[1]) {
+                            lamp.effect = Int(backToString.components(separatedBy: " ")[1])
+                            lamp.updatePickerFlag = true
                             if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                DispatchQueue.main.async {
-                                    self.timer.invalidate()
-                                    NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
-                                    CoreDataService.deleteAllData()
-                                    CoreDataService.save()
+                                if let effect = lamp.effect {
+                                    lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect], exceptFromTheMainLamp: true)
                                 }
                             }
+                        }
+
+                        if (lamp.bright != Int(backToString.components(separatedBy: " ")[2]))&&(lamp.speed != Int(backToString.components(separatedBy: " ")[3]))&&(lamp.scale != Int(backToString.components(separatedBy: " ")[4])){
+                            lamp.updateSliderFlag = true
+                        }
                         
+                        lamp.bright = Int(backToString.components(separatedBy: " ")[2])
+
+                        lamp.speed = Int(backToString.components(separatedBy: " ")[3])
+
+                        lamp.scale = Int(backToString.components(separatedBy: " ")[4])
+
+                        if backToString.components(separatedBy: " ")[9] == "1" {
+                            lamp.button = true
+                        } else {
+                            lamp.button = false
+                        }
+                        lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
+
+                        lamps.updateArrayOfLamps(lamp: lamp)
+
+                        if lamp.hostIP == lamps.mainLamp?.hostIP {
+                            self.timer.invalidate()
+                            lamp.lostConnectionFirstTime = false
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
+                                CoreDataService.deleteAllData()
+                                CoreDataService.save()
+                            }
+                        }
 
                     case "TMR":
                         if backToString.components(separatedBy: " ").count > 1 {
                             if backToString.components(separatedBy: " ")[1] == "1" {
                                 lamp.timer = true
                                 lamp.timerTime = Int(backToString.components(separatedBy: " ")[3]) ?? 0
+                                //lamp.timerCount()
                             } else {
                                 lamp.timer = false
                             }
@@ -294,6 +288,7 @@ class LampDevice { // объект лампа
     var favorite: String? // автопереключение эффектов
     var listOfEffects: [String] = listOfEffectsDefault // список эффектов
     var updateSliderFlag = true
+    var updatePickerFlag = true
     var effect: Int? // номер текущего эффекта
     var bright: Int? // значение яркости
     var speed: Int? // значение скорости
@@ -301,16 +296,17 @@ class LampDevice { // объект лампа
     var effectsFromLamp: Bool // использовать эффекты из лампы или нет
     var currentTime: Date? // время лампы
     var flagLampIsControlled: Bool // лампа входит в список управляемых или нет
+    var lostConnectionFirstTime = false // сколько раз не получен сигнал от лампы
 
-    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String]?, flagLampIsControlled: Bool = false) {
+    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort
         self.name = name
         self.effectsFromLamp = effectsFromLamp
         self.flagLampIsControlled = flagLampIsControlled
-
-        if effectsFromLamp {
-            getEffectsFromLamp(self.effectsFromLamp)
+        self.listOfEffects = listOfEffects
+        if newLamp {
+            getEffectsFromLamp(effectsFromLamp)
         }
 
         updateStatus() // запросить состояние лампы
@@ -319,6 +315,13 @@ class LampDevice { // объект лампа
         sendCommand(command: .timer_get, value: [0]) // запросить состояние таймера
     }
 
+    func timerCount(){
+        if self.timerTime != 0 {
+            self.timerTime -= 1 // decrease counter timer
+        }
+    }
+    
+    
     func updateStatus() {
         let client = UDPClient()
         client.connectToUDP(messageToUDP: .get, lamp: self, value: [0]) // запрос состояние лампы
@@ -355,6 +358,6 @@ class LampDevice { // объект лампа
     // поиск ламп в локальной сети
     static func scan(deviceIp: String) {
         let client = UDPClient()
-        client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, listOfEffects: nil), value: [0])
+        client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true), value: [0])
     }
 }

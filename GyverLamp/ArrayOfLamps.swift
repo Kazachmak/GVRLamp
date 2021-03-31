@@ -13,11 +13,7 @@ var lamps = ArrayOfLamps()
 
 class ArrayOfLamps {
     
-    var timer =  Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
-        if let currentLamp = lamps.mainLamp {
-            currentLamp.updateStatus() // запрос состояние лампы
-        }
-    }
+    
 
     var arrayOfLamps: [LampDevice]
     
@@ -47,7 +43,7 @@ class ArrayOfLamps {
                 let ip = element.value(forKey: "ip") as! String
                 let port = element.value(forKey: "port") as! String
                 let effectsFromLamp = element.value(forKey: "flagEffects") as! Bool
-             
+                let listOfEffects = element.value(forKey: "listOfEffects") as! String
                 let mainLamp = element.value(forKey: "mainLamp") as! Bool
                 let flagLampIsControlled = element.value(forKey: "flagLampIsControlled") as! Bool
                 
@@ -55,7 +51,7 @@ class ArrayOfLamps {
                     mainLampIndex = index
                 }
                 
-                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: nil, flagLampIsControlled: flagLampIsControlled))
+                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ",") , flagLampIsControlled: flagLampIsControlled))
                 
             }
             if mainLampIndex == nil{
@@ -66,19 +62,34 @@ class ArrayOfLamps {
     }
     
     private func timerStartAndStop(_ start: Bool) {
+        var timer = Timer()
         if start {
-            timer.fire()
+            timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
+                if let currentLamp = lamps.mainLamp {
+                    currentLamp.updateStatus() // запрос состояние лампы
+                }
+            }
         } else {
             timer.invalidate()
         }
     }
 
-    func sendCommandToArrayOfLamps(command: CommandsToLamp, value: [Int], valueTxt: String = "") {
+    func sendCommandToArrayOfLamps(command: CommandsToLamp, value: [Int], valueTxt: String = "", exceptFromTheMainLamp: Bool = false) {
         switch command {
         case .sca, .power_on, .power_off, .bri, .spd, .eff:
             for element in arrayOfLamps {
                 if (element.flagLampIsControlled)||(element.hostIP == mainLamp?.hostIP){
-                    element.sendCommand(command: command, value: value)
+                    
+                    if exceptFromTheMainLamp{
+                        if (element.hostIP != mainLamp?.hostIP){
+                            element.sendCommand(command: command, value: value)
+                            let second: Double = 1000000
+                            usleep(useconds_t(0.1 * second))
+                        }
+                    }else{
+                        element.sendCommand(command: command, value: value)
+                    }
+                    
                     if (command == .eff)&&(element.hostIP != mainLamp?.hostIP ){
                         if let bright = mainLamp?.bright{
                             element.sendCommand(command: .bri, value: [bright])
@@ -100,6 +111,7 @@ class ArrayOfLamps {
     func setMainLamp(_ index: Int) {
         mainLampIndex = index
         arrayOfLamps[index].flagLampIsControlled = true
+        self.timerStartAndStop(true)
     }
 
     func checkIP(_ ip: String) -> Bool {

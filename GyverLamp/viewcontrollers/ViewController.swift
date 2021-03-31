@@ -82,12 +82,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     private func changeEffectByButton(_ step: Int) {
-        let selectedValue = picker.selectedRow(inComponent: 0)
         if let currentLamp = lamps.mainLamp {
             currentLamp.updateSliderFlag = true
-            // currentLamp.sendCommand(command: .eff, value: [selectedValue + step])
-            lamps.sendCommandToArrayOfLamps(command: .eff, value: [selectedValue + step])
-            currentLamp.effect = selectedValue + step
+            currentLamp.updatePickerFlag = true
+            if let effect = currentLamp.effect{
+                currentLamp.effect = effect + step
+                lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect + step])
+            }
         }
     }
 
@@ -246,8 +247,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if let currentLamp = lamps.mainLamp {
             if currentLamp.powerStatus ?? false {
                 lamps.sendCommandToArrayOfLamps(command: .power_off, value: [0])
+                currentLamp.powerStatus = false
             } else {
                 lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0])
+                currentLamp.powerStatus = true
             }
         }
     }
@@ -255,13 +258,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var onOffButttonOut: UIButton!
 
     // фукнция обновляет инерфейс
-    @objc func updateInterface(notification: Notification? = nil) {
+    @objc func updateInterface() {
         if let currentLamp = lamps.mainLamp {
+            
             picker.delegate = self
             if currentLamp.updateSliderFlag {
                 updateSlider()
             }
-            currentLamp.updateSliderFlag = true
+           
             if let bright = currentLamp.bright {
                 brightPercent.text = String(bright * 100 / 255)
             }
@@ -274,12 +278,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
             statusLabel.text = currentLamp.name
             if let effectNumber = currentLamp.effect {
-                picker.selectRow(effectNumber, inComponent: 0, animated: false)
+                if currentLamp.updatePickerFlag{
+                    picker.selectRow(effectNumber, inComponent: 0, animated: false)
+                    currentLamp.updatePickerFlag = false
+                }
             }
 
             if currentLamp.connectionStatus { // проверка доступа к лампе
                 removeOffView()
-
+                statusLabel.textColor = blackColor
                 if currentLamp.powerStatus == true { // проверка включена лампа или нет
                     onOffButttonOut.setImage(UIImage(named: "onOff2.png"), for: .normal)
                     if errorMessageHeight.constant != 0 {
@@ -300,12 +307,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
 
             } else {
-                statusLabel.text = "Цветолампа"
+                statusLabel.textColor = .gray
                 UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.errorMessage.isUserInteractionEnabled = false
                     self.errorMessageHeight.constant = 24
                     self.errorMessage.setTitle("Нет подключения к лампе", for: .normal)
-                    self.addOffView()
+                    //self.addOffView()
 
                 })
             }
@@ -332,6 +339,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         } else {
             errorMessage.isUserInteractionEnabled = false
             statusLabel.text = "Цветолампа"
+            statusLabel.textColor = .gray
             UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [self] in
                 errorMessageHeight.constant = 24
                 self.errorMessage.setTitle("Нет подключения к лампе", for: .normal)
@@ -366,21 +374,23 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if let scale = lamps.mainLamp?.scale {
             scaleSlider.setValue(Float(scale), animated: false)
         }
+        lamps.mainLamp?.updateSliderFlag = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        lamps.mainLamp?.updatePickerFlag = true
+        lamps.mainLamp?.updateSliderFlag = true
         if lamps.mainLamp?.connectionStatus ?? false { // проверка соединения с лампой
             if lamps.mainLamp?.powerStatus == true { // проверка включена лампа или нет
-                updateInterface()
                 leftPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
                 rightPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
             }
         }
+        updateInterface()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         addOffView()
         errorMessage.layer.zPosition = 2
         leftPickerButtonInteractionOut.layer.zPosition = 2
@@ -404,19 +414,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         brightnessSlider.tintColor = UIColor(patternImage: imageGradient)
         speedSlider.tintColor = UIColor(patternImage: imageGradient)
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
-        // RunLoop.current.add(timer, forMode: .common)
-        updateInterface()
+       
     }
 
     @objc func updateTimerLabel() {
-        if let currentLamp = lamps.mainLamp {
-            timerLabel.text = currentLamp.timerTime.timeFormatted() // will show timer
+        
+            if let currentLamp = lamps.mainLamp {
 
-            if currentLamp.timerTime != 0 {
-                currentLamp.timerTime -= 1 // decrease counter timer
-            } else {
-                timer.invalidate()
-            }
+                timerLabel.text = currentLamp.timerTime.timeFormatted() // will show timer
+               
+                if currentLamp.timerTime != 0 {
+                    currentLamp.timerTime -= 1 // decrease counter timer
+                   
+                } else {
+                    timer.invalidate()
+                }
         }
     }
 

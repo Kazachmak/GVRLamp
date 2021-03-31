@@ -39,16 +39,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if  lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
             let AddAction = UIContextualAction(style: .destructive, title: "Убрать из группы", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
                 lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = false
-                print("Лампа " + "\(lamps.arrayOfLamps[indexPath.row].name)" + " удалена")
-                print("В группе:")
-                for element in lamps.arrayOfLamps{
-                    if element.flagLampIsControlled {
-                        print(element.name)
-                    }
-                }
+                
                 success(true)
                 updateTableFlag = true
-                updateTable()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    updateTable()
+                }
+               
             })
             AddAction.backgroundColor = .red
             return UISwipeActionsConfiguration(actions: [AddAction])
@@ -57,14 +54,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = true
                 success(true)
                 updateTableFlag = true
-                print("Лампа " + "\(lamps.arrayOfLamps[indexPath.row].name)" + " добавлена")
-                print("В группе:")
-                for element in lamps.arrayOfLamps{
-                    if element.flagLampIsControlled {
-                        print(element.name)
-                    }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    updateTable()
                 }
-                updateTable()
             })
             AddAction.backgroundColor = .gray
             
