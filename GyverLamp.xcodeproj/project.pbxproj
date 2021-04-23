@@ -619,16 +619,18 @@
 			baseConfigurationReference = EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S76LJWD5GQ;
+				DEVELOPMENT_TEAM = W3NBKKY483;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -639,16 +641,18 @@
 			baseConfigurationReference = 250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S76LJWD5GQ;
+				DEVELOPMENT_TEAM = W3NBKKY483;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

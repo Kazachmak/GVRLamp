@@ -63,7 +63,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let currentLamp = lamps.mainLamp {
             if currentLamp.listOfEffects.count >= row {
-                return "\(currentLamp.listOfEffects[row])"
+                return "\(currentLamp.getEffectName(row))"
             } else {
                 return ""
             }
@@ -77,7 +77,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             currentLamp.effect = row
             currentLamp.updateSliderFlag = true
             lamps.sendCommandToArrayOfLamps(command: .eff, value: [row])
-            // currentLamp.sendCommand(command: .eff, value: [row])
+            lamps.necessaryToAlignTheParametersOfTheLamps = true
         }
     }
 
@@ -88,6 +88,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if let effect = currentLamp.effect{
                 currentLamp.effect = effect + step
                 lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect + step])
+                lamps.necessaryToAlignTheParametersOfTheLamps = true
+                
             }
         }
     }
@@ -245,7 +247,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // выключатель
     @IBAction func onOffButton(_ sender: UIButton) {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.powerStatus ?? false {
+            if currentLamp.powerStatus {
                 lamps.sendCommandToArrayOfLamps(command: .power_off, value: [0])
                 currentLamp.powerStatus = false
             } else {
@@ -396,7 +398,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         leftPickerButtonInteractionOut.layer.zPosition = 2
         rightPickerButtonInteractionOut.layer.zPosition = 2
         statusLabel.adjustsFontSizeToFitWidth = true
-       
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification
+                    , object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateInterface), name: Notification.Name("updateInterface"), object: nil)
 
         timerOut.imageView?.contentMode = .scaleAspectFit
@@ -416,7 +420,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
        
     }
-
+    
+    @objc private func appMovedToForeground() {
+        lamps.mainLamp?.updatePickerFlag = true
+        lamps.mainLamp?.updateSliderFlag = true
+        print("App moved to ForeGround!")
+    }
+    
     @objc func updateTimerLabel() {
         
             if let currentLamp = lamps.mainLamp {

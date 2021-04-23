@@ -162,7 +162,7 @@ class UDPClient {
                             self.listCounter += 1
                             arrayOfQuantity = arrayOfQuantity.filter { !$0.contains("LIST") }
                             for element in arrayOfQuantity {
-                                lamp.listOfEffects.append(element.components(separatedBy: ",")[0])
+                                lamp.listOfEffects.append(element)//.components(separatedBy: ",")[0])
                             }
                             lamp.effectsFromLamp = true
                             DispatchQueue.main.async {
@@ -178,7 +178,7 @@ class UDPClient {
                         if backToString.components(separatedBy: " ").count > 9 {
                             
                             if backToString.components(separatedBy: " ")[5] == "0" {
-                                if lamp.powerStatus ?? false {
+                                if lamp.powerStatus  {
                                     lamp.powerStatus = false
                                     if lamp.hostIP == lamps.mainLamp?.hostIP {
                                         lamps.sendCommandToArrayOfLamps(command: .power_off, value: [0], exceptFromTheMainLamp: true)
@@ -186,13 +186,13 @@ class UDPClient {
                                 }
 
                             } else {
-                                if !(lamp.powerStatus ?? false) {
-                                    lamp.powerStatus = true
-                                    if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                        lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0], exceptFromTheMainLamp: true)
+                                if !lamp.powerStatus  {
+                                   lamp.powerStatus = true
+                                  if lamp.hostIP == lamps.mainLamp?.hostIP {
+                                     lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0], exceptFromTheMainLamp: true)
                                     }
                                 }
-                            }
+                            
                         }
                         if backToString.components(separatedBy: " ")[8] == "1" {
                             lamp.timer = true
@@ -205,6 +205,7 @@ class UDPClient {
                             if lamp.hostIP == lamps.mainLamp?.hostIP {
                                 if let effect = lamp.effect {
                                     lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect], exceptFromTheMainLamp: true)
+                                    lamps.necessaryToAlignTheParametersOfTheLamps = true
                                 }
                             }
                         }
@@ -225,18 +226,22 @@ class UDPClient {
                             lamp.button = false
                         }
                         lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
-
+                        }
                         lamps.updateArrayOfLamps(lamp: lamp)
 
                         if lamp.hostIP == lamps.mainLamp?.hostIP {
                             self.timer.invalidate()
                             lamp.lostConnectionFirstTime = false
                             DispatchQueue.main.async {
+                                if lamps.necessaryToAlignTheParametersOfTheLamps{
+                                    lamps.alignLampsParametersAfterChangeEffect()
+                                }
                                 NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
                                 CoreDataService.deleteAllData()
                                 CoreDataService.save()
                             }
                         }
+                        
 
                     case "TMR":
                         if backToString.components(separatedBy: " ").count > 1 {
@@ -279,7 +284,7 @@ class LampDevice { // объект лампа
     let hostIP: NWEndpoint.Host // адрес
     let hostPort: NWEndpoint.Port // порт
     var connectionStatus: Bool = false // наличие соединения с лампой
-    var powerStatus: Bool? // включено или выключено
+    var powerStatus: Bool = false// включено или выключено
     var timer: Bool? // таймер выключения
     var timerTime: Int = 0
     var button: Bool? // кнопка на лампе включена или выключена
@@ -290,6 +295,7 @@ class LampDevice { // объект лампа
     var updateSliderFlag = true
     var updatePickerFlag = true
     var effect: Int? // номер текущего эффекта
+    
     var bright: Int? // значение яркости
     var speed: Int? // значение скорости
     var scale: Int? // значение масштаба
@@ -298,6 +304,11 @@ class LampDevice { // объект лампа
     var flagLampIsControlled: Bool // лампа входит в список управляемых или нет
     var lostConnectionFirstTime = false // сколько раз не получен сигнал от лампы
 
+    
+    func getEffectName(_ index: Int)->String{
+        return listOfEffects[index].components(separatedBy: ",")[0]
+    }
+    
     init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort
@@ -357,7 +368,26 @@ class LampDevice { // объект лампа
 
     // поиск ламп в локальной сети
     static func scan(deviceIp: String) {
-        let client = UDPClient()
-        client.connectToUDP(messageToUDP: .get, lamp: LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true), value: [0])
+        _ = LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true)
+    }
+    
+    func lampBlink(){
+        if self.powerStatus{
+            if let tempBright = self.bright{
+                self.sendCommand(command: .bri, value: [0])
+                self.bright = 0
+                let second: Double = 1000000
+                usleep(useconds_t(0.3 * second))
+                self.sendCommand(command: .bri, value: [tempBright])
+                self.bright = tempBright
+            }
+        }else{
+            self.sendCommand(command: .power_on, value: [0])
+            self.powerStatus = true
+            let second: Double = 1000000
+            usleep(useconds_t(0.3 * second))
+            self.sendCommand(command: .power_off, value: [0])
+            self.powerStatus = false
+        }
     }
 }

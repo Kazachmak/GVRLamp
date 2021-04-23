@@ -13,22 +13,7 @@ import  Network
 
 class CoreDataService {
     
-    /*
-    class func listOfLamps() -> [String] {
-        var listOfLamps: [String] = []
-        if CoreDataService.fetchLamps().count > 0 {
-            for element in CoreDataService.fetchLamps() {
-                let name = element.value(forKey: "name") as! String
-                let ip = element.value(forKey: "ip") as! String
-                let port = element.value(forKey: "port") as! String
-                let effectsFromLamp = element.value(forKey: "flagEffects") as! Bool
-                let flagLampIsControlled = element.value(forKey: "flagLampIsControlled") as! Bool
-                listOfLamps.append(ip + ":" + port + ":" + name + ":" + effectsFromLamp.convertToString() + ":" + flagLampIsControlled.convertToString())
-            }
-        }
-        return listOfLamps
-    }
- */
+    
     class func fetchLamps() -> [NSManagedObject] {
         var allLamps: [NSManagedObject] = []
        
@@ -47,95 +32,7 @@ class CoreDataService {
         }
         return allLamps
     }
-/*
-    class func setMainLamp(_ ip: String)-> Bool{
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
 
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lamp")
-        
-            fetchRequest.predicate = NSPredicate(format: "ip = %@", "\(ip)")
-            let result = try? managedContext.fetch(fetchRequest)
-            let resultData = result as! [Lamp]
-            for object in resultData {
-                if object.ip == ip {
-                    object.setValue(true, forKey: "mainLamp")
-                }else{
-                    object.setValue(false, forKey: "mainLamp")
-                }
-            }
-            do {
-                try managedContext.save()
-                print("saved!")
-                return true
-            } catch let error as NSError  {
-                print("Could not save \(error), \(error.userInfo)")
-                return false
-            }
-    }
-    
-    class func fetchLampByIP(_ ip: String)->LampDevice?{
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lamp")
-        
-            fetchRequest.predicate = NSPredicate(format: "ip = %@", "\(ip)")
-            let result = try? managedContext.fetch(fetchRequest)
-            let resultData = result as! [Lamp]
-            for object in resultData {
-                if object.ip == ip {
-                    let port = object.value(forKey: "port") as! String
-                    let name = object.value(forKey: "name") as! String
-                    let effectsFromLamp = object.value(forKey: "flagEffects") as! Bool
-                    let listOfEffects = object.value(forKey: "listOfEffects") as! String
-                    return LampDevice(hostIP: NWEndpoint.Host(ip), hostPort:NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp.convertToString(), listOfEffects: listOfEffects.components(separatedBy: ","))
-                    
-                }
-            }
-        return nil
-    }
-    
-    class func rename(lamp: LampDevice, newName: String) -> Bool{
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-            return false
-        }
-
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lamp")
-        
-        let ip = "\(lamp.hostIP)"
-            fetchRequest.predicate = NSPredicate(format: "ip = %@", "\(ip)")
-            let result = try? managedContext.fetch(fetchRequest)
-            let resultData = result as! [Lamp]
-            for object in resultData {
-                if object.ip == ip {
-                    object.setValue("\(newName)", forKey: "name")
-                }
-            }
-            do {
-                try managedContext.save()
-                print("saved!")
-                return true
-            } catch let error as NSError  {
-                print("Could not save \(error), \(error.userInfo)")
-                return false
-            }
-    }
-    */
     
    
     class func deleteAllData(){
@@ -182,7 +79,7 @@ class CoreDataService {
             newLamp.setValue("\(element.hostIP)", forKey: "ip")
             newLamp.setValue("\(element.hostPort)", forKey: "port")
             newLamp.setValue(element.effectsFromLamp, forKey: "flagEffects")
-            newLamp.setValue(element.listOfEffects.joined(separator: ","), forKey: "listOfEffects")
+            newLamp.setValue(element.listOfEffects.joined(separator: ";"), forKey: "listOfEffects")
             newLamp.setValue(element.flagLampIsControlled, forKey: "flagLampIsControlled")
             do {
                 try managedContext.save()

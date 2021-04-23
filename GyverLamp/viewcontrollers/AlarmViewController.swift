@@ -44,16 +44,18 @@ class AlarmViewController: UIViewController {
 
     @IBOutlet var constraitFortButton: NSLayoutConstraint!
 
-    @IBOutlet var buttonHeight: NSLayoutConstraint!
-
     // включаем и выключаем будильник
-    @IBAction func alarmOnButton(_ sender: UIButton) {
+    
+    
+    @IBOutlet weak var alarmOnOffSwitch: UISwitch!
+    
+    @IBAction func alarmOnOffSwitchAction(_ sender: UISwitch) {
         if let currentLamp = lamp, selectedDays.contains(true) {
-            if sender.titleLabel?.text == "Отключить будильник" {
+            if !sender.isOn {
                 for element in [Int](1 ... 7) {
                     currentLamp.sendCommand(command: .alarm_off, value: [element])
                 }
-                alarmOnButtonOut.setTitle("Включить будильник", for: .normal)
+                
             } else {
                 let date = datePickerOut.date
                 let calendar = Calendar.current
@@ -67,12 +69,13 @@ class AlarmViewController: UIViewController {
                     }
                 }
                 currentLamp.sendCommand(command: .dawn, value: [(selectedDawn ?? 0) + 1])
-                alarmOnButtonOut.setTitle("Отключить будильник", for: .normal)
+                
             }
         }
+        
     }
-
-    @IBOutlet var alarmOnButtonOut: UIButton!
+    
+   
 
     @IBOutlet var datePickerOut: UIDatePicker!
 
@@ -158,7 +161,7 @@ class AlarmViewController: UIViewController {
                         array.append(true)
                         let timeArray = Array(times)
                         datePickerOut.setDate(timeArray[index].getTimeFromString(), animated: true)
-                        alarmOnButtonOut.setTitle("Отключить будильник", for: .normal)
+                        alarmOnOffSwitch.setOn(true, animated: false)
                     }
                 }
                 

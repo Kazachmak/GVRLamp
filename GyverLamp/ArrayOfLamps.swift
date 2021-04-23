@@ -12,14 +12,20 @@ import Network
 var lamps = ArrayOfLamps()
 
 class ArrayOfLamps {
-    
-    
+    var timer = Timer()
 
     var arrayOfLamps: [LampDevice]
-    
 
     var mainLampIndex: Int?
 
+    var necessaryToAlignTheParametersOfTheLamps = false
+    
+    var mainLampIsBlinking = false
+    
+    var slaveLamps: [LampDevice]{
+        return arrayOfLamps.filter({ $0.flagLampIsControlled && ($0.hostIP != mainLamp?.hostIP) }) // отбираем ведомые лампы
+    }
+    
     var mainLamp: LampDevice? {
         if arrayOfLamps.count > 0, let index = mainLampIndex {
             return arrayOfLamps[index]
@@ -30,15 +36,8 @@ class ArrayOfLamps {
 
     init() {
         arrayOfLamps = []
-        
-       
-    }
-
-    func loadData(){
         if CoreDataService.fetchLamps().count > 0 {
-            
             for (index, element) in CoreDataService.fetchLamps().enumerated() {
-                
                 let name = element.value(forKey: "name") as! String
                 let ip = element.value(forKey: "ip") as! String
                 let port = element.value(forKey: "port") as! String
@@ -46,83 +45,110 @@ class ArrayOfLamps {
                 let listOfEffects = element.value(forKey: "listOfEffects") as! String
                 let mainLamp = element.value(forKey: "mainLamp") as! Bool
                 let flagLampIsControlled = element.value(forKey: "flagLampIsControlled") as! Bool
-                
+
                 if mainLamp {
                     mainLampIndex = index
                 }
-                
-                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ",") , flagLampIsControlled: flagLampIsControlled))
-                
-            }
-            if mainLampIndex == nil{
-                mainLampIndex = 0
+
+                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ";"), flagLampIsControlled: flagLampIsControlled))
             }
             timerStartAndStop(true)
-        }
-    }
-    
+        }    }
+
+   
+
     private func timerStartAndStop(_ start: Bool) {
-        var timer = Timer()
+        timer.invalidate()
         if start {
             timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
                 if let currentLamp = lamps.mainLamp {
                     currentLamp.updateStatus() // запрос состояние лампы
                 }
             }
-        } else {
-            timer.invalidate()
         }
     }
 
+    func alignLampsParametersAfterChangeEffect() {
+        // выравниваем параметры яркости - скорости - масштаба на всех лампах
+        self.necessaryToAlignTheParametersOfTheLamps = false
+        if let flag = mainLamp?.flagLampIsControlled{
+            if flag { // если главная лампа в группе, то остальные тоже получают команду
+                 
+                slaveLamps.forEach({ device in
+                    if let bright = mainLamp?.bright {
+                        device.sendCommand(command: .bri, value: [bright])
+                    }
+                    if let speed = mainLamp?.speed {
+                        device.sendCommand(command: .spd, value: [speed])
+                    }
+                    if let scale = mainLamp?.scale {
+                        device.sendCommand(command: .sca, value: [scale])
+                    }
+                })
+            }
+        }
+    }
+
+    func alignLampParametersAfterNewLampAdded(_ lamp: LampDevice){
+        if let effect = mainLamp?.effect{
+            lamp.sendCommand(command: .eff, value: [effect])
+        }
+        if let bright = mainLamp?.bright {
+            lamp.sendCommand(command: .bri, value: [bright])
+        }
+        if let speed = mainLamp?.speed {
+            lamp.sendCommand(command: .spd, value: [speed])
+        }
+        if let scale = mainLamp?.scale {
+            lamp.sendCommand(command: .sca, value: [scale])
+        }
+        
+    }
+    
+    
     func sendCommandToArrayOfLamps(command: CommandsToLamp, value: [Int], valueTxt: String = "", exceptFromTheMainLamp: Bool = false) {
         switch command {
         case .sca, .power_on, .power_off, .bri, .spd, .eff:
-            for element in arrayOfLamps {
-                if (element.flagLampIsControlled)||(element.hostIP == mainLamp?.hostIP){
-                    
-                    if exceptFromTheMainLamp{
-                        if (element.hostIP != mainLamp?.hostIP){
-                            element.sendCommand(command: command, value: value)
-                            let second: Double = 1000000
-                            usleep(useconds_t(0.1 * second))
-                        }
-                    }else{
-                        element.sendCommand(command: command, value: value)
-                    }
-                    
-                    if (command == .eff)&&(element.hostIP != mainLamp?.hostIP ){
-                        if let bright = mainLamp?.bright{
-                            element.sendCommand(command: .bri, value: [bright])
-                        }
-                        if let speed = mainLamp?.speed{
-                            element.sendCommand(command: .spd, value: [speed])
-                        }
-                        if let scale = mainLamp?.scale{
-                            element.sendCommand(command: .sca, value: [scale])
-                        }
-                    }
-                }
-                
+
+            if !exceptFromTheMainLamp {
+                mainLamp?.sendCommand(command: command, value: value) // отправляем команду главной лампе
             }
+
+            if let flag = mainLamp?.flagLampIsControlled{
+            
+            if flag { // если главная лампа в группе, то остальные тоже получают команду
+                
+                slaveLamps.forEach({ device in
+                    device.sendCommand(command: command, value: value)
+                    })
+                }
+            }
+            
+
         default: break
         }
     }
 
+    // установка основной лампы
     func setMainLamp(_ index: Int) {
-        mainLampIndex = index
-        arrayOfLamps[index].flagLampIsControlled = true
-        self.timerStartAndStop(true)
+        mainLampIndex = index // выбор основной лампы
+        mainLamp?.lampBlink() // мигнуть этой лампой
+        timerStartAndStop(true) // запустить таймер опроса лампы
+        slaveLamps.forEach({ device in
+            self.alignLampParametersAfterNewLampAdded(device)
+        })
     }
 
+    // проверка новая эта лампа или нет
     func checkIP(_ ip: String) -> Bool {
-        for element in arrayOfLamps {
-            if "\(element.hostIP)" == ip {
-                return true
-            }
+        if arrayOfLamps.contains(where: { "\($0.hostIP)" == ip }) {
+            return true
+        } else {
+            return false
         }
-        return false
     }
 
+    // добавить новую лампу в список
     func updateArrayOfLamps(lamp: LampDevice) {
         if !checkIP("\(lamp.hostIP)") {
             arrayOfLamps.append(lamp)
@@ -135,25 +161,26 @@ class ArrayOfLamps {
             }
         }
     }
-    
-    func removeLamp(_ lamp: LampDevice){
-        self.timerStartAndStop(false)
+
+    // удалить лампу из списка
+    func removeLamp(_ lamp: LampDevice) {
+        timerStartAndStop(false)
         mainLampIndex = nil
-        self.arrayOfLamps = arrayOfLamps.filter{ devices in
-            return devices.hostIP != lamp.hostIP
-          }
+        arrayOfLamps = arrayOfLamps.filter { devices in
+            devices.hostIP != lamp.hostIP
+        }
         NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
         CoreDataService.deleteAllData()
         CoreDataService.save()
-        
     }
-    
+
+    // переименовать лампу в списке
     func renameLamp(name: String, lamp: LampDevice) { // переименование лампы
-        for element in self.arrayOfLamps{
-            if element.hostIP == lamp.hostIP{
+        for element in arrayOfLamps {
+            if element.hostIP == lamp.hostIP {
                 element.name = name
             }
         }
+        NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
     }
-    
 }

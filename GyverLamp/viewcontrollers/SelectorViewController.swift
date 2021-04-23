@@ -13,7 +13,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
     var flag: selectorFlag = .days
 
     var selectedDays = [Bool](repeating: false, count: 7)
-    var selectedEffects = [Bool](repeating: false, count: 26)
+    lazy var selectedEffects = [Bool](repeating: false, count: self.lamp?.listOfEffects.count ?? 26)
     var selectedDay: Int?
     var selectedDawn: Int?
     var lamp: LampDevice?

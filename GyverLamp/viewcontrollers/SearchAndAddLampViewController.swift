@@ -26,8 +26,8 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
     
     // когда найдено новое устройство, проверяется лампа ли это
     func lanScanDidFindNewDevice(_ device: MMDevice!) {
-            if !lamps.checkIP(String(device.ipAddress)){
-                LampDevice.scan(deviceIp: String(device.ipAddress))
+            if !lamps.checkIP(device.ipAddress){
+                LampDevice.scan(deviceIp: device.ipAddress)
             }
     }
 

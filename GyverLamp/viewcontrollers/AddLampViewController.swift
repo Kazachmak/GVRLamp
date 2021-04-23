@@ -16,15 +16,21 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
     
     @IBOutlet var listener: MaskedTextFieldDelegate!
     
-    @IBOutlet weak var lampImage: UIImageView!
-    
-    var ifNeedMoveView = true
-    
     @IBOutlet weak var addingLampLabel: UILabel!
     
     @IBOutlet weak var backArrowHeight: NSLayoutConstraint!
     
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var interval1: NSLayoutConstraint!
+    
+    @IBOutlet weak var interval2: NSLayoutConstraint!
+    
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBAction func cancelButtonAction(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     @IBAction func close(_ sender: UITapGestureRecognizer) {
@@ -32,7 +38,7 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
     }
     
     @IBAction func returnToMainView(_ sender: UIButton) {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     
@@ -40,25 +46,11 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
     
     @IBOutlet weak var portTextField: UITextField!
     
-    @IBOutlet weak var nameLamp: UITextField!
-    
     @IBOutlet weak var addLampOut: UIButton!
     
     
-    @IBAction func ipDidBegin(_ sender: UITextField) {
-        ifNeedMoveView = false
-    }
-    
-    @IBAction func ipDidEnd(_ sender: UITextField) {
-        ifNeedMoveView = true
-    }
-    
-    
-    @IBAction func addLamp(_ sender: UIButton) {
-        if let ip = ipTextField.text, var port = portTextField.text, var name = nameLamp.text{
-            if name == "" {
-                name = ip
-            }
+    private func searchAndAddNewLamp(){
+        if let ip = ipTextField.text, var port = portTextField.text{
             if port == ""{
                 port = "8888"
             }
@@ -70,7 +62,7 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                             self.addingLampLabel.text = "Идет поиск лампы..."
                             self.addingLampLabel.isHidden = false
                             })
-                    _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true)
+                    _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: ip, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true)
                         self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
                             UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                                 self.addingLampLabel.text = "Лампа не найдена"
@@ -99,6 +91,11 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                     })
             }
         }
+        
+    }
+    
+    @IBAction func addLamp(_ sender: UIButton) {
+       searchAndAddNewLamp()
     }
     
     @objc func updateLamp(notification: Notification?) {
@@ -121,32 +118,39 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
         headerViewHeight.constant += self.view.safeAreaTop - 20
         ipTextField.keyboardType = .decimalPad
         portTextField.keyboardType = .numberPad
-        nameLamp.autocorrectionType = .no
+        
         ipTextField.setLeftPaddingPoints(20.0)
         portTextField.setLeftPaddingPoints(20.0)
-        nameLamp.setLeftPaddingPoints(20.0)
+        
         ipTextField.layer.cornerRadius = 14
         portTextField.layer.cornerRadius = 14
-        nameLamp.layer.cornerRadius = 14
+        
         addLampOut.imageView?.contentMode = .scaleAspectFit
         NotificationCenter.default.addObserver(self, selector: #selector(updateLamp), name: Notification.Name("newLampHasAdded"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        if UIScreen.main.bounds.height < 667 {
-            lampImage.isHidden = true
-        }
         
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-          
-            if (self.view.frame.origin.y == 0)&&(ifNeedMoveView) {
-                self.view.frame.origin.y -= 200
-            
+        if UIScreen.main.bounds.height < 569{
+            interval1.constant = 20
+            interval2.constant = 20
+        }
+        if UIScreen.main.bounds.height < 670{
+            if (self.view.frame.origin.y == 0){
+                self.view.frame.origin.y -= 190
+            }
+        }else{
+            if (self.view.frame.origin.y == 0){
+                self.view.frame.origin.y -= 280
+           }
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
+        interval1.constant = 42
+        interval2.constant = 42
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }

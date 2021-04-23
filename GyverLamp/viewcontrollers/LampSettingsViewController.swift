@@ -38,6 +38,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             randomTimeOut.setTitle("\(randomSec ?? 0)" + " сек", for: .normal)
             sendFavoriteMessage()
         }
+        sendFavoriteMessage()
         picker.removeFromSuperview()
     }
 
@@ -91,10 +92,17 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
 
     @IBOutlet var favOnOut: UISwitch!
 
-    private func sendFavoriteMessage() {
+    private func sendFavoriteMessage(favoriteAlways: Bool = false) {
         if let currentLamp = lamp {
             if let interval = intervalSec, let random = randomSec {
-                var array = [favOnOut.isOn.convertToInt(), interval, random, favAlwaysOnOut.isOn.convertToInt()]
+                var array: [Int] = []
+                if favoriteAlways{
+                    array = [favOnOut.isOn.convertToInt(), interval, random, 1]
+                }else{
+                    array = [favOnOut.isOn.convertToInt(), interval, random, favAlwaysOnOut.isOn.convertToInt()]
+                    
+                }
+                
                 if let effects = selectedEffects {
                     array.append(contentsOf: effects.convertToIntArray())
                     currentLamp.sendCommand(command: .fav_set, value: array)
@@ -104,7 +112,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     }
 
     @IBAction func favOn(_ sender: UISwitch) {
-        sendFavoriteMessage()
+        sendFavoriteMessage(favoriteAlways: true)
     }
 
     @IBOutlet var favAlwaysOnOut: UISwitch!
@@ -146,6 +154,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         if let effects = selectedEffects {
             openListOfEffectsOut.setTitle("\(effects.filter({ $0 == true }).count)", for: .normal)
         }
+        sendFavoriteMessage()
     }
 
     @IBOutlet var buttonOnLampOut: UISwitch!

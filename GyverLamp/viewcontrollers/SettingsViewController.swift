@@ -33,8 +33,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?{
         updateTableFlag = false
         // добавляем лампу в список управляемых
-
-        if indexPath.row != lamps.mainLampIndex {
         
         if  lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
             let AddAction = UIContextualAction(style: .destructive, title: "Убрать из группы", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
@@ -51,21 +49,22 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return UISwipeActionsConfiguration(actions: [AddAction])
         } else {
             let AddAction = UIContextualAction(style: .destructive, title: "Добавить в группу", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
-                lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = true
+                let newAddedLamp = lamps.arrayOfLamps[indexPath.row]
+                newAddedLamp.flagLampIsControlled = true
                 success(true)
                 updateTableFlag = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    updateTable()
-                }
+                newAddedLamp.lampBlink()
+                lamps.alignLampParametersAfterNewLampAdded(newAddedLamp)
+                
+                //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                //    updateTable()
+                //}
             })
             AddAction.backgroundColor = .gray
             
             return UISwipeActionsConfiguration(actions: [AddAction])
         }
         
-        }else{
-            return nil
-        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -124,11 +123,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
 
-        lamps.setMainLamp(indexPath.row)
-
+        //lamps.setMainLamp(indexPath.row, blinkLamp: false)
+        lamps.arrayOfLamps[indexPath.row].lampBlink()
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
-        vc.lamp = lamps.mainLamp
+        vc.lamp = lamps.arrayOfLamps[indexPath.row]
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
