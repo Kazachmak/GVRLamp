@@ -309,6 +309,61 @@ class LampDevice { // объект лампа
         return listOfEffects[index].components(separatedBy: ",")[0]
     }
     
+    func getMaxSpeed(_ index: Int)->Int{
+        var maxSpeed = 255
+        if listOfEffects[index].components(separatedBy: ",").count > 2 {
+            guard let speed = Int(listOfEffects[index].components(separatedBy: ",")[2]) else {
+                return maxSpeed
+            }
+            maxSpeed = speed
+        }
+        return maxSpeed
+    }
+    
+    func getMinSpeed(_ index: Int)->Int{
+        var minSpeed = 0
+        print()
+        if listOfEffects[index].components(separatedBy: ",").count > 1 {
+            guard let speed = Int(listOfEffects[index].components(separatedBy: ",")[1]) else {
+                return minSpeed
+            }
+            minSpeed = speed
+        }
+        return minSpeed
+    }
+    
+    func getSpeedRange(_ index: Int)->Int{
+        return getMaxSpeed(index) - getMinSpeed(index)
+    }
+    
+    func getMaxScale(_ index: Int)->Int{
+        var maxScale = 0
+        if listOfEffects[index].components(separatedBy: ",").count > 4{
+            guard let scale = Int(listOfEffects[index].components(separatedBy: ",")[4]) else {
+                return maxScale
+            }
+            maxScale = scale
+        }
+        return maxScale
+    }
+    
+    func getMinScale(_ index: Int)->Int{
+        var minScale = 255
+        if listOfEffects[index].components(separatedBy: ",").count > 3{
+            guard let scale = Int(listOfEffects[index].components(separatedBy: ",")[3]) else {
+                return minScale
+            }
+            minScale = scale
+        }
+       
+        return minScale
+    }
+        
+    func getScaleRange(_ index: Int)->Int{
+        return getMaxScale(index) - getMinScale(index)
+    }
+    
+        
     init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort

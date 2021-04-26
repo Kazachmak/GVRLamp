@@ -173,6 +173,7 @@ extension UIImage {
     static func gradientImageWithBounds(bounds: CGRect) -> UIImage {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: bounds.height + 30)
+        
         gradientLayer.colors = [UIColor(red: 103.0 / 255.0, green: 40.0 / 255.0, blue: 199.0 / 255.0, alpha: 1).cgColor, UIColor(red: 115.0 / 255.0, green: 112.0 / 255.0, blue: 249.0 / 255.0, alpha: 1).cgColor]
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
@@ -180,6 +181,30 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image!
     }
+    
+    static func rainbowGradientImageWithBounds(bounds: CGRect) -> UIImage {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: UIScreen.main.bounds.height/3.3)
+        let hueColors = stride(from: 0, to: 1, by: 0.01).map {
+            UIColor(hue: $0, saturation: 1, brightness: 1, alpha: 1).cgColor
+            }
+        gradientLayer.colors = hueColors
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    
+  
+        func image(alpha: CGFloat) -> UIImage? {
+            UIGraphicsBeginImageContextWithOptions(size, false, scale)
+            draw(at: .zero, blendMode: .normal, alpha: alpha)
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage
+        }
+    
 }
 
 extension UIViewController {

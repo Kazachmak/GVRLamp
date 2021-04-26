@@ -272,10 +272,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 brightPercent.text = String(bright * 100 / 255)
             }
             if let speed = currentLamp.speed {
-                speedPercent.text = String(speed * 100 / 255)
+                speedPercent.text = String(((speed - currentLamp.getMinSpeed(currentLamp.effect ?? 0)) * 100 / currentLamp.getSpeedRange(currentLamp.effect ?? 0)))
+               
             }
             if let scale = currentLamp.scale {
-                scalePercent.text = String(scale * 100 / 255)
+                scalePercent.text = String(((scale - currentLamp.getMinScale(currentLamp.effect ?? 0)) * 100 / currentLamp.getScaleRange(currentLamp.effect ?? 0)))
             }
 
             statusLabel.text = currentLamp.name
@@ -331,6 +332,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if let favorite = currentLamp.favorite {
                 if favorite.components(separatedBy: " ")[1] == "1" {
                     errorMessage.isUserInteractionEnabled = true
+                    currentLamp.updatePickerFlag = true
+                    currentLamp.updateSliderFlag = true
                     UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [self] in
                         self.errorMessageHeight.constant = 24
                         self.errorMessage.setTitle("Автопереключение", for: .normal)
@@ -372,9 +375,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         if let speed = lamps.mainLamp?.speed {
             speedSlider.setValue(Float(speed), animated: false)
+            if let maxSpeed = lamps.mainLamp?.getMaxSpeed(lamps.mainLamp?.effect ?? 0){
+                speedSlider.maximum = Float(maxSpeed)
+            }
+            if let minSpeed = lamps.mainLamp?.getMinSpeed(lamps.mainLamp?.effect ?? 0){
+                speedSlider.minimum = Float(minSpeed)
+            }
         }
         if let scale = lamps.mainLamp?.scale {
             scaleSlider.setValue(Float(scale), animated: false)
+            if let maxScale = lamps.mainLamp?.getMaxScale(lamps.mainLamp?.effect ?? 0){
+                scaleSlider.maximum = Float(maxScale)
+            }
+            if let minScale = lamps.mainLamp?.getMinScale(lamps.mainLamp?.effect ?? 0){
+                scaleSlider.minimum = Float(minScale)
+            }
         }
         lamps.mainLamp?.updateSliderFlag = false
     }
@@ -418,7 +433,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         brightnessSlider.tintColor = UIColor(patternImage: imageGradient)
         speedSlider.tintColor = UIColor(patternImage: imageGradient)
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
-       
+        //scaleSlider.tintColor = UIColor(patternImage: imageGradient.image(alpha: 0.5)! )
+
+        //let imageRainbow = UIImage.rainbowGradientImageWithBounds(bounds: scaleSlider.frame)
+        //scaleSlider.reverseValueAxis = true
+        
+        //scaleSlider.trackBackground = UIColor(patternImage: imageRainbow)
     }
     
     @objc private func appMovedToForeground() {
