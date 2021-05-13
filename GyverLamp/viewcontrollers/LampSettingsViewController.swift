@@ -30,7 +30,11 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if senderTag == 1 {
-            intervalSec = row
+            if row > 2 {
+                intervalSec = row
+            }else{
+                intervalSec = 3
+            }
             intervalOut.setTitle("\(intervalSec ?? 0)" + " сек", for: .normal)
             sendFavoriteMessage()
         } else {
@@ -263,8 +267,13 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                 getEffectsFromListOut.setOn(false, animated: false)
             }
             if let intervalSec = currentLamp.favorite?.components(separatedBy: " ")[2] {
+                if (Int(intervalSec) ?? 0) > 2{
+                    self.intervalSec = Int(intervalSec)
+                }else{
+                    self.intervalSec = 3
+                }
                 intervalOut.setTitle("\(intervalSec)" + " сек", for: .normal)
-                self.intervalSec = Int(intervalSec)
+                
             }
             if let randomSec = currentLamp.favorite?.components(separatedBy: " ")[3] {
                 randomTimeOut.setTitle("\(randomSec)" + " сек", for: .normal)

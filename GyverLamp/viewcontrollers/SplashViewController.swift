@@ -14,7 +14,7 @@ class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        lamps = ArrayOfLamps()
+        lamps.loadData()
         var i: Float = 1
         _ = Timer.scheduledTimer(withTimeInterval: 0.015, repeats: true) { timer in
             if i != 52 {

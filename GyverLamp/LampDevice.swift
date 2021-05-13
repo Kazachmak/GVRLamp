@@ -39,7 +39,7 @@ enum CommandsToLamp: String {
 class UDPClient {
     var connection: NWConnection?
     var listCounter = 0
-    
+
     var timer = Timer()
     // подготовка сообщения для отправки в лампу
     func connectToUDP(messageToUDP: CommandsToLamp, lamp: LampDevice, value: [Int], valueTXT: String = "") {
@@ -76,15 +76,14 @@ class UDPClient {
                     DispatchQueue.main.async {
                         // таймер срабатывает, если не пришло никакого ответа от лампы
                         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
-                            //print("Lost connections")
-                            if lamp.lostConnectionFirstTime{
+                            // print("Lost connections")
+                            if lamp.lostConnectionFirstTime {
                                 lamp.connectionStatus = false
                                 NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
-                            }else{
+                            } else {
                                 lamp.lostConnectionFirstTime = true
-                                
                             }
-                            
+
                         })
                     }
                 }
@@ -152,7 +151,7 @@ class UDPClient {
                     lamp.connectionStatus = true
                     let backToString = String(decoding: data!, as: UTF8.self)
                     print("Received message: \(backToString)")
-                    
+
                     if backToString.contains("LIST") {
                         var arrayOfQuantity = backToString.components(separatedBy: ";")
                         if arrayOfQuantity.count > 1 {
@@ -162,7 +161,7 @@ class UDPClient {
                             self.listCounter += 1
                             arrayOfQuantity = arrayOfQuantity.filter { !$0.contains("LIST") }
                             for element in arrayOfQuantity {
-                                lamp.listOfEffects.append(element)//.components(separatedBy: ",")[0])
+                                lamp.listOfEffects.append(element) // .components(separatedBy: ",")[0])
                             }
                             lamp.effectsFromLamp = true
                             DispatchQueue.main.async {
@@ -171,14 +170,12 @@ class UDPClient {
                             }
                         }
                     }
-                    
 
                     switch backToString.components(separatedBy: " ")[0] {
                     case "CURR":
                         if backToString.components(separatedBy: " ").count > 9 {
-                            
                             if backToString.components(separatedBy: " ")[5] == "0" {
-                                if lamp.powerStatus  {
+                                if lamp.powerStatus {
                                     lamp.powerStatus = false
                                     if lamp.hostIP == lamps.mainLamp?.hostIP {
                                         lamps.sendCommandToArrayOfLamps(command: .power_off, value: [0], exceptFromTheMainLamp: true)
@@ -186,46 +183,45 @@ class UDPClient {
                                 }
 
                             } else {
-                                if !lamp.powerStatus  {
-                                   lamp.powerStatus = true
-                                  if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                     lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0], exceptFromTheMainLamp: true)
+                                if !lamp.powerStatus {
+                                    lamp.powerStatus = true
+                                    if lamp.hostIP == lamps.mainLamp?.hostIP {
+                                        lamps.sendCommandToArrayOfLamps(command: .power_on, value: [0], exceptFromTheMainLamp: true)
                                     }
                                 }
-                            
-                        }
-                        if backToString.components(separatedBy: " ")[8] == "1" {
-                            lamp.timer = true
-                        } else {
-                            lamp.timer = false
-                        }
-                        if lamp.effect != Int(backToString.components(separatedBy: " ")[1]) {
-                            lamp.effect = Int(backToString.components(separatedBy: " ")[1])
-                            lamp.updatePickerFlag = true
-                            if lamp.hostIP == lamps.mainLamp?.hostIP {
-                                if let effect = lamp.effect {
-                                    lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect], exceptFromTheMainLamp: true)
-                                    lamps.necessaryToAlignTheParametersOfTheLamps = true
+                            }
+                            if backToString.components(separatedBy: " ")[8] == "1" {
+                                lamp.timer = true
+                            } else {
+                                lamp.timer = false
+                            }
+                            if lamp.effect != Int(backToString.components(separatedBy: " ")[1]) {
+                                lamp.effect = Int(backToString.components(separatedBy: " ")[1])
+                                lamp.updatePickerFlag = true
+                                if lamp.hostIP == lamps.mainLamp?.hostIP {
+                                    if let effect = lamp.effect {
+                                        lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect], exceptFromTheMainLamp: true)
+                                        lamps.necessaryToAlignTheParametersOfTheLamps = true
+                                    }
                                 }
                             }
-                        }
 
-                        if (lamp.bright != Int(backToString.components(separatedBy: " ")[2]))&&(lamp.speed != Int(backToString.components(separatedBy: " ")[3]))&&(lamp.scale != Int(backToString.components(separatedBy: " ")[4])){
-                            lamp.updateSliderFlag = true
-                        }
-                        
-                        lamp.bright = Int(backToString.components(separatedBy: " ")[2])
+                            if (lamp.bright != Int(backToString.components(separatedBy: " ")[2])) || (lamp.speed != Int(backToString.components(separatedBy: " ")[3])) || (lamp.scale != Int(backToString.components(separatedBy: " ")[4])) {
+                                lamp.updateSliderFlag = true
+                            }
 
-                        lamp.speed = Int(backToString.components(separatedBy: " ")[3])
+                            lamp.bright = Int(backToString.components(separatedBy: " ")[2])
 
-                        lamp.scale = Int(backToString.components(separatedBy: " ")[4])
+                            lamp.speed = Int(backToString.components(separatedBy: " ")[3])
 
-                        if backToString.components(separatedBy: " ")[9] == "1" {
-                            lamp.button = true
-                        } else {
-                            lamp.button = false
-                        }
-                        lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
+                            lamp.scale = Int(backToString.components(separatedBy: " ")[4])
+
+                            if backToString.components(separatedBy: " ")[9] == "1" {
+                                lamp.button = true
+                            } else {
+                                lamp.button = false
+                            }
+                            lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
                         }
                         lamps.updateArrayOfLamps(lamp: lamp)
 
@@ -233,7 +229,7 @@ class UDPClient {
                             self.timer.invalidate()
                             lamp.lostConnectionFirstTime = false
                             DispatchQueue.main.async {
-                                if lamps.necessaryToAlignTheParametersOfTheLamps{
+                                if lamps.necessaryToAlignTheParametersOfTheLamps {
                                     lamps.alignLampsParametersAfterChangeEffect()
                                 }
                                 NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
@@ -241,14 +237,13 @@ class UDPClient {
                                 CoreDataService.save()
                             }
                         }
-                        
 
                     case "TMR":
                         if backToString.components(separatedBy: " ").count > 1 {
                             if backToString.components(separatedBy: " ")[1] == "1" {
                                 lamp.timer = true
                                 lamp.timerTime = Int(backToString.components(separatedBy: " ")[3]) ?? 0
-                                //lamp.timerCount()
+                                // lamp.timerCount()
                             } else {
                                 lamp.timer = false
                             }
@@ -284,7 +279,7 @@ class LampDevice { // объект лампа
     let hostIP: NWEndpoint.Host // адрес
     let hostPort: NWEndpoint.Port // порт
     var connectionStatus: Bool = false // наличие соединения с лампой
-    var powerStatus: Bool = false// включено или выключено
+    var powerStatus: Bool = false // включено или выключено
     var timer: Bool? // таймер выключения
     var timerTime: Int = 0
     var button: Bool? // кнопка на лампе включена или выключена
@@ -295,7 +290,7 @@ class LampDevice { // объект лампа
     var updateSliderFlag = true
     var updatePickerFlag = true
     var effect: Int? // номер текущего эффекта
-    
+
     var bright: Int? // значение яркости
     var speed: Int? // значение скорости
     var scale: Int? // значение масштаба
@@ -304,66 +299,106 @@ class LampDevice { // объект лампа
     var flagLampIsControlled: Bool // лампа входит в список управляемых или нет
     var lostConnectionFirstTime = false // сколько раз не получен сигнал от лампы
 
-    
-    func getEffectName(_ index: Int)->String{
+    func getEffectName(_ index: Int) -> String {
         return listOfEffects[index].components(separatedBy: ",")[0]
     }
-    
-    func getMaxSpeed(_ index: Int)->Int{
+
+    func getMaxSpeed(_ index: Int) -> Int {
         var maxSpeed = 255
-        if listOfEffects[index].components(separatedBy: ",").count > 2 {
-            guard let speed = Int(listOfEffects[index].components(separatedBy: ",")[2]) else {
-                return maxSpeed
+        if listOfEffects.count > index {
+            if listOfEffects[index].components(separatedBy: ",").count > 2 {
+                guard let speed = Int(listOfEffects[index].components(separatedBy: ",")[2]) else {
+                    return maxSpeed
+                }
+                maxSpeed = speed
             }
-            maxSpeed = speed
+            return maxSpeed
+        } else {
+            return maxSpeed
         }
-        return maxSpeed
     }
-    
-    func getMinSpeed(_ index: Int)->Int{
+
+    func getMinSpeed(_ index: Int) -> Int {
         var minSpeed = 0
-        print()
-        if listOfEffects[index].components(separatedBy: ",").count > 1 {
-            guard let speed = Int(listOfEffects[index].components(separatedBy: ",")[1]) else {
-                return minSpeed
+        if listOfEffects.count > index {
+            if listOfEffects[index].components(separatedBy: ",").count > 1 {
+                guard let speed = Int(listOfEffects[index].components(separatedBy: ",")[1]) else {
+                    return minSpeed
+                }
+                minSpeed = speed
             }
-            minSpeed = speed
+            return minSpeed
+        } else {
+            return minSpeed
         }
-        return minSpeed
     }
-    
-    func getSpeedRange(_ index: Int)->Int{
-        return getMaxSpeed(index) - getMinSpeed(index)
+
+    func getSpeedRange(_ index: Int) -> Int {
+        let range = getMaxSpeed(index) - getMinSpeed(index)
+        if range == 0 {
+            return 100
+        } else {
+            return range
+        }
     }
-    
-    func getMaxScale(_ index: Int)->Int{
-        var maxScale = 0
-        if listOfEffects[index].components(separatedBy: ",").count > 4{
-            guard let scale = Int(listOfEffects[index].components(separatedBy: ",")[4]) else {
-                return maxScale
+
+    func getMaxScale(_ index: Int) -> Int {
+        var maxScale = 255
+        if listOfEffects.count > index {
+            if listOfEffects[index].components(separatedBy: ",").count > 4 {
+                guard let scale = Int(listOfEffects[index].components(separatedBy: ",")[4]) else {
+                    return maxScale
+                }
+                maxScale = scale
             }
-            maxScale = scale
+            return maxScale
+        } else {
+            return maxScale
         }
-        return maxScale
     }
-    
-    func getMinScale(_ index: Int)->Int{
-        var minScale = 255
-        if listOfEffects[index].components(separatedBy: ",").count > 3{
-            guard let scale = Int(listOfEffects[index].components(separatedBy: ",")[3]) else {
-                return minScale
+
+    func getMinScale(_ index: Int) -> Int {
+        var minScale = 0
+        if listOfEffects.count > index {
+            if listOfEffects[index].components(separatedBy: ",").count > 3 {
+                guard let scale = Int(listOfEffects[index].components(separatedBy: ",")[3]) else {
+                    return minScale
+                }
+                minScale = scale
             }
-            minScale = scale
+            return minScale
+        } else {
+            return minScale
         }
-       
-        return minScale
     }
-        
-    func getScaleRange(_ index: Int)->Int{
-        return getMaxScale(index) - getMinScale(index)
+
+    func getScaleRange(_ index: Int) -> Int {
+        let range = getMaxScale(index) - getMinScale(index)
+        if range == 0 {
+            return 100
+        } else {
+            return range
+        }
+    }
+
+    func percentageOfSpeed()->String{
+        let percentage = ((self.speed ?? 0) - self.getMinSpeed(self.effect ?? 0)) * 100 / self.getSpeedRange(self.effect ?? 0)
+        if percentage > -1 {
+            return String(percentage)
+        }else{
+            return "0"
+        }
     }
     
-        
+    func percentageOfScale()->String{
+        let percentage = ((self.scale ?? 0) - self.getMinScale(self.effect ?? 0)) * 100 / self.getScaleRange(self.effect ?? 0)
+        if percentage > -1 {
+            return String(percentage)
+        }else{
+            return "0"
+        }
+    }
+    
     init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort
@@ -381,13 +416,12 @@ class LampDevice { // объект лампа
         sendCommand(command: .timer_get, value: [0]) // запросить состояние таймера
     }
 
-    func timerCount(){
-        if self.timerTime != 0 {
-            self.timerTime -= 1 // decrease counter timer
+    func timerCount() {
+        if timerTime != 0 {
+            timerTime -= 1 // decrease counter timer
         }
     }
-    
-    
+
     func updateStatus() {
         let client = UDPClient()
         client.connectToUDP(messageToUDP: .get, lamp: self, value: [0]) // запрос состояние лампы
@@ -425,24 +459,24 @@ class LampDevice { // объект лампа
     static func scan(deviceIp: String) {
         _ = LampDevice(hostIP: NWEndpoint.Host(deviceIp), hostPort: 8888, name: deviceIp, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true)
     }
-    
-    func lampBlink(){
-        if self.powerStatus{
-            if let tempBright = self.bright{
-                self.sendCommand(command: .bri, value: [0])
-                self.bright = 0
+
+    func lampBlink() {
+        if powerStatus {
+            if let tempBright = bright {
+                sendCommand(command: .bri, value: [0])
+                bright = 0
                 let second: Double = 1000000
                 usleep(useconds_t(0.3 * second))
-                self.sendCommand(command: .bri, value: [tempBright])
-                self.bright = tempBright
+                sendCommand(command: .bri, value: [tempBright])
+                bright = tempBright
             }
-        }else{
-            self.sendCommand(command: .power_on, value: [0])
-            self.powerStatus = true
+        } else {
+            sendCommand(command: .power_on, value: [0])
+            powerStatus = true
             let second: Double = 1000000
             usleep(useconds_t(0.3 * second))
-            self.sendCommand(command: .power_off, value: [0])
-            self.powerStatus = false
+            sendCommand(command: .power_off, value: [0])
+            powerStatus = false
         }
     }
 }

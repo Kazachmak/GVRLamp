@@ -85,11 +85,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if let currentLamp = lamps.mainLamp {
             currentLamp.updateSliderFlag = true
             currentLamp.updatePickerFlag = true
-            if let effect = currentLamp.effect{
+            if let effect = currentLamp.effect {
                 currentLamp.effect = effect + step
                 lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect + step])
                 lamps.necessaryToAlignTheParametersOfTheLamps = true
-                
             }
         }
     }
@@ -262,30 +261,26 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // фукнция обновляет инерфейс
     @objc func updateInterface() {
         if let currentLamp = lamps.mainLamp {
-            
             picker.delegate = self
             if currentLamp.updateSliderFlag {
                 updateSlider()
             }
-           
-            if let bright = currentLamp.bright {
-                brightPercent.text = String(bright * 100 / 255)
-            }
-            if let speed = currentLamp.speed {
-                speedPercent.text = String(((speed - currentLamp.getMinSpeed(currentLamp.effect ?? 0)) * 100 / currentLamp.getSpeedRange(currentLamp.effect ?? 0)))
-               
-            }
-            if let scale = currentLamp.scale {
-                scalePercent.text = String(((scale - currentLamp.getMinScale(currentLamp.effect ?? 0)) * 100 / currentLamp.getScaleRange(currentLamp.effect ?? 0)))
-            }
-
-            statusLabel.text = currentLamp.name
             if let effectNumber = currentLamp.effect {
-                if currentLamp.updatePickerFlag{
+                if currentLamp.updatePickerFlag {
                     picker.selectRow(effectNumber, inComponent: 0, animated: false)
                     currentLamp.updatePickerFlag = false
                 }
             }
+            
+            if let bright = currentLamp.bright {
+                brightPercent.text = String(bright * 100 / 255)
+            }
+            
+            speedPercent.text = currentLamp.percentageOfSpeed()
+            
+            scalePercent.text = currentLamp.percentageOfScale()
+
+            statusLabel.text = currentLamp.name
 
             if currentLamp.connectionStatus { // проверка доступа к лампе
                 removeOffView()
@@ -315,7 +310,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     self.errorMessage.isUserInteractionEnabled = false
                     self.errorMessageHeight.constant = 24
                     self.errorMessage.setTitle("Нет подключения к лампе", for: .normal)
-                    //self.addOffView()
+                    // self.addOffView()
 
                 })
             }
@@ -332,15 +327,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if let favorite = currentLamp.favorite {
                 if favorite.components(separatedBy: " ")[1] == "1" {
                     errorMessage.isUserInteractionEnabled = true
-                    currentLamp.updatePickerFlag = true
-                    currentLamp.updateSliderFlag = true
+                    if let effectNumber = currentLamp.effect {
+                            picker.selectRow(effectNumber, inComponent: 0, animated: false)
+                    }
+                    updateSlider()
                     UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [self] in
                         self.errorMessageHeight.constant = 24
                         self.errorMessage.setTitle("Автопереключение", for: .normal)
                     })
                 }
             }
-
+            
         } else {
             errorMessage.isUserInteractionEnabled = false
             statusLabel.text = "Цветолампа"
@@ -374,22 +371,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             brightnessSlider.setValue(Float(bright), animated: false)
         }
         if let speed = lamps.mainLamp?.speed {
-            speedSlider.setValue(Float(speed), animated: false)
-            if let maxSpeed = lamps.mainLamp?.getMaxSpeed(lamps.mainLamp?.effect ?? 0){
+            if let maxSpeed = lamps.mainLamp?.getMaxSpeed(lamps.mainLamp?.effect ?? 0) {
                 speedSlider.maximum = Float(maxSpeed)
             }
-            if let minSpeed = lamps.mainLamp?.getMinSpeed(lamps.mainLamp?.effect ?? 0){
+            if let minSpeed = lamps.mainLamp?.getMinSpeed(lamps.mainLamp?.effect ?? 0) {
                 speedSlider.minimum = Float(minSpeed)
             }
+            speedSlider.setValue(Float(speed), animated: false)
         }
         if let scale = lamps.mainLamp?.scale {
-            scaleSlider.setValue(Float(scale), animated: false)
-            if let maxScale = lamps.mainLamp?.getMaxScale(lamps.mainLamp?.effect ?? 0){
+            if let maxScale = lamps.mainLamp?.getMaxScale(lamps.mainLamp?.effect ?? 0) {
                 scaleSlider.maximum = Float(maxScale)
             }
-            if let minScale = lamps.mainLamp?.getMinScale(lamps.mainLamp?.effect ?? 0){
+            if let minScale = lamps.mainLamp?.getMinScale(lamps.mainLamp?.effect ?? 0) {
                 scaleSlider.minimum = Float(minScale)
             }
+            scaleSlider.setValue(Float(scale), animated: false)
         }
         lamps.mainLamp?.updateSliderFlag = false
     }
@@ -414,8 +411,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         rightPickerButtonInteractionOut.layer.zPosition = 2
         statusLabel.adjustsFontSizeToFitWidth = true
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification
-                    , object: nil)
-        
+                                               , object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(updateInterface), name: Notification.Name("updateInterface"), object: nil)
 
         timerOut.imageView?.contentMode = .scaleAspectFit
@@ -433,32 +430,30 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         brightnessSlider.tintColor = UIColor(patternImage: imageGradient)
         speedSlider.tintColor = UIColor(patternImage: imageGradient)
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
-        //scaleSlider.tintColor = UIColor(patternImage: imageGradient.image(alpha: 0.5)! )
+        // scaleSlider.tintColor = UIColor(patternImage: imageGradient.image(alpha: 0.5)! )
 
-        //let imageRainbow = UIImage.rainbowGradientImageWithBounds(bounds: scaleSlider.frame)
-        //scaleSlider.reverseValueAxis = true
-        
-        //scaleSlider.trackBackground = UIColor(patternImage: imageRainbow)
+        // let imageRainbow = UIImage.rainbowGradientImageWithBounds(bounds: scaleSlider.frame)
+        // scaleSlider.reverseValueAxis = true
+
+        // scaleSlider.trackBackground = UIColor(patternImage: imageRainbow)
     }
-    
+
     @objc private func appMovedToForeground() {
         lamps.mainLamp?.updatePickerFlag = true
         lamps.mainLamp?.updateSliderFlag = true
         print("App moved to ForeGround!")
     }
-    
-    @objc func updateTimerLabel() {
-        
-            if let currentLamp = lamps.mainLamp {
 
-                timerLabel.text = currentLamp.timerTime.timeFormatted() // will show timer
-               
-                if currentLamp.timerTime != 0 {
-                    currentLamp.timerTime -= 1 // decrease counter timer
-                   
-                } else {
-                    timer.invalidate()
-                }
+    @objc func updateTimerLabel() {
+        if let currentLamp = lamps.mainLamp {
+            timerLabel.text = currentLamp.timerTime.timeFormatted() // will show timer
+
+            if currentLamp.timerTime != 0 {
+                currentLamp.timerTime -= 1 // decrease counter timer
+
+            } else {
+                timer.invalidate()
+            }
         }
     }
 

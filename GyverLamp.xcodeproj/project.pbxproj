@@ -65,6 +65,7 @@
 		3CA0C5EC2576352800858C95 /* SelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0C5EB2576352800858C95 /* SelectorTableViewCell.swift */; };
 		3CA714832578AF64008984EA /* lamp_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA714822578AF64008984EA /* lamp_big.png */; };
 		3CB419472561617E0025A34D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CB419462561617E0025A34D /* settings.png */; };
+		3CBCEDD52639558500619E4C /* Lamps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBCEDD42639558500619E4C /* Lamps.swift */; };
 		3CD37A462592496D0076A696 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD37A452592496C0076A696 /* home.png */; };
 		3CDB362A2567C4C1004E3E1C /* backArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB36292567C4C1004E3E1C /* backArrow.png */; };
 		3CDB362D2567C5CD004E3E1C /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB362C2567C5CD004E3E1C /* enter.png */; };
@@ -136,6 +137,7 @@
 		3CA0C5EB2576352800858C95 /* SelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorTableViewCell.swift; sourceTree = "<group>"; };
 		3CA714822578AF64008984EA /* lamp_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lamp_big.png; sourceTree = "<group>"; };
 		3CB419462561617E0025A34D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		3CBCEDD42639558500619E4C /* Lamps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lamps.swift; sourceTree = "<group>"; };
 		3CD37A452592496C0076A696 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		3CDB36292567C4C1004E3E1C /* backArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backArrow.png; sourceTree = "<group>"; };
 		3CDB362C2567C5CD004E3E1C /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				3C31837A2511E66C00663FC8 /* GyverLamp-Bridging-Header.h */,
 				3C7CF12B24F0FAB10094D602 /* cells */,
 				3C15F2D024EDA6F600F63C92 /* LampDevice.swift */,
+				3CBCEDD42639558500619E4C /* Lamps.swift */,
 				3C2A5F6825EADBF400E3F5D1 /* ArrayOfLamps.swift */,
 				3C7CF12924F0FA810094D602 /* others */,
 				3C7CF12A24F0FAA20094D602 /* viewcontrollers */,
@@ -467,6 +470,7 @@
 				3C2A5F6925EADBF400E3F5D1 /* ArrayOfLamps.swift in Sources */,
 				3CA069FA24F909130058AD2A /* LampSettingsViewController.swift in Sources */,
 				3C735A90257018FB001093C3 /* SearchAndAddLampViewController.swift in Sources */,
+				3CBCEDD52639558500619E4C /* Lamps.swift in Sources */,
 				3C76396E25E9162C007D13C4 /* Model.xcdatamodeld in Sources */,
 				3C8DE0B224F6E7A000C61BBC /* DawnCollectionViewCell.swift in Sources */,
 				3CA0C5E8257631B700858C95 /* SelectorViewController.swift in Sources */,

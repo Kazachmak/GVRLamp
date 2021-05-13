@@ -9,23 +9,21 @@
 import Foundation
 import Network
 
-var lamps = ArrayOfLamps()
-
 class ArrayOfLamps {
     var timer = Timer()
 
-    var arrayOfLamps: [LampDevice]
+    var arrayOfLamps: [LampDevice] = []
 
     var mainLampIndex: Int?
 
     var necessaryToAlignTheParametersOfTheLamps = false
-    
+
     var mainLampIsBlinking = false
-    
-    var slaveLamps: [LampDevice]{
+
+    var slaveLamps: [LampDevice] {
         return arrayOfLamps.filter({ $0.flagLampIsControlled && ($0.hostIP != mainLamp?.hostIP) }) // отбираем ведомые лампы
     }
-    
+
     var mainLamp: LampDevice? {
         if arrayOfLamps.count > 0, let index = mainLampIndex {
             return arrayOfLamps[index]
@@ -34,8 +32,7 @@ class ArrayOfLamps {
         }
     }
 
-    init() {
-        arrayOfLamps = []
+    func loadData() {
         if CoreDataService.fetchLamps().count > 0 {
             for (index, element) in CoreDataService.fetchLamps().enumerated() {
                 let name = element.value(forKey: "name") as! String
@@ -52,10 +49,10 @@ class ArrayOfLamps {
 
                 arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ";"), flagLampIsControlled: flagLampIsControlled))
             }
+            UserDefaults.standard.setValue(true, forKey: "firstLaunchOfV11")
             timerStartAndStop(true)
-        }    }
-
-   
+        }
+    }
 
     private func timerStartAndStop(_ start: Bool) {
         timer.invalidate()
@@ -70,10 +67,9 @@ class ArrayOfLamps {
 
     func alignLampsParametersAfterChangeEffect() {
         // выравниваем параметры яркости - скорости - масштаба на всех лампах
-        self.necessaryToAlignTheParametersOfTheLamps = false
-        if let flag = mainLamp?.flagLampIsControlled{
+        necessaryToAlignTheParametersOfTheLamps = false
+        if let flag = mainLamp?.flagLampIsControlled {
             if flag { // если главная лампа в группе, то остальные тоже получают команду
-                 
                 slaveLamps.forEach({ device in
                     if let bright = mainLamp?.bright {
                         device.sendCommand(command: .bri, value: [bright])
@@ -89,8 +85,8 @@ class ArrayOfLamps {
         }
     }
 
-    func alignLampParametersAfterNewLampAdded(_ lamp: LampDevice){
-        if let effect = mainLamp?.effect{
+    func alignLampParametersAfterNewLampAdded(_ lamp: LampDevice) {
+        if let effect = mainLamp?.effect {
             lamp.sendCommand(command: .eff, value: [effect])
         }
         if let bright = mainLamp?.bright {
@@ -102,10 +98,8 @@ class ArrayOfLamps {
         if let scale = mainLamp?.scale {
             lamp.sendCommand(command: .sca, value: [scale])
         }
-        
     }
-    
-    
+
     func sendCommandToArrayOfLamps(command: CommandsToLamp, value: [Int], valueTxt: String = "", exceptFromTheMainLamp: Bool = false) {
         switch command {
         case .sca, .power_on, .power_off, .bri, .spd, .eff:
@@ -114,16 +108,13 @@ class ArrayOfLamps {
                 mainLamp?.sendCommand(command: command, value: value) // отправляем команду главной лампе
             }
 
-            if let flag = mainLamp?.flagLampIsControlled{
-            
-            if flag { // если главная лампа в группе, то остальные тоже получают команду
-                
-                slaveLamps.forEach({ device in
-                    device.sendCommand(command: command, value: value)
+            if let flag = mainLamp?.flagLampIsControlled {
+                if flag { // если главная лампа в группе, то остальные тоже получают команду
+                    slaveLamps.forEach({ device in
+                        device.sendCommand(command: command, value: value)
                     })
                 }
             }
-            
 
         default: break
         }
