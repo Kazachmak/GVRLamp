@@ -13,7 +13,6 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
     var flag: selectorFlag = .days
 
     var selectedDays = [Bool](repeating: false, count: 7)
-    lazy var selectedEffects = [Bool](repeating: false, count: self.lamp?.listOfEffects.count ?? 26)
     var selectedDay: Int?
     var selectedDawn: Int?
     var lamp: LampDevice?
@@ -58,10 +57,12 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         switch flag {
         case .effects:
             cell.day.text = lamp?.getEffectName(indexPath.row)
-            if selectedEffects[indexPath.row] {
-                cell.selector.image = UIImage(named: "selector.png")!
-            } else {
-                cell.selector.image = nil
+            if let currentLamp = lamp{
+                if currentLamp.selectedEffects[indexPath.row] {
+                    cell.selector.image = UIImage(named: "selector.png")!
+                } else {
+                    cell.selector.image = nil
+                }
             }
         case .days:
             cell.day.text = days[indexPath.row]
@@ -85,9 +86,11 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch flag {
         case .effects:
-            selectedEffects[indexPath.row] = !selectedEffects[indexPath.row]
-            let vc = parent as! LampSettingsViewController
-            vc.setListOfEffects(list: selectedEffects)
+            if let currentLamp = lamp{
+                currentLamp.selectedEffects[indexPath.row] = !currentLamp.selectedEffects[indexPath.row]
+                let vc = parent as! LampSettingsViewController
+                vc.setListOfEffects(list: currentLamp.selectedEffects)
+            }
         case .days:
             selectedDays[indexPath.row] = !selectedDays[indexPath.row]
             let vc = parent as! AlarmViewController

@@ -67,7 +67,7 @@
                                 <rect key="frame" x="24" y="44" width="366" height="70"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цветолампа" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-8w-6on">
-                                        <rect key="frame" x="0.0" y="18.333333333333339" width="298" height="33.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="18.333333333333339" width="230" height="33.666666666666657"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                         <color key="textColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,6 +76,10 @@
                                             <outletCollection property="gestureRecognizers" destination="Y0M-ym-cOW" appends="YES" id="Pjk-aG-g8r"/>
                                         </connections>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k4E-fs-Frv">
+                                        <rect key="frame" x="250" y="11" width="48" height="48"/>
+                                        <state key="normal" title="Button" image="heart.png"/>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKJ-tO-Xbi">
                                         <rect key="frame" x="318" y="11" width="48" height="48"/>
                                         <constraints>
@@ -91,7 +95,9 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="k4E-fs-Frv" firstAttribute="width" secondItem="tKJ-tO-Xbi" secondAttribute="width" id="Dj7-Rb-kP9"/>
                                     <constraint firstAttribute="height" constant="70" id="FbR-JO-fCR"/>
+                                    <constraint firstItem="k4E-fs-Frv" firstAttribute="height" secondItem="tKJ-tO-Xbi" secondAttribute="height" id="fJB-Rb-SJh"/>
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcz-2J-Xov">
@@ -2379,6 +2385,7 @@
         <image name="edit.png" width="36" height="36"/>
         <image name="effect_switch_button.png" width="34" height="36"/>
         <image name="enter.png" width="688" height="120"/>
+        <image name="heart.png" width="478.75323486328125" height="478.75323486328125"/>
         <image name="lamp.png" width="28" height="36"/>
         <image name="lamp2.png" width="28" height="60"/>
         <image name="lamp_big.png" width="544" height="544"/>

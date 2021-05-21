@@ -11,7 +11,6 @@ import UIKit
 class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     var picker = UIPickerView()
     var lamp: LampDevice?
-    var selectedEffects: [Bool]?
     var intervalSec: Int?
     var randomSec: Int?
     var senderTag: Int?
@@ -89,7 +88,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     }
 
     @IBAction func openEffectsList(_ sender: UITapGestureRecognizer) {
-        openSelector(.effects, selectedEffects: selectedEffects, lamp: lamp!)
+        openSelector(.effects, lamp: lamp!)
     }
 
     @IBOutlet var randomTimeOut: UIButton!
@@ -107,10 +106,9 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                     
                 }
                 
-                if let effects = selectedEffects {
-                    array.append(contentsOf: effects.convertToIntArray())
-                    currentLamp.sendCommand(command: .fav_set, value: array)
-                }
+                let effects = currentLamp.selectedEffects
+                array.append(contentsOf: effects.convertToIntArray())
+                currentLamp.sendCommand(command: .fav_set, value: array)
             }
         }
     }
@@ -154,8 +152,8 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     @IBOutlet var openListOfEffectsOut: UIButton!
 
     func setListOfEffects(list: [Bool]) {
-        selectedEffects = list
-        if let effects = selectedEffects {
+        lamp?.selectedEffects = list
+        if let effects = lamp?.selectedEffects {
             openListOfEffectsOut.setTitle("\(effects.filter({ $0 == true }).count)", for: .normal)
         }
         sendFavoriteMessage()
@@ -284,16 +282,9 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             } else {
                 buttonOnLampOut.setOn(false, animated: false)
             }
-            let range = (currentLamp.favorite?.components(separatedBy: " ").count ?? 0) - 1
-            if let arrayOfSelectedEffect = currentLamp.favorite?.components(separatedBy: " ")[5 ... range] {
-                selectedEffects = [Bool](repeating: false, count: arrayOfSelectedEffect.count)
-                for (index, element) in arrayOfSelectedEffect.enumerated() {
-                    if element == "1" {
-                        selectedEffects?[index] = true
-                    }
-                }
-                openListOfEffectsOut.setTitle("\(selectedEffects?.filter({ $0 == true }).count ?? 0)", for: .normal)
-            }
+           
+            openListOfEffectsOut.setTitle("\(currentLamp.selectedEffects.filter({ $0 == true }).count )", for: .normal)
+            
         } else {
             showMessage(true, text: "Обновляем информацию")
         }

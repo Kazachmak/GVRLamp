@@ -257,6 +257,15 @@ class UDPClient {
 
                     case "FAV":
                         lamp.favorite = backToString
+                        let range = (lamp.favorite?.components(separatedBy: " ").count ?? 0) - 1
+                        if let arrayOfSelectedEffect = lamp.favorite?.components(separatedBy: " ")[5 ... range] {
+                            lamp.selectedEffects = [Bool](repeating: false, count: arrayOfSelectedEffect.count)
+                            for (index, element) in arrayOfSelectedEffect.enumerated() {
+                                if element == "1" {
+                                    lamp.selectedEffects[index] = true
+                                }
+                            }
+                        }
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: Notification.Name("updateFavorite"), object: nil)
                         }
@@ -290,7 +299,6 @@ class LampDevice { // объект лампа
     var updateSliderFlag = true
     var updatePickerFlag = true
     var effect: Int? // номер текущего эффекта
-
     var bright: Int? // значение яркости
     var speed: Int? // значение скорости
     var scale: Int? // значение масштаба
@@ -298,9 +306,20 @@ class LampDevice { // объект лампа
     var currentTime: Date? // время лампы
     var flagLampIsControlled: Bool // лампа входит в список управляемых или нет
     var lostConnectionFirstTime = false // сколько раз не получен сигнал от лампы
+    lazy var selectedEffects = [Bool](repeating: false, count: self.listOfEffects.count)
+    var useSelectedEffectOnScreen: Bool = false // показывать на экране только выбранные эффекты
 
     func getEffectName(_ index: Int) -> String {
-        return listOfEffects[index].components(separatedBy: ",")[0]
+        if useSelectedEffectOnScreen {
+            let result = zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
+            return result[index].components(separatedBy: ",")[0]
+        } else {
+            return listOfEffects[index].components(separatedBy: ",")[0]
+        }
+    }
+
+    func getEffectNumber(_ name: String) -> Int {
+        return listOfEffects.firstIndex(where: { $0.components(separatedBy: ",")[0] == name }) ?? 0
     }
 
     func getMaxSpeed(_ index: Int) -> Int {
@@ -381,24 +400,24 @@ class LampDevice { // объект лампа
         }
     }
 
-    func percentageOfSpeed()->String{
-        let percentage = ((self.speed ?? 0) - self.getMinSpeed(self.effect ?? 0)) * 100 / self.getSpeedRange(self.effect ?? 0)
+    func percentageOfSpeed() -> String {
+        let percentage = ((speed ?? 0) - getMinSpeed(effect ?? 0)) * 100 / getSpeedRange(effect ?? 0)
         if percentage > -1 {
             return String(percentage)
-        }else{
+        } else {
             return "0"
         }
     }
-    
-    func percentageOfScale()->String{
-        let percentage = ((self.scale ?? 0) - self.getMinScale(self.effect ?? 0)) * 100 / self.getScaleRange(self.effect ?? 0)
+
+    func percentageOfScale() -> String {
+        let percentage = ((scale ?? 0) - getMinScale(effect ?? 0)) * 100 / getScaleRange(effect ?? 0)
         if percentage > -1 {
             return String(percentage)
-        }else{
+        } else {
             return "0"
         }
     }
-    
+
     init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort

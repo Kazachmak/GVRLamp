@@ -210,13 +210,11 @@ extension UIViewController {
         view.endEditing(true)
     }
 
-    func openSelector(_ flag: selectorFlag, selectedEffects: [Bool]? = nil, selectedDays: [Bool]? = nil, selectedDawn: Int? = nil, lamp: LampDevice) {
+    func openSelector(_ flag: selectorFlag,  selectedDays: [Bool]? = nil, selectedDawn: Int? = nil, lamp: LampDevice) {
         let popvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selector") as! SelectorViewController
         addChild(popvc)
         popvc.flag = flag
-        if let effects = selectedEffects {
-            popvc.selectedEffects = effects
-        }
+        
         if let dawn = selectedDawn {
             popvc.selectedDawn = dawn
         }

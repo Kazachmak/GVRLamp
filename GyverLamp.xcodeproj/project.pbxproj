@@ -26,6 +26,9 @@
 		3C2C3AA72570D04F00E345DD /* lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3AA62570D04F00E345DD /* lamp.png */; };
 		3C2C3AAE2570D72C00E345DD /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3AAC2570D72C00E345DD /* minus.png */; };
 		3C330EC42570DA6700CEA6DC /* brightness_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C330EC32570DA6700CEA6DC /* brightness_big.png */; };
+		3C3713C926569EFD00BD42CB /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3713C826569EFD00BD42CB /* heart.png */; };
+		3C3713CD26569FED00BD42CB /* heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3713CB26569FED00BD42CB /* heart2.png */; };
+		3C3713CE26569FED00BD42CB /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3713CC26569FED00BD42CB /* favorite.png */; };
 		3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */; };
 		3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */; };
 		3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45878124EC2C5A00DBE5C4 /* ViewController.swift */; };
@@ -96,6 +99,9 @@
 		3C2C3AAC2570D72C00E345DD /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		3C31837A2511E66C00663FC8 /* GyverLamp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GyverLamp-Bridging-Header.h"; sourceTree = "<group>"; };
 		3C330EC32570DA6700CEA6DC /* brightness_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness_big.png; sourceTree = "<group>"; };
+		3C3713C826569EFD00BD42CB /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		3C3713CB26569FED00BD42CB /* heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart2.png; sourceTree = "<group>"; };
+		3C3713CC26569FED00BD42CB /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
 		3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyverLamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,6 +256,9 @@
 				3C2C3AA32570CF8B00E345DD /* LaunchScreen.png */,
 				3C18568B25945F0300851A6B /* main.png */,
 				3C09B3EF257FC62700CA34D4 /* picker_button_left.png */,
+				3C3713C826569EFD00BD42CB /* heart.png */,
+				3C3713CC26569FED00BD42CB /* favorite.png */,
+				3C3713CB26569FED00BD42CB /* heart2.png */,
 				3C2C3AA62570D04F00E345DD /* lamp.png */,
 				3C561FFC25681D2E00E14632 /* plus.png */,
 				3C735A9425702591001093C3 /* basket.png */,
@@ -372,6 +381,7 @@
 				3C09B3F0257FC62700CA34D4 /* picker_button_left.png in Resources */,
 				3C28CDE72575470E008B3D90 /* speed_big.png in Resources */,
 				3C2C3AA42570CF8B00E345DD /* LaunchScreen.png in Resources */,
+				3C3713CD26569FED00BD42CB /* heart2.png in Resources */,
 				3C039B342561AD2200119134 /* speed.png in Resources */,
 				3C735A9E2570302C001093C3 /* clock.png in Resources */,
 				3C561FFD25681D2E00E14632 /* search.png in Resources */,
@@ -383,6 +393,7 @@
 				3C6ECADA25617E8A00813C43 /* background.png in Resources */,
 				3C039B322561AD2200119134 /* scale.png in Resources */,
 				3CE0576C25796726008EB7A2 /* lamp2.png in Resources */,
+				3C3713C926569EFD00BD42CB /* heart.png in Resources */,
 				3CD37A462592496D0076A696 /* home.png in Resources */,
 				3CDB362D2567C5CD004E3E1C /* enter.png in Resources */,
 				3C803AE62576CE8100759462 /* onOff2.png in Resources */,
@@ -393,6 +404,7 @@
 				3CB419472561617E0025A34D /* settings.png in Resources */,
 				3C45878724EC2C5C00DBE5C4 /* Assets.xcassets in Resources */,
 				3C735A9625702591001093C3 /* red_background.png in Resources */,
+				3C3713CE26569FED00BD42CB /* favorite.png in Resources */,
 				3C28CDE82575470E008B3D90 /* scale_big.png in Resources */,
 				3C461022257777F800F375ED /* oval.png in Resources */,
 				3C735A9D2570302C001093C3 /* effect_switch_button.png in Resources */,

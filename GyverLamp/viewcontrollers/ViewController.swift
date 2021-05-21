@@ -76,7 +76,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if let currentLamp = lamps.mainLamp {
             currentLamp.effect = row
             currentLamp.updateSliderFlag = true
-            lamps.sendCommandToArrayOfLamps(command: .eff, value: [row])
+            lamps.sendCommandToArrayOfLamps(command: .eff, value: [currentLamp.getEffectNumber(currentLamp.getEffectName(row))])
             lamps.necessaryToAlignTheParametersOfTheLamps = true
         }
     }
@@ -86,8 +86,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             currentLamp.updateSliderFlag = true
             currentLamp.updatePickerFlag = true
             if let effect = currentLamp.effect {
-                currentLamp.effect = effect + step
-                lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect + step])
+                let nextEffect = currentLamp.getEffectNumber(currentLamp.getEffectName(effect + step))
+                currentLamp.effect = nextEffect
+                lamps.sendCommandToArrayOfLamps(command: .eff, value: [nextEffect])
                 lamps.necessaryToAlignTheParametersOfTheLamps = true
             }
         }
