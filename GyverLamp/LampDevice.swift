@@ -151,7 +151,7 @@ class UDPClient {
                     lamp.connectionStatus = true
                     let backToString = String(decoding: data!, as: UTF8.self)
                     print("Received message: \(backToString)")
-
+                    
                     if backToString.contains("LIST") {
                         var arrayOfQuantity = backToString.components(separatedBy: ";")
                         if arrayOfQuantity.count > 1 {
@@ -197,7 +197,6 @@ class UDPClient {
                             }
                             if lamp.effect != Int(backToString.components(separatedBy: " ")[1]) {
                                 lamp.effect = Int(backToString.components(separatedBy: " ")[1])
-                                lamp.updatePickerFlag = true
                                 if lamp.hostIP == lamps.mainLamp?.hostIP {
                                     if let effect = lamp.effect {
                                         lamps.sendCommandToArrayOfLamps(command: .eff, value: [effect], exceptFromTheMainLamp: true)
@@ -206,7 +205,8 @@ class UDPClient {
                                 }
                             }
 
-                            if (lamp.bright != Int(backToString.components(separatedBy: " ")[2])) || (lamp.speed != Int(backToString.components(separatedBy: " ")[3])) || (lamp.scale != Int(backToString.components(separatedBy: " ")[4])) {
+                            if (lamp.bright != Int(backToString.components(separatedBy: " ")[2])) && (lamp.speed != Int(backToString.components(separatedBy: " ")[3])) && (lamp.scale != Int(backToString.components(separatedBy: " ")[4])) {
+                                print("Test update slider")
                                 lamp.updateSliderFlag = true
                             }
 
@@ -296,8 +296,7 @@ class LampDevice { // объект лампа
     var dawn: Int? // рассвет за сколько минут
     var favorite: String? // автопереключение эффектов
     var listOfEffects: [String] = listOfEffectsDefault // список эффектов
-    var updateSliderFlag = true
-    var updatePickerFlag = true
+    var updateSliderFlag = false
     var effect: Int? // номер текущего эффекта
     var bright: Int? // значение яркости
     var speed: Int? // значение скорости
@@ -309,19 +308,26 @@ class LampDevice { // объект лампа
     lazy var selectedEffects = [Bool](repeating: false, count: self.listOfEffects.count)
     var useSelectedEffectOnScreen: Bool = false // показывать на экране только выбранные эффекты
 
-    func getEffectName(_ index: Int) -> String {
+    var selectedEffectsNameList: [String] {
         if useSelectedEffectOnScreen {
-            let result = zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
-            return result[index].components(separatedBy: ",")[0]
+            return zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
         } else {
-            return listOfEffects[index].components(separatedBy: ",")[0]
+            return listOfEffects
         }
+        
     }
+
+    
 
     func getEffectNumber(_ name: String) -> Int {
-        return listOfEffects.firstIndex(where: { $0.components(separatedBy: ",")[0] == name }) ?? 0
+        return listOfEffects.firstIndex(where: { $0.components(separatedBy: ",")[0] == name.components(separatedBy: ",")[0] }) ?? 0
     }
 
+    func getEffectNumberFromSelectedList(_ name: String) -> Int{
+        let result = zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
+        return result.firstIndex(where: { $0.components(separatedBy: ",")[0] == name.components(separatedBy: ",")[0] }) ?? 0
+    }
+    
     func getMaxSpeed(_ index: Int) -> Int {
         var maxSpeed = 255
         if listOfEffects.count > index {
@@ -400,31 +406,29 @@ class LampDevice { // объект лампа
         }
     }
 
-    func percentageOfSpeed() -> String {
-        let percentage = ((speed ?? 0) - getMinSpeed(effect ?? 0)) * 100 / getSpeedRange(effect ?? 0)
-        if percentage > -1 {
-            return String(percentage)
-        } else {
-            return "0"
+    func percentageOfValue(_ command: CommandsToLamp)->String{
+        switch command {
+        case .bri:
+            return String(((bright ?? 0) * 100 / 255).checkPercentage())
+        case .sca:
+            return String((((scale ?? 0) - getMinScale(effect ?? 0)) * 100 / getScaleRange(effect ?? 0)).checkPercentage())
+        case .spd:
+            return String((((speed ?? 0) - getMinSpeed(effect ?? 0)) * 100 / getSpeedRange(effect ?? 0)).checkPercentage())
+        default:
+            return "?"
+            
         }
     }
+    
 
-    func percentageOfScale() -> String {
-        let percentage = ((scale ?? 0) - getMinScale(effect ?? 0)) * 100 / getScaleRange(effect ?? 0)
-        if percentage > -1 {
-            return String(percentage)
-        } else {
-            return "0"
-        }
-    }
-
-    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false) {
+    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false, useSelectedEffectOnScreen: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort
         self.name = name
         self.effectsFromLamp = effectsFromLamp
         self.flagLampIsControlled = flagLampIsControlled
         self.listOfEffects = listOfEffects
+        self.useSelectedEffectOnScreen = useSelectedEffectOnScreen
         if newLamp {
             getEffectsFromLamp(effectsFromLamp)
         }

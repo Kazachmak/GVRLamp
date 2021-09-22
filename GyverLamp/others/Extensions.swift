@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 extension UIView {
     // добавление тени объекту
     func addBoxShadow() {
@@ -128,7 +126,6 @@ extension String {
             return nil
         }
     }
-
 }
 
 // преобразование значения [Bool] в [Int]
@@ -196,7 +193,6 @@ extension UIImage {
             UIGraphicsEndImageContext()
             return newImage
         }
-    
 }
 
 extension UIViewController {
@@ -334,4 +330,31 @@ extension UIViewController {
     }
 }
 
+extension UIViewController {
 
+    func showAlertAboutNeedToRestart(){
+        let alert = UIAlertController(title: alertAboutNeedToRestart, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func delay(delayTime: Double, completionHandler handler:@escaping () -> ()) {
+            let newDelay = DispatchTime.now() + delayTime
+            DispatchQueue.main.asyncAfter(deadline: newDelay, execute: handler)
+        }
+}
+
+extension Int{
+    func checkPercentage()->Int{
+        if self > -1 {
+            if self > 100{
+                return 100
+            }else{
+                return self
+            }
+        } else {
+            return 0
+        }
+    }
+}

@@ -81,6 +81,7 @@ class CoreDataService {
             newLamp.setValue(element.effectsFromLamp, forKey: "flagEffects")
             newLamp.setValue(element.listOfEffects.joined(separator: ";"), forKey: "listOfEffects")
             newLamp.setValue(element.flagLampIsControlled, forKey: "flagLampIsControlled")
+            newLamp.setValue(element.useSelectedEffectOnScreen, forKey: "useSelectedEffectOnScreen")
             do {
                 try managedContext.save()
                 

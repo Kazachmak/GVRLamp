@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H524" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Lamp" representedClassName="Lamp" syncable="YES" codeGenerationType="class">
         <attribute name="flagEffects" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="flagLampIsControlled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -8,8 +8,9 @@
         <attribute name="mainLamp" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="port" optional="YES" attributeType="String"/>
+        <attribute name="useSelectedEffectOnScreen" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Lamp" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Lamp" positionX="-63" positionY="-18" width="128" height="163"/>
     </elements>
 </model>
