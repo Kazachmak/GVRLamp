@@ -35,7 +35,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // добавляем лампу в список управляемых
         
         if  lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
-            let AddAction = UIContextualAction(style: .destructive, title: "Убрать из группы", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
+            let AddAction = UIContextualAction(style: .destructive, title: removeFromGroup, handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
                 lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = false
                 
                 success(true)
@@ -48,7 +48,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AddAction.backgroundColor = .red
             return UISwipeActionsConfiguration(actions: [AddAction])
         } else {
-            let AddAction = UIContextualAction(style: .destructive, title: "Добавить в группу", handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
+            let AddAction = UIContextualAction(style: .destructive, title: addToGroup, handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
                 let newAddedLamp = lamps.arrayOfLamps[indexPath.row]
                 newAddedLamp.flagLampIsControlled = true
                 success(true)
@@ -123,7 +123,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
 
-        //lamps.setMainLamp(indexPath.row, blinkLamp: false)
         lamps.arrayOfLamps[indexPath.row].lampBlink()
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
@@ -133,6 +132,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         present(vc, animated: true, completion: nil)
     }
 
+    @IBAction func add41(_ sender: UIButton) {
+        LampDevice.scan(deviceIp: "192.168.4.1")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if !lamps.checkIP("192.168.4.1"){
+                        // create the alert
+                        let alert = UIAlertController(title: lampNotFound, message: youNotConnectedToLedLamp, preferredStyle: UIAlertController.Style.alert)
+
+                        // add the actions (buttons)
+                        alert.addAction(UIAlertAction(title: openSettings, style: UIAlertAction.Style.default, handler: {action in UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil) }))
+                        
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+
+                        // show the alert
+                        self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @IBOutlet weak var add41ButtobOut: UIButton!
+    
+    
     @IBOutlet var addButtonOut: UIButton!
 
     // обновляем таблицу
@@ -162,5 +182,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.separatorStyle = .none
         scanOut.imageView?.contentMode = .scaleAspectFit
         addButtonOut.imageView?.contentMode = .scaleAspectFit
+        add41ButtobOut.imageView?.contentMode = .scaleAspectFit
+        
     }
 }

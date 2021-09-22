@@ -11,7 +11,7 @@ import UIKit
 class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var lamp: LampDevice?
-    let pickerData = ["Не выключать", "1 минуту", "5 минут", "10 минут", "15 минут", "30 минут", "45 минут", "60 минут"]
+    let pickerData = [doNotTurnOff, _1min, _5min, _10min, _15min, _30min, _45min, _60min]
     
     
     @IBAction func close(_ sender: UITapGestureRecognizer) {

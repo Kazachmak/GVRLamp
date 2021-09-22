@@ -82,7 +82,7 @@ class SliderFullScreenViewController: UIViewController {
         // switch command {
         // case .bri: //lamp.sendCommand(command: command, value: [Int(slider.value) + value])
         lamps.sendCommandToArrayOfLamps(command: command, value: [Int(slider.value) + value])
-        /// case .spd: //lamp.sendCommand(command: command, value: [Int(slider.value) + value])
+        // case .spd: //lamp.sendCommand(command: command, value: [Int(slider.value) + value])
         // lamps.sendCommandToArrayOfLamps(command: command, value: [Int(slider.value) + value])
         // case .sca: lamp.sendCommand(command: command, value: [Int(slider.value) + value])
         // default: break
@@ -134,11 +134,11 @@ class SliderFullScreenViewController: UIViewController {
             
             switch command {
             case .spd:
-                percentageLabel.text = currentLamp.percentageOfSpeed() + "%"
+                percentageLabel.text = currentLamp.percentageOfValue(.spd) + "%"
             case .sca:
-                percentageLabel.text = currentLamp.percentageOfScale() + "%"
+                percentageLabel.text = currentLamp.percentageOfValue(.sca) + "%"
             case .bri:
-                percentageLabel.text = String(value * 100 / 255) + "%"
+                percentageLabel.text = currentLamp.percentageOfValue(.bri) + "%"
             default: break
             }
             

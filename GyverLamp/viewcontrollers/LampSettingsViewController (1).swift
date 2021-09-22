@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LanguageManager_iOS
 
 class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     var picker = UIPickerView()
@@ -64,24 +63,23 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     @IBOutlet var headerViewHeight: NSLayoutConstraint!
 
     @IBAction func changeLanguageButton(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Choose language", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "English", style: .default, handler: { action in
-            UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
-            UserDefaults.standard.synchronize()
-            self.showAlertAboutNeedToRestart()
-        }))
-        alert.addAction(UIAlertAction(title: "Русский", style: .default, handler: { action in
-            UserDefaults.standard.set(["ru"], forKey: "AppleLanguages")
-            UserDefaults.standard.synchronize()
-            self.showAlertAboutNeedToRestart()
-        }))
-        alert.addAction(UIAlertAction(title: "Український", style: .default, handler: { action in
-            UserDefaults.standard.set(["uk"], forKey: "AppleLanguages")
-            UserDefaults.standard.synchronize()
-            self.showAlertAboutNeedToRestart()
+        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+                case .default:
+                print("default")
+                
+                case .cancel:
+                print("cancel")
+                
+                case .destructive:
+                print("destructive")
+                
+            }
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
     
     func openPickerView(_ tag: Int) {
         picker.removeFromSuperview()

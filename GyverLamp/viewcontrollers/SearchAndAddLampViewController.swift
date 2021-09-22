@@ -21,7 +21,7 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
     var lanScanner: MMLANScanner! // сканер устройств в локальной сети
 
     func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int){
-        self.lampSearchLabel.text = "Поиск лампы .. " + String(Int(pingedHosts)*100/overallHosts) + "%"
+        self.lampSearchLabel.text = searchingForLamp + String(Int(pingedHosts)*100/overallHosts) + "%"
     }
     
     // когда найдено новое устройство, проверяется лампа ли это
@@ -48,17 +48,18 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        lanScanner = MMLANScanner(delegate: self)
+        lanScanner.start()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         backArrowHeight.constant += self.view.safeAreaTop - 20
         headerViewHeight.constant += self.view.safeAreaTop - 20
         searchAndAddLabel.adjustsFontSizeToFitWidth = true
-        lanScanner = MMLANScanner(delegate: self)
-        lanScanner.start()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.dismiss(animated: true, completion: nil)
-        }
-       
     }
 }

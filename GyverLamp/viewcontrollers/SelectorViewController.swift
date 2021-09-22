@@ -9,7 +9,6 @@
 import UIKit
 
 class SelectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
     var flag: selectorFlag = .days
 
     var selectedDays = [Bool](repeating: false, count: 7)
@@ -18,32 +17,59 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
     var lamp: LampDevice?
 
     // дни будильника
-    let days = ["Каждый понедельник", "Каждый вторник", "Каждую среду", "Каждый четверг", "Каждую пятница", "Каждую суббота", "Каждую воскресенье"]
+    let days = [everyMonday, everyTuesday, everyWednesday, everyThursday, everyFriday, everySaturday, everySunday]
 
     // рассвет
-    let dawnList = ["Рассвет за 5 минут", "Рассвет за 10 минут", "Рассвет за 15 минут", "Рассвет за 20 минут", "Рассвет за 25 минут", "Рассвет за 30 минут", "Рассвет за 40 минут", "Рассвет за 50 минут", "Рассвет за 60 минут"]
+    let dawnList = [dawnin5Minutes, dawnin10Minutes, dawnin15Minutes, dawnin20Minutes, dawnin25Minutes, dawnin30Minutes, dawnin40Minutes, dawnin50Minutes, dawnin60Minutes]
 
-    
-    @IBOutlet weak var mainLabel: UILabel!
-    
+    @IBOutlet var mainLabel: UILabel!
+
     @IBOutlet var tableView: UITableView!
-    
-    
-    @IBOutlet weak var backArrowHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
+
+    @IBOutlet var backArrowHeight: NSLayoutConstraint!
+
+    @IBOutlet var headerViewHeight: NSLayoutConstraint!
+
+    private func sendFavoriteMessage() {
+        if let currentLamp = lamp {
+            let array = currentLamp.favorite?.components(separatedBy: " ")[1...4]
+            var intArray = array?.compactMap { Int($0) }
+            let effects = currentLamp.selectedEffects
+            intArray?.append(contentsOf: effects.convertToIntArray())
+            currentLamp.sendCommand(command: .fav_set, value: intArray!)
+        }
+    }
     
     
     @IBAction func close(_ sender: UITapGestureRecognizer) {
-        self.view.removeFromSuperview()
-        self.removeFromParent()
+        if flag == .effects{
+            if let currentLamp = lamp{
+                if let vc = parent as? LampSettingsViewController{
+                    vc.setListOfEffects(list: currentLamp.selectedEffects)
+                }else{
+                    self.sendFavoriteMessage()
+                }
+            }
+        }
+        view.removeFromSuperview()
+        removeFromParent()
     }
-    
-    
+
     @IBAction func returnToMainView(_ sender: UIButton) {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        if flag == .effects{
+            if let currentLamp = lamp{
+                if let vc = parent as? LampSettingsViewController{
+                    vc.setListOfEffects(list: currentLamp.selectedEffects)
+                }else{
+                    self.sendFavoriteMessage()
+                    view.removeFromSuperview()
+                    removeFromParent()
+                }
+            }
+        }
+        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch flag {
         case .dawn: return dawnList.count
@@ -56,8 +82,8 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "selector", for: indexPath) as! SelectorTableViewCell
         switch flag {
         case .effects:
-            cell.day.text = lamp?.getEffectName(indexPath.row)
-            if let currentLamp = lamp{
+            cell.day.text = lamp?.listOfEffects[indexPath.row].components(separatedBy: ",")[0]
+            if let currentLamp = lamp {
                 if currentLamp.selectedEffects[indexPath.row] {
                     cell.selector.image = UIImage(named: "selector.png")!
                 } else {
@@ -73,7 +99,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
             }
         case .dawn:
             cell.day.text = dawnList[indexPath.row]
-            if selectedDawn == indexPath.row{
+            if selectedDawn == indexPath.row + 1 {
                 cell.selector.image = UIImage(named: "selector.png")!
             } else {
                 cell.selector.image = nil
@@ -86,34 +112,30 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch flag {
         case .effects:
-            if let currentLamp = lamp{
+            if let currentLamp = lamp {
                 currentLamp.selectedEffects[indexPath.row] = !currentLamp.selectedEffects[indexPath.row]
-                let vc = parent as! LampSettingsViewController
-                vc.setListOfEffects(list: currentLamp.selectedEffects)
             }
         case .days:
             selectedDays[indexPath.row] = !selectedDays[indexPath.row]
             let vc = parent as! AlarmViewController
             vc.setDays(days: selectedDays)
         case .dawn:
-                selectedDawn = indexPath.row
+            selectedDawn = indexPath.row + 1
             let vc = parent as! AlarmViewController
-            vc.setDawn(dawn: selectedDawn ?? 0)
+            vc.setDawn(selectedDawn ?? 1)
         }
-
         tableView.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        backArrowHeight.constant += self.view.safeAreaTop - 20
-        headerViewHeight.constant += self.view.safeAreaTop - 20
+        backArrowHeight.constant += view.safeAreaTop - 20
+        headerViewHeight.constant += view.safeAreaTop - 20
         tableView.tableFooterView = UIView()
-        switch flag{
-        case .dawn : mainLabel.text = "Рассвет за"
-        case .days : mainLabel.text = "Повтор"
-        case .effects : mainLabel.text = "Выбрать эффекты"
+        switch flag {
+        case .dawn: mainLabel.text = dawnFor
+        case .days: mainLabel.text = repeatAlarm
+        case .effects: mainLabel.text = selectEffects
         }
-       
     }
 }

@@ -9,6 +9,7 @@ pod 'TactileSlider'
 pod 'MIBlurPopup'
 pod 'InputMask'
 pod "SimpleAnimation"
+pod 'LanguageManager-iOS'
   # Pods for GyverLamp
 
 end

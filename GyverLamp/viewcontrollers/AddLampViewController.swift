@@ -59,19 +59,19 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                     
                 if !lamps.checkIP(ip){
                         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                            self.addingLampLabel.text = "Идет поиск лампы..."
+                            self.addingLampLabel.text = searchingForLamp
                             self.addingLampLabel.isHidden = false
                             })
                     _ = LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: ip, listOfEffects: LampDevice.listOfEffectsDefault, newLamp: true)
                         self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
                             UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                                self.addingLampLabel.text = "Лампа не найдена"
+                                self.addingLampLabel.text = lampDidNotFound
                                 self.addingLampLabel.isHidden = false
                                 })
                         }
                     }else{
                         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                            self.addingLampLabel.text = "Лампа уже была добавлена"
+                            self.addingLampLabel.text = lampHasAlreadyBeenAdded
                             self.addingLampLabel.isHidden = false
                             
                             })
@@ -85,7 +85,7 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
                 
             }else{
                 UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                    self.addingLampLabel.text = "Неверный IP - адрес"
+                    self.addingLampLabel.text = invalidIPAddress
                     self.addingLampLabel.isHidden = false
                     
                     })
@@ -101,7 +101,7 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
     @objc func updateLamp(notification: Notification?) {
         timer.invalidate()
         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-            self.addingLampLabel.text = "Лампа добавлена"
+            self.addingLampLabel.text = lampWasAdded
             self.addingLampLabel.isHidden = false
             })
         _ = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { timer in

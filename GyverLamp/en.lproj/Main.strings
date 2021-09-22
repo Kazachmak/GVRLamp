@@ -1,0 +1,215 @@
+
+/* Class = "UILabel"; text = "Включить будильник"; ObjectID = "2wo-Zh-5lK"; */
+"2wo-Zh-5lK.text" = "Turn on alarm";
+
+/* Class = "UILabel"; text = "Лампа добавлена"; ObjectID = "3PS-sH-v3x"; */
+"3PS-sH-v3x.text" = "Lamp added";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "45a-xW-bM4"; */
+"45a-xW-bM4.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "529-lo-yaG"; */
+"529-lo-yaG.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Порт"; ObjectID = "5nM-yM-mHU"; */
+"5nM-yM-mHU.text" = "Port";
+
+/* Class = "UIButton"; normalTitle = "Отправить текст в лампу"; ObjectID = "6MK-eJ-AaD"; */
+"6MK-eJ-AaD.normalTitle" = "Send text to lamp";
+
+/* Class = "UILabel"; text = "50"; ObjectID = "6ch-ci-vXp"; */
+"6ch-ci-vXp.text" = "50";
+
+/* Class = "UILabel"; text = "Назад"; ObjectID = "70J-WP-l7J"; */
+"70J-WP-l7J.text" = "Back";
+
+/* Class = "UIButton"; normalTitle = "Сохранить"; ObjectID = "8b5-qL-lS0"; */
+"8b5-qL-lS0.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "Яркость"; ObjectID = "8hK-mi-acd"; */
+"8hK-mi-acd.text" = "Brightness";
+
+/* Class = "UILabel"; text = "Повтор"; ObjectID = "92e-lg-mQT"; */
+"92e-lg-mQT.text" = "Repeat";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9I0-i3-cOS"; */
+"9I0-i3-cOS.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Отмена"; ObjectID = "9Ia-yc-723"; */
+"9Ia-yc-723.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "Переименовать"; ObjectID = "9Ls-uI-oIp"; */
+"9Ls-uI-oIp.text" = "Rename";
+
+/* Class = "UILabel"; text = "Выкл."; ObjectID = "9lX-9n-Llm"; */
+"9lX-9n-Llm.text" = "Off";
+
+/* Class = "UILabel"; text = "50"; ObjectID = "Anm-ey-v3t"; */
+"Anm-ey-v3t.text" = "50";
+
+/* Class = "UINavigationItem"; title = "Настройки"; ObjectID = "B6q-7Y-HoZ"; */
+"B6q-7Y-HoZ.title" = "Settings";
+
+/* Class = "UILabel"; text = "Масштаб"; ObjectID = "BsX-T3-001"; */
+"BsX-T3-001.text" = "Scale";
+
+/* Class = "UILabel"; text = "Выбор дней"; ObjectID = "C4e-V7-djx"; */
+"C4e-V7-djx.text" = "Days setup";
+
+/* Class = "UILabel"; text = "Автопереключение эффектов"; ObjectID = "Cvw-9e-mpz"; */
+"Cvw-9e-mpz.text" = "Animations Auto-switching";
+
+/* Class = "UITextField"; placeholder = "8888"; ObjectID = "EEo-lW-i3N"; */
+"EEo-lW-i3N.placeholder" = "8888";
+
+/* Class = "UIButton"; normalTitle = "Удалить лампу"; ObjectID = "EKz-0S-KaU"; */
+"EKz-0S-KaU.normalTitle" = "Delete lamp";
+
+/* Class = "UILabel"; text = "Рассвет за"; ObjectID = "FSo-PD-o18"; */
+"FSo-PD-o18.text" = "Dawn in";
+
+/* Class = "UILabel"; text = "Загружать эффекты из лампы "; ObjectID = "FxO-g3-sFh"; */
+"FxO-g3-sFh.text" = "Load aninamations from the lamp ";
+
+/* Class = "UIButton"; normalTitle = "сек"; ObjectID = "GGC-AE-sje"; */
+"GGC-AE-sje.normalTitle" = "sec";
+
+/* Class = "UILabel"; text = "IP"; ObjectID = "GzB-7E-rYs"; */
+"GzB-7E-rYs.text" = "IP";
+
+/* Class = "UILabel"; text = "Кнопка на лампе"; ObjectID = "HIE-gw-3Zh"; */
+"HIE-gw-3Zh.text" = "Button on the lamp";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Icq-00-qjo"; */
+"Icq-00-qjo.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Указать идентификатор лампы"; ObjectID = "JkH-UV-8S2"; */
+"JkH-UV-8S2.normalTitle" = "Choose language";
+
+/* Class = "UILabel"; text = "Назад"; ObjectID = "KCd-QN-bhq"; */
+"KCd-QN-bhq.text" = "Back";
+
+/* Class = "UILabel"; text = "Обновляем информацию"; ObjectID = "KJQ-Hg-FUW"; */
+"KJQ-Hg-FUW.text" = "Refreshing";
+
+/* Class = "UINavigationItem"; title = "Управление лампой"; ObjectID = "KQB-KQ-7ox"; */
+"KQB-KQ-7ox.title" = "Lamp Control";
+
+/* Class = "UILabel"; text = "Настройки"; ObjectID = "Kgi-4g-Qsb"; */
+"Kgi-4g-Qsb.text" = "Settings";
+
+/* Class = "UILabel"; text = "Не повторять"; ObjectID = "MRA-DT-jNB"; */
+"MRA-DT-jNB.text" = "Do not repeat";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "MRY-Gm-BVb"; */
+"MRY-Gm-BVb.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "GVR Lamp"; ObjectID = "N3Y-6l-Xy3"; */
+"N3Y-6l-Xy3.text" = "GVR Lamp";
+
+/* Class = "UIButton"; normalTitle = "Переименовать"; ObjectID = "Nj6-rY-7cN"; */
+"Nj6-rY-7cN.normalTitle" = "Rename";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "O80-A7-0KF"; */
+"O80-A7-0KF.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Отключить таймер"; ObjectID = "ODy-RP-PiE"; */
+"ODy-RP-PiE.normalTitle" = "Disable timer";
+
+/* Class = "UILabel"; text = "Цветолампа"; ObjectID = "ORs-8w-6on"; */
+"ORs-8w-6on.text" = "Colourful Lamp";
+
+/* Class = "UIButton"; normalTitle = "Добавить"; ObjectID = "PeE-Fm-M04"; */
+"PeE-Fm-M04.normalTitle" = "Add";
+
+/* Class = "UILabel"; text = "Выкл."; ObjectID = "TKN-Ti-J5e"; */
+"TKN-Ti-J5e.text" = "Off";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "TZY-nw-Yzk"; */
+"TZY-nw-Yzk.text" = "%";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Ucg-CS-H00"; */
+"Ucg-CS-H00.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "Таймер"; ObjectID = "V0d-lz-AhH"; */
+"V0d-lz-AhH.title" = "Timer";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "VYK-Ia-p8J"; */
+"VYK-Ia-p8J.text" = ":";
+
+/* Class = "UILabel"; text = "+ случайное время в секундах"; ObjectID = "W2Z-T9-YfZ"; */
+"W2Z-T9-YfZ.text" = "+ random time in seconds";
+
+/* Class = "UINavigationItem"; title = "Будильники"; ObjectID = "WMd-FR-g8v"; */
+"WMd-FR-g8v.title" = "Alarms";
+
+/* Class = "UIButton"; normalTitle = "Нет подключения к лампе"; ObjectID = "WWO-Uf-LGM"; */
+"WWO-Uf-LGM.normalTitle" = "No connection to lamp";
+
+/* Class = "UILabel"; text = "Интервал смены эффектов"; ObjectID = "XUr-ON-ebD"; */
+"XUr-ON-ebD.text" = "Animations switch time";
+
+/* Class = "UIButton"; normalTitle = "Добавить"; ObjectID = "agB-6x-GS4"; */
+"agB-6x-GS4.normalTitle" = "Add";
+
+"wg0-Fx-x6F.normalTitle" = "Add 192.168.4.1";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "amp-wK-zqt"; */
+"amp-wK-zqt.text" = "%";
+
+/* Class = "UILabel"; text = "209"; ObjectID = "bT3-Xm-jQ8"; */
+"bT3-Xm-jQ8.text" = "209";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "cZS-bP-hM4"; */
+"cZS-bP-hM4.text" = "Label";
+
+/* Class = "UILabel"; text = "Найти и добавить"; ObjectID = "cx5-I7-qDx"; */
+"cx5-I7-qDx.text" = "Lookup Lamps";
+
+/* Class = "UIButton"; normalTitle = "сек"; ObjectID = "eLM-Sz-hR0"; */
+"eLM-Sz-hR0.normalTitle" = "sec";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "eS9-Jj-6dg"; */
+"eS9-Jj-6dg.text" = "%";
+
+/* Class = "UILabel"; text = "Будильник"; ObjectID = "ejb-8t-GHC"; */
+"ejb-8t-GHC.text" = "Alarms";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "k4E-fs-Frv"; */
+"k4E-fs-Frv.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Таймер"; ObjectID = "k5V-wv-xga"; */
+"k5V-wv-xga.text" = "Timer";
+
+/* Class = "UILabel"; text = "Новое имя"; ObjectID = "mYe-KR-lwt"; */
+"mYe-KR-lwt.text" = "New name";
+
+/* Class = "UILabel"; text = "Скорость"; ObjectID = "orW-wA-1Dh"; */
+"orW-wA-1Dh.text" = "Speed";
+
+/* Class = "UILabel"; text = "Добавить"; ObjectID = "p3I-4u-oqR"; */
+"p3I-4u-oqR.text" = "Add";
+
+/* Class = "UILabel"; text = "Не отключать режим смены  эффектов при выключении лампы"; ObjectID = "r4t-Jd-fgT"; */
+"r4t-Jd-fgT.text" = "Do not disable the animations auto-switching after lamp is turned off";
+
+/* Class = "UILabel"; text = "Лампа недоступна"; ObjectID = "sE5-j1-x9c"; */
+"sE5-j1-x9c.text" = "Lamp is not available";
+
+/* Class = "UIButton"; normalTitle = "Найти и добавить"; ObjectID = "wEK-3T-I8N"; */
+"wEK-3T-I8N.normalTitle" = "Lookup Lamps";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wJJ-ff-zRN"; */
+"wJJ-ff-zRN.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Поиск лампы ."; ObjectID = "wSk-Hf-Aie"; */
+"wSk-Hf-Aie.text" = "Looking up .";
+
+/* Class = "UILabel"; text = "Текущее время на лампе"; ObjectID = "xbB-kg-3kG"; */
+"xbB-kg-3kG.text" = "Current time on lamp";
+
+/* Class = "UILabel"; text = "Набор эффектов"; ObjectID = "yYx-k0-IBI"; */
+"yYx-k0-IBI.text" = "Animations set";
+
+/* Class = "UILabel"; text = "50"; ObjectID = "zGR-iv-zpu"; */
+"zGR-iv-zpu.text" = "50";
