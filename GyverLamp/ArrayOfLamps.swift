@@ -42,12 +42,24 @@ class ArrayOfLamps {
                 let listOfEffects = element.value(forKey: "listOfEffects") as! String
                 let mainLamp = element.value(forKey: "mainLamp") as! Bool
                 let flagLampIsControlled = element.value(forKey: "flagLampIsControlled") as! Bool
+                var useSelectedEffectOnScreen = false
+                if let useSelectedEffectOnScreenTemp = element.value(forKey: "useSelectedEffectOnScreen") as? Bool {
+                    useSelectedEffectOnScreen = useSelectedEffectOnScreenTemp
+                }
+
+                /*
+                 for key in element.entity.attributesByName.keys{
+                             let value: Any? = element.value(forKey: key)
+                             print("\(key) = \(value)")
+                         }
+
+                 */
 
                 if mainLamp {
                     mainLampIndex = index
                 }
 
-                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ";"), flagLampIsControlled: flagLampIsControlled))
+                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ";"), flagLampIsControlled: flagLampIsControlled, useSelectedEffectOnScreen: useSelectedEffectOnScreen))
             }
             UserDefaults.standard.setValue(true, forKey: "firstLaunchOfV11")
             timerStartAndStop(true)
@@ -57,7 +69,7 @@ class ArrayOfLamps {
     private func timerStartAndStop(_ start: Bool) {
         timer.invalidate()
         if start {
-            timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                 if let currentLamp = lamps.mainLamp {
                     currentLamp.updateStatus() // запрос состояние лампы
                 }
