@@ -69,7 +69,7 @@
 "FSo-PD-o18.text" = "Dawn in";
 
 /* Class = "UILabel"; text = "Загружать эффекты из лампы "; ObjectID = "FxO-g3-sFh"; */
-"FxO-g3-sFh.text" = "Load aninamations from the lamp ";
+"FxO-g3-sFh.text" = "Get animations from the lamp";
 
 /* Class = "UIButton"; normalTitle = "сек"; ObjectID = "GGC-AE-sje"; */
 "GGC-AE-sje.normalTitle" = "sec";
