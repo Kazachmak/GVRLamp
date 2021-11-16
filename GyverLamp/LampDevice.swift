@@ -190,11 +190,8 @@ class UDPClient {
                                     }
                                 }
                             }
-                            if backToString.components(separatedBy: " ")[8] == "1" {
-                                lamp.timer = true
-                            } else {
-                                lamp.timer = false
-                            }
+                            lamp.timer = backToString.components(separatedBy: " ")[8].convertToBool()
+                            
                             if lamp.effect != Int(backToString.components(separatedBy: " ")[1]) {
                                 lamp.effect = Int(backToString.components(separatedBy: " ")[1])
                                 if lamp.hostIP == lamps.mainLamp?.hostIP {
@@ -216,11 +213,10 @@ class UDPClient {
 
                             lamp.scale = Int(backToString.components(separatedBy: " ")[4])
 
-                            if backToString.components(separatedBy: " ")[9] == "1" {
-                                lamp.button = true
-                            } else {
-                                lamp.button = false
-                            }
+                            lamp.espMode = backToString.components(separatedBy: " ")[6].convertToBool()
+                            
+                            lamp.button = backToString.components(separatedBy: " ")[9].convertToBool()
+                            
                             lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
                         }
                         lamps.updateArrayOfLamps(lamp: lamp)
@@ -307,7 +303,9 @@ class LampDevice { // объект лампа
     var lostConnectionFirstTime = false // сколько раз не получен сигнал от лампы
     lazy var selectedEffects = [Bool](repeating: false, count: self.listOfEffects.count)
     var useSelectedEffectOnScreen: Bool = false // показывать на экране только выбранные эффекты
-
+    var espMode = false
+    
+    
     var selectedEffectsNameList: [String] {
         if useSelectedEffectOnScreen {
             return zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }

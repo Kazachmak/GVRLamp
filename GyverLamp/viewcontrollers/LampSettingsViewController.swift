@@ -210,6 +210,17 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                             })
     }
     
+    @IBAction func openWeb(_ sender: UIButton) {
+        if let currentLamp = lamp {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "web") as! WebViewViewController
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            vc.lamp = currentLamp
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
 
     @IBAction func renameLamp(_ sender: UIButton) {
         if let currentLamp = lamp {
@@ -222,6 +233,21 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         }
     }
 
+    @IBOutlet weak var openWiFiSettingsOut: UIButton!
+    
+    
+    @IBAction func openWiFiSettings(_ sender: UIButton) {
+        if let currentLamp = lamp {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "wi-fi") as! WiFiSettingsViewController
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            vc.lamp = currentLamp
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    
     @IBAction func close(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
@@ -276,6 +302,12 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         if let currentLamp = lamp {
             showMessage(false, text: "")
 
+            if currentLamp.espMode{
+                openWiFiSettingsOut.setTitle("Wi-fi Роутер", for: .normal)
+            }else{
+                openWiFiSettingsOut.setTitle("Wi-Fi сеть лампы", for: .normal)
+            }
+            
             if currentLamp.favorite?.components(separatedBy: " ")[1] == "1" {
                 favOnOut.setOn(true, animated: false)
             }

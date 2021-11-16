@@ -40,6 +40,7 @@
 		3C4610262577781F00F375ED /* onOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4610252577781F00F375ED /* onOff.png */; };
 		3C561FFD25681D2E00E14632 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFB25681D2E00E14632 /* search.png */; };
 		3C561FFE25681D2E00E14632 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFC25681D2E00E14632 /* plus.png */; };
+		3C6B366B2743DE00008AD16B /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B366A2743DE00008AD16B /* WebViewViewController.swift */; };
 		3C6ECAD825617E8A00813C43 /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD425617E8A00813C43 /* timer.png */; };
 		3C6ECAD925617E8A00813C43 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD525617E8A00813C43 /* alarm.png */; };
 		3C6ECADA25617E8A00813C43 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD625617E8A00813C43 /* background.png */; };
@@ -68,6 +69,7 @@
 		3CA6DE0A26B09B13003F1AE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CA6DE0826B09B13003F1AE2 /* LaunchScreen.storyboard */; };
 		3CA6DE1926B09C82003F1AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CA6DE1B26B09C82003F1AE2 /* Main.storyboard */; };
 		3CA714832578AF64008984EA /* lamp_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA714822578AF64008984EA /* lamp_big.png */; };
+		3CAC1830273FC23C00F158B9 /* WiFiSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC182F273FC23C00F158B9 /* WiFiSettingsViewController.swift */; };
 		3CAF6586268245CD006C3B2A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF6585268245CD006C3B2A /* PaddingLabel.swift */; };
 		3CB419472561617E0025A34D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CB419462561617E0025A34D /* settings.png */; };
 		3CBCEDD52639558500619E4C /* Lamps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBCEDD42639558500619E4C /* Lamps.swift */; };
@@ -120,6 +122,7 @@
 		3C4610252577781F00F375ED /* onOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff.png; sourceTree = "<group>"; };
 		3C561FFB25681D2E00E14632 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		3C561FFC25681D2E00E14632 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		3C6B366A2743DE00008AD16B /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		3C6ECAD425617E8A00813C43 /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
 		3C6ECAD525617E8A00813C43 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = "<group>"; };
 		3C6ECAD625617E8A00813C43 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -149,6 +152,7 @@
 		3CA6DE1A26B09C82003F1AE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3CA6DE1D26B09C90003F1AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		3CA714822578AF64008984EA /* lamp_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lamp_big.png; sourceTree = "<group>"; };
+		3CAC182F273FC23C00F158B9 /* WiFiSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSettingsViewController.swift; sourceTree = "<group>"; };
 		3CAF6585268245CD006C3B2A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		3CB419462561617E0025A34D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		3CBCEDD42639558500619E4C /* Lamps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lamps.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				3C09B3FC257FDC8800CA34D4 /* SplashViewController.swift */,
 				3C735A8F257018FB001093C3 /* SearchAndAddLampViewController.swift */,
 				3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */,
+				3CAC182F273FC23C00F158B9 /* WiFiSettingsViewController.swift */,
 				3C735A8C25701395001093C3 /* AddLampViewController.swift */,
 				3C8DE0AD24F6D09900C61BBC /* AlarmViewController.swift */,
 				3CA069F924F909130058AD2A /* LampSettingsViewController.swift */,
@@ -249,6 +254,7 @@
 				3C45878124EC2C5A00DBE5C4 /* ViewController.swift */,
 				3C20D8F22657A83E008A9066 /* Empty2ViewController.swift */,
 				3C20D8F52657AB8A008A9066 /* EffectTableViewController.swift */,
+				3C6B366A2743DE00008AD16B /* WebViewViewController.swift */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 				3CEF72C726BD5710009585AA /* Bundle.swift in Sources */,
 				3C20D8F32657A83E008A9066 /* Empty2ViewController.swift in Sources */,
 				3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */,
+				3C6B366B2743DE00008AD16B /* WebViewViewController.swift in Sources */,
 				3C76399025E92AC5007D13C4 /* CoreDataService.swift in Sources */,
 				3C20D8F62657AB8A008A9066 /* EffectTableViewController.swift in Sources */,
 				3C45877E24EC2C5A00DBE5C4 /* AppDelegate.swift in Sources */,
@@ -503,6 +510,7 @@
 				3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */,
 				3CF2224426B31E2E00C6D35F /* StringsNeededLocalize.swift in Sources */,
 				3C15F2D124EDA6F600F63C92 /* LampDevice.swift in Sources */,
+				3CAC1830273FC23C00F158B9 /* WiFiSettingsViewController.swift in Sources */,
 				3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */,
 				3C2A5F6925EADBF400E3F5D1 /* ArrayOfLamps.swift in Sources */,
 				3CA069FA24F909130058AD2A /* LampSettingsViewController.swift in Sources */,
