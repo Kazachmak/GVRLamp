@@ -33,9 +33,7 @@ class WiFiSettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
         dismiss(animated: true)
     }
 
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+   
 
     @IBAction func saveButon(_ sender: UIButton) {
         if viewWithTextFileds.isHidden {
@@ -53,13 +51,13 @@ class WiFiSettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
                         timeout = "60"
                     }
                     delay(delayTime: 0.0, completionHandler: { [self] in
-                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "wifi_ssid=" + name)
+                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "ssid=" + name)
                     })
                     delay(delayTime: 0.05, completionHandler: { [self] in
-                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "wifi_pass=" + pass)
+                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "passw=" + pass)
                     })
                     delay(delayTime: 0.1, completionHandler: { [self] in
-                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "wifi_timeout=" + timeout)
+                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "timeout=" + timeout)
                     })
                     delay(delayTime: 0.15, completionHandler: { [self] in
                         lamp?.sendCommand(command: .txt, value: [0], valueTXT: "esp_mode=1")

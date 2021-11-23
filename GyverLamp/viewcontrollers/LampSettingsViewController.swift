@@ -252,10 +252,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         dismiss(animated: true)
     }
 
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
-
+ 
     @IBOutlet var renameLampOut: UIButton!
 
     @IBOutlet var removeLampOut: UIButton!

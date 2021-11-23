@@ -23,21 +23,18 @@ class WebViewViewController: UIViewController {
         dismiss(animated: true)
     }
 
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         backArrowHeight.constant += view.safeAreaTop - 20
         headerViewHeight.constant += view.safeAreaTop - 20
-        
         if let espMode = lamp?.espMode{
             if espMode{
-                let request = URLRequest(url: URL(string: "http://192.168.1.48")!)
+                let request = URLRequest(url: URL(string: "http://" + "\(lamp?.hostIP ?? "")")!)
                 webView.load(request)
             }else{
-                let request = URLRequest(url: URL(string: "http://" + "\(String(describing: lamp?.hostIP))")!)
+                let request = URLRequest(url: URL(string: "http://192.168.4.1")!)
                 webView.load(request)
             }
         }

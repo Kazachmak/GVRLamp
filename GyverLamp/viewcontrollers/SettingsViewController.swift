@@ -13,13 +13,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // обновлять таблицу или нет
     var updateTableFlag = true
 
+    
+    
     @IBAction func close(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+    
 
     @IBOutlet var heightOfErrorLabel: NSLayoutConstraint!
 
@@ -56,9 +56,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 newAddedLamp.lampBlink()
                 lamps.alignLampParametersAfterNewLampAdded(newAddedLamp)
                 
-                // DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                //    updateTable()
-                //}
             })
             AddAction.backgroundColor = .gray
             
@@ -109,6 +106,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
 
+    @IBAction func searchAndAdd(_ sender: UIButton) {
+        performSegue(withIdentifier: "searchAndAdd", sender: nil)
+    }
+    
+    
     @IBAction func settingsButton(_ sender: UIButton) {
         var superview = sender.superview
         while let view = superview, !(view is UITableViewCell) {
@@ -132,6 +134,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         present(vc, animated: true, completion: nil)
     }
 
+    
     @IBAction func add41(_ sender: UIButton) {
         LampDevice.scan(deviceIp: "192.168.4.1")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -183,6 +186,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         scanOut.imageView?.contentMode = .scaleAspectFit
         addButtonOut.imageView?.contentMode = .scaleAspectFit
         add41ButtobOut.imageView?.contentMode = .scaleAspectFit
-        
+        if isFirstLaunch{
+            performSegue(withIdentifier: "searchAndAdd", sender: nil)
+        }
     }
 }

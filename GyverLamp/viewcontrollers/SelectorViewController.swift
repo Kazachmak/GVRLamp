@@ -55,20 +55,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         removeFromParent()
     }
 
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        if flag == .effects{
-            if let currentLamp = lamp{
-                if let vc = parent as? LampSettingsViewController{
-                    vc.setListOfEffects(list: currentLamp.selectedEffects)
-                }else{
-                    self.sendFavoriteMessage()
-                    view.removeFromSuperview()
-                    removeFromParent()
-                }
-            }
-        }
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+   
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch flag {

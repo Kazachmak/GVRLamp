@@ -37,9 +37,7 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func returnToMainView(_ sender: UIButton) {
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+   
     
     
     @IBOutlet weak var ipTextField: UITextField!

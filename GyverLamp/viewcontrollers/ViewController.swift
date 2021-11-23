@@ -64,30 +64,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
 
-    /*
-     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-         if let currentLamp = lamps.mainLamp {
-            return currentLamp.selectedEffectsNameList[row].components(separatedBy: ",")[0]
-         } else {
-             return LampDevice.listOfEffectsDefault[row]
-         }
-     }
-     */
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = PaddingLabel()
         if let v = view {
             label = v as! PaddingLabel
-        }else {
+        } else {
             label = PaddingLabel(frame: CGRect(x: 0, y: 0, width: pickerView.frame.width, height: 400))
         }
-        
+
         label.font = UIFont.systemFont(ofSize: 22)
 
         if let currentLamp = lamps.mainLamp {
             if currentLamp.selectedEffectsNameList.count == 0 {
-                label.text =  youMustSelectEffects 
-            }else{
+                label.text = youMustSelectEffects
+            } else {
                 label.text = currentLamp.selectedEffectsNameList[row].components(separatedBy: ",")[0]
             }
         } else {
@@ -97,12 +88,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         label.adjustsFontSizeToFitWidth = true
         label.paddingLeft = 10
         label.paddingRight = 10
-        if lamps.mainLamp?.selectedEffectsNameList.count == 0{
+        if lamps.mainLamp?.selectedEffectsNameList.count == 0 {
             label.numberOfLines = 0
-        }else{
+        } else {
             label.numberOfLines = 1
         }
-        
+
         label.sizeToFit()
         return label
     }
@@ -111,24 +102,37 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if let currentLamp = lamps.mainLamp {
             if currentLamp.selectedEffectsNameList.count == 0 {
                 return 80.0
-            }else{
+            } else {
                 return 30.0
             }
-        }else{
+        } else {
             return 30.0
         }
     }
     
-    @IBAction func touchPicker(_ sender: UIButton) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if let currentLamp = lamps.mainLamp {
+            currentLamp.effect = row
+            currentLamp.updateSliderFlag = true
+            lamps.sendCommandToArrayOfLamps(command: .eff, value: [currentLamp.getEffectNumber(currentLamp.selectedEffectsNameList[row])])
+            lamps.necessaryToAlignTheParametersOfTheLamps = true
+        }
+    }
+    
+    
+    
+    @IBAction func touchPick(_ sender: UILongPressGestureRecognizer) {
         if let currentLamp = lamps.mainLamp {
             if currentLamp.selectedEffectsNameList.count == 0 {
                 openSelector(.effects, lamp: currentLamp)
-            }else{
+            } else {
                 performSegue(withIdentifier: "effects", sender: sender)
             }
-    }
+        }
     }
     
+   
+
     private func changeEffectByButton(_ step: Int) {
         if let currentLamp = lamps.mainLamp {
             currentLamp.updateSliderFlag = true
@@ -350,7 +354,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     picker.selectRow(effectNumber, inComponent: 0, animated: false)
                 }
             }
-          
+
             brightPercent.text = currentLamp.percentageOfValue(.bri)
 
             speedPercent.text = currentLamp.percentageOfValue(.spd)
@@ -362,9 +366,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if currentLamp.connectionStatus { // проверка доступа к лампе
                 removeOffView()
                 statusLabel.textColor = blackColor
-                if currentLamp.useSelectedEffectOnScreen{
+                if currentLamp.useSelectedEffectOnScreen {
                     toggleFavoriteEffectsOut.setImage(UIImage(named: "heart2.png"), for: .normal)
-                }else{
+                } else {
                     toggleFavoriteEffectsOut.setImage(UIImage(named: "heart.png"), for: .normal)
                 }
                 if currentLamp.powerStatus == true { // проверка включена лампа или нет
@@ -508,38 +512,46 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         brightnessSlider.tintColor = UIColor(patternImage: imageGradient)
         speedSlider.tintColor = UIColor(patternImage: imageGradient)
         scaleSlider.tintColor = UIColor(patternImage: imageGradient)
-        if let currentLamp = lamps.mainLamp{
-            if currentLamp.useSelectedEffectOnScreen{
+        if let currentLamp = lamps.mainLamp {
+            if currentLamp.useSelectedEffectOnScreen {
                 toggleFavoriteEffectsOut.setImage(UIImage(named: "heart2.png"), for: .normal)
-            }else{
+            } else {
                 toggleFavoriteEffectsOut.setImage(UIImage(named: "heart.png"), for: .normal)
             }
         }
         DispatchQueue.main.async {
-        let systemLang = Locale.current.languageCode
-        if let storedLocale =  UserDefaults.standard.string(forKey: "storedLocale"){
-            if storedLocale != systemLang {
-                let alert = UIAlertController(title: systemLangWasChange, message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "English", style: .default, handler: { action in
-                    UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
-                    UserDefaults.standard.synchronize()
-                    self.showAlertAboutNeedToRestart()
-                }))
-                alert.addAction(UIAlertAction(title: "Русский", style: .default, handler: { action in
-                    UserDefaults.standard.set(["ru"], forKey: "AppleLanguages")
-                    UserDefaults.standard.synchronize()
-                    self.showAlertAboutNeedToRestart()
-                }))
-                alert.addAction(UIAlertAction(title: "Український", style: .default, handler: { action in
-                    UserDefaults.standard.set(["uk"], forKey: "AppleLanguages")
-                    UserDefaults.standard.synchronize()
-                    self.showAlertAboutNeedToRestart()
-                }))
-                self.present(alert, animated: true, completion: nil)
+            let systemLang = Locale.current.languageCode
+            if let storedLocale = UserDefaults.standard.string(forKey: "storedLocale") {
+                if storedLocale != systemLang {
+                    let alert = UIAlertController(title: systemLangWasChange, message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "English", style: .default, handler: { _ in
+                        UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+                        UserDefaults.standard.synchronize()
+                        self.showAlertAboutNeedToRestart()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Русский", style: .default, handler: { _ in
+                        UserDefaults.standard.set(["ru"], forKey: "AppleLanguages")
+                        UserDefaults.standard.synchronize()
+                        self.showAlertAboutNeedToRestart()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Український", style: .default, handler: { _ in
+                        UserDefaults.standard.set(["uk"], forKey: "AppleLanguages")
+                        UserDefaults.standard.synchronize()
+                        self.showAlertAboutNeedToRestart()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }else{
+                isFirstLaunch = true
+                self.performSegue(withIdentifier: "settings", sender: nil)
+                
             }
+            UserDefaults.standard.set(systemLang, forKey: "storedLocale")
+           
         }
-        UserDefaults.standard.set(systemLang, forKey: "storedLocale")
-        }        
+        
+        
+        
     }
 
     @objc private func appMovedToForeground() {

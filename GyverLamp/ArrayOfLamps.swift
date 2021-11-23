@@ -15,7 +15,7 @@ class ArrayOfLamps {
     var arrayOfLamps: [LampDevice] = []
 
     var mainLampIndex: Int?
-
+    
     var necessaryToAlignTheParametersOfTheLamps = false
 
     var mainLampIsBlinking = false

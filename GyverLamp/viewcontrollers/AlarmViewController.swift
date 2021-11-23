@@ -25,9 +25,7 @@ class AlarmViewController: UIViewController {
         openSelector(.dawn, selectedDawn: selectedDawn, lamp: lamps.mainLamp!)
     }
 
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+   
 
     @IBOutlet var daysLabel: UILabel!
 

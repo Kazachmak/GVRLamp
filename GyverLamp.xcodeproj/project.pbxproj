@@ -18,6 +18,7 @@
 		3C15F2D124EDA6F600F63C92 /* LampDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C15F2D024EDA6F600F63C92 /* LampDevice.swift */; };
 		3C16E042257A866600D8EBFE /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C16E041257A866600D8EBFE /* right-arrow.png */; };
 		3C18568C25945F0300851A6B /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C18568B25945F0300851A6B /* main.png */; };
+		3C1E0891274CF3D00030F560 /* ic_settings_wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */; };
 		3C20D8F32657A83E008A9066 /* Empty2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20D8F22657A83E008A9066 /* Empty2ViewController.swift */; };
 		3C20D8F62657AB8A008A9066 /* EffectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20D8F52657AB8A008A9066 /* EffectTableViewController.swift */; };
 		3C22E2AD2573F2B300BD93B2 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */; };
@@ -97,6 +98,7 @@
 		3C15F2D024EDA6F600F63C92 /* LampDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampDevice.swift; sourceTree = "<group>"; };
 		3C16E041257A866600D8EBFE /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		3C18568B25945F0300851A6B /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
+		3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_settings_wifi.png; sourceTree = "<group>"; };
 		3C20D8F22657A83E008A9066 /* Empty2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty2ViewController.swift; sourceTree = "<group>"; };
 		3C20D8F52657AB8A008A9066 /* EffectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTableViewController.swift; sourceTree = "<group>"; };
 		3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				3C2C3AAC2570D72C00E345DD /* minus.png */,
 				3CE0576B25796726008EB7A2 /* lamp2.png */,
 				3C09B3F3257FCD4800CA34D4 /* picker_button_right.png */,
+				3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */,
 				3C16E041257A866600D8EBFE /* right-arrow.png */,
 				3C2C3AA32570CF8B00E345DD /* LaunchScreen.png */,
 				3C18568B25945F0300851A6B /* main.png */,
@@ -421,6 +424,7 @@
 				3C039B322561AD2200119134 /* scale.png in Resources */,
 				3CE0576C25796726008EB7A2 /* lamp2.png in Resources */,
 				3C3713C926569EFD00BD42CB /* heart.png in Resources */,
+				3C1E0891274CF3D00030F560 /* ic_settings_wifi.png in Resources */,
 				3CD37A462592496D0076A696 /* home.png in Resources */,
 				3CA6DE1926B09C82003F1AE2 /* Main.storyboard in Resources */,
 				3CDB362D2567C5CD004E3E1C /* enter.png in Resources */,

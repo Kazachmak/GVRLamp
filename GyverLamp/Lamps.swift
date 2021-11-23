@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+var isFirstLaunch = false
+
 var lamps = ArrayOfLamps()
 
 enum selectorFlag {

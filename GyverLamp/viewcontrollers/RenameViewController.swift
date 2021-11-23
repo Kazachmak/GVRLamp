@@ -30,9 +30,7 @@ class RenameViewController: UIViewController {
         dismiss(animated: true)
     }
 
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+    
 
     @IBOutlet var renameLampOut: UIButton!
 

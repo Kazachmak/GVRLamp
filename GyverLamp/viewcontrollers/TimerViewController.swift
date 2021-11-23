@@ -18,10 +18,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.dismiss(animated: true)
     }
     
-    @IBAction func returnToMainView(_ sender: UIButton) {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
-    
+   
     
     @IBOutlet var picker: UIPickerView!
 
