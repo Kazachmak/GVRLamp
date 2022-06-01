@@ -238,6 +238,26 @@ extension UITextField {
         rightView = paddingView
         rightViewMode = .always
     }
+    
+  
+        @IBInspectable var placeholderColor: UIColor {
+            get {
+                return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor ?? .clear
+            }
+            set {
+                guard let attributedPlaceholder = attributedPlaceholder else { return }
+                let attributes: [NSAttributedString.Key: UIColor] = [.foregroundColor: newValue]
+                self.attributedPlaceholder = NSAttributedString(string: attributedPlaceholder.string, attributes: attributes)
+            }
+        }
+        func hideShowPassword(){
+            if self.isSecureTextEntry{
+                self.isSecureTextEntry = false
+            }else{
+                self.isSecureTextEntry = true
+            }
+        }
+    
 }
 
 extension Int {
@@ -270,6 +290,25 @@ extension UIButton {
 }
 
 extension String {
+    var onlyDigits: String { return onlyCharacters(charSets: [.decimalDigits]) }
+    var onlyLetters: String { return onlyCharacters(charSets: [.letters, .whitespacesAndNewlines]) }
+    
+    private func filterCharacters(definedIn charSets: [CharacterSet], unicodeScalarsFilter: (CharacterSet, UnicodeScalar) -> Bool) -> String {
+        if charSets.isEmpty { return self }
+        let charSet = charSets.reduce(CharacterSet()) { $0.union($1) }
+        return filterCharacters { unicodeScalarsFilter(charSet, $0) }
+    }
+
+    private func filterCharacters(unicodeScalarsFilter closure: (UnicodeScalar) -> Bool) -> String {
+        return String(String.UnicodeScalarView(unicodeScalars.filter { closure($0) }))
+    }
+    
+    func removeCharacters(charSets: [CharacterSet]) -> String { return filterCharacters(definedIn: charSets) { !$0.contains($1) } }
+    func removeCharacters(charSet: CharacterSet) -> String { return removeCharacters(charSets: [charSet]) }
+
+    func onlyCharacters(charSets: [CharacterSet]) -> String { return filterCharacters(definedIn: charSets) { $0.contains($1) } }
+    func onlyCharacters(charSet: CharacterSet) -> String { return onlyCharacters(charSets: [charSet]) }
+    
     var length: Int {
         return count
     }

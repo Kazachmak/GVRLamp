@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1100"
+   LastUpgradeVersion = "1240"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "75F1EA88CB9544AB5CBE20DEC9A011AE"
-               BuildableName = "LanguageManager_iOS.framework"
-               BlueprintName = "LanguageManager-iOS"
+               BlueprintIdentifier = "9A2AFD30069CA32CD2E72E7D9D0E0097"
+               BuildableName = "MagicTimer.framework"
+               BlueprintName = "MagicTimer"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

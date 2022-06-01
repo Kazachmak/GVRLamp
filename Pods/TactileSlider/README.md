@@ -1,7 +1,9 @@
 # TactileSlider
 
-[![CI Status](https://img.shields.io/travis/daprice/iOS-Tactile-Slider.svg?style=flat)](https://travis-ci.org/daprice/iOS-Tactile-Slider)
+![CI Status](https://github.com/daprice/iOS-Tactile-Slider/actions/workflows/main.yml/badge.svg)
+![Swift Package Manager compatible](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat)
 [![Version](https://img.shields.io/cocoapods/v/TactileSlider.svg?style=flat)](https://cocoapods.org/pods/TactileSlider)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/TactileSlider.svg?style=flat)](https://cocoapods.org/pods/TactileSlider)
 [![Platform](https://img.shields.io/cocoapods/p/TactileSlider.svg?style=flat)](https://cocoapods.org/pods/TactileSlider)
 
@@ -14,7 +16,7 @@ A slider control designed to be easy to grab and use because it can be dragged o
 - Can be dragged or (optionally) tapped to set a value
 - Supports horizontal and vertical orientation in either direction
 - IBDesignable – colors, values, rounded corners, and behavior can be customized in Interface Builder or programatically
-- Supports light & dark appearance using semantic system colors by default (iOS 13+)
+- Supports light & dark appearance using semantic system colors with borders that can automatically appear in low contrast situations (iOS 13+)
 - Adjustable haptic feedback (iOS 10+)
 - VoiceOver support
 - Supports pointer (e.g. trackpad or mouse) based scrolling on iPadOS (iOS 13.4+)
@@ -25,7 +27,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-iOS 8.0+
+iOS 9.0+
 
 - iOS 10.0+ required for haptic feedback
 - iPadOS 13.4+ required for pointer use
@@ -41,6 +43,8 @@ pod 'TactileSlider'
 ```
 
 ## Usage
+
+For the full documentation using Xcode 13 or later, add TactileSlider as a dependency or download a local copy, then choose Product > Build Documentation. In previous versions of Xcode, symbol documentation will appear in Quick Help.
 
 ```swift
 let slider = TactileSlider(frame: someRect)
@@ -61,10 +65,11 @@ slider.reverseValueAxis = true
 ### Adjusting behavior
 
 ```swift
-slider.isContinuous = false
+slider.isContinuous = false // send events only at end of gesture vs continuously
 slider.enableTapping = false // allow or disallow tapping anywhere on the slider track to instantly set a value
-slider.feedbackStyle = .medium // customize haptic feedback
+slider.feedbackStyle = .medium // customize haptic feedback when the slider reaches the end
 slider.isScrollingEnabled = false // allow or disallow scrolling to adjust the slider using a connected pointing device on iPadOS
+slider.precisionRampUpDistance = 10 // enable finer adjustment when moving the slider by amounts smaller than this distance (in screen points)
 ```
 
 ### Changing colors and appearance
@@ -72,8 +77,27 @@ slider.isScrollingEnabled = false // allow or disallow scrolling to adjust the s
 ```swift
 slider.trackBackground = UIColor.black.withAlpha(0.8) // use translucent black for the slider track
 slider.tintColor = UIColor.systemGreen // use dynamic green for the slider thumb
-slider.cornerRadius = 12
+
+slider.outlineColor = UIColor.gray // color of outline around slider and thumb (if unset, will be determined automatically based on contrast between tintColor and current system appearance)
+slider.outlineColorProvider = { slider, suggestedColor -> UIColor? in … } // provide your own closure to set the outline color dynamically
+slider.outlineSize = 2 // set thickness of outline
+
+slider.cornerRadius = 12 // size of corner radius; defaults to automatic based on the slider's bounds
+
 slider.isPointerInteractionEnabled = true // display a hover effect when under the pointer on iPadOS
+```
+
+
+### Fine tuning accessibility
+
+By default, the accessibility increment and decrement gestures change the value by 10% of the slider's range, matching the behavior of UISlider. This can be adjusted:
+
+```swift
+slider.steppingMode = .percentage(5) // specify a percentage to increment/decrement the slider's value by
+```
+
+```swift
+slider.steppingMode = .stepValue(0.1) // specify a fixed value to increment/decrement the slider's value by
 ```
 
 ### Interface Builder

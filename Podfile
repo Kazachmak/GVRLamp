@@ -8,8 +8,8 @@ pod 'MMLanScan'
 pod 'TactileSlider'
 pod 'MIBlurPopup'
 pod 'InputMask'
-pod "SimpleAnimation"
-pod 'LanguageManager-iOS'
+pod 'MagicTimer'
+pod 'SimpleAnimation'
   # Pods for GyverLamp
 
 end

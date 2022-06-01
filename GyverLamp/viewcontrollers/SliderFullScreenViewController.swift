@@ -79,14 +79,7 @@ class SliderFullScreenViewController: UIViewController {
 
     // отправка нового значения в лампу
     private func sendNewValueWhenButtonPressed(_ value: Int, lamp: LampDevice, command: CommandsToLamp) {
-        // switch command {
-        // case .bri: //lamp.sendCommand(command: command, value: [Int(slider.value) + value])
         lamps.sendCommandToArrayOfLamps(command: command, value: [Int(slider.value) + value])
-        // case .spd: //lamp.sendCommand(command: command, value: [Int(slider.value) + value])
-        // lamps.sendCommandToArrayOfLamps(command: command, value: [Int(slider.value) + value])
-        // case .sca: lamp.sendCommand(command: command, value: [Int(slider.value) + value])
-        // default: break
-        // }
         slider.setValue(slider.value + Float(value), animated: true)
     }
 
@@ -98,7 +91,6 @@ class SliderFullScreenViewController: UIViewController {
     // передача значений при движении ползунком
     @IBAction func valueChange(_ sender: TactileSlider) {
         if let currentLamp = lamp, let commandToSend = command {
-            // currentLamp.sendCommand(command: commandToSend, value: [Int(sender.value)])
             lamps.sendCommandToArrayOfLamps(command: commandToSend, value: [Int(sender.value)])
             currentLamp.updateSliderFlag = true
         }

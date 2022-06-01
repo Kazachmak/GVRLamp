@@ -69,7 +69,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "selector", for: indexPath) as! SelectorTableViewCell
         switch flag {
         case .effects:
-            cell.day.text = lamp?.listOfEffects[indexPath.row].components(separatedBy: ",")[0]
+            cell.day.text = lamp?.getEffectName(indexPath.row)
             if let currentLamp = lamp {
                 if currentLamp.selectedEffects[indexPath.row] {
                     cell.selector.image = UIImage(named: "selector.png")!

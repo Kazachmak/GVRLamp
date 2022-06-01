@@ -7,13 +7,24 @@
 
 import UIKit
 
+@available(iOS 9, *)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
 internal class TactileSliderLayerRenderer {
+	
+	private static var valueChangeTimingFunction = CAMediaTimingFunction(name: .default)
 	
 	weak var tactileSlider: TactileSlider?
 	
 	var trackBackground: UIColor = .darkGray {
 		didSet {
 			trackLayer.backgroundColor = trackBackground.cgColor
+		}
+	}
+	
+	var outlineSize: CGFloat = 1 {
+		didSet {
+			updateOutlineLayer()
 		}
 	}
 	
@@ -25,7 +36,7 @@ internal class TactileSliderLayerRenderer {
 	
 	var cornerRadius: CGFloat = 10 {
 		didSet {
-			updateMaskLayerPath()
+			updateMaskAndOutlineLayerPath()
 		}
 	}
 	
@@ -46,14 +57,29 @@ internal class TactileSliderLayerRenderer {
 	let trackLayer = CALayer()
 	let thumbLayer = CAShapeLayer()
 	let maskLayer = CAShapeLayer()
+	let outlineLayer = CAShapeLayer()
+	let thumbOutlineLayer = CAShapeLayer()
 	
 	init() {
 		trackLayer.backgroundColor = trackBackground.cgColor
 		thumbLayer.fillColor = thumbTint.cgColor
+		thumbLayer.masksToBounds = true
 		maskLayer.fillColor = UIColor.white.cgColor
 		maskLayer.backgroundColor = UIColor.clear.cgColor
 		trackLayer.mask = maskLayer
 		trackLayer.masksToBounds = true
+		outlineLayer.backgroundColor = nil
+		outlineLayer.fillColor = nil
+		thumbOutlineLayer.backgroundColor = nil
+		
+		updateOutlineLayer(updateBounds: false)
+		updateOutlineColors()
+	}
+	
+	internal func setupLayers() {
+		trackLayer.addSublayer(thumbLayer)
+		trackLayer.addSublayer(outlineLayer)
+		thumbLayer.addSublayer(thumbOutlineLayer)
 	}
 	
 	private func updateThumbLayerPath() {
@@ -62,18 +88,65 @@ internal class TactileSliderLayerRenderer {
 		
 		thumbLayer.path = CGPath(rect: CGRect(x: 0, y: 0, width: thumbLayer.bounds.width, height: thumbLayer.bounds.height), transform: nil)
 		
+		updateThumbOutlineLayerPath()
+		
 		CATransaction.commit()
 	}
 	
-	private func updateMaskLayerPath() {
+	private func updateThumbOutlineLayerPath() {
+		guard let slider = tactileSlider else {
+			return
+		}
+		
+		CATransaction.begin()
+		CATransaction.setDisableActions(true)
+		
+		let edgeInsets: UIEdgeInsets
+		switch (slider.vertical, slider.reverseValueAxis) {
+		case (false, false):
+			edgeInsets = UIEdgeInsets(top: 0, left: thumbLayer.bounds.width - outlineSize, bottom: 0, right: -1)
+		case (false, true):
+			edgeInsets = UIEdgeInsets(top: 0, left: -1, bottom: 0, right: thumbLayer.bounds.width - outlineSize)
+		case (true, false):
+			edgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: thumbLayer.bounds.height - outlineSize, right: 0)
+		case (true, true):
+			edgeInsets = UIEdgeInsets(top: thumbLayer.bounds.height - outlineSize, left: 0, bottom: -1, right: 0)
+		}
+		
+		let baseRect = CGRect(x: 0, y: 0, width: thumbLayer.bounds.width, height: thumbLayer.bounds.height)
+		let insetRect = baseRect.inset(by: edgeInsets)
+		thumbOutlineLayer.path = CGPath(rect: insetRect, transform: nil)
+		
+		CATransaction.commit()
+	}
+	
+	private func updateMaskAndOutlineLayerPath() {
 		CATransaction.begin()
 		CATransaction.setDisableActions(true)
 		
 		let maskRect = CGRect(x: 0, y: 0, width: maskLayer.bounds.width, height: maskLayer.bounds.height)
-		let maskPath = UIBezierPath(roundedRect: maskRect, cornerRadius: cornerRadius)
-		maskLayer.path = maskPath.cgPath
+		let maskPath = UIBezierPath(roundedRect: maskRect, cornerRadius: cornerRadius).cgPath
+		maskLayer.path = maskPath
+		outlineLayer.path = maskPath
 		
 		CATransaction.commit()
+	}
+	
+	internal func updateOutlineColors() {
+		let color: CGColor?
+		if let slider = tactileSlider {
+			color = slider.finalOutlineColor?.cgColor
+		} else {
+			color = nil
+		}
+		
+		outlineLayer.strokeColor = color
+		thumbOutlineLayer.fillColor = color
+	}
+	
+	private func updateOutlineLayer(updateBounds: Bool = true) {
+		outlineLayer.lineWidth = outlineSize * 2
+		if updateBounds { updateThumbOutlineLayerPath() }
 	}
 	
 	private func updateGrayedOut() {
@@ -83,15 +156,12 @@ internal class TactileSliderLayerRenderer {
 	
 	private func updatePopUp() {
 		CATransaction.begin()
-		CATransaction.setDisableActions(true)
+		
+		CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeOut))
+		CATransaction.setAnimationDuration(0.1)
 		
 		let zPosition: CGFloat = popUp ? 1.025 : 1
 		trackLayer.transform = CATransform3DScale(CATransform3DIdentity, zPosition, zPosition, zPosition)
-		
-		let animation = CABasicAnimation(keyPath: "transform.scale")
-		animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-		animation.duration = 0.1
-		trackLayer.add(animation, forKey: nil)
 		
 		CATransaction.commit()
 	}
@@ -105,22 +175,31 @@ internal class TactileSliderLayerRenderer {
 		
 		maskLayer.bounds = trackLayer.bounds
 		maskLayer.position = trackLayer.position
-		updateMaskLayerPath()
+		outlineLayer.bounds = trackLayer.bounds
+		outlineLayer.position = trackLayer.position
+		updateMaskAndOutlineLayerPath()
 		
 		thumbLayer.bounds = trackLayer.bounds
 		thumbLayer.position = trackLayer.position
+		thumbOutlineLayer.bounds = trackLayer.bounds
+		thumbOutlineLayer.position = trackLayer.position
 		updateThumbLayerPath()
-		
-		CATransaction.commit()
 		
 		if let value = tactileSlider?.value {
 			setValue(value)
 		}
+		
+		CATransaction.commit()
 	}
 	
 	internal func setValue(_ value: Float, animated: Bool = false) {
 		CATransaction.begin()
-		CATransaction.setDisableActions(true)
+		
+		if animated {
+			CATransaction.setAnimationTimingFunction(Self.valueChangeTimingFunction)
+		} else {
+			CATransaction.setDisableActions(true)
+		}
 		
 		let valueAxisOffset = tactileSlider!.valueAxisFrom(CGPoint(x: thumbLayer.bounds.width, y: thumbLayer.bounds.height), accountForDirection: true)
 		let valueAxisAmount = tactileSlider!.positionForValue(value)
@@ -128,13 +207,6 @@ internal class TactileSliderLayerRenderer {
 		let position = tactileSlider!.pointOnSlider(valueAxisPosition: valueAxisAmount - (reverseOffset ? 0 : valueAxisOffset), offAxisPosition: 0)
 		
 		thumbLayer.transform = CATransform3DTranslate(CATransform3DIdentity, position.x, position.y, 0)
-		
-		if animated {
-			let animationAxis = tactileSlider!.vertical ? "y" : "x"
-			let animation = CABasicAnimation(keyPath: "transform.translation.\(animationAxis)")
-			animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
-			thumbLayer.add(animation, forKey: nil)
-		}
 		
 		CATransaction.commit()
 	}

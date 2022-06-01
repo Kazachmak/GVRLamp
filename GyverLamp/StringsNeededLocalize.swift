@@ -83,3 +83,14 @@ let lampOff = NSLocalizedString("Лампа выключена", comment: "")
 
 let alertAboutNeedToRestart = NSLocalizedString("Язык поменятся после перезапуска приложения.", comment: "")
 let systemLangWasChange = NSLocalizedString("Системный язык поменялся. Выберите язык в приложении.", comment: "")
+
+
+let lampNotFoundExt = NSLocalizedString("Не удалось найти вашу лампу. Проверьте список Wi-Fi сетей.\n В списке появилась сеть лампы (LedLamp)? Если да: подключите к ней смартфон и нажмите кнопку ниже.\n Если нет: просто нажмите кнопку ниже для повторной попытки.", comment: "")
+let lampNotFoundExt2 = NSLocalizedString("Не удалось найти вашу лампу. Убедитесь, что телефон подключен к Wi-Fi сети лампы и нажмите:", comment: "")
+let connectPhoneToWiFi = NSLocalizedString("Подключите теперь телефон к Wi-Fi сети ", comment: "")
+let andPressFind = NSLocalizedString(" и нажмите Найти:", comment: "")
+
+let wifiRouter = NSLocalizedString("Wi-Fi Роутер >", comment: "")
+let wifiRouterLamp = NSLocalizedString("Wi-Fi сеть лампы >", comment: "")
+
+
