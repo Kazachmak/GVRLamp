@@ -11,12 +11,15 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // обновлять таблицу или нет
-    var updateTableFlag = true
-
     
+    @IBOutlet weak var backArrow: UIButton!
+    
+    var updateTableFlag = true
     
     @IBAction func close(_ sender: UITapGestureRecognizer) {
-        dismiss(animated: true, completion: nil)
+        if !lamps.isListEmpty{
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     
@@ -155,11 +158,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var add41ButtobOut: UIButton!
     
-    
     @IBOutlet var addButtonOut: UIButton!
 
     // обновляем таблицу
     @objc func updateTable() {
+        if lamps.isListEmpty{
+            backArrow.isHidden = true
+        }else{
+            backArrow.isHidden = false
+        }
         if updateTableFlag {
             tableView.reloadData()
         }
@@ -173,6 +180,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewWillAppear(_ animated: Bool) {
         // читаем из памяти список сохранненых ламп
+        if lamps.isListEmpty{
+            backArrow.isHidden = true
+        }else{
+            backArrow.isHidden = false
+        }
         updateTable()
     }
 
@@ -186,8 +198,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         scanOut.imageView?.contentMode = .scaleAspectFit
         addButtonOut.imageView?.contentMode = .scaleAspectFit
         add41ButtobOut.imageView?.contentMode = .scaleAspectFit
-        if isFirstLaunch{
-            performSegue(withIdentifier: "searchAndAdd", sender: nil)
-        }
+        
     }
 }

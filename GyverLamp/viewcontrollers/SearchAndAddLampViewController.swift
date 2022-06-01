@@ -6,21 +6,41 @@
 //  Copyright © 2020 Maksim Kazachkov. All rights reserved.
 //
 
+import MMLanScan
 import UIKit
 
 class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
-    @IBOutlet var lampSearchLabel: UILabel!
+    var label: String?
+
+    var modeOfSearch: ModeOfSearch = .firstStartSearch
+
+    
+
+    @IBOutlet var searchLampTextLabel: UITextView!
+
+    @IBAction func searchLampLabelTouch(_ sender: UITapGestureRecognizer) {
+        switch searchLampTextLabel.text {
+        case lampNotFoundExt1:
+            searchLampTextLabel.text = lampNotFoundExt
+          //  searchButtonOut.isHidden = true
+
+        case lampNotFoundExt: searchLampTextLabel.text = lampNotFoundExt1
+                //  searchButtonOut.isHidden = false
+
+        default: break
+        }
+    }
 
     @IBOutlet var searchAndAddLabel: UILabel!
 
-    @IBOutlet var backArrowHeight: NSLayoutConstraint!
-
+    
     @IBOutlet var headerViewHeight: NSLayoutConstraint!
 
     var lanScanner: MMLANScanner! // сканер устройств в локальной сети
 
     func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int) {
-        lampSearchLabel.text = searchingForLamp + String(Int(pingedHosts) * 100 / overallHosts) + "%"
+        searchLampTextLabel.textAlignment = .center
+        searchLampTextLabel.text = searchingForLamp + String(Int(pingedHosts) * 100 / overallHosts) + "%"
     }
 
     // когда найдено новое устройство, проверяется лампа ли это
@@ -31,50 +51,90 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
     }
 
     func lanScanDidFinishScanning(with status: MMLanScannerStatus) {
-        if isFirstLaunch && lamps.arrayOfLamps.isEmpty {
-            // create the alert
-            let alert = UIAlertController(title: lampNotFound, message: " «Лампы не обнаружены. Подключитесь к WiFi сети лампы и нажмите \"Найти\" или \"Добавьте лампу вручную\"", preferredStyle: UIAlertController.Style.alert)
-            // add the actions (buttons)
-            alert.addAction(UIAlertAction(title: openSettings, style: UIAlertAction.Style.default, handler: { _ in UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil) }))
-            // show the alert
-            present(alert, animated: true, completion: nil)
+        searchButtonOut.alpha = 1
+        searchButtonOut.isHidden = false
+        searchLampTextLabel.textAlignment = .left
+        if lamps.arrayOfLamps.isEmpty {
+           
+            switch modeOfSearch {
+            case .searchInRouterMode:
+                searchLampTextLabel.text = lampNotFoundExt1
+            case .searchInSpotMode, .firstStartSearch:
+                searchLampTextLabel.text = lampNotFoundExt2
+            }
         } else {
-            dismiss(animated: true)
+            view.window!.rootViewController?.dismiss(animated: false, completion: nil)
         }
     }
 
     func lanScanDidFailedToScan() {
-        dismiss(animated: true)
+        //view.window!.rootViewController?.dismiss(animated: false, completion: nil)
         print("Failed to scan")
     }
 
-    @IBAction func close(_ sender: UITapGestureRecognizer) {
-        dismiss(animated: true)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        lanScanner = MMLANScanner(delegate: self)
-        if isFirstLaunch {
+    @IBAction func searchButton(_ sender: UIButton) {
+        self.searchButtonOut.alpha = 0.5
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+            
             LampDevice.scan(deviceIp: "192.168.4.1")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if !lamps.checkIP("192.168.4.1") {
                     self.lanScanner.start()
                 } else {
-                    self.dismiss(animated: true)
+                   // if self.modeOfSearch == .searchInRouterMode {
+                        
+                    //} else {
+                        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                   // }
                 }
             }
-        } else {
-            lanScanner.start()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.dismiss(animated: true, completion: nil)
+        
+    }
+
+    @IBOutlet var searchButtonOut: UIButton!
+
+    
+
+    override func viewDidAppear(_ animated: Bool) {
+        lanScanner = MMLANScanner(delegate: self)
+        searchButtonOut.isHidden = false
+        switch modeOfSearch {
+        case .firstStartSearch:
+            searchButtonOut.isHidden = true
+            if lamps.arrayOfLamps.isEmpty || !lamps.connectionStatusOfMainLamp {
+                
+                LampDevice.scan(deviceIp: "192.168.4.1")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if !lamps.checkIP("192.168.4.1") {
+                        self.lanScanner.start()
+                    } else {
+                        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                    }
+                }
+            } else {
+                lanScanner.start()
+            }
+        case .searchInRouterMode:
+            
+            searchLampTextLabel.textAlignment = .left
+            searchLampTextLabel.text = connectPhoneToWiFi + (label ?? "") + andPressFind
+        case .searchInSpotMode:
+            
+            searchLampTextLabel.textAlignment = .left
+            searchLampTextLabel.text = connectPhoneToWiFi + "Led Lamp" + andPressFind
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        backArrowHeight.constant += view.safeAreaTop - 20
-        headerViewHeight.constant += view.safeAreaTop - 20
+        //  backArrowHeight.constant += view.safeAreaTop + 20
+        //  headerViewHeight.constant += view.safeAreaTop - 20
         searchAndAddLabel.adjustsFontSizeToFitWidth = true
+        searchLampTextLabel.textAlignment = .left
+
+        // searchLampTextLabel.text = lampNotFoundExt
+        // searchButtonOut.isHidden = false
     }
 }

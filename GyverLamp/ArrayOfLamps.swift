@@ -10,12 +10,11 @@ import Foundation
 import Network
 
 class ArrayOfLamps {
-    var timer = Timer()
-
+   
     var arrayOfLamps: [LampDevice] = []
 
     var mainLampIndex: Int?
-    
+
     var necessaryToAlignTheParametersOfTheLamps = false
 
     var mainLampIsBlinking = false
@@ -29,6 +28,18 @@ class ArrayOfLamps {
             return arrayOfLamps[index]
         } else {
             return nil
+        }
+    }
+
+    var isListEmpty: Bool {
+        return arrayOfLamps.isEmpty
+    }
+
+    var connectionStatusOfMainLamp: Bool {
+        if let connection = mainLamp?.connectionStatus {
+            return connection
+        } else {
+            return false
         }
     }
 
@@ -46,35 +57,33 @@ class ArrayOfLamps {
                 if let useSelectedEffectOnScreenTemp = element.value(forKey: "useSelectedEffectOnScreen") as? Bool {
                     useSelectedEffectOnScreen = useSelectedEffectOnScreenTemp
                 }
-
-                /*
-                 for key in element.entity.attributesByName.keys{
-                             let value: Any? = element.value(forKey: key)
-                             print("\(key) = \(value)")
-                         }
-
-                 */
+                var doNotForgetTheLampWhenTheConnectionIsLost = false
+                if let doNotForgetTheLampWhenTheConnectionIsLostTemp = element.value(forKey: "doNotForgetTheLampWhenTheConnectionIsLost") as? Bool {
+                    doNotForgetTheLampWhenTheConnectionIsLost = doNotForgetTheLampWhenTheConnectionIsLostTemp
+                }
 
                 if mainLamp {
                     mainLampIndex = index
                 }
 
-                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ";"), flagLampIsControlled: flagLampIsControlled, useSelectedEffectOnScreen: useSelectedEffectOnScreen))
+                arrayOfLamps.append(LampDevice(hostIP: NWEndpoint.Host(ip), hostPort: NWEndpoint.Port(port) ?? 8888, name: name, effectsFromLamp: effectsFromLamp, listOfEffects: listOfEffects.components(separatedBy: ";"), flagLampIsControlled: flagLampIsControlled, useSelectedEffectOnScreen: useSelectedEffectOnScreen, doNotForgetTheLampWhenTheConnectionIsLost: doNotForgetTheLampWhenTheConnectionIsLost))
             }
             UserDefaults.standard.setValue(true, forKey: "firstLaunchOfV11")
-            timerStartAndStop(true)
-        }
-    }
 
-    private func timerStartAndStop(_ start: Bool) {
-        timer.invalidate()
-        if start {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.arrayOfLamps.forEach({ lampDevice in
+                    if (!lampDevice.connectionStatus) && (!lampDevice.doNotForgetTheLampWhenTheConnectionIsLost) {
+                        lamps.removeLamp(lampDevice)
+                    }
+                })
+            }
+        }
+            _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+                print("Timer fire!")
                 if let currentLamp = lamps.mainLamp {
                     currentLamp.updateStatus() // запрос состояние лампы
                 }
             }
-        }
     }
 
     func alignLampsParametersAfterChangeEffect() {
@@ -114,16 +123,24 @@ class ArrayOfLamps {
 
     func sendCommandToArrayOfLamps(command: CommandsToLamp, value: [Int], valueTxt: String = "", exceptFromTheMainLamp: Bool = false) {
         switch command {
-        case .sca, .power_on, .power_off, .bri, .spd, .eff:
+        case .sca, .power_on, .power_off, .bri, .gbr, .spd, .eff:
+
+            var newCommand = command
+
+            if let commonBright = mainLamp?.commonBright {
+                if commonBright && command == .bri {
+                    newCommand = .gbr
+                }
+            }
 
             if !exceptFromTheMainLamp {
-                mainLamp?.sendCommand(command: command, value: value) // отправляем команду главной лампе
+                mainLamp?.sendCommand(command: newCommand, value: value) // отправляем команду главной лампе
             }
 
             if let flag = mainLamp?.flagLampIsControlled {
                 if flag { // если главная лампа в группе, то остальные тоже получают команду
                     slaveLamps.forEach({ device in
-                        device.sendCommand(command: command, value: value)
+                        device.sendCommand(command: newCommand, value: value)
                     })
                 }
             }
@@ -136,7 +153,6 @@ class ArrayOfLamps {
     func setMainLamp(_ index: Int) {
         mainLampIndex = index // выбор основной лампы
         mainLamp?.lampBlink() // мигнуть этой лампой
-        timerStartAndStop(true) // запустить таймер опроса лампы
         slaveLamps.forEach({ device in
             self.alignLampParametersAfterNewLampAdded(device)
         })
@@ -155,10 +171,17 @@ class ArrayOfLamps {
     func updateArrayOfLamps(lamp: LampDevice) {
         if !checkIP("\(lamp.hostIP)") {
             arrayOfLamps.append(lamp)
-            if arrayOfLamps.count == 1 {
-                timerStartAndStop(true)
-                mainLampIndex = 0
+
+            if lamp.hostIP != "192.168.4.1" {
+                arrayOfLamps = arrayOfLamps.filter { devices in
+                    devices.hostIP != "192.168.4.1"
+                }
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
+                }
             }
+            // timerStartAndStop()
+            mainLampIndex = 0
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("newLampHasAdded"), object: lamp)
             }
@@ -167,11 +190,11 @@ class ArrayOfLamps {
 
     // удалить лампу из списка
     func removeLamp(_ lamp: LampDevice) {
-        timerStartAndStop(false)
         mainLampIndex = nil
         arrayOfLamps = arrayOfLamps.filter { devices in
             devices.hostIP != lamp.hostIP
         }
+
         NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
         CoreDataService.deleteAllData()
         CoreDataService.save()

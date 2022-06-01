@@ -8,13 +8,14 @@
 
 import UIKit
 
-class WiFiSettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class WiFiSettingsViewController: UIViewController {
     var lamp: LampDevice?
 
-    var picker = UIPickerView()
-
-    let pickerArray = ["Использовать WiFi сеть лампы", "Использовать роутер"]
-
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    
+    @IBOutlet weak var saveButtonOut: UIButton!
+    
     @IBOutlet var viewWithTextFileds: UIView!
 
     @IBOutlet var backArrowHeight: NSLayoutConstraint!
@@ -27,104 +28,144 @@ class WiFiSettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
 
     @IBOutlet var timeoutTextField: UITextField!
 
-    @IBOutlet var saveButtonOut: UIButton!
-
+    @IBOutlet weak var wifiLampSwitchOut: UISwitch!
+    
+    @IBOutlet weak var routerWifiSwitchOut: UISwitch!
+    
+    @IBOutlet weak var label1: UILabel!
+    
+    
+    @IBOutlet weak var height1: NSLayoutConstraint!
+    
+    @IBOutlet weak var label2: UILabel!
+    
+    @IBOutlet weak var height2: NSLayoutConstraint!
+    
+    
     @IBAction func close(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
 
-   
+    @IBAction func hideShowPassword(_ sender: UIButton) {
+        passTestField.hideShowPassword()
+    }
+    
+    
+    @IBAction func wifiLampSwitch(_ sender: UISwitch) {
+        if sender.isOn{
+            routerWifiSwitchOut.setOn(false, animated: true)
+            viewWithTextFileds.isHidden = true
+            label1.isHidden = false
+            label2.isHidden = false
+            height1.constant = 60
+            height2.constant = 30
+        }else{
+            routerWifiSwitchOut.setOn(true, animated: true)
+        }
+    }
+    
+    @IBAction func routerWifiSwitch(_ sender: UISwitch) {
+        if sender.isOn{
+            wifiLampSwitchOut.setOn(false, animated: true)
+            viewWithTextFileds.isHidden = false
+            label1.isHidden = true
+            label2.isHidden = true
+            height1.constant = 0
+            height2.constant = 420
+        }else{
+            wifiLampSwitchOut.setOn(true, animated: true)
+        }
+    }
+    
 
     @IBAction func saveButon(_ sender: UIButton) {
         if viewWithTextFileds.isHidden {
             delay(delayTime: 0.0, completionHandler: { [self] in
-                lamp?.sendCommand(command: .txt, value: [0], valueTXT: "reset=wifi")
+                lamp?.sendCommand(command: .blank, value: [0], valueTXT: "reset=wifi")
+            })
+            delay(delayTime: 0.05, completionHandler: { [self] in
+                lamp?.sendCommand(command: .blank, value: [0], valueTXT: "esp_mode=0")
             })
             delay(delayTime: 0.05, completionHandler: { [self] in
                 lamp?.sendCommand(command: .txt, value: [0], valueTXT: "esp_mode=0")
             })
-            dismiss(animated: true)
+            let mode: ModeOfSearch = .searchInSpotMode
+            lamps.removeLamp(lamp!)
+            performSegue(withIdentifier: "searchAndAdd3", sender: mode)
+            
         } else {
             if let name = nameTextField.text, let pass = passTestField.text, var timeout = timeoutTextField.text {
                 if (name != "") && (pass != "") {
                     if timeout == "" {
                         timeout = "60"
                     }
+                    UserDefaults.standard.set(name, forKey: "wifiName")
+                    UserDefaults.standard.set(pass, forKey: "wifiPass")
+                   
+                    
                     delay(delayTime: 0.0, completionHandler: { [self] in
-                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "ssid=" + name)
+                        lamp?.sendCommand(command: .blank, value: [0], valueTXT: "ssid=" + name)
                     })
                     delay(delayTime: 0.05, completionHandler: { [self] in
-                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "passw=" + pass)
+                        lamp?.sendCommand(command: .blank, value: [0], valueTXT: "passw=" + pass)
                     })
                     delay(delayTime: 0.1, completionHandler: { [self] in
-                        lamp?.sendCommand(command: .txt, value: [0], valueTXT: "timeout=" + timeout)
+                        lamp?.sendCommand(command: .blank, value: [0], valueTXT: "timeout=" + timeout)
                     })
                     delay(delayTime: 0.15, completionHandler: { [self] in
+                        lamp?.sendCommand(command: .blank, value: [0], valueTXT: "esp_mode=1")
+                    })
+                    delay(delayTime: 0.2, completionHandler: { [self] in
                         lamp?.sendCommand(command: .txt, value: [0], valueTXT: "esp_mode=1")
                     })
-                    dismiss(animated: true)
+                    lamps.removeLamp(lamp!)
+                    let mode: ModeOfSearch = .searchInRouterMode
+                    performSegue(withIdentifier: "searchAndAdd3", sender: mode)
                 }
             }
         }
     }
 
-    @IBAction func selectConnectionTypeButton(_ sender: UIButton) {
-        picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        picker.backgroundColor = UIColor.white
-        picker.setValue(UIColor.black, forKey: "textColor")
-        picker.autoresizingMask = .flexibleWidth
-        picker.contentMode = .center
-        picker.frame = CGRect(x: 0.0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-        view.addSubview(picker)
-    }
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerArray.count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerArray[row]
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if row == 0 {
-            viewWithTextFileds.isHidden = true
-            saveButtonOut.setTitle("Переключить лампу в режим точки доступа", for: .normal)
-            saveButtonOut.setImage(nil, for: .normal)
-        } else {
-            viewWithTextFileds.isHidden = false
-            saveButtonOut.setTitle("Сохранить", for: .normal)
-            saveButtonOut.setImage(UIImage(named: "edit.png"), for: .normal)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchAndAdd3" {
+            let vc = segue.destination as? SearchAndAddLampViewController
+            
+            if let text = nameTextField.text{
+                vc?.label = text
+            }
+            vc?.modeOfSearch = sender as! ModeOfSearch
         }
-        picker.removeFromSuperview()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
         hideKeyboardWhenTappedAround()
+        titleLabel.adjustsFontSizeToFitWidth = true
         backArrowHeight.constant += view.safeAreaTop - 20
         headerViewHeight.constant += view.safeAreaTop - 20
-        saveButtonOut.imageView?.contentMode = .scaleAspectFit
+        if let wifiName = UserDefaults.standard.string(forKey: "wifiName"){
+            nameTextField.text = wifiName
+        }
+        if let wifiPass = UserDefaults.standard.string(forKey: "wifiPass"){
+            passTestField.text = wifiPass
+        }
         nameTextField.setLeftPaddingPoints(20.0)
         passTestField.setLeftPaddingPoints(20.0)
         timeoutTextField.setLeftPaddingPoints(20.0)
         timeoutTextField.keyboardType = .decimalPad
         saveButtonOut.titleLabel?.adjustsFontSizeToFitWidth = true
         if let espMode = lamp?.espMode {
-            viewWithTextFileds.isHidden = espMode
+            viewWithTextFileds.isHidden = !espMode
             if !espMode {
-                saveButtonOut.setTitle("Сохранить", for: .normal)
-                saveButtonOut.setImage(UIImage(named: "edit.png"), for: .normal)
+                wifiLampSwitchOut.setOn(true, animated: false)
+                routerWifiSwitchOut.setOn(false, animated: false)
             } else {
-                saveButtonOut.setTitle("Переключить лампу в режим точки доступа", for: .normal)
-                saveButtonOut.setImage(nil, for: .normal)
+                wifiLampSwitchOut.setOn(false, animated: false)
+                routerWifiSwitchOut.setOn(true, animated: false)
+                label1.isHidden = true
+                label2.isHidden = true
+                height1.constant = 0
+                //height2.constant = 0
             }
         }
     }

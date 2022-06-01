@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double LanguageManager_iOSVersionNumber;
-FOUNDATION_EXPORT const unsigned char LanguageManager_iOSVersionString[];
+FOUNDATION_EXPORT double MagicTimerVersionNumber;
+FOUNDATION_EXPORT const unsigned char MagicTimerVersionString[];
 

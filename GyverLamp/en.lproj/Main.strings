@@ -15,7 +15,7 @@
 "5nM-yM-mHU.text" = "Port";
 
 /* Class = "UIButton"; normalTitle = "Отправить текст в лампу"; ObjectID = "6MK-eJ-AaD"; */
-"6MK-eJ-AaD.normalTitle" = "Send text to lamp";
+"6MK-eJ-AaD.normalTitle" = "Send text command to the lamp";
 
 /* Class = "UILabel"; text = "50"; ObjectID = "6ch-ci-vXp"; */
 "6ch-ci-vXp.text" = "50";
@@ -63,7 +63,7 @@
 "EEo-lW-i3N.placeholder" = "8888";
 
 /* Class = "UIButton"; normalTitle = "Удалить лампу"; ObjectID = "EKz-0S-KaU"; */
-"EKz-0S-KaU.normalTitle" = "Delete lamp";
+"EKz-0S-KaU.normalTitle" = "Forgot the lamp";
 
 /* Class = "UILabel"; text = "Рассвет за"; ObjectID = "FSo-PD-o18"; */
 "FSo-PD-o18.text" = "Dawn in";
@@ -84,7 +84,7 @@
 "Icq-00-qjo.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Указать идентификатор лампы"; ObjectID = "JkH-UV-8S2"; */
-"JkH-UV-8S2.normalTitle" = "Choose language";
+"JkH-UV-8S2.normalTitle" = "Change app language";
 
 /* Class = "UILabel"; text = "Назад"; ObjectID = "KCd-QN-bhq"; */
 "KCd-QN-bhq.text" = "Back";
@@ -108,7 +108,7 @@
 "N3Y-6l-Xy3.text" = "GVR Lamp";
 
 /* Class = "UIButton"; normalTitle = "Переименовать"; ObjectID = "Nj6-rY-7cN"; */
-"Nj6-rY-7cN.normalTitle" = "Rename";
+"Nj6-rY-7cN.normalTitle" = "Rename the lamp";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "O80-A7-0KF"; */
 "O80-A7-0KF.text" = "Label";
@@ -138,16 +138,16 @@
 "VYK-Ia-p8J.text" = ":";
 
 /* Class = "UILabel"; text = "+ случайное время в секундах"; ObjectID = "W2Z-T9-YfZ"; */
-"W2Z-T9-YfZ.text" = "+ random time in seconds";
+"W2Z-T9-YfZ.text" = "+ random time";
 
 /* Class = "UINavigationItem"; title = "Будильники"; ObjectID = "WMd-FR-g8v"; */
 "WMd-FR-g8v.title" = "Alarms";
 
 /* Class = "UIButton"; normalTitle = "Нет подключения к лампе"; ObjectID = "WWO-Uf-LGM"; */
-"WWO-Uf-LGM.normalTitle" = "No connection to lamp";
+"WWO-Uf-LGM.normalTitle" = "No connection to the lamp";
 
 /* Class = "UILabel"; text = "Интервал смены эффектов"; ObjectID = "XUr-ON-ebD"; */
-"XUr-ON-ebD.text" = "Animations switch time";
+"XUr-ON-ebD.text" = "Animations switching time";
 
 /* Class = "UIButton"; normalTitle = "Добавить"; ObjectID = "agB-6x-GS4"; */
 "agB-6x-GS4.normalTitle" = "Add";
@@ -164,7 +164,7 @@
 "cZS-bP-hM4.text" = "Label";
 
 /* Class = "UILabel"; text = "Найти и добавить"; ObjectID = "cx5-I7-qDx"; */
-"cx5-I7-qDx.text" = "Lookup Lamps";
+"cx5-I7-qDx.text" = "Discover the Lamps";
 
 /* Class = "UIButton"; normalTitle = "сек"; ObjectID = "eLM-Sz-hR0"; */
 "eLM-Sz-hR0.normalTitle" = "sec";
@@ -191,13 +191,13 @@
 "p3I-4u-oqR.text" = "Add";
 
 /* Class = "UILabel"; text = "Не отключать режим смены  эффектов при выключении лампы"; ObjectID = "r4t-Jd-fgT"; */
-"r4t-Jd-fgT.text" = "Do not disable the animations auto-switching after lamp is turned off";
+"r4t-Jd-fgT.text" = "Do not disable the mode after the lamp is turned off/on";
 
 /* Class = "UILabel"; text = "Лампа недоступна"; ObjectID = "sE5-j1-x9c"; */
 "sE5-j1-x9c.text" = "Lamp is not available";
 
 /* Class = "UIButton"; normalTitle = "Найти и добавить"; ObjectID = "wEK-3T-I8N"; */
-"wEK-3T-I8N.normalTitle" = "Lookup Lamps";
+"wEK-3T-I8N.normalTitle" = "Discover the Lamps";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wJJ-ff-zRN"; */
 "wJJ-ff-zRN.normalTitle" = "Button";
@@ -206,10 +206,47 @@
 "wSk-Hf-Aie.text" = "Looking up .";
 
 /* Class = "UILabel"; text = "Текущее время на лампе"; ObjectID = "xbB-kg-3kG"; */
-"xbB-kg-3kG.text" = "Current time on lamp";
+"xbB-kg-3kG.text" = "Current time on the lamp";
 
 /* Class = "UILabel"; text = "Набор эффектов"; ObjectID = "yYx-k0-IBI"; */
 "yYx-k0-IBI.text" = "Animations set";
 
 /* Class = "UILabel"; text = "50"; ObjectID = "zGR-iv-zpu"; */
 "zGR-iv-zpu.text" = "50";
+
+"jg7-Ir-1Oc.text" = "To allow the app discover the lamp your smartphone must be connected to your lamp WiFi:  (Led Lamp).";
+
+"bFV-Wu-dyM.text" = "To control the lamp this smartphone must be connected to your WiFi network. Your lamp will automatically connect to that WiFi each time.";
+
+"lRJ-sn-120.text" = "To allow the app discover the lamp your smartphone must be connected to the same WiFi.";
+
+
+"Ncm-iq-CPc.text" = "Name of your WiFi network (2.4GHz only)";
+
+"i1O-ax-eeA.text" = "Password";
+
+"12S-la-iTf.text" = "If the lamp can not connect to your WiFi router during that time, the lamp will be switched back to the basic mode and turn on its own WiFi network";
+
+"dfT-12-v9D.normalTitle" = "Restart the lamp in new mode";
+
+"AFH-dC-luG.text" = "Lamp operation mode";
+
+"tpW-fN-Upb.text" = "Web-panel";
+
+"HxT-zV-Jmp.normalTitle" = "Open web-panel";
+
+"yYx-k0-IBI.text" = "Favorite animations";
+
+"bHp-k3-6Fs.text" = "Turn on lamp's Wi-Fi";
+
+"oU5-hX-JV3.text" = "Connect lamp to the router";
+
+"Uuh-M6-WUa.text" = "Lamp mode";
+
+"Caq-8c-wT9.text" = "Overall brightness for effects";
+
+"iN8-af-mRq.text" = "Do not forget lamp when the connection is lost";
+
+"TdU-C8-87e.text" = "Lamp connection to WiFi router timeout (sec)";
+
+"iDu-7x-muv.normalTitle" = "Discover the lamps";

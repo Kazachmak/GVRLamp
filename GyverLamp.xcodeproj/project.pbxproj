@@ -19,6 +19,7 @@
 		3C16E042257A866600D8EBFE /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C16E041257A866600D8EBFE /* right-arrow.png */; };
 		3C18568C25945F0300851A6B /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C18568B25945F0300851A6B /* main.png */; };
 		3C1E0891274CF3D00030F560 /* ic_settings_wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */; };
+		3C1E089B274D2A8C0030F560 /* CustomMagicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1E089A274D2A8C0030F560 /* CustomMagicTimer.swift */; };
 		3C20D8F32657A83E008A9066 /* Empty2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20D8F22657A83E008A9066 /* Empty2ViewController.swift */; };
 		3C20D8F62657AB8A008A9066 /* EffectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20D8F52657AB8A008A9066 /* EffectTableViewController.swift */; };
 		3C22E2AD2573F2B300BD93B2 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */; };
@@ -39,8 +40,11 @@
 		3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879524EC426100DBE5C4 /* Extensions.swift */; };
 		3C461022257777F800F375ED /* oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C461021257777F800F375ED /* oval.png */; };
 		3C4610262577781F00F375ED /* onOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4610252577781F00F375ED /* onOff.png */; };
+		3C4B81E827873E4800D0B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B81E727873E4800D0B14B /* Effect.swift */; };
 		3C561FFD25681D2E00E14632 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFB25681D2E00E14632 /* search.png */; };
 		3C561FFE25681D2E00E14632 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFC25681D2E00E14632 /* plus.png */; };
+		3C62CA412788A3ED001D08D9 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C62CA402788A3ED001D08D9 /* eye.png */; };
+		3C68E6B5278B659A00CE73A5 /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C68E6B4278B659A00CE73A5 /* GlobalVars.swift */; };
 		3C6B366B2743DE00008AD16B /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B366A2743DE00008AD16B /* WebViewViewController.swift */; };
 		3C6ECAD825617E8A00813C43 /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD425617E8A00813C43 /* timer.png */; };
 		3C6ECAD925617E8A00813C43 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD525617E8A00813C43 /* alarm.png */; };
@@ -99,6 +103,7 @@
 		3C16E041257A866600D8EBFE /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		3C18568B25945F0300851A6B /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
 		3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_settings_wifi.png; sourceTree = "<group>"; };
+		3C1E089A274D2A8C0030F560 /* CustomMagicTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMagicTimer.swift; sourceTree = "<group>"; };
 		3C20D8F22657A83E008A9066 /* Empty2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty2ViewController.swift; sourceTree = "<group>"; };
 		3C20D8F52657AB8A008A9066 /* EffectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTableViewController.swift; sourceTree = "<group>"; };
 		3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
@@ -122,8 +127,11 @@
 		3C45879524EC426100DBE5C4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3C461021257777F800F375ED /* oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oval.png; sourceTree = "<group>"; };
 		3C4610252577781F00F375ED /* onOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff.png; sourceTree = "<group>"; };
+		3C4B81E727873E4800D0B14B /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		3C561FFB25681D2E00E14632 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		3C561FFC25681D2E00E14632 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		3C62CA402788A3ED001D08D9 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
+		3C68E6B4278B659A00CE73A5 /* GlobalVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
 		3C6B366A2743DE00008AD16B /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		3C6ECAD425617E8A00813C43 /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
 		3C6ECAD525617E8A00813C43 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = "<group>"; };
@@ -213,6 +221,7 @@
 				3C31837A2511E66C00663FC8 /* GyverLamp-Bridging-Header.h */,
 				3C7CF12B24F0FAB10094D602 /* cells */,
 				3C15F2D024EDA6F600F63C92 /* LampDevice.swift */,
+				3C68E6B4278B659A00CE73A5 /* GlobalVars.swift */,
 				3CF2223D26B318AE00C6D35F /* Localizable.strings */,
 				3CA6DE1B26B09C82003F1AE2 /* Main.storyboard */,
 				3CA6DE0826B09B13003F1AE2 /* LaunchScreen.storyboard */,
@@ -232,8 +241,10 @@
 			isa = PBXGroup;
 			children = (
 				3C76398F25E92AC5007D13C4 /* CoreDataService.swift */,
+				3C1E089A274D2A8C0030F560 /* CustomMagicTimer.swift */,
 				3C45879524EC426100DBE5C4 /* Extensions.swift */,
 				3CAF6585268245CD006C3B2A /* PaddingLabel.swift */,
+				3C4B81E727873E4800D0B14B /* Effect.swift */,
 			);
 			path = others;
 			sourceTree = "<group>";
@@ -278,6 +289,7 @@
 				3C6ECAD625617E8A00813C43 /* background.png */,
 				3C2C3AAC2570D72C00E345DD /* minus.png */,
 				3CE0576B25796726008EB7A2 /* lamp2.png */,
+				3C62CA402788A3ED001D08D9 /* eye.png */,
 				3C09B3F3257FCD4800CA34D4 /* picker_button_right.png */,
 				3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */,
 				3C16E041257A866600D8EBFE /* right-arrow.png */,
@@ -427,6 +439,7 @@
 				3C1E0891274CF3D00030F560 /* ic_settings_wifi.png in Resources */,
 				3CD37A462592496D0076A696 /* home.png in Resources */,
 				3CA6DE1926B09C82003F1AE2 /* Main.storyboard in Resources */,
+				3C62CA412788A3ED001D08D9 /* eye.png in Resources */,
 				3CDB362D2567C5CD004E3E1C /* enter.png in Resources */,
 				3C803AE62576CE8100759462 /* onOff2.png in Resources */,
 				3C6ECAD925617E8A00813C43 /* alarm.png in Resources */,
@@ -496,12 +509,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C8DE0AE24F6D09900C61BBC /* AlarmViewController.swift in Sources */,
+				3C68E6B5278B659A00CE73A5 /* GlobalVars.swift in Sources */,
 				3C84E96324F3A732004B411A /* TimerViewController.swift in Sources */,
 				3CA0C5EC2576352800858C95 /* SelectorTableViewCell.swift in Sources */,
 				3C12C12325725B6500EAE13D /* SliderFullScreenViewController.swift in Sources */,
 				3C22E2AD2573F2B300BD93B2 /* EmptyViewController.swift in Sources */,
 				3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */,
 				3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */,
+				3C1E089B274D2A8C0030F560 /* CustomMagicTimer.swift in Sources */,
 				3CEF72C726BD5710009585AA /* Bundle.swift in Sources */,
 				3C20D8F32657A83E008A9066 /* Empty2ViewController.swift in Sources */,
 				3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */,
@@ -514,6 +529,7 @@
 				3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */,
 				3CF2224426B31E2E00C6D35F /* StringsNeededLocalize.swift in Sources */,
 				3C15F2D124EDA6F600F63C92 /* LampDevice.swift in Sources */,
+				3C4B81E827873E4800D0B14B /* Effect.swift in Sources */,
 				3CAC1830273FC23C00F158B9 /* WiFiSettingsViewController.swift in Sources */,
 				3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */,
 				3C2A5F6925EADBF400E3F5D1 /* ArrayOfLamps.swift in Sources */,
@@ -679,18 +695,20 @@
 			baseConfigurationReference = EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W3NBKKY483;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_TEAM = 656KCUF2WU;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp1;
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = ProvProf_with_cert1205_with_MK_CSR_AppStore;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -701,18 +719,20 @@
 			baseConfigurationReference = 250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W3NBKKY483;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_TEAM = 656KCUF2WU;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.MaksimKazachkov.GyverLamp1;
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = ProvProf_with_cert1205_with_MK_CSR_AppStore;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

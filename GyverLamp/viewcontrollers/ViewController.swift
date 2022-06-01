@@ -6,6 +6,7 @@
 //  Copyright © 2020 Maksim Kazachkov. All rights reserved.
 //
 
+import MagicTimer
 import MIBlurPopup
 import Network
 import SimpleAnimation
@@ -13,7 +14,10 @@ import TactileSlider
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate {
-    var timer = Timer()
+    
+    var isFirstLaunch = true
+    
+    @IBOutlet var timer: MagicTimerView!
 
     @IBOutlet var picker: UIPickerView!
 
@@ -64,7 +68,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
 
-
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = PaddingLabel()
         if let v = view {
@@ -79,7 +82,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if currentLamp.selectedEffectsNameList.count == 0 {
                 label.text = youMustSelectEffects
             } else {
-                label.text = currentLamp.selectedEffectsNameList[row].components(separatedBy: ",")[0]
+                label.text = currentLamp.getEffectName(row) //currentLamp.selectedEffectsNameList[row].components(separatedBy: ",")[0].incrementNumber
+                
             }
         } else {
             label.text = LampDevice.listOfEffectsDefault[row]
@@ -93,7 +97,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         } else {
             label.numberOfLines = 1
         }
-
         label.sizeToFit()
         return label
     }
@@ -109,16 +112,31 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             return 30.0
         }
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let currentLamp = lamps.mainLamp {
-            currentLamp.effect = row
-            currentLamp.updateSliderFlag = true
-            lamps.sendCommandToArrayOfLamps(command: .eff, value: [currentLamp.getEffectNumber(currentLamp.selectedEffectsNameList[row])])
-            lamps.necessaryToAlignTheParametersOfTheLamps = true
+            if currentLamp.selectedEffectsNameList.count != 0 {
+                currentLamp.effect = row
+                currentLamp.updateSliderFlag = true
+                lamps.sendCommandToArrayOfLamps(command: .eff, value: [currentLamp.getEffectNumber(currentLamp.selectedEffectsNameList[row])])
+                lamps.necessaryToAlignTheParametersOfTheLamps = true
+            } else {
+                openSelector(.effects, lamp: currentLamp)
+            }
         }
     }
+
     
+    
+    @IBOutlet weak var overlayPickerButtonOut: UIButton!
+    
+    @IBAction func overlayPickerButton(_ sender: UIButton) {
+        if let currentLamp = lamps.mainLamp {
+            if currentLamp.selectedEffectsNameList.count == 0 {
+                openSelector(.effects, lamp: currentLamp)
+            }
+        }
+    }
     
     
     @IBAction func touchPick(_ sender: UILongPressGestureRecognizer) {
@@ -130,8 +148,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
         }
     }
-    
-   
 
     private func changeEffectByButton(_ step: Int) {
         if let currentLamp = lamps.mainLamp {
@@ -139,7 +155,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if let effect = currentLamp.effect {
                 var number = 0
                 let effectName = currentLamp.listOfEffects[effect]
-
                 for (index, element) in currentLamp.selectedEffectsNameList.enumerated() {
                     if element == effectName {
                         number = index
@@ -160,17 +175,25 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var rightPickerImage: UIImageView!
 
     @IBAction func toggleFavoriteEffects(_ sender: UIButton) {
+        if lamps.arrayOfLamps.count > 0 {
         if sender.image(for: .normal) == UIImage(named: "heart.png") {
             sender.setImage(UIImage(named: "heart2.png"), for: .normal)
             lamps.mainLamp?.useSelectedEffectOnScreen = true
+            if lamps.mainLamp?.selectedEffectsNameList.count == 0{
+                overlayPickerButtonOut.isHidden = false
+            }else{
+                overlayPickerButtonOut.isHidden = true
+            }
+
             picker.delegate = self
         } else {
+            overlayPickerButtonOut.isHidden = true
             sender.setImage(UIImage(named: "heart.png"), for: .normal)
             lamps.mainLamp?.useSelectedEffectOnScreen = false
             picker.delegate = self
+            }
         }
     }
-
     @IBOutlet var toggleFavoriteEffectsOut: UIButton!
 
     @IBAction func leftPickerButton(_ sender: UIButton) {
@@ -187,7 +210,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     // открываем страницу настроек
     @IBAction func settingsButton(_ sender: UIButton) {
-        performSegue(withIdentifier: "settings", sender: nil)
+        if lamps.arrayOfLamps.count > 0 {
+            lamps.mainLamp?.lampBlink()
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
+            vc.lamp = lamps.mainLamp
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }else{
+            performSegue(withIdentifier: "settings", sender: nil)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -239,7 +272,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBAction func brightSetValue(_ sender: TactileSlider) {
         lamps.mainLamp?.updateSliderFlag = false
-        // lamps.mainLamp?.sendCommand(command: .bri, value: [Int(sender.value)])
         lamps.sendCommandToArrayOfLamps(command: .bri, value: [Int(sender.value)])
     }
 
@@ -293,15 +325,27 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if status && (currentlamp.timerTime > 0) {
                 timerOut.alpha = 1
                 timerLabel.alpha = 1
-                if !timer.isValid {
-                    updateTimerLabel()
-                    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                switch timer.currentState {
+                case .none:
+                    timer.isHidden = false
+                    timer.defaultValue = currentlamp.timerTime
+                    timer.mode = .countDown(fromSeconds: TimeInterval(currentlamp.timerTime))
+                    timer.startCounting()
+                case .fired:
+                    break
+                case .stopped:
+                    timerOut.alpha = 0.5
+                    timerLabel.alpha = 0.5
+                    timerLabel.text = offTitle
+                    timer.isHidden = true
+                case .restarted:
+                    break
                 }
             } else {
                 timerOut.alpha = 0.5
                 timerLabel.alpha = 0.5
                 timerLabel.text = offTitle
-                timer.invalidate()
+                timer.isHidden = true
             }
         }
     }
@@ -340,8 +384,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // фукнция обновляет инерфейс
     @objc func updateInterface() {
         if let currentLamp = lamps.mainLamp {
-            picker.delegate = self
-
+            self.picker.delegate = self
             if currentLamp.updateSliderFlag {
                 updateSlider()
             }
@@ -389,15 +432,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         })
                     }
                 }
-
             } else {
                 statusLabel.textColor = .gray
                 UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.errorMessage.isUserInteractionEnabled = false
                     self.errorMessageHeight.constant = 24
                     self.errorMessage.setTitle(lampIsNotConnected, for: .normal)
-                    // self.addOffView()
-
                 })
             }
 
@@ -478,6 +518,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.picker.delegate = self
         if lamps.mainLamp?.connectionStatus ?? false { // проверка соединения с лампой
             if lamps.mainLamp?.powerStatus == true { // проверка включена лампа или нет
                 leftPickerImage.shake(toward: .top, amount: 0.1, duration: 1, delay: 0.5)
@@ -485,8 +526,25 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
         }
         lamps.mainLamp?.updateSliderFlag = true
+        if lamps.mainLamp?.selectedEffectsNameList.count == 0{
+            overlayPickerButtonOut.isHidden = false
+        }else{
+            overlayPickerButtonOut.isHidden = true
+        }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if (lamps.isListEmpty || !lamps.connectionStatusOfMainLamp) && isFirstLaunch{
+                performSegue(withIdentifier: "searchAndAdd2", sender: nil)
+        }else{
+            if lamps.isListEmpty{
+                performSegue(withIdentifier: "settings", sender: nil)
+            }
+        }
+        isFirstLaunch = false
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addOffView()
@@ -494,8 +552,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         leftPickerButtonInteractionOut.layer.zPosition = 2
         rightPickerButtonInteractionOut.layer.zPosition = 2
         statusLabel.adjustsFontSizeToFitWidth = true
-        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification
-                                               , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateInterface), name: Notification.Name("updateInterface"), object: nil)
         timerOut.imageView?.contentMode = .scaleAspectFit
         alarmClockOut.imageView?.contentMode = .scaleAspectFit
@@ -519,6 +576,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 toggleFavoriteEffectsOut.setImage(UIImage(named: "heart.png"), for: .normal)
             }
         }
+        timer.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        timer.textColor = violetColor
         DispatchQueue.main.async {
             let systemLang = Locale.current.languageCode
             if let storedLocale = UserDefaults.standard.string(forKey: "storedLocale") {
@@ -539,19 +598,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         UserDefaults.standard.synchronize()
                         self.showAlertAboutNeedToRestart()
                     }))
+                    alert.addAction(UIAlertAction(title: closePopUp, style: .default, handler: { _ in
+                        
+                    }))
+
                     self.present(alert, animated: true, completion: nil)
                 }
-            }else{
-                isFirstLaunch = true
-                self.performSegue(withIdentifier: "settings", sender: nil)
-                
             }
-            UserDefaults.standard.set(systemLang, forKey: "storedLocale")
-           
         }
-        
-        
-        
     }
 
     @objc private func appMovedToForeground() {
@@ -559,20 +613,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("App moved to ForeGround!")
     }
 
-    @objc func updateTimerLabel() {
-        if let currentLamp = lamps.mainLamp {
-            timerLabel.text = currentLamp.timerTime.timeFormatted() // will show timer
-
-            if currentLamp.timerTime != 0 {
-                currentLamp.timerTime -= 1 // decrease counter timer
-
-            } else {
-                timer.invalidate()
-            }
-        }
-    }
-
     override func viewDidLayoutSubviews() {
+        let systemLang = Locale.current.languageCode
+        UserDefaults.standard.set(systemLang, forKey: "storedLocale")
         brightnessSlider.addImage(image: UIImage(named: "brightness.png")!, frame: CGRect(x: 22, y: brightnessSlider.frame.height - 60, width: 26, height: 26))
         speedSlider.addImage(image: UIImage(named: "speed.png")!, frame: CGRect(x: 19, y: brightnessSlider.frame.height - 60, width: 32, height: 18))
         scaleSlider.addImage(image: UIImage(named: "scale.png")!, frame: CGRect(x: 25, y: brightnessSlider.frame.height - 60, width: 20, height: 20))

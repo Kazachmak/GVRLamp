@@ -6,10 +6,10 @@
 "3PS-sH-v3x.text" = "Лампа добавлена";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "45a-xW-bM4"; */
-"45a-xW-bM4.text" = "Label";
+"45a-xW-bM4.text" = "Лейбо";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "529-lo-yaG"; */
-"529-lo-yaG.normalTitle" = "Button";
+"529-lo-yaG.normalTitle" = "Кнопка";
 
 /* Class = "UILabel"; text = "Порт"; ObjectID = "5nM-yM-mHU"; */
 "5nM-yM-mHU.text" = "Порт";
@@ -33,7 +33,7 @@
 "92e-lg-mQT.text" = "Повтор";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "9I0-i3-cOS"; */
-"9I0-i3-cOS.text" = "Label";
+"9I0-i3-cOS.text" = "Лейбл";
 
 /* Class = "UIButton"; normalTitle = "Отмена"; ObjectID = "9Ia-yc-723"; */
 "9Ia-yc-723.normalTitle" = "Отмена";
@@ -81,7 +81,7 @@
 "HIE-gw-3Zh.text" = "Кнопка на лампе";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Icq-00-qjo"; */
-"Icq-00-qjo.text" = "Label";
+"Icq-00-qjo.text" = "Лейбл";
 
 /* Class = "UIButton"; normalTitle = "Выбрать язык"; ObjectID = "JkH-UV-8S2"; */
 "JkH-UV-8S2.normalTitle" = "Выбрать язык";
@@ -102,7 +102,7 @@
 "MRA-DT-jNB.text" = "Не повторять";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "MRY-Gm-BVb"; */
-"MRY-Gm-BVb.normalTitle" = "Button";
+"MRY-Gm-BVb.normalTitle" = "Кнопка";
 
 /* Class = "UILabel"; text = "GVR Lamp"; ObjectID = "N3Y-6l-Xy3"; */
 "N3Y-6l-Xy3.text" = "GVR Lamp";
@@ -111,7 +111,7 @@
 "Nj6-rY-7cN.normalTitle" = "Переименовать";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "O80-A7-0KF"; */
-"O80-A7-0KF.text" = "Label";
+"O80-A7-0KF.text" = "Лейбл";
 
 /* Class = "UIButton"; normalTitle = "Отключить таймер"; ObjectID = "ODy-RP-PiE"; */
 "ODy-RP-PiE.normalTitle" = "Отключить таймер";
@@ -129,7 +129,7 @@
 "TZY-nw-Yzk.text" = "%";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "Ucg-CS-H00"; */
-"Ucg-CS-H00.text" = "Title";
+"Ucg-CS-H00.text" = "Название";
 
 /* Class = "UINavigationItem"; title = "Таймер"; ObjectID = "V0d-lz-AhH"; */
 "V0d-lz-AhH.title" = "Таймер";
@@ -138,7 +138,7 @@
 "VYK-Ia-p8J.text" = ":";
 
 /* Class = "UILabel"; text = "+ случайное время в секундах"; ObjectID = "W2Z-T9-YfZ"; */
-"W2Z-T9-YfZ.text" = "+ случайное время в секундах";
+"W2Z-T9-YfZ.text" = "+ случайное время";
 
 /* Class = "UINavigationItem"; title = "Будильники"; ObjectID = "WMd-FR-g8v"; */
 "WMd-FR-g8v.title" = "Будильники";
@@ -159,7 +159,7 @@
 "bT3-Xm-jQ8.text" = "209";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "cZS-bP-hM4"; */
-"cZS-bP-hM4.text" = "Label";
+"cZS-bP-hM4.text" = "Лейбл";
 
 /* Class = "UILabel"; text = "Найти и добавить"; ObjectID = "cx5-I7-qDx"; */
 "cx5-I7-qDx.text" = "Найти и добавить";
@@ -174,7 +174,7 @@
 "ejb-8t-GHC.text" = "Будильник";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "k4E-fs-Frv"; */
-"k4E-fs-Frv.normalTitle" = "Button";
+"k4E-fs-Frv.normalTitle" = "Кнопка";
 
 /* Class = "UILabel"; text = "Таймер"; ObjectID = "k5V-wv-xga"; */
 "k5V-wv-xga.text" = "Таймер";
@@ -189,7 +189,7 @@
 "p3I-4u-oqR.text" = "Добавить";
 
 /* Class = "UILabel"; text = "Не отключать режим смены  эффектов при выключении лампы"; ObjectID = "r4t-Jd-fgT"; */
-"r4t-Jd-fgT.text" = "Не отключать режим смены  эффектов при выключении лампы";
+"r4t-Jd-fgT.text" = "Не отключать режим после выкл/вкл лампы";
 
 /* Class = "UILabel"; text = "Лампа недоступна"; ObjectID = "sE5-j1-x9c"; */
 "sE5-j1-x9c.text" = "Лампа недоступна";
@@ -198,7 +198,7 @@
 "wEK-3T-I8N.normalTitle" = "Найти и добавить";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wJJ-ff-zRN"; */
-"wJJ-ff-zRN.normalTitle" = "Button";
+"wJJ-ff-zRN.normalTitle" = "Кнопка";
 
 /* Class = "UILabel"; text = "Поиск лампы ."; ObjectID = "wSk-Hf-Aie"; */
 "wSk-Hf-Aie.text" = "Поиск лампы .";
@@ -210,7 +210,43 @@
 "xbB-kg-3kG.text" = "Текущее время на лампе";
 
 /* Class = "UILabel"; text = "Набор эффектов"; ObjectID = "yYx-k0-IBI"; */
-"yYx-k0-IBI.text" = "Набор эффектов";
+"yYx-k0-IBI.text" = "Любимые эффекты";
 
 /* Class = "UILabel"; text = "50"; ObjectID = "zGR-iv-zpu"; */
 "zGR-iv-zpu.text" = "50";
+
+"jg7-Ir-1Oc.text" = "Для обнаружения лампы этот смартфон должен быть подключен к WiFi сети лампы: (Led Lamp).";
+
+"bFV-Wu-dyM.text" = "Для управления лампой со смартфона, просто подключите его к своей WiFi сети (роутеру). К этой сети будет автоматически подключаться и ваша лампа.";
+
+"lRJ-sn-120.text" = "Для обнаружения лампы этот смартфон должен быть подключен к этой же WiFi сети.";
+
+"Ncm-iq-CPc.text" = "Имя вашей WiFi сети (только 2.4 Ghz)";
+
+"i1O-ax-eeA.text" = "Пароль сети";
+
+"12S-la-iTf.text" = "Если за время тайм-аута лампа не сможет подключиться к роутеру, то она вернется в базовый режим работы (без роутера). И снова запустится WiFi сеть лампы.";
+
+"dfT-12-v9D.normalTitle" = "Перезапустить лампу в новому режиме";
+
+"AFH-dC-luG.text" = "Режим работы лампы";
+
+"tpW-fN-Upb.text" = "Web-интерфейс";
+
+"HxT-zV-Jmp.normalTitle" = "Открыть web-интерфейс";
+
+"yYx-k0-IBI.text" = "Избранные эффекты";
+
+"bHp-k3-6Fs.text" = "Включить WiFi лампы";
+
+"oU5-hX-JV3.text" = "Подключить лампу к роутеру";
+
+"Uuh-M6-WUa.text" = "Режим лампы";
+
+"Caq-8c-wT9.text" = "Общая яркость для анимаций";
+
+"iN8-af-mRq.text" = "Не забывать лампу при потере соединения";
+
+"TdU-C8-87e.text" = "Таймаут на попытку подключения лампы к роутеру (сек)";
+
+"iDu-7x-muv.normalTitle" = "Найти";

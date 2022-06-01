@@ -34,6 +34,7 @@ enum CommandsToLamp: String {
     case fav_get = "FAV_GET" // набор эффектов для автопереключения запросить
     case fav_set = "FAV_SET" // набор эффектов для автопереключения установить
     case rnd = "RND_" //
+    case blank = ""
 }
 
 class UDPClient {
@@ -97,12 +98,12 @@ class UDPClient {
     private func makeCommandForLamp(command: CommandsToLamp, value: [Int], valueTXT: String = "") -> String {
         switch command {
         case .list: return command.rawValue + String(value[0])
-        case .gbr, .button_on, .button_off, .power_on, .power_off, .deb, .fav_get: return command.rawValue
+        case .button_on, .button_off, .power_on, .power_off, .deb, .fav_get: return command.rawValue
         case .get: var secondsPlusGMT: Int { return TimeZone.current.secondsFromGMT() }
             return command.rawValue + String(Int(Date().timeIntervalSince1970) + secondsPlusGMT)
         case .eff:
             return command.rawValue + String(value[0])
-        case .bri:
+        case .bri, .gbr:
             return command.rawValue + String(value[0])
         case .spd:
             return command.rawValue + String(value[0])
@@ -138,6 +139,8 @@ class UDPClient {
             return command.rawValue
         case .txt:
             return command.rawValue + valueTXT
+        case .blank:
+            return valueTXT
         case .rnd:
             return command.rawValue
         }
@@ -151,17 +154,19 @@ class UDPClient {
                     lamp.connectionStatus = true
                     let backToString = String(decoding: data!, as: UTF8.self)
                     print("Received message: \(backToString)")
-                    
+
                     if backToString.contains("LIST") {
                         var arrayOfQuantity = backToString.components(separatedBy: ";")
                         if arrayOfQuantity.count > 1 {
                             if self.listCounter == 0 {
                                 lamp.listOfEffects = []
+                                lamp.newListOfEffects = []
                             }
                             self.listCounter += 1
                             arrayOfQuantity = arrayOfQuantity.filter { !$0.contains("LIST") }
                             for element in arrayOfQuantity {
-                                lamp.listOfEffects.append(element) // .components(separatedBy: ",")[0])
+                                lamp.listOfEffects.append(element)
+                                lamp.newListOfEffects?.append(Effect(element))
                             }
                             lamp.effectsFromLamp = true
                             DispatchQueue.main.async {
@@ -191,7 +196,7 @@ class UDPClient {
                                 }
                             }
                             lamp.timer = backToString.components(separatedBy: " ")[8].convertToBool()
-                            
+
                             if lamp.effect != Int(backToString.components(separatedBy: " ")[1]) {
                                 lamp.effect = Int(backToString.components(separatedBy: " ")[1])
                                 if lamp.hostIP == lamps.mainLamp?.hostIP {
@@ -214,9 +219,9 @@ class UDPClient {
                             lamp.scale = Int(backToString.components(separatedBy: " ")[4])
 
                             lamp.espMode = backToString.components(separatedBy: " ")[6].convertToBool()
-                            
+
                             lamp.button = backToString.components(separatedBy: " ")[9].convertToBool()
-                            
+
                             lamp.currentTime = backToString.components(separatedBy: " ")[10][0 ..< 5].time()
                         }
                         lamps.updateArrayOfLamps(lamp: lamp)
@@ -292,6 +297,9 @@ class LampDevice { // объект лампа
     var dawn: Int? // рассвет за сколько минут
     var favorite: String? // автопереключение эффектов
     var listOfEffects: [String] = listOfEffectsDefault // список эффектов
+
+    var newListOfEffects: [Effect]?
+
     var updateSliderFlag = false
     var effect: Int? // номер текущего эффекта
     var bright: Int? // значение яркости
@@ -304,28 +312,49 @@ class LampDevice { // объект лампа
     lazy var selectedEffects = [Bool](repeating: false, count: self.listOfEffects.count)
     var useSelectedEffectOnScreen: Bool = false // показывать на экране только выбранные эффекты
     var espMode = false
-    
+    var commonBright = false
+
+    var doNotForgetTheLampWhenTheConnectionIsLost = false
     
     var selectedEffectsNameList: [String] {
         if useSelectedEffectOnScreen {
-            return zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
+            let arrayOfNames = zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
+            return arrayOfNames
         } else {
             return listOfEffects
         }
-        
     }
 
+    func getEffectName(_ number: Int) -> String{
+        let names = self.selectedEffectsNameList[number].components(separatedBy: ",")[0]
+        let multiNames = (names.onlyLetters).components(separatedBy: "|")
+        
+        if multiNames.count > 1{
+            let systemLang = Locale.current.languageCode
+            switch systemLang{
+            case "en": return String(number + 1) + ". " + multiNames[0]
+            case "ru": return String(number + 1) + ". " + multiNames[1]
+            case "uk": return String(number + 1) + ". " + multiNames[2]
+            case .none:
+                return String(number + 1) + ". "  + multiNames[0]
+            case .some(_):
+                return String(number + 1) + ". "  + multiNames[0]
+            }
+        }else{
+            return String(number + 1) + ". " + multiNames[0]
+        }
+    }
     
-
+    
     func getEffectNumber(_ name: String) -> Int {
         return listOfEffects.firstIndex(where: { $0.components(separatedBy: ",")[0] == name.components(separatedBy: ",")[0] }) ?? 0
     }
 
-    func getEffectNumberFromSelectedList(_ name: String) -> Int{
+    func getEffectNumberFromSelectedList(_ name: String) -> Int {
         let result = zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
         return result.firstIndex(where: { $0.components(separatedBy: ",")[0] == name.components(separatedBy: ",")[0] }) ?? 0
     }
-    
+
     func getMaxSpeed(_ index: Int) -> Int {
         var maxSpeed = 255
         if listOfEffects.count > index {
@@ -404,7 +433,7 @@ class LampDevice { // объект лампа
         }
     }
 
-    func percentageOfValue(_ command: CommandsToLamp)->String{
+    func percentageOfValue(_ command: CommandsToLamp) -> String {
         switch command {
         case .bri:
             return String(((bright ?? 0) * 100 / 255).checkPercentage())
@@ -414,12 +443,10 @@ class LampDevice { // объект лампа
             return String((((speed ?? 0) - getMinSpeed(effect ?? 0)) * 100 / getSpeedRange(effect ?? 0)).checkPercentage())
         default:
             return "?"
-            
         }
     }
-    
 
-    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false, useSelectedEffectOnScreen: Bool = false) {
+    init(hostIP: NWEndpoint.Host, hostPort: NWEndpoint.Port, name: String, effectsFromLamp: Bool = true, listOfEffects: [String], flagLampIsControlled: Bool = false, newLamp: Bool = false, useSelectedEffectOnScreen: Bool = false, doNotForgetTheLampWhenTheConnectionIsLost: Bool = false) {
         self.hostIP = hostIP
         self.hostPort = hostPort
         self.name = name
@@ -427,6 +454,7 @@ class LampDevice { // объект лампа
         self.flagLampIsControlled = flagLampIsControlled
         self.listOfEffects = listOfEffects
         self.useSelectedEffectOnScreen = useSelectedEffectOnScreen
+        self.doNotForgetTheLampWhenTheConnectionIsLost = doNotForgetTheLampWhenTheConnectionIsLost
         if newLamp {
             getEffectsFromLamp(effectsFromLamp)
         }
@@ -435,12 +463,6 @@ class LampDevice { // объект лампа
         updateFavoriteStatus(lamp: self) // запросить состояние автопереключения
         sendCommand(command: .alarm_on, value: [0]) // запросить состоние будильника
         sendCommand(command: .timer_get, value: [0]) // запросить состояние таймера
-    }
-
-    func timerCount() {
-        if timerTime != 0 {
-            timerTime -= 1 // decrease counter timer
-        }
     }
 
     func updateStatus() {

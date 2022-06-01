@@ -20,6 +20,7 @@ extension UIView {
         layer.cornerRadius = 7
         layer.backgroundColor = UIColor.white.cgColor
     }
+
     // высота safearea сверху
     var safeAreaTop: CGFloat {
         if let window = UIApplication.shared.keyWindowInConnectedScenes {
@@ -162,7 +163,7 @@ extension UIImage {
     static func gradientImageWithBounds(bounds: CGRect) -> UIImage {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: bounds.height + 30)
-        
+
         gradientLayer.colors = [UIColor(red: 103.0 / 255.0, green: 40.0 / 255.0, blue: 199.0 / 255.0, alpha: 1).cgColor, UIColor(red: 115.0 / 255.0, green: 112.0 / 255.0, blue: 249.0 / 255.0, alpha: 1).cgColor]
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
@@ -170,13 +171,13 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image!
     }
-    
+
     static func rainbowGradientImageWithBounds(bounds: CGRect) -> UIImage {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: UIScreen.main.bounds.height/3.3)
+        gradientLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: UIScreen.main.bounds.height / 3.3)
         let hueColors = stride(from: 0, to: 1, by: 0.01).map {
             UIColor(hue: $0, saturation: 1, brightness: 1, alpha: 1).cgColor
-            }
+        }
         gradientLayer.colors = hueColors
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
@@ -184,15 +185,14 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image!
     }
-    
-  
-        func image(alpha: CGFloat) -> UIImage? {
-            UIGraphicsBeginImageContextWithOptions(size, false, scale)
-            draw(at: .zero, blendMode: .normal, alpha: alpha)
-            let newImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return newImage
-        }
+
+    func image(alpha: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: .zero, blendMode: .normal, alpha: alpha)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }
 
 extension UIViewController {
@@ -206,11 +206,11 @@ extension UIViewController {
         view.endEditing(true)
     }
 
-    func openSelector(_ flag: selectorFlag,  selectedDays: [Bool]? = nil, selectedDawn: Int? = nil, lamp: LampDevice) {
+    func openSelector(_ flag: selectorFlag, selectedDays: [Bool]? = nil, selectedDawn: Int? = nil, lamp: LampDevice) {
         let popvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selector") as! SelectorViewController
         addChild(popvc)
         popvc.flag = flag
-        
+
         if let dawn = selectedDawn {
             popvc.selectedDawn = dawn
         }
@@ -237,6 +237,25 @@ extension UITextField {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: frame.size.height))
         rightView = paddingView
         rightViewMode = .always
+    }
+
+    @IBInspectable var placeholderColor: UIColor {
+        get {
+            return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor ?? .clear
+        }
+        set {
+            guard let attributedPlaceholder = attributedPlaceholder else { return }
+            let attributes: [NSAttributedString.Key: UIColor] = [.foregroundColor: newValue]
+            self.attributedPlaceholder = NSAttributedString(string: attributedPlaceholder.string, attributes: attributes)
+        }
+    }
+
+    func hideShowPassword() {
+        if isSecureTextEntry {
+            isSecureTextEntry = false
+        } else {
+            isSecureTextEntry = true
+        }
     }
 }
 
@@ -270,6 +289,54 @@ extension UIButton {
 }
 
 extension String {
+    var isNumber: Bool {
+        return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+
+    var onlyDigits: String { return onlyCharacters(charSets: [.decimalDigits]) }
+
+    var onlyLetters: String {
+        var newName = self
+        if newName[0].isNumber {
+            newName.removeFirst()
+        }
+        if newName[0].isNumber {
+            newName.removeFirst()
+        }
+        if newName[0].isNumber {
+            newName.removeFirst()
+        }
+        if newName[0] == "." {
+            newName.removeFirst()
+        }
+        if newName[0] == "." {
+            newName.removeFirst()
+        }
+        if newName[0] == " " {
+            newName.removeFirst()
+        }
+        if newName[0] == " " {
+            newName.removeFirst()
+        }
+        return newName
+    }
+
+    private func filterCharacters(definedIn charSets: [CharacterSet], unicodeScalarsFilter: (CharacterSet, UnicodeScalar) -> Bool) -> String {
+        if charSets.isEmpty { return self }
+        let charSet = charSets.reduce(CharacterSet()) { $0.union($1) }
+        return filterCharacters { unicodeScalarsFilter(charSet, $0) }
+    }
+
+    private func filterCharacters(unicodeScalarsFilter closure: (UnicodeScalar) -> Bool) -> String {
+        return String(String.UnicodeScalarView(unicodeScalars.filter { closure($0) }))
+    }
+
+    func removeCharacters(charSets: [CharacterSet]) -> String { return filterCharacters(definedIn: charSets) { !$0.contains($1) } }
+    func removeCharacters(charSet: CharacterSet) -> String { return removeCharacters(charSets: [charSet]) }
+
+    func onlyCharacters(charSets: [CharacterSet]) -> String { return filterCharacters(definedIn: charSets) { $0.contains($1) } }
+    func onlyCharacters(charSet: CharacterSet) -> String { return onlyCharacters(charSets: [charSet]) }
+
     var length: Int {
         return count
     }
@@ -297,28 +364,27 @@ extension String {
 
 extension UILabel {
     func blink() {
-        UIView.animate(withDuration: 1.0, delay: 0.0, options:[.repeat,.autoreverse],
-                             animations:{ self.alpha=0.0}, completion: nil)
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.repeat, .autoreverse],
+                       animations: { self.alpha = 0.0 }, completion: nil)
     }
 }
 
 extension UIViewController {
-    func showInputDialog(title:String? = nil,
-                         subtitle:String? = nil,
-                         actionTitle:String? = "Add",
-                         cancelTitle:String? = "Cancel",
-                         inputPlaceholder:String? = nil,
-                         inputKeyboardType:UIKeyboardType = UIKeyboardType.default,
+    func showInputDialog(title: String? = nil,
+                         subtitle: String? = nil,
+                         actionTitle: String? = "Add",
+                         cancelTitle: String? = "Cancel",
+                         inputPlaceholder: String? = nil,
+                         inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
                          cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
                          actionHandler: ((_ text: String?) -> Void)? = nil) {
-
         let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-        alert.addTextField { (textField:UITextField) in
+        alert.addTextField { (textField: UITextField) in
             textField.placeholder = inputPlaceholder
             textField.keyboardType = inputKeyboardType
         }
-        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (action:UIAlertAction) in
-            guard let textField =  alert.textFields?.first else {
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (_: UIAlertAction) in
+            guard let textField = alert.textFields?.first else {
                 actionHandler?(nil)
                 return
             }
@@ -326,31 +392,30 @@ extension UIViewController {
         }))
         alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelHandler))
 
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
 
 extension UIViewController {
-
-    func showAlertAboutNeedToRestart(){
+    func showAlertAboutNeedToRestart() {
         let alert = UIAlertController(title: alertAboutNeedToRestart, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
         }))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
-    
-    func delay(delayTime: Double, completionHandler handler:@escaping () -> ()) {
-            let newDelay = DispatchTime.now() + delayTime
-            DispatchQueue.main.asyncAfter(deadline: newDelay, execute: handler)
-        }
+
+    func delay(delayTime: Double, completionHandler handler: @escaping () -> Void) {
+        let newDelay = DispatchTime.now() + delayTime
+        DispatchQueue.main.asyncAfter(deadline: newDelay, execute: handler)
+    }
 }
 
-extension Int{
-    func checkPercentage()->Int{
+extension Int {
+    func checkPercentage() -> Int {
         if self > -1 {
-            if self > 100{
+            if self > 100 {
                 return 100
-            }else{
+            } else {
                 return self
             }
         } else {
@@ -358,5 +423,3 @@ extension Int{
         }
     }
 }
-
-

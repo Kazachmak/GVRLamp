@@ -75,6 +75,8 @@ class CoreDataService {
             }else{
                 newLamp.setValue(false, forKey:  "mainLamp")
             }
+            
+            
             newLamp.setValue(element.name, forKeyPath: "name")
             newLamp.setValue("\(element.hostIP)", forKey: "ip")
             newLamp.setValue("\(element.hostPort)", forKey: "port")
@@ -82,6 +84,7 @@ class CoreDataService {
             newLamp.setValue(element.listOfEffects.joined(separator: ";"), forKey: "listOfEffects")
             newLamp.setValue(element.flagLampIsControlled, forKey: "flagLampIsControlled")
             newLamp.setValue(element.useSelectedEffectOnScreen, forKey: "useSelectedEffectOnScreen")
+            newLamp.setValue(element.doNotForgetTheLampWhenTheConnectionIsLost, forKey: "doNotForgetTheLampWhenTheConnectionIsLost")
             do {
                 try managedContext.save()
                 
