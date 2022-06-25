@@ -697,7 +697,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 656KCUF2WU;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -705,7 +705,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ProvProf_with_cert1205_with_MK_CSR_AppStore;
@@ -721,7 +721,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 656KCUF2WU;
 				INFOPLIST_FILE = GyverLamp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -729,7 +729,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ProvProf_with_cert1205_with_MK_CSR_AppStore;
