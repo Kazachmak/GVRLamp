@@ -289,54 +289,7 @@ extension UIButton {
 }
 
 extension String {
-    var isNumber: Bool {
-        return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
-    }
-
-    var onlyDigits: String { return onlyCharacters(charSets: [.decimalDigits]) }
-
-    var onlyLetters: String {
-        var newName = self
-        if newName[0].isNumber {
-            newName.removeFirst()
-        }
-        if newName[0].isNumber {
-            newName.removeFirst()
-        }
-        if newName[0].isNumber {
-            newName.removeFirst()
-        }
-        if newName[0] == "." {
-            newName.removeFirst()
-        }
-        if newName[0] == "." {
-            newName.removeFirst()
-        }
-        if newName[0] == " " {
-            newName.removeFirst()
-        }
-        if newName[0] == " " {
-            newName.removeFirst()
-        }
-        return newName
-    }
-
-    private func filterCharacters(definedIn charSets: [CharacterSet], unicodeScalarsFilter: (CharacterSet, UnicodeScalar) -> Bool) -> String {
-        if charSets.isEmpty { return self }
-        let charSet = charSets.reduce(CharacterSet()) { $0.union($1) }
-        return filterCharacters { unicodeScalarsFilter(charSet, $0) }
-    }
-
-    private func filterCharacters(unicodeScalarsFilter closure: (UnicodeScalar) -> Bool) -> String {
-        return String(String.UnicodeScalarView(unicodeScalars.filter { closure($0) }))
-    }
-
-    func removeCharacters(charSets: [CharacterSet]) -> String { return filterCharacters(definedIn: charSets) { !$0.contains($1) } }
-    func removeCharacters(charSet: CharacterSet) -> String { return removeCharacters(charSets: [charSet]) }
-
-    func onlyCharacters(charSets: [CharacterSet]) -> String { return filterCharacters(definedIn: charSets) { $0.contains($1) } }
-    func onlyCharacters(charSet: CharacterSet) -> String { return onlyCharacters(charSets: [charSet]) }
-
+ 
     var length: Int {
         return count
     }

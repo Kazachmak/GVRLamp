@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3C45877924EC2C5A00DBE5C4"
-               BuildableName = "GyverLamp.app"
-               BlueprintName = "GyverLamp"
-               ReferencedContainer = "container:GyverLamp.xcodeproj">
+               BuildableName = "GVRLamp.app"
+               BlueprintName = "GVRLamp"
+               ReferencedContainer = "container:GVRLamp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3C45877924EC2C5A00DBE5C4"
-            BuildableName = "GyverLamp.app"
-            BlueprintName = "GyverLamp"
-            ReferencedContainer = "container:GyverLamp.xcodeproj">
+            BuildableName = "GVRLamp.app"
+            BlueprintName = "GVRLamp"
+            ReferencedContainer = "container:GVRLamp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,9 +63,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3C45877924EC2C5A00DBE5C4"
-            BuildableName = "GyverLamp.app"
-            BlueprintName = "GyverLamp"
-            ReferencedContainer = "container:GyverLamp.xcodeproj">
+            BuildableName = "GVRLamp.app"
+            BlueprintName = "GVRLamp"
+            ReferencedContainer = "container:GVRLamp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

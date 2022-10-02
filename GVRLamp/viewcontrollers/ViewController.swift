@@ -82,8 +82,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if currentLamp.selectedEffectsNameList.count == 0 {
                 label.text = youMustSelectEffects
             } else {
-                label.text = currentLamp.getEffectName(row) //currentLamp.selectedEffectsNameList[row].components(separatedBy: ",")[0].incrementNumber
-                
+                label.text = currentLamp.getEffectName(row, nameList: currentLamp.selectedEffectsNameList)
             }
         } else {
             label.text = LampDevice.listOfEffectsDefault[row]
@@ -542,7 +541,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
         }
         isFirstLaunch = false
-        
     }
     
     override func viewDidLoad() {
@@ -601,7 +599,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     alert.addAction(UIAlertAction(title: closePopUp, style: .default, handler: { _ in
                         
                     }))
-
                     self.present(alert, animated: true, completion: nil)
                 }
             }

@@ -45,7 +45,7 @@ class EffectTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "effectCell", for: indexPath)
-        cell.textLabel?.text = lamps.mainLamp?.getEffectName(indexPath.row)//selectedEffectsNameList[indexPath.row].components(separatedBy: ",")[0].incrementNumber
+        cell.textLabel?.text = lamps.mainLamp?.getEffectName(indexPath.row, nameList: lamps.mainLamp?.selectedEffectsNameList ?? [""])
         if let effectNumber = lamps.mainLamp?.effect {
             if effectNumber == indexPath.row{
                 cell.textLabel?.textColor = redColor

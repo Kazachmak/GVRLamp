@@ -10,33 +10,6 @@
 import Network
 import UIKit
 
-// команды, которые можно передать на лампу
-enum CommandsToLamp: String {
-    case power_on = "P_ON" // включить
-    case power_off = "P_OFF" // выключить
-    case eff = "EFF" // номер эффекта
-    case get = "GET-" // запрос состояния
-    case txt = "TXT-" // отправка бегущей стрjки
-    case deb = "DEB"
-    case bri = "BRI" // установка яркости
-    case spd = "SPD" // установка скорости
-    case sca = "SCA" // установка масштаба
-    case gbr = "GBR" //
-    case list = "LIST" // запрос списка эффектов
-    case timer = "TMR_SET" // установка таймера
-    case timer_get = "TMR_GET" // запрос состояния таймера
-    case alarm_on
-    case alarm_off
-    case alarm = "ALM_SET" // установка будильника
-    case button_on = "BTN ON" // включение кнопки на лампе
-    case button_off = "BTN OFF" // отключение кнопки на лампе
-    case dawn = "DAWN" // рассвет
-    case fav_get = "FAV_GET" // набор эффектов для автопереключения запросить
-    case fav_set = "FAV_SET" // набор эффектов для автопереключения установить
-    case rnd = "RND_" //
-    case blank = ""
-}
-
 class UDPClient {
     var connection: NWConnection?
     var listCounter = 0
@@ -143,6 +116,8 @@ class UDPClient {
             return valueTXT
         case .rnd:
             return command.rawValue
+        case .lang:
+            return command.rawValue + valueTXT
         }
     }
 
@@ -178,6 +153,9 @@ class UDPClient {
 
                     switch backToString.components(separatedBy: " ")[0] {
                     case "CURR":
+                        if backToString.components(separatedBy: " ").count > 13 {
+                            print(backToString.components(separatedBy: " ")[14])
+                        }
                         if backToString.components(separatedBy: " ").count > 9 {
                             if backToString.components(separatedBy: " ")[5] == "0" {
                                 if lamp.powerStatus {
@@ -208,7 +186,6 @@ class UDPClient {
                             }
 
                             if (lamp.bright != Int(backToString.components(separatedBy: " ")[2])) && (lamp.speed != Int(backToString.components(separatedBy: " ")[3])) && (lamp.scale != Int(backToString.components(separatedBy: " ")[4])) {
-                                print("Test update slider")
                                 lamp.updateSliderFlag = true
                             }
 
@@ -315,7 +292,7 @@ class LampDevice { // объект лампа
     var commonBright = false
 
     var doNotForgetTheLampWhenTheConnectionIsLost = false
-    
+
     var selectedEffectsNameList: [String] {
         if useSelectedEffectOnScreen {
             let arrayOfNames = zip(selectedEffects, listOfEffects).filter { $0.0 }.map { $1 }
@@ -325,26 +302,12 @@ class LampDevice { // объект лампа
         }
     }
 
-    func getEffectName(_ number: Int) -> String{
-        let names = self.selectedEffectsNameList[number].components(separatedBy: ",")[0]
-        let multiNames = (names.onlyLetters).components(separatedBy: "|")
-        
-        if multiNames.count > 1{
-            let systemLang = Locale.current.languageCode
-            switch systemLang{
-            case "en": return String(number + 1) + ". " + multiNames[0]
-            case "ru": return String(number + 1) + ". " + multiNames[1]
-            case "uk": return String(number + 1) + ". " + multiNames[2]
-            case .none:
-                return String(number + 1) + ". "  + multiNames[0]
-            case .some(_):
-                return String(number + 1) + ". "  + multiNames[0]
-            }
-        }else{
-            return String(number + 1) + ". " + multiNames[0]
-        }
+    func getEffectName(_ number: Int, nameList: [String]) -> String {
+            let names = nameList[number].components(separatedBy: ",")[0]
+            let separateNames = names.components(separatedBy: " ")
+            let name = (separateNames.suffix(separateNames.count - 1)).joined(separator: " ")
+            return String(number + 1) + ". " + name
     }
-    
     
     func getEffectNumber(_ name: String) -> Int {
         return listOfEffects.firstIndex(where: { $0.components(separatedBy: ",")[0] == name.components(separatedBy: ",")[0] }) ?? 0
@@ -456,7 +419,15 @@ class LampDevice { // объект лампа
         self.useSelectedEffectOnScreen = useSelectedEffectOnScreen
         self.doNotForgetTheLampWhenTheConnectionIsLost = doNotForgetTheLampWhenTheConnectionIsLost
         if newLamp {
-            getEffectsFromLamp(effectsFromLamp)
+            switch Locale.current.languageCode{
+            case "ru" :  sendCommand(command: .lang, value: [], valueTXT: "ru")
+            case "uk" : sendCommand(command: .lang, value: [], valueTXT: "ua")
+            default : print(Locale.current.languageCode)
+                sendCommand(command: .lang, value: [], valueTXT: "en")
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.getEffectsFromLamp(effectsFromLamp)
+            }
         }
 
         updateStatus() // запросить состояние лампы
@@ -480,10 +451,12 @@ class LampDevice { // объект лампа
         if get {
             let client = UDPClient()
             DispatchQueue.global(qos: .userInitiated).async {
-                for element in 1 ... 3 {
-                    let second: Double = 1000000
-                    usleep(useconds_t(0.5 * second))
-                    client.connectToUDP(messageToUDP: .list, lamp: self, value: [element])
+                client.connectToUDP(messageToUDP: .list, lamp: self, value: [1])
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    client.connectToUDP(messageToUDP: .list, lamp: self, value: [2])
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    client.connectToUDP(messageToUDP: .list, lamp: self, value: [3])
                 }
             }
         } else {

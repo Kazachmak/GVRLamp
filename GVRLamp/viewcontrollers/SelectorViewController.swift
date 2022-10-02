@@ -36,7 +36,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
             var intArray = array?.compactMap { Int($0) }
             let effects = currentLamp.selectedEffects
             intArray?.append(contentsOf: effects.convertToIntArray())
-            currentLamp.sendCommand(command: .fav_set, value: intArray!)
+            currentLamp.sendCommand(command: .fav_set, value: intArray ?? [])
         }
     }
     
@@ -69,7 +69,7 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "selector", for: indexPath) as! SelectorTableViewCell
         switch flag {
         case .effects:
-            cell.day.text = lamp?.getEffectName(indexPath.row)
+            cell.day.text = lamp?.getEffectName(indexPath.row, nameList: lamp?.listOfEffects ?? [""])
             if let currentLamp = lamp {
                 if currentLamp.selectedEffects[indexPath.row] {
                     cell.selector.image = UIImage(named: "selector.png")!

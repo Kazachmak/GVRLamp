@@ -72,21 +72,27 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         alert.addAction(UIAlertAction(title: "English", style: .default, handler: { _ in
             UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
             UserDefaults.standard.synchronize()
+            lamps.mainLamp?.sendCommand(command: .lang, value: [], valueTXT: "en")
             self.showAlertAboutNeedToRestart()
         }))
         alert.addAction(UIAlertAction(title: "Русский", style: .default, handler: { _ in
             UserDefaults.standard.set(["ru"], forKey: "AppleLanguages")
             UserDefaults.standard.synchronize()
+            lamps.mainLamp?.sendCommand(command: .lang, value: [], valueTXT: "ru")
             self.showAlertAboutNeedToRestart()
         }))
         alert.addAction(UIAlertAction(title: "Українська", style: .default, handler: { _ in
             UserDefaults.standard.set(["uk"], forKey: "AppleLanguages")
             UserDefaults.standard.synchronize()
+            lamps.mainLamp?.sendCommand(command: .lang, value: [], valueTXT: "ua")
             self.showAlertAboutNeedToRestart()
         }))
         alert.addAction(UIAlertAction(title: closePopUp, style: .default, handler: { _ in
         }))
         present(alert, animated: true, completion: nil)
+        if getEffectsFromListOut.isOn{
+            UserDefaults.standard.setValue(true, forKey: "neededToReloadEffects")
+            }
     }
 
     func openPickerView(_ tag: Int) {

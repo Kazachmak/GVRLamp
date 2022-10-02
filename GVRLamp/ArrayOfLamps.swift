@@ -77,6 +77,11 @@ class ArrayOfLamps {
                     }
                 })
             }
+            let neededToReloadEffects = UserDefaults.standard.bool(forKey: "neededToReloadEffects")
+            if neededToReloadEffects{
+                lamps.mainLamp?.getEffectsFromLamp(true)
+                UserDefaults.standard.setValue(false, forKey: "neededToReloadEffects")
+            }
         }
             _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
                 print("Timer fire!")
@@ -171,7 +176,6 @@ class ArrayOfLamps {
     func updateArrayOfLamps(lamp: LampDevice) {
         if !checkIP("\(lamp.hostIP)") {
             arrayOfLamps.append(lamp)
-
             if lamp.hostIP != "192.168.4.1" {
                 arrayOfLamps = arrayOfLamps.filter { devices in
                     devices.hostIP != "192.168.4.1"
@@ -180,7 +184,6 @@ class ArrayOfLamps {
                     NotificationCenter.default.post(name: Notification.Name("updateInterface"), object: nil)
                 }
             }
-            // timerStartAndStop()
             mainLampIndex = 0
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("newLampHasAdded"), object: lamp)

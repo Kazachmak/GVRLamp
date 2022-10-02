@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iI3-um-CZu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iI3-um-CZu">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,7 +18,7 @@
         <!--Splash View Controller-->
         <scene sceneID="0Sh-AI-f6Y">
             <objects>
-                <viewController id="iI3-um-CZu" customClass="SplashViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iI3-um-CZu" customClass="SplashViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rB4-ZT-iAM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +58,7 @@
         <!--Управление лампой-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="mainView" id="BYZ-38-t0r" customClass="ViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainView" id="BYZ-38-t0r" customClass="ViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -581,7 +581,7 @@
         <!--Empty View Controller-->
         <scene sceneID="3to-gv-C3j">
             <objects>
-                <viewController storyboardIdentifier="empty" id="KtP-x3-QCK" customClass="EmptyViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="empty" id="KtP-x3-QCK" customClass="EmptyViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hRX-tB-WZw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -614,7 +614,7 @@
         <!--Slider Full Screen View Controller-->
         <scene sceneID="ZK9-tZ-kVB">
             <objects>
-                <viewController storyboardIdentifier="fullscreen" id="ZYD-OJ-30A" customClass="SliderFullScreenViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="fullscreen" id="ZYD-OJ-30A" customClass="SliderFullScreenViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c51-hF-ymT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -745,7 +745,7 @@
         <!--Будильники-->
         <scene sceneID="Ks7-wR-i9x">
             <objects>
-                <viewController storyboardIdentifier="alarm" id="VxG-0H-mKO" customClass="AlarmViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="alarm" id="VxG-0H-mKO" customClass="AlarmViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zd8-8h-nJy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -994,7 +994,7 @@
         <!--Selector View Controller-->
         <scene sceneID="4oj-eA-PWx">
             <objects>
-                <viewController storyboardIdentifier="selector" id="fid-Oz-7mD" customClass="SelectorViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="selector" id="fid-Oz-7mD" customClass="SelectorViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ev4-xb-WNd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1049,7 +1049,7 @@
                                 <rect key="frame" x="16" y="92" width="343" height="686"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="selector" id="MJz-K7-Plt" customClass="SelectorTableViewCell" customModule="GyverLamp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="selector" id="MJz-K7-Plt" customClass="SelectorTableViewCell" customModule="GVRLamp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="343" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MJz-K7-Plt" id="jhH-9B-QVE">
@@ -1139,7 +1139,7 @@
         <!--Таймер-->
         <scene sceneID="uDT-Xy-0Rc">
             <objects>
-                <viewController storyboardIdentifier="timer" id="4nl-VP-tTN" customClass="TimerViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="timer" id="4nl-VP-tTN" customClass="TimerViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gF7-7I-76V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1241,7 +1241,7 @@
         <!--Empty2 View Controller-->
         <scene sceneID="kqs-xW-uFb">
             <objects>
-                <viewController id="18G-Sw-3LV" customClass="Empty2ViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="18G-Sw-3LV" customClass="Empty2ViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="vw6-P8-Rqf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1274,9 +1274,9 @@
         <!--Effect Table View Controller-->
         <scene sceneID="2M9-1D-0yZ">
             <objects>
-                <tableViewController id="En5-mn-mlS" customClass="EffectTableViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="En5-mn-mlS" customClass="EffectTableViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="AV5-cq-8JM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="734"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1313,7 +1313,7 @@
         <!--Настройки-->
         <scene sceneID="OmW-Fw-NVo">
             <objects>
-                <viewController storyboardIdentifier="settings" id="4L0-4m-4Zc" customClass="SettingsViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settings" id="4L0-4m-4Zc" customClass="SettingsViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aXI-yb-F3L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1381,7 +1381,7 @@
                                 <rect key="frame" x="20" y="88" width="335" height="442"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="lampCell" rowHeight="129" id="EPC-Zj-lMp" customClass="LampsTableViewCell" customModule="GyverLamp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="lampCell" rowHeight="129" id="EPC-Zj-lMp" customClass="LampsTableViewCell" customModule="GVRLamp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="335" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EPC-Zj-lMp" id="eXA-zj-g0n">
@@ -1525,9 +1525,9 @@
         <!--Lamp Settings View Controller-->
         <scene sceneID="2I2-BM-vx5">
             <objects>
-                <viewController storyboardIdentifier="lampsettings" id="iGg-hs-MW9" customClass="LampSettingsViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="lampsettings" id="iGg-hs-MW9" customClass="LampSettingsViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u1Q-0C-wWk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t4v-x9-HTG">
@@ -2156,7 +2156,7 @@
         <!--Rename View Controller-->
         <scene sceneID="BbA-Tr-zit">
             <objects>
-                <viewController storyboardIdentifier="rename" id="czH-dB-iw7" customClass="RenameViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rename" id="czH-dB-iw7" customClass="RenameViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mew-MT-JBV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2263,9 +2263,9 @@
         <!--Add Lamp View Controller-->
         <scene sceneID="peg-LX-86z">
             <objects>
-                <viewController id="FSU-y8-KdL" customClass="AddLampViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FSU-y8-KdL" customClass="AddLampViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eOG-5k-koX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVf-9T-slG">
@@ -2445,7 +2445,7 @@
         <!--Search And Add Lamp View Controller-->
         <scene sceneID="tmy-mK-NyV">
             <objects>
-                <viewController id="Syx-4Y-l1g" customClass="SearchAndAddLampViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Syx-4Y-l1g" customClass="SearchAndAddLampViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h3F-OO-7Q5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2540,7 +2540,7 @@
         <!--Wi Fi Settings View Controller-->
         <scene sceneID="g3t-QP-LHW">
             <objects>
-                <viewController storyboardIdentifier="wi-fi" id="Qqs-5Y-T8N" customClass="WiFiSettingsViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="wi-fi" id="Qqs-5Y-T8N" customClass="WiFiSettingsViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GCb-qS-srI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2851,7 +2851,7 @@
         <!--Web View View Controller-->
         <scene sceneID="0Lw-cT-to9">
             <objects>
-                <viewController storyboardIdentifier="web" id="TDM-0P-jFN" customClass="WebViewViewController" customModule="GyverLamp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="web" id="TDM-0P-jFN" customClass="WebViewViewController" customModule="GVRLamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OcE-PH-757">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2926,7 +2926,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZFe-NC-OyM"/>
+        <segue reference="2RU-5o-jEp"/>
         <segue reference="f85-7v-PNc"/>
     </inferredMetricsTieBreakers>
     <resources>

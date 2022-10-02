@@ -61,6 +61,11 @@ class WiFiSettingsViewController: UIViewController {
             height2.constant = 30
         }else{
             routerWifiSwitchOut.setOn(true, animated: true)
+            viewWithTextFileds.isHidden = false
+            label1.isHidden = true
+            label2.isHidden = true
+            height1.constant = 0
+            height2.constant = 420
         }
     }
     
@@ -74,6 +79,11 @@ class WiFiSettingsViewController: UIViewController {
             height2.constant = 420
         }else{
             wifiLampSwitchOut.setOn(true, animated: true)
+            viewWithTextFileds.isHidden = true
+            label1.isHidden = false
+            label2.isHidden = false
+            height1.constant = 60
+            height2.constant = 30
         }
     }
     
@@ -165,7 +175,6 @@ class WiFiSettingsViewController: UIViewController {
                 label1.isHidden = true
                 label2.isHidden = true
                 height1.constant = 0
-                //height2.constant = 0
             }
         }
     }

@@ -69,7 +69,6 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
     }
 
     func lanScanDidFailedToScan() {
-        //view.window!.rootViewController?.dismiss(animated: false, completion: nil)
         print("Failed to scan")
     }
 
@@ -78,10 +77,10 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
         pingHosts = 0
             LampDevice.scan(deviceIp: "192.168.4.1")
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 if !lamps.checkIP("192.168.4.1") {
                     self.lanScanner.start()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){ [self] in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){ [self] in
                         
                            if pingHosts == 0 {
                                lanScanner.stop()
@@ -92,11 +91,7 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
                            }
                        }
                 } else {
-                   // if self.modeOfSearch == .searchInRouterMode {
-                        
-                    //} else {
                         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                   // }
                 }
             }
     }
@@ -110,22 +105,13 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
         searchButtonOut.isHidden = false
         switch modeOfSearch {
         case .firstStartSearch:
-         /*   DispatchQueue.main.asyncAfter(deadline: .now() + 3.0){ [self] in
-                if pingHosts == 0 {
-                    lanScanner.stop()
-                    searchLampTextLabel.textAlignment = .left
-                    searchLampTextLabel.text = connectPhoneToWiFi + "Led Lamp" + andPressFind
-                    searchButtonOut.isHidden = false
-                }
-            }*/
             searchButtonOut.isHidden = true
             if lamps.arrayOfLamps.isEmpty || !lamps.connectionStatusOfMainLamp {
-                
                 LampDevice.scan(deviceIp: "192.168.4.1")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     if !lamps.checkIP("192.168.4.1") {
                         self.lanScanner.start()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){ [self] in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2){ [self] in
                                if pingHosts == 0 {
                                    lanScanner.stop()
                                    searchLampTextLabel.textAlignment = .left
@@ -153,12 +139,7 @@ class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //  backArrowHeight.constant += view.safeAreaTop + 20
-        //  headerViewHeight.constant += view.safeAreaTop - 20
         searchAndAddLabel.adjustsFontSizeToFitWidth = true
         searchLampTextLabel.textAlignment = .left
-
-        // searchLampTextLabel.text = lampNotFoundExt
-        // searchButtonOut.isHidden = false
     }
 }

@@ -19,7 +19,6 @@
 		3C16E042257A866600D8EBFE /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C16E041257A866600D8EBFE /* right-arrow.png */; };
 		3C18568C25945F0300851A6B /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C18568B25945F0300851A6B /* main.png */; };
 		3C1E0891274CF3D00030F560 /* ic_settings_wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */; };
-		3C1E089B274D2A8C0030F560 /* CustomMagicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1E089A274D2A8C0030F560 /* CustomMagicTimer.swift */; };
 		3C20D8F32657A83E008A9066 /* Empty2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20D8F22657A83E008A9066 /* Empty2ViewController.swift */; };
 		3C20D8F62657AB8A008A9066 /* EffectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20D8F52657AB8A008A9066 /* EffectTableViewController.swift */; };
 		3C22E2AD2573F2B300BD93B2 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */; };
@@ -103,7 +102,6 @@
 		3C16E041257A866600D8EBFE /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		3C18568B25945F0300851A6B /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
 		3C1E0890274CF3D00030F560 /* ic_settings_wifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_settings_wifi.png; sourceTree = "<group>"; };
-		3C1E089A274D2A8C0030F560 /* CustomMagicTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMagicTimer.swift; sourceTree = "<group>"; };
 		3C20D8F22657A83E008A9066 /* Empty2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty2ViewController.swift; sourceTree = "<group>"; };
 		3C20D8F52657AB8A008A9066 /* EffectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTableViewController.swift; sourceTree = "<group>"; };
 		3C22E2AC2573F2B300BD93B2 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
@@ -118,7 +116,7 @@
 		3C3713C826569EFD00BD42CB /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		3C3713CB26569FED00BD42CB /* heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart2.png; sourceTree = "<group>"; };
 		3C3713CC26569FED00BD42CB /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
-		3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyverLamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C45877A24EC2C5A00DBE5C4 /* GVRLamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GVRLamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C45877F24EC2C5A00DBE5C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3C45878124EC2C5A00DBE5C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -196,7 +194,7 @@
 		3C45877124EC2C5A00DBE5C4 = {
 			isa = PBXGroup;
 			children = (
-				3C45877C24EC2C5A00DBE5C4 /* GyverLamp */,
+				3C45877C24EC2C5A00DBE5C4 /* GVRLamp */,
 				3C45877B24EC2C5A00DBE5C4 /* Products */,
 				A6265E26CC15F07C3F239C0F /* Pods */,
 				928B800D3974FC4B8B34E049 /* Frameworks */,
@@ -206,12 +204,12 @@
 		3C45877B24EC2C5A00DBE5C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */,
+				3C45877A24EC2C5A00DBE5C4 /* GVRLamp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3C45877C24EC2C5A00DBE5C4 /* GyverLamp */ = {
+		3C45877C24EC2C5A00DBE5C4 /* GVRLamp */ = {
 			isa = PBXGroup;
 			children = (
 				3C45877D24EC2C5A00DBE5C4 /* AppDelegate.swift */,
@@ -234,14 +232,13 @@
 				3C45878B24EC2C5C00DBE5C4 /* Info.plist */,
 				3C76396C25E9162C007D13C4 /* Model.xcdatamodeld */,
 			);
-			path = GyverLamp;
+			path = GVRLamp;
 			sourceTree = "<group>";
 		};
 		3C7CF12924F0FA810094D602 /* others */ = {
 			isa = PBXGroup;
 			children = (
 				3C76398F25E92AC5007D13C4 /* CoreDataService.swift */,
-				3C1E089A274D2A8C0030F560 /* CustomMagicTimer.swift */,
 				3C45879524EC426100DBE5C4 /* Extensions.swift */,
 				3CAF6585268245CD006C3B2A /* PaddingLabel.swift */,
 				3C4B81E727873E4800D0B14B /* Effect.swift */,
@@ -351,9 +348,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3C45877924EC2C5A00DBE5C4 /* GyverLamp */ = {
+		3C45877924EC2C5A00DBE5C4 /* GVRLamp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3C45878E24EC2C5C00DBE5C4 /* Build configuration list for PBXNativeTarget "GyverLamp" */;
+			buildConfigurationList = 3C45878E24EC2C5C00DBE5C4 /* Build configuration list for PBXNativeTarget "GVRLamp" */;
 			buildPhases = (
 				29F27E207E89B252E06EB392 /* [CP] Check Pods Manifest.lock */,
 				3C45877624EC2C5A00DBE5C4 /* Sources */,
@@ -365,9 +362,9 @@
 			);
 			dependencies = (
 			);
-			name = GyverLamp;
+			name = GVRLamp;
 			productName = GyverLamp;
-			productReference = 3C45877A24EC2C5A00DBE5C4 /* GyverLamp.app */;
+			productReference = 3C45877A24EC2C5A00DBE5C4 /* GVRLamp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -385,7 +382,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3C45877524EC2C5A00DBE5C4 /* Build configuration list for PBXProject "GyverLamp" */;
+			buildConfigurationList = 3C45877524EC2C5A00DBE5C4 /* Build configuration list for PBXProject "GVRLamp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -400,7 +397,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3C45877924EC2C5A00DBE5C4 /* GyverLamp */,
+				3C45877924EC2C5A00DBE5C4 /* GVRLamp */,
 			);
 		};
 /* End PBXProject section */
@@ -516,7 +513,6 @@
 				3C22E2AD2573F2B300BD93B2 /* EmptyViewController.swift in Sources */,
 				3C45878224EC2C5A00DBE5C4 /* ViewController.swift in Sources */,
 				3C9EAEC724EC5CBF00600578 /* SettingsViewController.swift in Sources */,
-				3C1E089B274D2A8C0030F560 /* CustomMagicTimer.swift in Sources */,
 				3CEF72C726BD5710009585AA /* Bundle.swift in Sources */,
 				3C20D8F32657A83E008A9066 /* Empty2ViewController.swift in Sources */,
 				3C9EAECD24EC61AA00600578 /* LampsTableViewCell.swift in Sources */,
@@ -695,20 +691,26 @@
 			baseConfigurationReference = EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = 656KCUF2WU;
-				INFOPLIST_FILE = GyverLamp/Info.plist;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 656KCUF2WU;
+				INFOPLIST_FILE = "$(SRCROOT)/GVRLamp/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "GVR Lamp";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.41;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ProvProf_with_cert1205_with_MK_CSR_AppStore;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ProvProf_with_cert1205_with_MK_CSR_AppStore;
+				SWIFT_OBJC_BRIDGING_HEADER = "GVRLamp/GyverLamp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -719,20 +721,26 @@
 			baseConfigurationReference = 250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = 656KCUF2WU;
-				INFOPLIST_FILE = GyverLamp/Info.plist;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 656KCUF2WU;
+				INFOPLIST_FILE = "$(SRCROOT)/GVRLamp/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "GVR Lamp";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.41;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ProvProf_with_cert1205_with_MK_CSR_AppStore;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ProvProf_with_cert1205_with_MK_CSR_AppStore;
+				SWIFT_OBJC_BRIDGING_HEADER = "GVRLamp/GyverLamp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -741,7 +749,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3C45877524EC2C5A00DBE5C4 /* Build configuration list for PBXProject "GyverLamp" */ = {
+		3C45877524EC2C5A00DBE5C4 /* Build configuration list for PBXProject "GVRLamp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3C45878C24EC2C5C00DBE5C4 /* Debug */,
@@ -750,7 +758,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3C45878E24EC2C5C00DBE5C4 /* Build configuration list for PBXNativeTarget "GyverLamp" */ = {
+		3C45878E24EC2C5C00DBE5C4 /* Build configuration list for PBXNativeTarget "GVRLamp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3C45878F24EC2C5C00DBE5C4 /* Debug */,
