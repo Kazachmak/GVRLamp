@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,11 +39,9 @@
 		3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45879524EC426100DBE5C4 /* Extensions.swift */; };
 		3C461022257777F800F375ED /* oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C461021257777F800F375ED /* oval.png */; };
 		3C4610262577781F00F375ED /* onOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4610252577781F00F375ED /* onOff.png */; };
-		3C4B81E827873E4800D0B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B81E727873E4800D0B14B /* Effect.swift */; };
 		3C561FFD25681D2E00E14632 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFB25681D2E00E14632 /* search.png */; };
 		3C561FFE25681D2E00E14632 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C561FFC25681D2E00E14632 /* plus.png */; };
 		3C62CA412788A3ED001D08D9 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C62CA402788A3ED001D08D9 /* eye.png */; };
-		3C68E6B5278B659A00CE73A5 /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C68E6B4278B659A00CE73A5 /* GlobalVars.swift */; };
 		3C6B366B2743DE00008AD16B /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B366A2743DE00008AD16B /* WebViewViewController.swift */; };
 		3C6ECAD825617E8A00813C43 /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD425617E8A00813C43 /* timer.png */; };
 		3C6ECAD925617E8A00813C43 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C6ECAD525617E8A00813C43 /* alarm.png */; };
@@ -85,11 +83,14 @@
 		3CEF72C726BD5710009585AA /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF72C626BD5710009585AA /* Bundle.swift */; };
 		3CF2223F26B318AE00C6D35F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CF2223D26B318AE00C6D35F /* Localizable.strings */; };
 		3CF2224426B31E2E00C6D35F /* StringsNeededLocalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF2224326B31E2E00C6D35F /* StringsNeededLocalize.swift */; };
-		41FE89CA722D6D15EDA7FD8C /* Pods_GyverLamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D58903E06228209968C630 /* Pods_GyverLamp.framework */; };
+		5CC95D922C4E444600AF325A /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC95D912C4E444600AF325A /* Effect.swift */; };
+		5CC95D942C4E44B200AF325A /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC95D932C4E44B200AF325A /* GlobalVars.swift */; };
+		F03FC1A00B0346E88094ABD7 /* Pods_GVRLamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D0D0D0B66F0EE13EC74D13 /* Pods_GVRLamp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GyverLamp.release.xcconfig"; path = "Target Support Files/Pods-GyverLamp/Pods-GyverLamp.release.xcconfig"; sourceTree = "<group>"; };
+		30D0D0D0B66F0EE13EC74D13 /* Pods_GVRLamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GVRLamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C039B2F2561AD2200119134 /* scale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scale.png; sourceTree = "<group>"; };
 		3C039B302561AD2200119134 /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness.png; sourceTree = "<group>"; };
 		3C039B312561AD2200119134 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
@@ -125,11 +126,9 @@
 		3C45879524EC426100DBE5C4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3C461021257777F800F375ED /* oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oval.png; sourceTree = "<group>"; };
 		3C4610252577781F00F375ED /* onOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onOff.png; sourceTree = "<group>"; };
-		3C4B81E727873E4800D0B14B /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		3C561FFB25681D2E00E14632 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		3C561FFC25681D2E00E14632 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		3C62CA402788A3ED001D08D9 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
-		3C68E6B4278B659A00CE73A5 /* GlobalVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
 		3C6B366A2743DE00008AD16B /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		3C6ECAD425617E8A00813C43 /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
 		3C6ECAD525617E8A00813C43 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = "<group>"; };
@@ -175,7 +174,10 @@
 		3CF2223E26B318AE00C6D35F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = GyverLamp/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CF2224126B318BF00C6D35F /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = GyverLamp/uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CF2224326B31E2E00C6D35F /* StringsNeededLocalize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsNeededLocalize.swift; sourceTree = "<group>"; };
-		88D58903E06228209968C630 /* Pods_GyverLamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GyverLamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AF60B58A4CDF09F42F23FC8 /* Pods-GVRLamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GVRLamp.release.xcconfig"; path = "Target Support Files/Pods-GVRLamp/Pods-GVRLamp.release.xcconfig"; sourceTree = "<group>"; };
+		57C6CC4BF5334CB1F6A32C7F /* Pods-GVRLamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GVRLamp.debug.xcconfig"; path = "Target Support Files/Pods-GVRLamp/Pods-GVRLamp.debug.xcconfig"; sourceTree = "<group>"; };
+		5CC95D912C4E444600AF325A /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Effect.swift; path = /Users/maksimkazachkov/Documents/GVRLamp/GVRLamp/others/Effect.swift; sourceTree = "<absolute>"; };
+		5CC95D932C4E44B200AF325A /* GlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
 		EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GyverLamp.debug.xcconfig"; path = "Target Support Files/Pods-GyverLamp/Pods-GyverLamp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,7 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41FE89CA722D6D15EDA7FD8C /* Pods_GyverLamp.framework in Frameworks */,
+				F03FC1A00B0346E88094ABD7 /* Pods_GVRLamp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,12 +221,10 @@
 				3C31837A2511E66C00663FC8 /* GyverLamp-Bridging-Header.h */,
 				3C7CF12B24F0FAB10094D602 /* cells */,
 				3C15F2D024EDA6F600F63C92 /* LampDevice.swift */,
-				3C68E6B4278B659A00CE73A5 /* GlobalVars.swift */,
 				3CF2223D26B318AE00C6D35F /* Localizable.strings */,
 				3CA6DE1B26B09C82003F1AE2 /* Main.storyboard */,
 				3CA6DE0826B09B13003F1AE2 /* LaunchScreen.storyboard */,
 				3CBCEDD42639558500619E4C /* Lamps.swift */,
-				3C2A5F6825EADBF400E3F5D1 /* ArrayOfLamps.swift */,
 				3C7CF12924F0FA810094D602 /* others */,
 				3C7CF12A24F0FAA20094D602 /* viewcontrollers */,
 				3C9EAECA24EC5E4D00600578 /* images */,
@@ -239,9 +239,11 @@
 			isa = PBXGroup;
 			children = (
 				3C76398F25E92AC5007D13C4 /* CoreDataService.swift */,
+				3C2A5F6825EADBF400E3F5D1 /* ArrayOfLamps.swift */,
+				5CC95D932C4E44B200AF325A /* GlobalVars.swift */,
+				5CC95D912C4E444600AF325A /* Effect.swift */,
 				3C45879524EC426100DBE5C4 /* Extensions.swift */,
 				3CAF6585268245CD006C3B2A /* PaddingLabel.swift */,
-				3C4B81E727873E4800D0B14B /* Effect.swift */,
 			);
 			path = others;
 			sourceTree = "<group>";
@@ -331,7 +333,7 @@
 		928B800D3974FC4B8B34E049 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				88D58903E06228209968C630 /* Pods_GyverLamp.framework */,
+				30D0D0D0B66F0EE13EC74D13 /* Pods_GVRLamp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -341,6 +343,8 @@
 			children = (
 				EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */,
 				250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */,
+				57C6CC4BF5334CB1F6A32C7F /* Pods-GVRLamp.debug.xcconfig */,
+				4AF60B58A4CDF09F42F23FC8 /* Pods-GVRLamp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -474,7 +478,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GyverLamp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-GVRLamp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -487,15 +491,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-GVRLamp/Pods-GVRLamp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-GVRLamp/Pods-GVRLamp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GVRLamp/Pods-GVRLamp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -506,7 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C8DE0AE24F6D09900C61BBC /* AlarmViewController.swift in Sources */,
-				3C68E6B5278B659A00CE73A5 /* GlobalVars.swift in Sources */,
+				5CC95D922C4E444600AF325A /* Effect.swift in Sources */,
 				3C84E96324F3A732004B411A /* TimerViewController.swift in Sources */,
 				3CA0C5EC2576352800858C95 /* SelectorTableViewCell.swift in Sources */,
 				3C12C12325725B6500EAE13D /* SliderFullScreenViewController.swift in Sources */,
@@ -525,11 +529,11 @@
 				3C45878024EC2C5A00DBE5C4 /* SceneDelegate.swift in Sources */,
 				3CF2224426B31E2E00C6D35F /* StringsNeededLocalize.swift in Sources */,
 				3C15F2D124EDA6F600F63C92 /* LampDevice.swift in Sources */,
-				3C4B81E827873E4800D0B14B /* Effect.swift in Sources */,
 				3CAC1830273FC23C00F158B9 /* WiFiSettingsViewController.swift in Sources */,
 				3C45879624EC426100DBE5C4 /* Extensions.swift in Sources */,
 				3C2A5F6925EADBF400E3F5D1 /* ArrayOfLamps.swift in Sources */,
 				3CA069FA24F909130058AD2A /* LampSettingsViewController.swift in Sources */,
+				5CC95D942C4E44B200AF325A /* GlobalVars.swift in Sources */,
 				3C735A90257018FB001093C3 /* SearchAndAddLampViewController.swift in Sources */,
 				3CBCEDD52639558500619E4C /* Lamps.swift in Sources */,
 				3C76396E25E9162C007D13C4 /* Model.xcdatamodeld in Sources */,
@@ -688,13 +692,13 @@
 		};
 		3C45878F24EC2C5C00DBE5C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */;
+			baseConfigurationReference = 57C6CC4BF5334CB1F6A32C7F /* Pods-GVRLamp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 656KCUF2WU;
 				INFOPLIST_FILE = "$(SRCROOT)/GVRLamp/Info.plist";
@@ -705,11 +709,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.41;
+				MARKETING_VERSION = 1.43;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ProvProf_with_cert1205_with_MK_CSR_AppStore;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "ProvProf_iOS-Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "GVRLamp/GyverLamp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -718,13 +722,13 @@
 		};
 		3C45879024EC2C5C00DBE5C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 250E5457315A784798227FAA /* Pods-GyverLamp.release.xcconfig */;
+			baseConfigurationReference = 4AF60B58A4CDF09F42F23FC8 /* Pods-GVRLamp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 656KCUF2WU;
 				INFOPLIST_FILE = "$(SRCROOT)/GVRLamp/Info.plist";
@@ -735,11 +739,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.41;
+				MARKETING_VERSION = 1.43;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.SlavaMashchenko.FireFlyLamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ProvProf_with_cert1205_with_MK_CSR_AppStore;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "ProvProf_iOS-Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "GVRLamp/GyverLamp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

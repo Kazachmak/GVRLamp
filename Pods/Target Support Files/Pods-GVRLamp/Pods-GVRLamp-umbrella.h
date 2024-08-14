@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_GyverLampVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_GyverLampVersionString[];
+FOUNDATION_EXPORT double Pods_GVRLampVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_GVRLampVersionString[];
 

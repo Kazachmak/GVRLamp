@@ -36,7 +36,7 @@ open class MagicTimerView: UIView {
     }
     
     /// Font size of timer label. just available in interface builder. Default value is 18.
-    @available(*, unavailable, message: "Just available in interface builder")
+    //@available(*, unavailable, message: "Just available in interface builder")
     @IBInspectable var fontSize: CGFloat = 18 {
         willSet {
             timerLabel.font = timerLabel.font.withSize(newValue)

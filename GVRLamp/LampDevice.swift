@@ -131,17 +131,14 @@ class UDPClient {
                     print("Received message: \(backToString)")
 
                     if backToString.contains("LIST") {
-                        var arrayOfQuantity = backToString.components(separatedBy: ";")
+                      let arrayOfQuantity = backToString.components(separatedBy: ";").filter { !$0.contains("LIST") }.filter { $0.count > 3}
                         if arrayOfQuantity.count > 1 {
                             if self.listCounter == 0 {
                                 lamp.listOfEffects = []
-                                lamp.newListOfEffects = []
                             }
                             self.listCounter += 1
-                            arrayOfQuantity = arrayOfQuantity.filter { !$0.contains("LIST") }
                             for element in arrayOfQuantity {
                                 lamp.listOfEffects.append(element)
-                                lamp.newListOfEffects?.append(Effect(element))
                             }
                             lamp.effectsFromLamp = true
                             DispatchQueue.main.async {
@@ -274,8 +271,6 @@ class LampDevice { // объект лампа
     var dawn: Int? // рассвет за сколько минут
     var favorite: String? // автопереключение эффектов
     var listOfEffects: [String] = listOfEffectsDefault // список эффектов
-
-    var newListOfEffects: [Effect]?
 
     var updateSliderFlag = false
     var effect: Int? // номер текущего эффекта

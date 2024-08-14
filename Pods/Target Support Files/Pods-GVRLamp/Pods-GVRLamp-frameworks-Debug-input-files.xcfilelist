@@ -1,4 +1,4 @@
-${PODS_ROOT}/Target Support Files/Pods-GyverLamp/Pods-GyverLamp-frameworks.sh
+${PODS_ROOT}/Target Support Files/Pods-GVRLamp/Pods-GVRLamp-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/InputMask/InputMask.framework
 ${BUILT_PRODUCTS_DIR}/MIBlurPopup/MIBlurPopup.framework
 ${BUILT_PRODUCTS_DIR}/MMLanScan/MMLanScan.framework
