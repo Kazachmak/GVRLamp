@@ -1,4 +1,4 @@
-# GVR Lamp
+## GVR Lamp
 <img src="https://github.com/Kazachmak/GVRLamp/blob/master/icon.png" align="center" height="300" width="300">
 
 Приложение под iOS для управления лампой Гайвера.
@@ -47,3 +47,11 @@
 Изменения в версии 1.42
 1. Улучшена совместимость с прошивкой FieryLedLamp.
 2. Исправлены мелкие баги
+
+## Автор
+
+Максим Казачков, kazachmak@gmail.com
+
+## Лицензия
+
+MIT license
