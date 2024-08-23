@@ -7,7 +7,7 @@
 Предназначено для использования с прошивками GUNNER47 v1.4 - 1.5, прошивкой "XX в 1" и FieryLedLamp.
 
 ## Скачать
-[<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg""> ](https://apps.apple.com/ru/app/gvr-lamp/id1546452194)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"> ](https://apps.apple.com/ru/app/gvr-lamp/id1546452194)
 
 ##  Функции:
 1. Автоматический поиск и добавление ламп в локальной сети.
