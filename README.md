@@ -1,5 +1,5 @@
 # Приложение GVR Lamp
-<img src="https://github.com/Kazachmak/GVRLamp/blob/master/icon.png" align="center" height="300" width="300">
+<img src="https://github.com/Kazachmak/GVRLamp/blob/master/icon.png" align="center" height="40" width="40">
 
 <img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo1.gif" width="250"/>  <img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo2.gif" width="250"/>  <img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo3.gif" width="250"/>
 
