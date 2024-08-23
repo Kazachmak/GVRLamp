@@ -1,12 +1,13 @@
 # Приложение GVR Lamp
 <img src="https://github.com/Kazachmak/GVRLamp/blob/master/icon.png" align="center" height="100" width="100">
+
 <img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo1.gif" width="250"/>  <img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo2.gif" width="250"/>  <img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo3.gif" width="250"/>
 
 Приложение под iOS для управления лампой Гайвера.
 Предназначено для использования с прошивками GUNNER47 v1.4 - 1.5, прошивкой "XX в 1" и FieryLedLamp.
 
 ## Скачать
-[<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" align="center" height="100" width="100"> ](https://apps.apple.com/ru/app/gvr-lamp/id1546452194)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg""> ](https://apps.apple.com/ru/app/gvr-lamp/id1546452194)
 
 ##  Функции:
 1. Автоматический поиск и добавление ламп в локальной сети.
