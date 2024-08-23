@@ -1,6 +1,8 @@
 # Приложение GVR Lamp
 <img src="https://github.com/Kazachmak/GVRLamp/blob/master/icon.png" align="center" height="300" width="300">
 
+<img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo1.gif" width="250"/><img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo2.gif" width="250"/><img src="https://github.com/Kazachmak/GVRLamp/blob/master/demo3.gif" width="250"/>
+
 Приложение под iOS для управления лампой Гайвера.
 Предназначено для использования с прошивками GUNNER47 v1.4 - 1.5, прошивкой "XX в 1" и FieryLedLamp.
 
