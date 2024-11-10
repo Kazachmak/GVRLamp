@@ -1,31 +1,16 @@
 import Foundation
 
-public class Effect {
+public final class Effect {
+  // текущие значения
   var bright: Int?
   var speed: Int?
   var scale: Int?
   
   let name: String
   let id: Int
-  let maxSpeed: Int
-  let minSpeed: Int
-  let maxScale: Int
-  let minScale: Int
-  let speedRange: Int
-  let scaleRange: Int
-
-  init(_ str: String) {
-    self.name = str.components(separatedBy: ",")[0].components(separatedBy: ".")[1]
-    self.id = Int(str.components(separatedBy: ",")[0].components(separatedBy: ".")[0]) ?? 0
-    self.maxSpeed = Self.getMaxSpeed(str)
-    self.minSpeed = Self.getMinSpeed(str)
-    self.maxScale = Self.getMaxScale(str)
-    self.minScale = Self.getMinScale(str)
-    self.speedRange = maxSpeed - minSpeed == 0 ? 100 : maxSpeed - minSpeed
-    self.scaleRange = maxScale - minScale == 0 ? 100 : maxScale - minScale
-  }
-
-  static func getMaxSpeed(_ str: String) -> Int {
+  let str: String
+  
+  var maxSpeed: Int {
     guard
       str.components(separatedBy: ",").count > 2,
       let speed = Int(str.components(separatedBy: ",")[2])
@@ -34,8 +19,8 @@ public class Effect {
       }
     return speed
   }
-
-  static func getMinSpeed(_ str: String) -> Int {
+  
+  var minSpeed: Int {
     guard
       str.components(separatedBy: ",").count > 1,
       let speed = Int(str.components(separatedBy: ",")[1])
@@ -44,8 +29,8 @@ public class Effect {
       }
      return speed
   }
-
-  static func getMaxScale(_ str: String) -> Int {
+  
+  var maxScale: Int {
     guard
       str.components(separatedBy: ",").count > 4,
       let scale = Int(str.components(separatedBy: ",")[4])
@@ -54,8 +39,8 @@ public class Effect {
       }
       return scale
   }
-
-  static func getMinScale(_ str: String) -> Int {
+  
+  var minScale: Int {
     guard
       str.components(separatedBy: ",").count > 3,
       let scale = Int(str.components(separatedBy: ",")[3])
@@ -63,5 +48,19 @@ public class Effect {
         return 0
       }
     return scale
+  }
+  
+  var speedRange: Int {
+    return maxSpeed - minSpeed == 0 ? 100 : maxSpeed - minSpeed
+  }
+  
+  var scaleRange: Int {
+    return maxScale - minScale == 0 ? 100 : maxScale - minScale
+  }
+  
+  init(_ str: String) {
+    self.name = str.components(separatedBy: ",")[0].components(separatedBy: ".")[1]
+    self.id = Int(str.components(separatedBy: ",")[0].components(separatedBy: ".")[0]) ?? 0
+    self.str = str
   }
 }
