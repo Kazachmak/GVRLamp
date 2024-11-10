@@ -10,12 +10,16 @@ import MMLanScan
 import UIKit
 
 class SearchAndAddLampViewController: UIViewController, MMLANScannerDelegate {
+  
     var label: String?
-
     var modeOfSearch: ModeOfSearch = .firstStartSearch
     var pingHosts = 0
     
-
+  
+  @IBAction func close(_ sender: UIButton) {
+    self.dismiss(animated: true)
+  }
+  
     @IBOutlet var searchLampTextLabel: UITextView!
 
     @IBAction func searchLampLabelTouch(_ sender: UITapGestureRecognizer) {

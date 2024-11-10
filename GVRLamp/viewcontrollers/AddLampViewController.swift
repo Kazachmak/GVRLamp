@@ -29,12 +29,12 @@ class AddLampViewController: UIViewController, MaskedTextFieldDelegateListener  
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func cancelButtonAction(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true)
     }
     
     
     @IBAction func close(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true)
     }
     
    
