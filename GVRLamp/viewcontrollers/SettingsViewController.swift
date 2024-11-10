@@ -11,18 +11,13 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // обновлять таблицу или нет
-    
+    var updateTableFlag = true
+   
     @IBOutlet weak var backArrow: UIButton!
     
-    var updateTableFlag = true
-    
     @IBAction func close(_ sender: UITapGestureRecognizer) {
-        if !lamps.isListEmpty{
             dismiss(animated: true, completion: nil)
-        }
     }
-
-    
 
     @IBOutlet var heightOfErrorLabel: NSLayoutConstraint!
 
@@ -162,11 +157,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     // обновляем таблицу
     @objc func updateTable() {
-        if lamps.isListEmpty{
-            backArrow.isHidden = true
-        }else{
-            backArrow.isHidden = false
-        }
         if updateTableFlag {
             tableView.reloadData()
         }
@@ -179,12 +169,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var headerViewHeight: NSLayoutConstraint!
 
     override func viewWillAppear(_ animated: Bool) {
-        // читаем из памяти список сохранненых ламп
-        if lamps.isListEmpty{
-            backArrow.isHidden = true
-        }else{
-            backArrow.isHidden = false
-        }
         updateTable()
     }
 
