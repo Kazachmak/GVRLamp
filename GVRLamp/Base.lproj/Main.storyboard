@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iI3-um-CZu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iI3-um-CZu">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1028,16 +1028,30 @@
                                         <color key="textColor" red="0.12549019610000001" green="0.1333333333" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yff-Ph-cmb">
+                                        <rect key="frame" x="261.66666666666669" y="34" width="103.33333333333331" height="28.333333333333329"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Выбрать все">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="12"/>
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="selectAllEffects:" destination="fid-Oz-7mD" eventType="touchUpInside" id="unh-Sv-TyJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="yff-Ph-cmb" firstAttribute="centerY" secondItem="KCd-QN-bhq" secondAttribute="centerY" id="6sq-RW-s9a"/>
                                     <constraint firstItem="92e-lg-mQT" firstAttribute="centerX" secondItem="GGk-Bf-RPk" secondAttribute="centerX" id="Fma-eI-kkz"/>
                                     <constraint firstItem="92e-lg-mQT" firstAttribute="centerY" secondItem="KCd-QN-bhq" secondAttribute="centerY" id="JBh-nn-Ji7"/>
+                                    <constraint firstAttribute="trailing" secondItem="yff-Ph-cmb" secondAttribute="trailing" constant="10" id="Nqc-dZ-e4R"/>
                                     <constraint firstItem="3H8-mN-ow1" firstAttribute="centerY" secondItem="KCd-QN-bhq" secondAttribute="centerY" id="QVs-VH-2XN"/>
                                     <constraint firstItem="3H8-mN-ow1" firstAttribute="top" secondItem="GGk-Bf-RPk" secondAttribute="top" constant="40" id="Wun-Ia-7zk"/>
                                     <constraint firstItem="KCd-QN-bhq" firstAttribute="leading" secondItem="3H8-mN-ow1" secondAttribute="trailing" constant="10" id="jaX-HR-j9j"/>
                                     <constraint firstItem="3H8-mN-ow1" firstAttribute="leading" secondItem="GGk-Bf-RPk" secondAttribute="leading" constant="20" symbolic="YES" id="mgi-EN-3t1"/>
+                                    <constraint firstItem="yff-Ph-cmb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="92e-lg-mQT" secondAttribute="trailing" constant="4.6666666666666856" id="nZV-IP-Qc1"/>
                                     <constraint firstItem="92e-lg-mQT" firstAttribute="leading" secondItem="KCd-QN-bhq" secondAttribute="trailing" constant="20" id="tOr-61-gZo"/>
                                     <constraint firstAttribute="height" constant="72" id="xtV-4Z-gaJ"/>
                                 </constraints>
@@ -1057,10 +1071,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45a-xW-bM4">
-                                                    <rect key="frame" x="16" y="19" width="200" height="17"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="pc2-ud-s8L"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="16.000000000000004" y="19" width="35.333333333333343" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1076,6 +1087,7 @@
                                             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="45a-xW-bM4" firstAttribute="centerY" secondItem="jhH-9B-QVE" secondAttribute="centerY" id="VjD-z5-4LE"/>
+                                                <constraint firstItem="HSQ-tM-BqK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="45a-xW-bM4" secondAttribute="trailing" constant="8" symbolic="YES" id="ZPU-Gc-zlL"/>
                                                 <constraint firstItem="45a-xW-bM4" firstAttribute="leading" secondItem="jhH-9B-QVE" secondAttribute="leadingMargin" id="aG5-Py-EtT"/>
                                                 <constraint firstItem="HSQ-tM-BqK" firstAttribute="centerY" secondItem="jhH-9B-QVE" secondAttribute="centerY" id="tvj-hr-GYa"/>
                                                 <constraint firstAttribute="trailing" secondItem="HSQ-tM-BqK" secondAttribute="trailing" id="xZk-UY-HJo"/>
@@ -1123,6 +1135,7 @@
                         <outlet property="backArrowHeight" destination="Wun-Ia-7zk" id="kVX-WQ-xhM"/>
                         <outlet property="headerViewHeight" destination="xtV-4Z-gaJ" id="ClQ-f5-tuZ"/>
                         <outlet property="mainLabel" destination="92e-lg-mQT" id="zfh-rg-eKR"/>
+                        <outlet property="selectAllButton" destination="yff-Ph-cmb" id="4VQ-MS-drH"/>
                         <outlet property="tableView" destination="1u8-hd-FYy" id="qgr-cX-3sn"/>
                     </connections>
                 </viewController>
@@ -1134,7 +1147,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2684.057971014493" y="-1290.4017857142856"/>
+            <point key="canvasLocation" x="2684" y="-1290.8866995073893"/>
         </scene>
         <!--Таймер-->
         <scene sceneID="uDT-Xy-0Rc">
