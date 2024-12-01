@@ -9,7 +9,7 @@
 import UIKit
 
 class DawnCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var dawnLabel: UILabel!
-    
+
 }

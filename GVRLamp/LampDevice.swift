@@ -33,7 +33,7 @@ class UDPClient {
             case .preparing: break
             // print("State: Preparing\n")
             default: break
-                // print("ERROR! State not defined!\n")
+            // print("ERROR! State not defined!\n")
             }
         }
 
@@ -131,7 +131,7 @@ class UDPClient {
                     print("Received message: \(backToString)")
 
                     if backToString.contains("LIST") {
-                      let arrayOfQuantity = backToString.components(separatedBy: ";").filter { !$0.contains("LIST") }.filter { $0.count > 3}
+                        let arrayOfQuantity = backToString.components(separatedBy: ";").filter { !$0.contains("LIST") }.filter { $0.count > 3}
                         if arrayOfQuantity.count > 1 {
                             if self.listCounter == 0 {
                                 lamp.listOfEffects = []
@@ -298,12 +298,12 @@ class LampDevice { // объект лампа
     }
 
     func getEffectName(_ number: Int, nameList: [String]) -> String {
-            let names = nameList[number].components(separatedBy: ",")[0]
-            let separateNames = names.components(separatedBy: " ")
-            let name = (separateNames.suffix(separateNames.count - 1)).joined(separator: " ")
-            return String(number + 1) + ". " + name
+        let names = nameList[number].components(separatedBy: ",")[0]
+        let separateNames = names.components(separatedBy: " ")
+        let name = (separateNames.suffix(separateNames.count - 1)).joined(separator: " ")
+        return String(number + 1) + ". " + name
     }
-    
+
     func getEffectNumber(_ name: String) -> Int {
         return listOfEffects.firstIndex(where: { $0.components(separatedBy: ",")[0] == name.components(separatedBy: ",")[0] }) ?? 0
     }
@@ -414,10 +414,10 @@ class LampDevice { // объект лампа
         self.useSelectedEffectOnScreen = useSelectedEffectOnScreen
         self.doNotForgetTheLampWhenTheConnectionIsLost = doNotForgetTheLampWhenTheConnectionIsLost
         if newLamp {
-            switch Locale.current.languageCode{
-            case "ru" :  sendCommand(command: .lang, value: [], valueTXT: "ru")
-            case "uk" : sendCommand(command: .lang, value: [], valueTXT: "ua")
-            default : print(Locale.current.languageCode)
+            switch Locale.current.languageCode {
+            case "ru": sendCommand(command: .lang, value: [], valueTXT: "ru")
+            case "uk": sendCommand(command: .lang, value: [], valueTXT: "ua")
+            default: print(Locale.current.languageCode)
                 sendCommand(command: .lang, value: [], valueTXT: "en")
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

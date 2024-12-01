@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-enum ModeOfSearch{
-    case firstStartSearch //поиск при первом запуске
+enum ModeOfSearch {
+    case firstStartSearch // поиск при первом запуске
     case searchInRouterMode // поиск при подключении лампы к роутеру
     case searchInSpotMode // поиск при работе лампы в режиме точки доступа
 }
 
-enum selectorFlag {
+enum SelectorFlag {
     case effects
     case days
     case dawn

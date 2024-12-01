@@ -25,8 +25,6 @@ class AlarmViewController: UIViewController {
         openSelector(.dawn, selectedDawn: selectedDawn, lamp: lamps.mainLamp!)
     }
 
-   
-
     @IBOutlet var daysLabel: UILabel!
 
     @IBOutlet var dawnLabel: UILabel!
@@ -53,11 +51,11 @@ class AlarmViewController: UIViewController {
 
     func alarmOnOff() {
         if let currentLamp = lamps.mainLamp {
-            //let date = datePickerOut.date
-            //let calendar = Calendar.current
-           // let comp = calendar.dateComponents([.hour, .minute], from: date)
-           // let hour = comp.hour
-           // let minute = comp.minute
+            // let date = datePickerOut.date
+            // let calendar = Calendar.current
+            // let comp = calendar.dateComponents([.hour, .minute], from: date)
+            // let hour = comp.hour
+            // let minute = comp.minute
 
             if !alarmOnOffSwitch.isOn {
                 for (index, _) in selectedDays.enumerated() {
@@ -118,13 +116,13 @@ class AlarmViewController: UIViewController {
                 delay(delayTime: Double(index) * 0.05, completionHandler: {
                     if element {
                         currentLamp.sendCommand(command: .alarm, value: [index + 1, 60 * hour! + minute!])
-                        if self.alarmOnOffSwitch.isOn{
+                        if self.alarmOnOffSwitch.isOn {
                             currentLamp.sendCommand(command: .alarm_on, value: [index + 1])
                         }
-                        
+
                     } else {
-                        if self.alarmOnOffSwitch.isOn{
-                        currentLamp.sendCommand(command: .alarm_off, value: [index + 1])
+                        if self.alarmOnOffSwitch.isOn {
+                            currentLamp.sendCommand(command: .alarm_off, value: [index + 1])
                         }
                     }
                 })

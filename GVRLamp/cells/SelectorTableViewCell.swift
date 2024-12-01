@@ -11,15 +11,7 @@ import UIKit
 class SelectorTableViewCell: UITableViewCell {
 
     @IBOutlet weak var day: UILabel!
-    
-    @IBOutlet weak var selector: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
+    @IBOutlet weak var selector: UIImageView!
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class SelectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var flag: selectorFlag = .days
+    var flag: SelectorFlag = .days
 
     var selectedDays = [Bool](repeating: false, count: 7)
     var selectedDay: Int?
@@ -39,14 +39,13 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
             currentLamp.sendCommand(command: .fav_set, value: intArray ?? [])
         }
     }
-    
-    
+
     @IBAction func close(_ sender: UITapGestureRecognizer) {
-        if flag == .effects{
-            if let currentLamp = lamp{
-                if let vc = parent as? LampSettingsViewController{
+        if flag == .effects {
+            if let currentLamp = lamp {
+                if let vc = parent as? LampSettingsViewController {
                     vc.setListOfEffects(list: currentLamp.selectedEffects)
-                }else{
+                } else {
                     self.sendFavoriteMessage()
                 }
             }
@@ -54,8 +53,6 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         view.removeFromSuperview()
         removeFromParent()
     }
-
-   
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch flag {

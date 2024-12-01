@@ -123,7 +123,7 @@ class SliderFullScreenViewController: UIViewController {
     @objc func updateInterface() {
         if let value = selectDataFromLamp(command: command!), let currentLamp = lamp {
             valueLabel.text = String(value)
-            
+
             switch command {
             case .spd:
                 percentageLabel.text = currentLamp.percentageOfValue(.spd) + "%"
@@ -133,7 +133,7 @@ class SliderFullScreenViewController: UIViewController {
                 percentageLabel.text = currentLamp.percentageOfValue(.bri) + "%"
             default: break
             }
-            
+
         }
         if let currentCommand = command {
             switch currentCommand {

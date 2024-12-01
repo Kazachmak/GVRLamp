@@ -10,7 +10,7 @@ import Foundation
 import Network
 
 class ArrayOfLamps {
-   
+
     var arrayOfLamps: [LampDevice] = []
 
     var mainLampIndex: Int?
@@ -24,7 +24,7 @@ class ArrayOfLamps {
     }
 
     var mainLamp: LampDevice? {
-        if arrayOfLamps.count > 0, let index = mainLampIndex {
+        if !arrayOfLamps.isEmpty, let index = mainLampIndex {
             return arrayOfLamps[index]
         } else {
             return nil
@@ -44,7 +44,7 @@ class ArrayOfLamps {
     }
 
     func loadData() {
-        if CoreDataService.fetchLamps().count > 0 {
+        if !CoreDataService.fetchLamps().isEmpty {
             for (index, element) in CoreDataService.fetchLamps().enumerated() {
                 let name = element.value(forKey: "name") as! String
                 let ip = element.value(forKey: "ip") as! String
@@ -78,17 +78,17 @@ class ArrayOfLamps {
                 })
             }
             let neededToReloadEffects = UserDefaults.standard.bool(forKey: "neededToReloadEffects")
-            if neededToReloadEffects{
+            if neededToReloadEffects {
                 lamps.mainLamp?.getEffectsFromLamp(true)
                 UserDefaults.standard.setValue(false, forKey: "neededToReloadEffects")
             }
         }
-            _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-                print("Timer fire!")
-                if let currentLamp = lamps.mainLamp {
-                    currentLamp.updateStatus() // запрос состояние лампы
-                }
+        _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+            print("Timer fire!")
+            if let currentLamp = lamps.mainLamp {
+                currentLamp.updateStatus() // запрос состояние лампы
             }
+        }
     }
 
     func alignLampsParametersAfterChangeEffect() {

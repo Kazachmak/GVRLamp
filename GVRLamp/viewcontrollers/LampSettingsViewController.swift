@@ -90,9 +90,9 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         alert.addAction(UIAlertAction(title: closePopUp, style: .default, handler: { _ in
         }))
         present(alert, animated: true, completion: nil)
-        if getEffectsFromListOut.isOn{
+        if getEffectsFromListOut.isOn {
             UserDefaults.standard.setValue(true, forKey: "neededToReloadEffects")
-            }
+        }
     }
 
     func openPickerView(_ tag: Int) {
@@ -150,10 +150,10 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
 
     @IBAction func favOn(_ sender: UISwitch) {
         sendFavoriteMessage(favoriteAlways: true)
-        if sender.isOn{
+        if sender.isOn {
             favoriteEffectView.isHidden = false
             favoriteViewHeight.constant = 206
-        }else{
+        } else {
             favoriteViewHeight.constant = 24
             favoriteEffectView.isHidden = true
         }
@@ -168,8 +168,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     @IBAction func doNotForgetLampWhenConnectionLostAction(_ sender: UISwitch) {
         lamp?.doNotForgetTheLampWhenTheConnectionIsLost = sender.isOn
     }
-    
-    
+
     @IBAction func getEffectsFromLamp(_ sender: UISwitch) {
         if let currentLamp = lamp {
             currentLamp.getEffectsFromLamp(sender.isOn)
@@ -353,7 +352,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             }
 
             getEffectsFromListOut.setOn(currentLamp.effectsFromLamp, animated: false)
-            
+
             if let intervalSec = currentLamp.favorite?.components(separatedBy: " ")[2] {
                 if (Int(intervalSec) ?? 0) > 2 {
                     self.intervalSec = Int(intervalSec)

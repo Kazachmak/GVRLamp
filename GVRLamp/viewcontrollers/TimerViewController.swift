@@ -9,24 +9,20 @@
 import UIKit
 
 class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+
     var lamp: LampDevice?
     let pickerData = [doNotTurnOff, _1min, _5min, _10min, _15min, _30min, _45min, _60min]
-    
-    
+
     @IBAction func close(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true)
     }
-    
-   
-    
+
     @IBOutlet var picker: UIPickerView!
 
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
-    
+
     @IBOutlet weak var backArrowHeight: NSLayoutConstraint!
-    
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -38,26 +34,25 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var title = UILabel()
-                if let view = view {
-                       title = view as! UILabel
-                 }
+        if let view = view {
+            title = view as! UILabel
+        }
         title.font = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.medium)
-               title.textColor = UIColor.black
-               title.text =  pickerData[row]
-               title.textAlignment = .center
+        title.textColor = UIColor.black
+        title.text =  pickerData[row]
+        title.textAlignment = .center
 
-           return title
+        return title
     }
-    
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let currentLamp = lamp {
             currentLamp.sendCommand(command: .timer, value: [row]) // устанавливаем таймер на выбранное время
             switch row {
-            
+
             case 1:
                 currentLamp.timerTime = 60
             case 2:
@@ -71,13 +66,13 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             case 6:
                 currentLamp.timerTime = 2700
             case 7:
-                currentLamp.timerTime = 3600 
+                currentLamp.timerTime = 3600
             default:
                 break
             }
             currentLamp.sendCommand(command: .timer_get, value: [0])
         }
-        
+
         dismiss(animated: true) // закрываем view
     }
 
@@ -85,7 +80,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
     @IBAction func invalidateTimer(_ sender: UIButton) {
         if let currentLamp = lamp {
-            currentLamp.sendCommand(command: .timer, value: [0])  //отключаем таймер
+            currentLamp.sendCommand(command: .timer, value: [0])  // отключаем таймер
         }
         dismiss(animated: true) // закрываем view
     }

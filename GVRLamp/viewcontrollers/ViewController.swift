@@ -14,9 +14,9 @@ import TactileSlider
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate {
-    
+
     var isFirstLaunch = true
-    
+
     @IBOutlet var timer: MagicTimerView!
 
     @IBOutlet var picker: UIPickerView!
@@ -40,7 +40,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func openSettings(_ sender: UIButton) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
-        if lamps.arrayOfLamps.count > 0 {
+        if !lamps.arrayOfLamps.isEmpty {
             vc.lamp = lamps.mainLamp
             vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .fullScreen
@@ -58,7 +58,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.selectedEffectsNameList.count == 0 {
+            if currentLamp.selectedEffectsNameList.isEmpty {
                 return 1
             } else {
                 return currentLamp.selectedEffectsNameList.count
@@ -79,7 +79,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         label.font = UIFont.systemFont(ofSize: 22)
 
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.selectedEffectsNameList.count == 0 {
+            if currentLamp.selectedEffectsNameList.isEmpty {
                 label.text = youMustSelectEffects
             } else {
                 label.text = currentLamp.getEffectName(row, nameList: currentLamp.selectedEffectsNameList)
@@ -102,7 +102,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.selectedEffectsNameList.count == 0 {
+            if currentLamp.selectedEffectsNameList.isEmpty {
                 return 80.0
             } else {
                 return 30.0
@@ -114,7 +114,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.selectedEffectsNameList.count != 0 {
+            if !currentLamp.selectedEffectsNameList.isEmpty {
                 currentLamp.effect = row
                 currentLamp.updateSliderFlag = true
                 lamps.sendCommandToArrayOfLamps(command: .eff, value: [currentLamp.getEffectNumber(currentLamp.selectedEffectsNameList[row])])
@@ -125,22 +125,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
 
-    
-    
     @IBOutlet weak var overlayPickerButtonOut: UIButton!
-    
+
     @IBAction func overlayPickerButton(_ sender: UIButton) {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.selectedEffectsNameList.count == 0 {
+            if currentLamp.selectedEffectsNameList.isEmpty {
                 openSelector(.effects, lamp: currentLamp)
             }
         }
     }
-    
-    
+
     @IBAction func touchPick(_ sender: UILongPressGestureRecognizer) {
         if let currentLamp = lamps.mainLamp {
-            if currentLamp.selectedEffectsNameList.count == 0 {
+            if currentLamp.selectedEffectsNameList.isEmpty {
                 openSelector(.effects, lamp: currentLamp)
             } else {
                 performSegue(withIdentifier: "effects", sender: sender)
@@ -174,22 +171,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var rightPickerImage: UIImageView!
 
     @IBAction func toggleFavoriteEffects(_ sender: UIButton) {
-        if lamps.arrayOfLamps.count > 0 {
-        if sender.image(for: .normal) == UIImage(named: "heart.png") {
-            sender.setImage(UIImage(named: "heart2.png"), for: .normal)
-            lamps.mainLamp?.useSelectedEffectOnScreen = true
-            if lamps.mainLamp?.selectedEffectsNameList.count == 0{
-                overlayPickerButtonOut.isHidden = false
-            }else{
-                overlayPickerButtonOut.isHidden = true
-            }
+        if !lamps.arrayOfLamps.isEmpty {
+            if sender.image(for: .normal) == UIImage(named: "heart.png") {
+                sender.setImage(UIImage(named: "heart2.png"), for: .normal)
+                lamps.mainLamp?.useSelectedEffectOnScreen = true
+                if lamps.mainLamp?.selectedEffectsNameList.count == 0 {
+                    overlayPickerButtonOut.isHidden = false
+                } else {
+                    overlayPickerButtonOut.isHidden = true
+                }
 
-            picker.delegate = self
-        } else {
-            overlayPickerButtonOut.isHidden = true
-            sender.setImage(UIImage(named: "heart.png"), for: .normal)
-            lamps.mainLamp?.useSelectedEffectOnScreen = false
-            picker.delegate = self
+                picker.delegate = self
+            } else {
+                overlayPickerButtonOut.isHidden = true
+                sender.setImage(UIImage(named: "heart.png"), for: .normal)
+                lamps.mainLamp?.useSelectedEffectOnScreen = false
+                picker.delegate = self
             }
         }
     }
@@ -209,7 +206,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     // открываем страницу настроек
     @IBAction func settingsButton(_ sender: UIButton) {
-        if lamps.arrayOfLamps.count > 0 {
+        if !lamps.arrayOfLamps.isEmpty {
             lamps.mainLamp?.lampBlink()
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "lampsettings") as! LampSettingsViewController
@@ -217,7 +214,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
-        }else{
+        } else {
             performSegue(withIdentifier: "settings", sender: nil)
         }
     }
@@ -525,24 +522,24 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
         }
         lamps.mainLamp?.updateSliderFlag = true
-        if lamps.mainLamp?.selectedEffectsNameList.count == 0{
+        if lamps.mainLamp?.selectedEffectsNameList.count == 0 {
             overlayPickerButtonOut.isHidden = false
-        }else{
+        } else {
             overlayPickerButtonOut.isHidden = true
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if (lamps.isListEmpty || !lamps.connectionStatusOfMainLamp) && isFirstLaunch{
-                performSegue(withIdentifier: "searchAndAdd2", sender: nil)
-        }else{
-            if lamps.isListEmpty{
+        if (lamps.isListEmpty || !lamps.connectionStatusOfMainLamp) && isFirstLaunch {
+            performSegue(withIdentifier: "searchAndAdd2", sender: nil)
+        } else {
+            if lamps.isListEmpty {
                 performSegue(withIdentifier: "settings", sender: nil)
             }
         }
         isFirstLaunch = false
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addOffView()
@@ -597,7 +594,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         self.showAlertAboutNeedToRestart()
                     }))
                     alert.addAction(UIAlertAction(title: closePopUp, style: .default, handler: { _ in
-                        
+
                     }))
                     self.present(alert, animated: true, completion: nil)
                 }

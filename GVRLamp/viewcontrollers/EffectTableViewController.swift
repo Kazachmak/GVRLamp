@@ -13,28 +13,23 @@ class EffectTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func viewWillAppear(_ animated: Bool) {
-        
-        if let currentLamp = lamps.mainLamp{
-            
-            if currentLamp.useSelectedEffectOnScreen{
+
+        if let currentLamp = lamps.mainLamp {
+
+            if currentLamp.useSelectedEffectOnScreen {
                 let row = IndexPath(row: currentLamp.getEffectNumberFromSelectedList(currentLamp.listOfEffects[currentLamp.effect ?? 0]), section: 0)
-                if currentLamp.listOfEffects.count > row.row{
-                    self.tableView.scrollToRow(at: row, at: .middle , animated: true)
+                if currentLamp.listOfEffects.count > row.row {
+                    self.tableView.scrollToRow(at: row, at: .middle, animated: true)
                 }
-            }else{
+            } else {
                 let row = IndexPath(row: currentLamp.effect ?? 0, section: 0)
-                if currentLamp.listOfEffects.count > row.row{
-                    self.tableView.scrollToRow(at: row, at: .middle , animated: true)
+                if currentLamp.listOfEffects.count > row.row {
+                    self.tableView.scrollToRow(at: row, at: .middle, animated: true)
                 }
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -47,15 +42,15 @@ class EffectTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "effectCell", for: indexPath)
         cell.textLabel?.text = lamps.mainLamp?.getEffectName(indexPath.row, nameList: lamps.mainLamp?.selectedEffectsNameList ?? [""])
         if let effectNumber = lamps.mainLamp?.effect {
-            if effectNumber == indexPath.row{
+            if effectNumber == indexPath.row {
                 cell.textLabel?.textColor = redColor
-            }else{
+            } else {
                 cell.textLabel?.textColor = .black
             }
         }
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let currentLamp = lamps.mainLamp {
             currentLamp.effect = indexPath.row
@@ -65,5 +60,5 @@ class EffectTableViewController: UITableViewController {
         }
         dismiss(animated: true, completion: nil)
     }
-    
+
 }

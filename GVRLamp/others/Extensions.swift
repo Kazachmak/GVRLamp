@@ -162,9 +162,12 @@ extension Array where Element == Int {
 extension UIImage {
     static func gradientImageWithBounds(bounds: CGRect) -> UIImage {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: bounds.height + 30)
-
-        gradientLayer.colors = [UIColor(red: 103.0 / 255.0, green: 40.0 / 255.0, blue: 199.0 / 255.0, alpha: 1).cgColor, UIColor(red: 115.0 / 255.0, green: 112.0 / 255.0, blue: 249.0 / 255.0, alpha: 1).cgColor]
+        gradientLayer.frame = CGRect(
+            x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: bounds.height + 30)
+        gradientLayer.colors = [
+            UIColor(red: 103.0 / 255.0, green: 40.0 / 255.0, blue: 199.0 / 255.0, alpha: 1).cgColor,
+            UIColor(red: 115.0 / 255.0, green: 112.0 / 255.0, blue: 249.0 / 255.0, alpha: 1).cgColor
+        ]
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -174,7 +177,8 @@ extension UIImage {
 
     static func rainbowGradientImageWithBounds(bounds: CGRect) -> UIImage {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: UIScreen.main.bounds.height / 3.3)
+        gradientLayer.frame = CGRect(
+            x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: UIScreen.main.bounds.height / 3.3)
         let hueColors = stride(from: 0, to: 1, by: 0.01).map {
             UIColor(hue: $0, saturation: 1, brightness: 1, alpha: 1).cgColor
         }
@@ -197,7 +201,8 @@ extension UIImage {
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
@@ -206,8 +211,10 @@ extension UIViewController {
         view.endEditing(true)
     }
 
-    func openSelector(_ flag: selectorFlag, selectedDays: [Bool]? = nil, selectedDawn: Int? = nil, lamp: LampDevice) {
-        let popvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selector") as! SelectorViewController
+    func openSelector(_ flag: SelectorFlag, selectedDays: [Bool]? = nil, selectedDawn: Int? = nil, lamp: LampDevice) {
+        let popvc =
+            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selector")
+            as! SelectorViewController
         addChild(popvc)
         popvc.flag = flag
 
@@ -283,66 +290,75 @@ extension UIButton {
             imageView.leadingAnchor.constraint(equalTo: titleLabel!.trailingAnchor, constant: xConstrait),
             imageView.centerYAnchor.constraint(equalTo: titleLabel!.centerYAnchor, constant: 0),
             imageView.widthAnchor.constraint(equalToConstant: 12),
-            imageView.heightAnchor.constraint(equalToConstant: 12),
+            imageView.heightAnchor.constraint(equalToConstant: 12)
         ])
     }
 }
 
 extension String {
- 
+
     var length: Int {
         return count
     }
 
     subscript(i: Int) -> String {
-        return self[i ..< i + 1]
+        return self[i..<i + 1]
     }
 
     func substring(fromIndex: Int) -> String {
-        return self[min(fromIndex, length) ..< length]
+        return self[min(fromIndex, length)..<length]
     }
 
     func substring(toIndex: Int) -> String {
-        return self[0 ..< max(0, toIndex)]
+        return self[0..<max(0, toIndex)]
     }
 
     subscript(r: Range<Int>) -> String {
-        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
-                                            upper: min(length, max(0, r.upperBound))))
+        let range = Range(
+            uncheckedBounds: (
+                lower: max(0, min(length, r.lowerBound)),
+                upper: min(length, max(0, r.upperBound))
+            ))
         let start = index(startIndex, offsetBy: range.lowerBound)
         let end = index(start, offsetBy: range.upperBound - range.lowerBound)
-        return String(self[start ..< end])
+        return String(self[start..<end])
     }
 }
 
 extension UILabel {
     func blink() {
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.repeat, .autoreverse],
-                       animations: { self.alpha = 0.0 }, completion: nil)
+        UIView.animate(
+            withDuration: 1.0, delay: 0.0, options: [.repeat, .autoreverse],
+            animations: { self.alpha = 0.0 }, completion: nil)
     }
 }
 
 extension UIViewController {
-    func showInputDialog(title: String? = nil,
-                         subtitle: String? = nil,
-                         actionTitle: String? = "Add",
-                         cancelTitle: String? = "Cancel",
-                         inputPlaceholder: String? = nil,
-                         inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
-                         cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
-                         actionHandler: ((_ text: String?) -> Void)? = nil) {
+    func showInputDialog(
+        title: String? = nil,
+        subtitle: String? = nil,
+        actionTitle: String? = "Add",
+        cancelTitle: String? = "Cancel",
+        inputPlaceholder: String? = nil,
+        inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
+        cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
+        actionHandler: ((_ text: String?) -> Void)? = nil
+    ) {
         let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
         alert.addTextField { (textField: UITextField) in
             textField.placeholder = inputPlaceholder
             textField.keyboardType = inputKeyboardType
         }
-        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (_: UIAlertAction) in
-            guard let textField = alert.textFields?.first else {
-                actionHandler?(nil)
-                return
-            }
-            actionHandler?(textField.text)
-        }))
+        alert.addAction(
+            UIAlertAction(
+                title: actionTitle, style: .default,
+                handler: { (_: UIAlertAction) in
+                    guard let textField = alert.textFields?.first else {
+                        actionHandler?(nil)
+                        return
+                    }
+                    actionHandler?(textField.text)
+                }))
         alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelHandler))
 
         present(alert, animated: true, completion: nil)
@@ -352,8 +368,11 @@ extension UIViewController {
 extension UIViewController {
     func showAlertAboutNeedToRestart() {
         let alert = UIAlertController(title: alertAboutNeedToRestart, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-        }))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK", style: .default,
+                handler: { _ in
+                }))
         present(alert, animated: true, completion: nil)
     }
 

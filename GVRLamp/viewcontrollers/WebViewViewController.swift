@@ -12,9 +12,9 @@ import WebKit
 class WebViewViewController: UIViewController {
 
     var lamp: LampDevice?
-   
+
     @IBOutlet weak var webView: WKWebView!
-    
+
     @IBOutlet var backArrowHeight: NSLayoutConstraint!
 
     @IBOutlet var headerViewHeight: NSLayoutConstraint!
@@ -23,17 +23,15 @@ class WebViewViewController: UIViewController {
         dismiss(animated: true)
     }
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         backArrowHeight.constant += view.safeAreaTop - 20
         headerViewHeight.constant += view.safeAreaTop - 20
-        if let espMode = lamp?.espMode{
-            if espMode{
+        if let espMode = lamp?.espMode {
+            if espMode {
                 let request = URLRequest(url: URL(string: "http://" + "\(lamp?.hostIP ?? "")")!)
                 webView.load(request)
-            }else{
+            } else {
                 let request = URLRequest(url: URL(string: "http://192.168.4.1")!)
                 webView.load(request)
             }

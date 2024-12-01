@@ -12,13 +12,12 @@ import UIKit
 import  Network
 
 class CoreDataService {
-    
-    
+
     class func fetchLamps() -> [NSManagedObject] {
         var allLamps: [NSManagedObject] = []
-       
+
         guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
+                UIApplication.shared.delegate as? AppDelegate else {
             return allLamps
         }
         let managedContext =
@@ -33,37 +32,35 @@ class CoreDataService {
         return allLamps
     }
 
-    
-   
-    class func deleteAllData(){
+    class func deleteAllData() {
 
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedContext = appDelegate.persistentContainer.viewContext
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lamp")
-    fetchRequest.returnsObjectsAsFaults = false
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lamp")
+        fetchRequest.returnsObjectsAsFaults = false
 
-    do {
-        let arrUsrObj = try managedContext.fetch(fetchRequest)
-        for usrObj in arrUsrObj as! [NSManagedObject] {
-            managedContext.delete(usrObj)
-        }
-       try managedContext.save() //don't forget
+        do {
+            let arrUsrObj = try managedContext.fetch(fetchRequest)
+            for usrObj in arrUsrObj as! [NSManagedObject] {
+                managedContext.delete(usrObj)
+            }
+            try managedContext.save() // don't forget
         } catch let error as NSError {
-        print("delete fail--",error)
-      }
+            print("delete fail--", error)
+        }
 
     }
-    
-    class func save()  {
+
+    class func save() {
         guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-           return
+                UIApplication.shared.delegate as? AppDelegate else {
+            return
         }
 
         let managedContext =
             appDelegate.persistentContainer.viewContext
 
-        for (index,element) in lamps.arrayOfLamps.enumerated(){
+        for (index, element) in lamps.arrayOfLamps.enumerated() {
             let entity =
                 NSEntityDescription.entity(forEntityName: "Lamp",
                                            in: managedContext)!
@@ -72,11 +69,10 @@ class CoreDataService {
                                           insertInto: managedContext)
             if index == lamps.mainLampIndex {
                 newLamp.setValue(true, forKeyPath: "mainLamp")
-            }else{
-                newLamp.setValue(false, forKey:  "mainLamp")
+            } else {
+                newLamp.setValue(false, forKey: "mainLamp")
             }
-            
-            
+
             newLamp.setValue(element.name, forKeyPath: "name")
             newLamp.setValue("\(element.hostIP)", forKey: "ip")
             newLamp.setValue("\(element.hostPort)", forKey: "port")
@@ -87,15 +83,13 @@ class CoreDataService {
             newLamp.setValue(element.doNotForgetTheLampWhenTheConnectionIsLost, forKey: "doNotForgetTheLampWhenTheConnectionIsLost")
             do {
                 try managedContext.save()
-                
+
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
-                
+
             }
         }
-        
-        
+
     }
 
-    
 }

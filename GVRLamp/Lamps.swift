@@ -8,6 +8,4 @@
 
 import Foundation
 
-
 var lamps = ArrayOfLamps()
-

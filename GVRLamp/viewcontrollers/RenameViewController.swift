@@ -30,8 +30,6 @@ class RenameViewController: UIViewController {
         dismiss(animated: true)
     }
 
-    
-
     @IBOutlet var renameLampOut: UIButton!
 
     override func viewDidLoad() {

@@ -53,7 +53,7 @@ let enterTextForSending = NSLocalizedString("Введите текст для о
 let sendText = NSLocalizedString("Отправить", comment: "")
 let cancelSendText = NSLocalizedString("Отмена", comment: "")
 let messageToSend = NSLocalizedString("Сообщение", comment: "")
-                
+
 let removeFromGroup = NSLocalizedString("Убрать из группы", comment: "")
 let addToGroup = NSLocalizedString("Добавить в группу", comment: "")
 
@@ -68,22 +68,18 @@ let everyThursday = NSLocalizedString("Каждый четверг", comment: ""
 let everyFriday = NSLocalizedString("Каждую пятница", comment: "")
 let everySaturday = NSLocalizedString("Каждую суббота", comment: "")
 let everySunday = NSLocalizedString("Каждую воскресенье", comment: "")
-   
 
 let dawnFor = NSLocalizedString("Рассвет за", comment: "")
 let repeatAlarm = NSLocalizedString("Повтор", comment: "")
 let selectEffects = NSLocalizedString("Выбрать эффекты", comment: "")
-
 
 let lampIsNotConnected = NSLocalizedString("Нет подключения к лампе", comment: "")
 let colorLamp = NSLocalizedString("Цветолампа", comment: "")
 let autoSwitch = NSLocalizedString("Автопереключение", comment: "")
 let lampOff = NSLocalizedString("Лампа выключена", comment: "")
 
-
 let alertAboutNeedToRestart = NSLocalizedString("Язык поменятся после перезапуска приложения.", comment: "")
 let systemLangWasChange = NSLocalizedString("Системный язык поменялся. Выберите язык в приложении.", comment: "")
-
 
 let lampNotFoundExt = NSLocalizedString("Не удалось найти вашу лампу. Попробуйте повторить поиск, нажав кнопку поиска ниже. Если это не поможет, значит лампа не смогла подключиться к роутеру. Тогда вам необходимо повторить процедуру подключения. Для этого подключите смартфон к WiFi сети лампы 'Led Lamp', нажмите кнопку ниже, чтобы обнаружить лампу и в настройках лампы повторите процедуру смены режима. <<< Меньше", comment: "")
 

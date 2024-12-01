@@ -83,6 +83,7 @@
 		3CEF72C726BD5710009585AA /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF72C626BD5710009585AA /* Bundle.swift */; };
 		3CF2223F26B318AE00C6D35F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CF2223D26B318AE00C6D35F /* Localizable.strings */; };
 		3CF2224426B31E2E00C6D35F /* StringsNeededLocalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF2224326B31E2E00C6D35F /* StringsNeededLocalize.swift */; };
+		5C1736D22CFC652100AD25F9 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5C1736D12CFC633D00AD25F9 /* .swiftlint.yml */; };
 		5CC95D922C4E444600AF325A /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC95D912C4E444600AF325A /* Effect.swift */; };
 		5CC95D942C4E44B200AF325A /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC95D932C4E44B200AF325A /* GlobalVars.swift */; };
 		F03FC1A00B0346E88094ABD7 /* Pods_GVRLamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D0D0D0B66F0EE13EC74D13 /* Pods_GVRLamp.framework */; };
@@ -176,6 +177,7 @@
 		3CF2224326B31E2E00C6D35F /* StringsNeededLocalize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsNeededLocalize.swift; sourceTree = "<group>"; };
 		4AF60B58A4CDF09F42F23FC8 /* Pods-GVRLamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GVRLamp.release.xcconfig"; path = "Target Support Files/Pods-GVRLamp/Pods-GVRLamp.release.xcconfig"; sourceTree = "<group>"; };
 		57C6CC4BF5334CB1F6A32C7F /* Pods-GVRLamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GVRLamp.debug.xcconfig"; path = "Target Support Files/Pods-GVRLamp/Pods-GVRLamp.debug.xcconfig"; sourceTree = "<group>"; };
+		5C1736D12CFC633D00AD25F9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		5CC95D912C4E444600AF325A /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Effect.swift; path = /Users/maksimkazachkov/Documents/GVRLamp/GVRLamp/others/Effect.swift; sourceTree = "<absolute>"; };
 		5CC95D932C4E44B200AF325A /* GlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
 		EBD06183AF7039343D7774AA /* Pods-GyverLamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GyverLamp.debug.xcconfig"; path = "Target Support Files/Pods-GyverLamp/Pods-GyverLamp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		3C45877124EC2C5A00DBE5C4 = {
 			isa = PBXGroup;
 			children = (
+				5C1736D12CFC633D00AD25F9 /* .swiftlint.yml */,
 				3C45877C24EC2C5A00DBE5C4 /* GVRLamp */,
 				3C45877B24EC2C5A00DBE5C4 /* Products */,
 				A6265E26CC15F07C3F239C0F /* Pods */,
@@ -361,6 +364,7 @@
 				3C45877724EC2C5A00DBE5C4 /* Frameworks */,
 				3C45877824EC2C5A00DBE5C4 /* Resources */,
 				DADD91EA4B7DB81A539841BB /* [CP] Embed Pods Frameworks */,
+				5C1736D02CFC60B600AD25F9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -441,6 +445,7 @@
 				3CD37A462592496D0076A696 /* home.png in Resources */,
 				3CA6DE1926B09C82003F1AE2 /* Main.storyboard in Resources */,
 				3C62CA412788A3ED001D08D9 /* eye.png in Resources */,
+				5C1736D22CFC652100AD25F9 /* .swiftlint.yml in Resources */,
 				3CDB362D2567C5CD004E3E1C /* enter.png in Resources */,
 				3C803AE62576CE8100759462 /* onOff2.png in Resources */,
 				3C6ECAD925617E8A00813C43 /* alarm.png in Resources */,
@@ -483,6 +488,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C1736D02CFC60B600AD25F9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint && swiftlint --fix --format\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DADD91EA4B7DB81A539841BB /* [CP] Embed Pods Frameworks */ = {

@@ -12,11 +12,11 @@ import UIKit
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // обновлять таблицу или нет
     var updateTableFlag = true
-   
+
     @IBOutlet weak var backArrow: UIButton!
-    
+
     @IBAction func close(_ sender: UITapGestureRecognizer) {
-            dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     @IBOutlet var heightOfErrorLabel: NSLayoutConstraint!
@@ -28,20 +28,20 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     // свайп ячеек
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?{
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         updateTableFlag = false
         // добавляем лампу в список управляемых
-        
+
         if  lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
             let AddAction = UIContextualAction(style: .destructive, title: removeFromGroup, handler: { [self] (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
                 lamps.arrayOfLamps[indexPath.row].flagLampIsControlled = false
-                
+
                 success(true)
                 updateTableFlag = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     updateTable()
                 }
-               
+
             })
             AddAction.backgroundColor = .red
             return UISwipeActionsConfiguration(actions: [AddAction])
@@ -53,13 +53,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 updateTableFlag = true
                 newAddedLamp.lampBlink()
                 lamps.alignLampParametersAfterNewLampAdded(newAddedLamp)
-                
+
             })
             AddAction.backgroundColor = .gray
-            
+
             return UISwipeActionsConfiguration(actions: [AddAction])
         }
-        
+
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -84,21 +84,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "lampCell", for: indexPath) as! LampsTableViewCell
 
-       
         cell.lampLabel.text = lamps.arrayOfLamps[indexPath.row].name
-        
-        
-        if lamps.arrayOfLamps.count > 0 {
+
+        if !lamps.arrayOfLamps.isEmpty {
             if cell.lampLabel.text == "\(lamps.mainLamp?.name ?? "")" {
                 cell.lampLabel.textColor = redColor // текущая лампа подсвечена красным
                 cell.settingsButtonOut.alpha = 1.0
-        }else{
-            if lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
-                cell.lampLabel.textColor = violetColor // управляемая лампа подсвечена фиолетовым
-            }else{
-                cell.lampLabel.textColor = blackColor
-            }
-            cell.settingsButtonOut.alpha = 0.3
+            } else {
+                if lamps.arrayOfLamps[indexPath.row].flagLampIsControlled {
+                    cell.lampLabel.textColor = violetColor // управляемая лампа подсвечена фиолетовым
+                } else {
+                    cell.lampLabel.textColor = blackColor
+                }
+                cell.settingsButtonOut.alpha = 0.3
             }
         }
         return cell
@@ -107,8 +105,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func searchAndAdd(_ sender: UIButton) {
         performSegue(withIdentifier: "searchAndAdd", sender: nil)
     }
-    
-    
+
     @IBAction func settingsButton(_ sender: UIButton) {
         var superview = sender.superview
         while let view = superview, !(view is UITableViewCell) {
@@ -132,27 +129,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         present(vc, animated: true, completion: nil)
     }
 
-    
     @IBAction func add41(_ sender: UIButton) {
         LampDevice.scan(deviceIp: "192.168.4.1")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if !lamps.checkIP("192.168.4.1"){
-                        // create the alert
-                        let alert = UIAlertController(title: lampNotFound, message: youNotConnectedToLedLamp, preferredStyle: UIAlertController.Style.alert)
+            if !lamps.checkIP("192.168.4.1") {
+                // create the alert
+                let alert = UIAlertController(title: lampNotFound, message: youNotConnectedToLedLamp, preferredStyle: UIAlertController.Style.alert)
 
-                        // add the actions (buttons)
-                        alert.addAction(UIAlertAction(title: openSettings, style: UIAlertAction.Style.default, handler: {action in UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil) }))
-                        
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+                // add the actions (buttons)
+                alert.addAction(UIAlertAction(title: openSettings, style: UIAlertAction.Style.default, handler: {_ in UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil) }))
 
-                        // show the alert
-                        self.present(alert, animated: true, completion: nil)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
-    
+
     @IBOutlet weak var add41ButtobOut: UIButton!
-    
+
     @IBOutlet var addButtonOut: UIButton!
 
     // обновляем таблицу
@@ -182,6 +178,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         scanOut.imageView?.contentMode = .scaleAspectFit
         addButtonOut.imageView?.contentMode = .scaleAspectFit
         add41ButtobOut.imageView?.contentMode = .scaleAspectFit
-        
+
     }
 }

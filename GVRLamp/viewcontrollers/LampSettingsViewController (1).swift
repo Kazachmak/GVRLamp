@@ -31,7 +31,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         if senderTag == 1 {
             if row > 2 {
                 intervalSec = row
-            }else{
+            } else {
                 intervalSec = 3
             }
             intervalOut.setTitle("\(intervalSec ?? 0)" + sec, for: .normal)
@@ -41,13 +41,12 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             randomTimeOut.setTitle("\(randomSec ?? 0)" + sec, for: .normal)
             sendFavoriteMessage()
         }
-        //sendFavoriteMessage()
+        // sendFavoriteMessage()
         picker.removeFromSuperview()
     }
 
     @IBOutlet weak var effectsSetLabel: UILabel!
-    
-    
+
     @IBOutlet var autoSwitchLabel: UILabel!
 
     @IBOutlet var alwaysAutoSwitchLabel: UILabel!
@@ -65,22 +64,21 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
     @IBAction func changeLanguageButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            switch action.style{
-                case .default:
+            switch action.style {
+            case .default:
                 print("default")
-                
-                case .cancel:
+
+            case .cancel:
                 print("cancel")
-                
-                case .destructive:
+
+            case .destructive:
                 print("destructive")
-                
+
             }
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    
+
     func openPickerView(_ tag: Int) {
         picker.removeFromSuperview()
         picker = UIPickerView()
@@ -121,13 +119,13 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
         if let currentLamp = lamp {
             if let interval = intervalSec, let random = randomSec {
                 var array: [Int] = []
-                if favoriteAlways{
+                if favoriteAlways {
                     array = [favOnOut.isOn.convertToInt(), interval, random, 1]
-                }else{
+                } else {
                     array = [favOnOut.isOn.convertToInt(), interval, random, favAlwaysOnOut.isOn.convertToInt()]
-                    
+
                 }
-                
+
                 let effects = currentLamp.selectedEffects
                 array.append(contentsOf: effects.convertToIntArray())
                 currentLamp.sendCommand(command: .fav_set, value: array)
@@ -192,8 +190,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             }
         }
     }
-    
-    
+
     @IBAction func sendTextToLamp(_ sender: UIButton) {
         showInputDialog(title: enterText,
                         subtitle: enterTextForSending,
@@ -201,13 +198,12 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                         cancelTitle: cancelSendText,
                         inputPlaceholder: messageToSend,
                         inputKeyboardType: .default, actionHandler:
-                            { (input:String?) in
-                                if let currentLamp = self.lamp{
+                            { (input: String?) in
+                                if let currentLamp = self.lamp {
                                     currentLamp.sendCommand(command: .txt, value: [0], valueTXT: input ?? "")
                                 }
                             })
     }
-    
 
     @IBAction func renameLamp(_ sender: UIButton) {
         if let currentLamp = lamp {
@@ -238,8 +234,7 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             dismiss(animated: true)
         }
     }
-    
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         backArrowHeight.constant += view.safeAreaTop - 20
@@ -287,13 +282,13 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
                 getEffectsFromListOut.setOn(false, animated: false)
             }
             if let intervalSec = currentLamp.favorite?.components(separatedBy: " ")[2] {
-                if (Int(intervalSec) ?? 0) > 2{
+                if (Int(intervalSec) ?? 0) > 2 {
                     self.intervalSec = Int(intervalSec)
-                }else{
+                } else {
                     self.intervalSec = 3
                 }
                 intervalOut.setTitle("\(intervalSec)" + sec, for: .normal)
-                
+
             }
             if let randomSec = currentLamp.favorite?.components(separatedBy: " ")[3] {
                 randomTimeOut.setTitle("\(randomSec)" + sec, for: .normal)
@@ -304,9 +299,9 @@ class LampSettingsViewController: UIViewController, UIPickerViewDataSource, UIPi
             } else {
                 buttonOnLampOut.setOn(false, animated: false)
             }
-           
+
             openListOfEffectsOut.setTitle("\(currentLamp.selectedEffects.filter({ $0 == true }).count )", for: .normal)
-            
+
         } else {
             showMessage(true, text: updatingInformation)
         }

@@ -12,10 +12,9 @@ class WiFiSettingsViewController: UIViewController {
     var lamp: LampDevice?
 
     @IBOutlet weak var titleLabel: UILabel!
-    
-    
+
     @IBOutlet weak var saveButtonOut: UIButton!
-    
+
     @IBOutlet var viewWithTextFileds: UIView!
 
     @IBOutlet var backArrowHeight: NSLayoutConstraint!
@@ -29,19 +28,17 @@ class WiFiSettingsViewController: UIViewController {
     @IBOutlet var timeoutTextField: UITextField!
 
     @IBOutlet weak var wifiLampSwitchOut: UISwitch!
-    
+
     @IBOutlet weak var routerWifiSwitchOut: UISwitch!
-    
+
     @IBOutlet weak var label1: UILabel!
-    
-    
+
     @IBOutlet weak var height1: NSLayoutConstraint!
-    
+
     @IBOutlet weak var label2: UILabel!
-    
+
     @IBOutlet weak var height2: NSLayoutConstraint!
-    
-    
+
     @IBAction func close(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
@@ -49,17 +46,16 @@ class WiFiSettingsViewController: UIViewController {
     @IBAction func hideShowPassword(_ sender: UIButton) {
         passTestField.hideShowPassword()
     }
-    
-    
+
     @IBAction func wifiLampSwitch(_ sender: UISwitch) {
-        if sender.isOn{
+        if sender.isOn {
             routerWifiSwitchOut.setOn(false, animated: true)
             viewWithTextFileds.isHidden = true
             label1.isHidden = false
             label2.isHidden = false
             height1.constant = 60
             height2.constant = 30
-        }else{
+        } else {
             routerWifiSwitchOut.setOn(true, animated: true)
             viewWithTextFileds.isHidden = false
             label1.isHidden = true
@@ -68,16 +64,16 @@ class WiFiSettingsViewController: UIViewController {
             height2.constant = 420
         }
     }
-    
+
     @IBAction func routerWifiSwitch(_ sender: UISwitch) {
-        if sender.isOn{
+        if sender.isOn {
             wifiLampSwitchOut.setOn(false, animated: true)
             viewWithTextFileds.isHidden = false
             label1.isHidden = true
             label2.isHidden = true
             height1.constant = 0
             height2.constant = 420
-        }else{
+        } else {
             wifiLampSwitchOut.setOn(true, animated: true)
             viewWithTextFileds.isHidden = true
             label1.isHidden = false
@@ -86,7 +82,6 @@ class WiFiSettingsViewController: UIViewController {
             height2.constant = 30
         }
     }
-    
 
     @IBAction func saveButon(_ sender: UIButton) {
         if viewWithTextFileds.isHidden {
@@ -102,7 +97,7 @@ class WiFiSettingsViewController: UIViewController {
             let mode: ModeOfSearch = .searchInSpotMode
             lamps.removeLamp(lamp!)
             performSegue(withIdentifier: "searchAndAdd3", sender: mode)
-            
+
         } else {
             if let name = nameTextField.text, let pass = passTestField.text, var timeout = timeoutTextField.text {
                 if (name != "") && (pass != "") {
@@ -111,8 +106,7 @@ class WiFiSettingsViewController: UIViewController {
                     }
                     UserDefaults.standard.set(name, forKey: "wifiName")
                     UserDefaults.standard.set(pass, forKey: "wifiPass")
-                   
-                    
+
                     delay(delayTime: 0.0, completionHandler: { [self] in
                         lamp?.sendCommand(command: .blank, value: [0], valueTXT: "ssid=" + name)
                     })
@@ -139,24 +133,24 @@ class WiFiSettingsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchAndAdd3" {
             let vc = segue.destination as? SearchAndAddLampViewController
-            
-            if let text = nameTextField.text{
+
+            if let text = nameTextField.text {
                 vc?.label = text
             }
             vc?.modeOfSearch = sender as! ModeOfSearch
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
         titleLabel.adjustsFontSizeToFitWidth = true
         backArrowHeight.constant += view.safeAreaTop - 20
         headerViewHeight.constant += view.safeAreaTop - 20
-        if let wifiName = UserDefaults.standard.string(forKey: "wifiName"){
+        if let wifiName = UserDefaults.standard.string(forKey: "wifiName") {
             nameTextField.text = wifiName
         }
-        if let wifiPass = UserDefaults.standard.string(forKey: "wifiPass"){
+        if let wifiPass = UserDefaults.standard.string(forKey: "wifiPass") {
             passTestField.text = wifiPass
         }
         nameTextField.setLeftPaddingPoints(20.0)
